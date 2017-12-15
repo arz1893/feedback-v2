@@ -1,0 +1,101 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/faq', function () {
+    return view('faq.faq_selection');
+});
+Route::get('/complaint', function () {
+    return view('complaint.complaint_selection');
+});
+
+/* Authentication Routes */
+Auth::routes();
+Route::get('/company-login', 'Auth\LoginController@companyLogin')->name('company_login');
+Route::post('/check-tenant', 'Auth\LoginController@checkTenant')->name('check_tenant');
+/* end of authentication routes */
+
+/* Product Routes */
+Route::resource('product', 'MasterData\ProductController');
+Route::put('product/change-picture/{Product}', 'MasterData\ProductController@changePicture')->name('change_product_picture');
+Route::post('product/delete-product', 'MasterData\ProductController@deleteProduct')->name('delete_product');
+/* end of product routes */
+
+/* Product Category Routes */
+Route::post('product_category/get-category', 'MasterData\ProductCategoryController@getProductCategory');
+Route::post('product_category/update-category', 'MasterData\ProductCategoryController@updateProductCategory');
+Route::post('product_category/get-childs', 'MasterData\ProductCategoryController@getChilds');
+Route::post('product_category/get-trees', 'MasterData\ProductCategoryController@getTrees');
+Route::post('product_category/get-category', 'MasterData\ProductCategoryController@getCategory');
+Route::post('product_category/add-child-node', 'MasterData\ProductCategoryController@addChildNode');
+Route::post('product_category/rename-node', 'MasterData\ProductCategoryController@renameNode');
+Route::post('product_category/delete-node', 'MasterData\ProductCategoryController@removeNode');
+Route::post('product_category/delete-product-category', 'MasterData\ProductCategoryController@deleteProductCategory');
+Route::resource('product_category', 'MasterData\ProductCategoryController');
+/* end of product category route */
+
+/* Service Routes */
+Route::resource('service', 'MasterData\ServiceController');
+Route::put('service/change-picture/{Service}', 'MasterData\ServiceController@changePicture')->name('change_service_picture');
+Route::post('service/delete-service', 'MasterData\ServiceController@deleteService')->name('delete_service');
+/* end of service routes */
+
+/* Service Category Routes */
+Route::post('service_category/get-trees', 'MasterData\ServiceCategoryController@getTrees');
+Route::post('service_category/get-childs', 'MasterData\ServiceCategoryController@getChilds');
+Route::post('service_category/get-category', 'MasterData\ServiceCategoryController@getCategory');
+Route::post('service_category/rename-category', 'MasterData\ServiceCategoryController@renameServiceCategory');
+Route::post('service_category/delete-category', 'MasterData\ServiceCategoryController@deleteServiceCategory');
+Route::post('service_category/add-child-node', 'MasterData\ServiceCategoryController@addChildNode');
+Route::post('service_category/rename-node', 'MasterData\ServiceCategoryController@renameNode');
+Route::post('service_category/delete-node', 'MasterData\ServiceCategoryController@deleteNode');
+Route::resource('service_category', 'MasterData\ServiceCategoryController');
+/* end of service category route */
+
+/* Faq Product Routes */
+Route::resource('faq_product', 'Faq\FaqProductController');
+Route::post('faq_product/delete-faq-product', 'Faq\FaqProductController@deleteFaqProduct')->name('delete_faq_product');
+/* end of faq product routes */
+
+/* Faq Service Routes */
+Route::resource('faq_service', 'Faq\FaqServiceController');
+Route::post('faq_service/delete-faq-service', 'Faq\FaqServiceController@deleteFaqService')->name('delete_faq_service');
+/* end of faq service routes */
+
+/* Complaint Product Routes */
+Route::resource('complaint_product', 'Complaint\ComplaintProductController');
+Route::get('complaint_product/show-product/{Product}/{CurrentNodeId}', 'Complaint\ComplaintProductController@showProduct')->name('show_complaint_product');
+/* end of complaint product routes */
+
+/* Complaint Product List Routes */
+Route::resource('complaint_product_list', 'Complaint\ComplaintProductListController');
+Route::post('complaint_product_list/delete-complaint-product', 'Complaint\ComplaintProductListController@deleteComplaintProduct')->name('delete_complaint_product');
+/* end of complaint product list routes */
+
+/* Complaint Service Routes */
+Route::resource('complaint_service', 'Complaint\ComplaintServiceController');
+Route::get('complaint_service/show-service/{Service}/{CurrentNodeId}', 'Complaint\ComplaintServiceController@showService')->name('show_complaint_service');
+/* end of complaint service routes */
+
+/* Complaint Service List Routes */
+Route::resource('complaint_service_list', 'Complaint\ComplaintServiceListController');
+Route::post('complaint_service_list/delete-complaint-service', 'Complaint\ComplaintServiceListController@deleteComplaintService')->name('delete_complaint_service');
+/* end of complaint service list routes */
+
+/* Customer Complaint Routes */
+Route::resource('customer', 'Customer\CustomerController');
+/* end of customer routes */
