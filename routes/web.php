@@ -16,11 +16,17 @@ Route::get('/', function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/faq', function () {
     return view('faq.faq_selection');
 });
+
 Route::get('/complaint', function () {
     return view('complaint.complaint_selection');
+});
+
+Route::get('/suggestion', function () {
+    return view('suggestion.suggestion_selection');
 });
 
 /* Authentication Routes */
@@ -95,6 +101,11 @@ Route::get('complaint_service/show-service/{Service}/{CurrentNodeId}', 'Complain
 Route::resource('complaint_service_list', 'Complaint\ComplaintServiceListController');
 Route::post('complaint_service_list/delete-complaint-service', 'Complaint\ComplaintServiceListController@deleteComplaintService')->name('delete_complaint_service');
 /* end of complaint service list routes */
+
+/* Suggestion Product Controller Routes */
+Route::resource('suggestion_product', 'Suggestion\SuggestionProductController');
+Route::get('suggestion_product/show-product/{Product}/{CurrentNodeId}', 'Suggestion\SuggestionProductController@showProduct')->name('show_suggestion_product');
+/* end of suggestion product routes */
 
 /* Customer Complaint Routes */
 Route::resource('customer', 'Customer\CustomerController');
