@@ -29,7 +29,7 @@
             </div>
             <!-- /.col -->
             <div class="col-lg-4 col-md-3 col-sm-4 col-xs-12">
-                <a href="#!">
+                <a href="{{ route('suggestion_service.index') }}">
                     <div class="info-box bg-orange">
                         <span class="info-box-icon"><i class="fa fa-trophy"></i></span>
 

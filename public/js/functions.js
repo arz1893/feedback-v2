@@ -64,7 +64,7 @@ function deleteComplaintProduct(selected) {
         name: 'complaint_id',
         value: $(selected).data('id')
     }).appendTo('#form_delete_complaint_product');
-    $('#modal_remove_complaint').modal('show');
+    $('#modal_remove_complaint_product').modal('show');
 }
 
 function deleteComplaintService(selected) {
@@ -73,5 +73,23 @@ function deleteComplaintService(selected) {
         name: 'complaint_id',
         value: $(selected).data('id')
     }).appendTo('#form_delete_complaint_service');
-    $('#modal_remove_complaint').modal('show');
+    $('#modal_remove_complaint_service').modal('show');
+}
+
+function deleteSuggestionProduct(selected) {
+    $('<input>').attr({
+        type: 'hidden',
+        name: 'suggestion_id',
+        value: $(selected).data('id')
+    }).appendTo('#form_delete_suggestion_product');
+    $('#modal_remove_suggestion_product').modal('show');
+}
+
+function deleteSuggestionService(selected) {
+    $('<input>').attr({
+        type: 'hidden',
+        name: 'suggestion_id',
+        value: $(selected).data('id')
+    }).appendTo('#form_delete_suggestion_service');
+    $('#modal_remove_suggestion_service').modal('show');
 }

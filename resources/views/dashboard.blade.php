@@ -67,7 +67,7 @@
         </div>
     </a>
 
-    <a href="#!">
+    <a href="{{ route('question.index') }}">
         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
             <div class="info-box bg-green">
                 <span class="info-box-icon"><i class="ion ion-help-circled"></i></span>

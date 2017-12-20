@@ -62,6 +62,16 @@ $(document).ready(function () {
         scrollX: true
     });
 
+    $('#table_suggestion_product').DataTable({
+        responsive: true,
+        scrollX: true
+    });
+
+    $('#table_suggestion_service').DataTable({
+        responsive: true,
+        scrollX: true
+    });
+
     $('#product_picture').on('change', function (e) {
         e.preventDefault();
         $('#form_change_picture').submit();

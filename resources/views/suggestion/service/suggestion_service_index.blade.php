@@ -10,8 +10,8 @@
 
     <div class="centered-pills" style="margin-top: 5px;">
         <ul class="nav nav-pills">
-            <li role="presentation" class="active"><a data-toggle="pill" href="#product_panel">Product</a></li>
-            <li><a href="{{ route('suggestion_service.index') }}">Service</a></li>
+            <li><a href="{{ route('suggestion_product.index') }}">Product</a></li>
+            <li role="presentation" class="active"><a data-toggle="pill" href="#service_panel">Service</a></li>
         </ul>
     </div>
 @endsection
@@ -32,14 +32,14 @@
     <br>
 
     <div class="tab-content">
-        <div id="product_panel" class="tab-pane fade in active">
+        <div id="service_panel" class="tab-pane fade in active">
             <div class="row">
-                @foreach($products as $product)
+                @foreach($services as $service)
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                         <div class="imagebox">
-                            <a href="{{ route('show_suggestion_product', [$product->systemId, 0]) }}">
-                                <img src="{{ asset($product->img) }}"  class="category-banner img-responsive">
-                                <span class="imagebox-desc">{{ $product->name }}</span>
+                            <a href="{{ route('show_suggestion_service', [$service->systemId, 0]) }}">
+                                <img src="{{ asset($service->img) }}"  class="category-banner img-responsive">
+                                <span class="imagebox-desc">{{ $service->name }}</span>
                             </a>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="row">
                 <div class="text-center">
-                    {{ $products->links() }}
+                    {{ $services->links() }}
                 </div>
             </div>
         </div>

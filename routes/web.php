@@ -102,11 +102,30 @@ Route::resource('complaint_service_list', 'Complaint\ComplaintServiceListControl
 Route::post('complaint_service_list/delete-complaint-service', 'Complaint\ComplaintServiceListController@deleteComplaintService')->name('delete_complaint_service');
 /* end of complaint service list routes */
 
-/* Suggestion Product Controller Routes */
+/* Suggestion Product Routes */
 Route::resource('suggestion_product', 'Suggestion\SuggestionProductController');
 Route::get('suggestion_product/show-product/{Product}/{CurrentNodeId}', 'Suggestion\SuggestionProductController@showProduct')->name('show_suggestion_product');
 /* end of suggestion product routes */
 
+/* Suggestion Product List Routes */
+Route::resource('suggestion_product_list', 'Suggestion\SuggestionProductListController');
+Route::post('suggestion_product_list/delete-suggestion-product', 'Suggestion\SuggestionProductListController@deleteSuggestionProduct')->name('delete_suggestion_product');
+/* end of suggestion product list routes */
+
+/* Suggestion Service Routes */
+Route::resource('suggestion_service', 'Suggestion\SuggestionServiceController');
+Route::get('suggestion_service/show-service/{Service}/{CurrentNodeId}', 'Suggestion\SuggestionServiceController@showService')->name('show_suggestion_service');
+/* end of suggestion service routes */
+
+/* Suggestion Service List Routes */
+Route::resource('suggestion_service_list', 'Suggestion\SuggestionServiceListController');
+Route::post('suggestion_service_list/delete-suggestion-service', 'Suggestion\SuggestionServiceListController@deleteSuggestionService')->name('delete_suggestion_service');
+/* end of suggestion service list routes */
+
 /* Customer Complaint Routes */
 Route::resource('customer', 'Customer\CustomerController');
 /* end of customer routes */
+
+/* Question Routes */
+Route::resource('question', 'Question\QuestionController');
+/* end of question routes */

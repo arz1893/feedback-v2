@@ -5,31 +5,31 @@
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('js/vue/vue_suggestion_product.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/vue_suggestion_service.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('suggestion_product.index') }}"><i class="fa fa-question-circle"></i> Complaint Product </a></li>
-        <li class="active">Product</li>
+        <li><a href="{{ route('suggestion_service.index') }}"><i class="fa fa-question-circle"></i> Suggestion Service </a></li>
+        <li class="active">Service</li>
     </ol>
 
     <div class="media">
         <div class="media-left">
             <a href="#">
-                <img class="media-object" src="{{ $product->img }}" alt="..." width="64" height="64">
+                <img class="media-object" src="{{ $service->img }}" alt="..." width="64" height="64">
             </a>
         </div>
         <div class="media-body">
-            <h4 class="media-heading">{{ $product->name }}</h4>
+            <h4 class="media-heading">{{ $service->name }}</h4>
             <small class="text-orange">*Please choose category that you want to suggest</small>
         </div>
     </div>
 @endsection
 
 @section('main-content')
-    {{ Form::hidden('product_id', $product->systemId, ['id' => 'product_id']) }}
+    {{ Form::hidden('service_id', $service->systemId, ['id' => 'service_id']) }}
 
     @if(\Session::has('status'))
         <div class="alert alert-success alert-dismissible">
@@ -39,7 +39,7 @@
         </div>
     @endif
 
-    <div id="vue_suggestion_product_container">
+    <div id="vue_suggestion_service_container">
 
         <transition name="fadeDown">
             <a href="#!" class="btn btn-link btn-lg hidden" id="btn_show_category_navigator" v-on:click="showNavigator()">
@@ -53,29 +53,29 @@
 
                 @if(isset($currentParentNode))
                     @if($currentParentNode->parent_id == null)
-                        <a href="{{ route('show_suggestion_product', [$product->systemId, 0]) }}" class="btn btn-link btn-lg">
+                        <a href="{{ route('show_suggestion_service', [$service->systemId, 0]) }}" class="btn btn-link btn-lg">
                             <i class="fa fa-arrow-circle-up"></i> Up One Level
                         </a> <br>
                     @else
-                        <a href="{{ route('show_suggestion_product', [$product->systemId, $currentParentNode->parent_id]) }}" class="btn btn-link btn-lg">
+                        <a href="{{ route('show_suggestion_service', [$service->systemId, $currentParentNode->parent_id]) }}" class="btn btn-link btn-lg">
                             <i class="fa fa-arrow-circle-up"></i> Up One Level
                         </a> <br>
                     @endif
                 @endif
 
-                @foreach($productCategories as $productCategory)
-                    @if(count($productCategory->getImmediateDescendants()) > 0)
-                        <a href="{{ route('show_suggestion_product', [$product->systemId, $productCategory->id]) }}" class="btn btn-app">
-                            <span class="badge bg-aqua">{{ count($productCategory->getImmediateDescendants()) }}</span>
-                            <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $productCategory->name }}
+                @foreach($serviceCategories as $serviceCategory)
+                    @if(count($serviceCategory->getImmediateDescendants()) > 0)
+                        <a href="{{ route('show_suggestion_service', [$service->systemId, $serviceCategory->id]) }}" class="btn btn-app">
+                            <span class="badge bg-aqua">{{ count($serviceCategory->getImmediateDescendants()) }}</span>
+                            <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $serviceCategory->name }}
                         </a>
-                    @elseif(count($productCategory->getImmediateDescendants()) == 0)
+                    @elseif(count($serviceCategory->getImmediateDescendants()) == 0)
                         <button class="btn btn-app active"
-                                data-node_id="{{ $productCategory->id }}"
-                                data-product_id="{{ $product->systemId }}"
-                                data-title="{{ $productCategory->name }}"
-                                v-on:click="append('{{ $productCategory->name }}', '{{ $product->systemId }}', '{{ $productCategory->id }}')">
-                            <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $productCategory->name }}
+                                data-node_id="{{ $serviceCategory->id }}"
+                                data-service_id="{{ $service->systemId }}"
+                                data-title="{{ $serviceCategory->name }}"
+                                v-on:click="append('{{ $serviceCategory->name }}', '{{ $service->systemId }}', '{{ $serviceCategory->id }}')">
+                            <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $serviceCategory->name }}
                         </button>
                     @endif
                 @endforeach
@@ -87,7 +87,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <transition name="fadeDown">
-                    <div class="panel panel-warning hidden" id="panel_add_suggestion_product">
+                    <div class="panel panel-warning hidden" id="panel_add_suggestion_service">
                         <div class="panel-heading">
                             <h4>Add Complaint</h4>
                         </div>
@@ -95,11 +95,11 @@
                             <div class="form-group">
                                 <span v-html="nodeTitle"></span>
                             </div>
-                            {{ Form::open(['action' => 'Suggestion\SuggestionProductController@store', 'id' => 'form_add_suggestion_product']) }}
-                            <div v-html="productId"></div>
-                            <div v-html="productCategoryId"></div>
+                            {{ Form::open(['action' => 'Suggestion\SuggestionServiceController@store', 'id' => 'form_add_suggestion_service']) }}
+                            <div v-html="serviceId"></div>
+                            <div v-html="serviceCategoryId"></div>
                             {{ Form::hidden('tenantId', Auth::user()->tenantId) }}
-                            @include('layouts.suggestion.product.suggestion_product_form', ['submitButtonText' => 'Add Suggestion'])
+                            @include('layouts.suggestion.service.suggestion_service_form', ['submitButtonText' => 'Add Suggestion'])
                             {{ Form::close() }}
                         </div>
                     </div>

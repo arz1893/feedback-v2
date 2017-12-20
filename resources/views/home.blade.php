@@ -82,35 +82,14 @@
 
                             <ul class="treeview-menu">
                                 <li><a href="{{ route('suggestion_product.index') }}"><i class="ion ion-android-bookmark"></i> Suggestion Product</a></li>
-                                <li><a href="#!"><i class="ion ion-android-bookmark"></i> Suggestion Service</a></li>
+                                <li><a href="{{ route('suggestion_service.index') }}"><i class="ion ion-android-bookmark"></i> Suggestion Service</a></li>
                             </ul>
                         </li>
-                        <li><a href="#!"><i class="ion ion-help-circled"></i> Questions </a></li>
-                        {{--<li class="treeview">--}}
-                        {{--<a href="#"><i class="fa fa-circle-o"></i> Level One--}}
-                        {{--<span class="pull-right-container">--}}
-                        {{--<i class="fa fa-angle-left pull-right"></i>--}}
-                        {{--</span>--}}
-                        {{--</a>--}}
-                        {{--<ul class="treeview-menu">--}}
-                        {{--<li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>--}}
-                        {{--<li class="treeview">--}}
-                        {{--<a href="#"><i class="fa fa-circle-o"></i> Level Two--}}
-                        {{--<span class="pull-right-container">--}}
-                        {{--<i class="fa fa-angle-left pull-right"></i>--}}
-                        {{--</span>--}}
-                        {{--</a>--}}
-                        {{--<ul class="treeview-menu">--}}
-                        {{--<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>--}}
-                        {{--<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>--}}
-                        {{--</ul>--}}
-                        {{--</li>--}}
-                        {{--</ul>--}}
-                        {{--</li>--}}
+                        <li><a href="{{ route('question.index') }}"><i class="ion ion-help-circled"></i> Questions </a></li>
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#">
+                    <a href="#!">
                         <i class="ion ion-clipboard"></i> <span>List</span>
                         <span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
@@ -118,8 +97,14 @@
                     </a>
 
                     <ul class="treeview-menu">
+                        <li class="treeview">
+                            <a href="#!">
+                                <i class=""></i>
+                            </a>
+                        </li>
                         <li><a href="{{ route('complaint_product_list.index') }}"><i class="ion ion-ios-list-outline"></i> List of Product Complaint</a></li>
                         <li><a href="{{ route('complaint_service_list.index') }}"><i class="ion ion-ios-list-outline"></i> List of Service Complaint</a></li>
+                        <li><a href="{{ route('suggestion_product_list.index') }}"><i class="ion ion-ios-list-outline"></i> List of Product Suggestion</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

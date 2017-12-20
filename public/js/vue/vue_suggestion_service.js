@@ -1,26 +1,26 @@
 var complaint_product = new Vue({
-    el: '#vue_suggestion_product_container',
+    el: '#vue_suggestion_service_container',
     data: {
         nodeTitle: '',
-        productId: '',
-        productCategoryId: '',
+        serviceId: '',
+        serviceCategoryId: '',
         show: true
     },
     methods: {
-        append: function(title, productId, productCategoryId) {
+        append: function(title, serviceId, serviceCategoryId) {
             $('#btn_show_category_navigator').removeClass('hidden');
-            $('#panel_add_suggestion_product').removeClass('hidden');
+            $('#panel_add_suggestion_service').removeClass('hidden');
             $('#category_navigator').addClass('hidden');
             // this.show = false;
             this.nodeTitle = '<span class="text-orange"> Add complaint to </span> : ' + title;
-            this.productId = '<input type="hidden" name="productId" value="' + productId +'">';
-            this.productCategoryId = '<input type="hidden" name="productCategoryId" value="' + productCategoryId +'">';
+            this.serviceId = '<input type="hidden" name="serviceId" value="' + serviceId +'">';
+            this.serviceCategoryId = '<input type="hidden" name="serviceCategoryId" value="' + serviceCategoryId +'">';
         },
 
         showNavigator: function () {
             // this.show = true;
             $('#btn_show_category_navigator').addClass('hidden');
-            $('#panel_add_suggestion_product').addClass('hidden');
+            $('#panel_add_suggestion_service').addClass('hidden');
             $('#category_navigator').removeClass('hidden');
         }
     }

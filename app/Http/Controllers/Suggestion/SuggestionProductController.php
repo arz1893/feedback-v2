@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Suggestion;
 use App\Customer;
 use App\Product;
 use App\ProductCategory;
+use App\SuggestionProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Webpatser\Uuid\Uuid;
 
 class SuggestionProductController extends Controller
 {
@@ -32,6 +35,31 @@ class SuggestionProductController extends Controller
     }
 
     public function store(Request $request) {
-        dd($request->all());
+        $rules = [
+            'customer_suggestion' => 'required'
+        ];
+        $messages = [
+            'customer_suggestion.required' => 'please enter customer\'s suggestion'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        SuggestionProduct::create([
+            'systemId' => Uuid::generate(4),
+            'customer_suggestion' => $request->customer_suggestion,
+            'customerId' => $request->customerId,
+            'productId' => $request->productId,
+            'productCategoryId' => $request->productCategoryId,
+            'tenantId' => $request->tenantId
+        ]);
+
+        return redirect('suggestion_product_list')->with('status', 'A new suggestion has been added');
+    }
+
+    public function edit($id) {
+        dd($id);
     }
 }
