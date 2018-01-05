@@ -295,7 +295,7 @@ $(document).ready(function () {
                 equalTo: '#password'
             },
             phone: 'required',
-            user_type_id: 'required'
+            usergroupId: 'required'
         },
         messages: {
             name: 'please enter user\'s name',
@@ -311,7 +311,19 @@ $(document).ready(function () {
                 equalTo: 'your password didn\'t match'
             },
             phone: 'please enter user\'s phone number',
-            user_type_id: 'please select user type'
+            usergroupId: 'please select user type'
+        },
+
+        errorPlacement: function(error, element)
+        {
+            if ( element.is(":text") )
+            {
+                error.appendTo( element.parents('.error') );
+            }
+            else
+            { // This is the default behavior
+                error.insertAfter( element );
+            }
         },
 
         submitHandler: function (form) {

@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.2.3/jquery.contextMenu.min.css" />
     <!-- Icheck -->
     <link rel="stylesheet" href="{{ asset('css/icheck/all.css') }}">
+    <!-- Select 2 -->
+    <link rel="stylesheet" href="{{ asset('css/select2/select2.min.css') }}">
 
     @stack('styles')
 
@@ -291,6 +293,8 @@
     <script src="{{ asset('js/icheck/icheck.min.js') }}" type="text/javascript"></script>
     <!-- Pretty file upload -->
     <script src="{{ asset('js/pretty-file-upload/bootstrap-prettyfile.js') }}" type="text/javascript"></script>
+    <!-- Select 2 -->
+    <script src="{{ asset('js/select2/select2.full.min.js') }}" type="text/javascript"></script>
 
     @stack('scripts')
 

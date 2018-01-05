@@ -122,10 +122,14 @@ Route::resource('suggestion_service_list', 'Suggestion\SuggestionServiceListCont
 Route::post('suggestion_service_list/delete-suggestion-service', 'Suggestion\SuggestionServiceListController@deleteSuggestionService')->name('delete_suggestion_service');
 /* end of suggestion service list routes */
 
+/* Question Routes */
+Route::resource('question', 'Question\QuestionController');
+/* end of question routes */
+
 /* Customer Complaint Routes */
 Route::resource('customer', 'Customer\CustomerController');
 /* end of customer routes */
 
-/* Question Routes */
-Route::resource('question', 'Question\QuestionController');
-/* end of question routes */
+/* User Management Routes */
+Route::resource('user', 'User\UserController');
+/* end of user management */

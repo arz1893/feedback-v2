@@ -1,7 +1,7 @@
 @extends('home')
 
 @section('content-header')
-    <a href="{{ route('home') }}" class="btn btn-link">
+    <a href="{{ url('/complaint') }}" class="btn btn-link">
         <i class="fa fa-arrow-circle-left"></i> Back
     </a>
 

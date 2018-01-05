@@ -24,7 +24,7 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading">{{ $service->name }}</h4>
-            <small class="text-blue">*Please choose category that you want to complaint</small>
+            <small class="text-red">*Please choose category that you want to complaint</small>
         </div>
     </div>
 @endsection

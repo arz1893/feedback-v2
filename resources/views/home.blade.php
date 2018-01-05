@@ -105,6 +105,7 @@
                         <li><a href="{{ route('complaint_product_list.index') }}"><i class="ion ion-ios-list-outline"></i> List of Product Complaint</a></li>
                         <li><a href="{{ route('complaint_service_list.index') }}"><i class="ion ion-ios-list-outline"></i> List of Service Complaint</a></li>
                         <li><a href="{{ route('suggestion_product_list.index') }}"><i class="ion ion-ios-list-outline"></i> List of Product Suggestion</a></li>
+                        <li><a href="{{ route('suggestion_service_list.index') }}"><i class="ion ion-ios-list-outline"></i> List of Service Suggestion</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -125,12 +126,16 @@
                         <span>Report</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="#!">
-                        <i class="fa fa-user-circle-o"></i>
-                        <span>Manage Users</span>
-                    </a>
-                </li>
+
+                @if(Auth::user()->user_group->name == 'Administrator')
+                    <li class="">
+                        <a href="{{ route('user.index') }}">
+                            <i class="fa fa-user-circle-o"></i>
+                            <span>Manage Users</span>
+                        </a>
+                    </li>
+                @endif
+
                 <li>
                     <a href="#">
                         <i class="fa fa-calendar"></i> <span>Calendar</span>
