@@ -35,6 +35,12 @@ Route::get('/company-login', 'Auth\LoginController@companyLogin')->name('company
 Route::post('/check-tenant', 'Auth\LoginController@checkTenant')->name('check_tenant');
 /* end of authentication routes */
 
+/* Password Reset Routes */
+//Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetForm')->name('password_reset');
+//Route::post('password/email', 'Auth\ResetPasswordController@sendResetLinkEmail');
+//Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+/* end of password reset routes */
+
 /* Product Routes */
 Route::resource('product', 'MasterData\ProductController');
 Route::put('product/change-picture/{Product}', 'MasterData\ProductController@changePicture')->name('change_product_picture');

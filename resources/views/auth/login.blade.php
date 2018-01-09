@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-xs-8">
                         <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
-                        <a href="#" class="text-center">Forgot password ?</a>
+                        <a href="{{ route('password.request') }}" class="text-center">Forgot password ?</a>
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
