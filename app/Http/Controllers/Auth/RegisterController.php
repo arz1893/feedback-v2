@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Invite;
 use App\Tenant;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -104,5 +105,13 @@ class RegisterController extends Controller
         ]);
 
         return $user;
+    }
+
+    protected function acceptInvitation($token) {
+        $invitation = Invite::where('token', $token)->first();
+        if (!$invitation) {
+            abort(404);
+        }
+        return view('auth.account_setup', compact('invitation'));
     }
 }

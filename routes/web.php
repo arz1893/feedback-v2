@@ -138,4 +138,6 @@ Route::resource('customer', 'Customer\CustomerController');
 
 /* User Management Routes */
 Route::resource('user', 'User\UserController');
+Route::post('user/invite', 'User\UserController@sendInvitation');
+Route::get('register/accept/{token}', 'Auth\RegisterController@acceptInvitation');
 /* end of user management */

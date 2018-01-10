@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function user_group() {
         return $this->belongsTo(UserGroup::class, 'usergroupId', 'systemId');
     }
+
+    public function invites() {
+        return $this->hasMany(Invite::class);
+    }
 }

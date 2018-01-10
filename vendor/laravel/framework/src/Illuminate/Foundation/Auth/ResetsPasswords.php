@@ -77,7 +77,11 @@ trait ResetsPasswords
      */
     protected function validationErrorMessages()
     {
-        return [];
+        return [
+            'token.required' => 'missing token in request',
+            'email.required' => 'user\'s email is required',
+            'password.required' => 'user\'s password is required'
+        ];
     }
 
     /**
