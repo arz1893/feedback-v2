@@ -16,9 +16,11 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading">{{ $product->name }}</h4>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_add_product_faq">
-                Add FAQ <i class="fa fa-plus-circle"></i>
-            </button>
+            @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_add_product_faq">
+                    Add FAQ <i class="fa fa-plus-circle"></i>
+                </button>
+            @endif
         </div>
     </div>
 

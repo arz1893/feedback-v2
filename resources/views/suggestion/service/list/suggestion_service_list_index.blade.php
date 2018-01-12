@@ -47,12 +47,16 @@
                 <td>{{ $suggestionService->service_category->name }}</td>
                 <td>{{ $suggestionService->customer_suggestion }}</td>
                 <td>
-                    <a href="{{ route('suggestion_service_list.edit', $suggestionService->systemId) }}" class="btn btn-warning">
-                        <i class="ion ion-edit"></i>
-                    </a>
-                    <button class="btn btn-danger" data-id="{{ $suggestionService->systemId }}" onclick="deleteSuggestionService(this)">
-                        <i class="ion ion-ios-trash"></i>
-                    </button>
+                    @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
+                        <a href="{{ route('suggestion_service_list.edit', $suggestionService->systemId) }}" class="btn btn-warning">
+                            <i class="ion ion-edit"></i>
+                        </a>
+                        <button class="btn btn-danger" data-id="{{ $suggestionService->systemId }}" onclick="deleteSuggestionService(this)">
+                            <i class="ion ion-ios-trash"></i>
+                        </button>
+                    @else
+                        <span class="text-red">Not Authorized</span>
+                    @endif
                 </td>
             </tr>
             @php $counter++; @endphp

@@ -51,12 +51,16 @@
                 <td>{!! $complaintProduct->is_need_call == 1 ? '<span class="text-red">yes</span>':'<span class="blue-text">no</span>' !!}</td>
                 <td>{!! $complaintProduct->is_urgent == 1 ? '<span class="text-red">yes</span>':'<span class="blue-text">no</span>' !!}</td>
                 <td>
-                    <a href="{{ route('complaint_product_list.edit', $complaintProduct->systemId) }}" class="btn btn-warning">
-                        <i class="ion ion-edit"></i>
-                    </a>
-                    <button class="btn btn-danger" data-id="{{ $complaintProduct->systemId }}" onclick="deleteComplaintProduct(this)">
-                        <i class="ion ion-ios-trash"></i>
-                    </button>
+                    @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
+                        <a href="{{ route('complaint_product_list.edit', $complaintProduct->systemId) }}" class="btn btn-warning">
+                            <i class="ion ion-edit"></i>
+                        </a>
+                        <button class="btn btn-danger" data-id="{{ $complaintProduct->systemId }}" onclick="deleteComplaintProduct(this)">
+                            <i class="ion ion-ios-trash"></i>
+                        </button>
+                    @else
+                        <span class="text-red">Not Authorized</span>
+                    @endif
                 </td>
             </tr>
             @php $counter++; @endphp
