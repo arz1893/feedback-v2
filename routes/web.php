@@ -140,4 +140,5 @@ Route::resource('customer', 'Customer\CustomerController');
 Route::resource('user', 'User\UserController');
 Route::post('user/invite', 'User\UserController@sendInvitation');
 Route::get('register/accept/{token}', 'Auth\RegisterController@acceptInvitation');
+Route::post('register/via-invitation/{id}', 'Auth\RegisterController@registerViaEmail')->name('register_via_invitation');
 /* end of user management */

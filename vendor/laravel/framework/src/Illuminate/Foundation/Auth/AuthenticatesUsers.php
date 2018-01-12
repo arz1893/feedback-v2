@@ -32,6 +32,14 @@ trait AuthenticatesUsers
     {
         $this->validateLogin($request);
 
+        $user = \App\User::where('email', $request->email)->first();
+
+        if($user) {
+            if($user->tenantId != $request->session()->get('tenant_id')) {
+                return redirect()->back()->withErrors(['error' => 'Your account is not registered on this tenant']);
+            }
+        }
+
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.

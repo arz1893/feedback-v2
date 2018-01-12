@@ -380,4 +380,53 @@ $(document).ready(function () {
             form.submit();
         }
     });
+
+    $('#form_account_setup').validate({
+        errorClass: "my-error-class",
+        validClass: "my-valid-class",
+
+        rules: {
+            phone: {
+                required: true,
+                minlength: 11
+            },
+            password: {
+                required: true,
+                minlength: 6
+            },
+            password_confirmation: {
+                required: true,
+                equalTo: '#txt_password'
+            }
+        },
+        messages: {
+            phone: {
+                required: 'please enter your phone number',
+                minlength: 'your phone number is invalid'
+            },
+            password: {
+                required: 'please enter your password',
+                minlength: 'at least 6 character are required'
+            },
+            password_confirmation: {
+                equalTo: 'your password didn\'t match'
+            }
+        },
+
+        errorPlacement: function(error, element)
+        {
+            if ( element.is(":text") || element.is(":password") )
+            {
+                error.appendTo( element.parents('.error') );
+            }
+            else
+            { // This is the default behavior
+                error.insertAfter( element );
+            }
+        },
+
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
 });

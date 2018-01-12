@@ -19,7 +19,8 @@ class Invite extends Model
         'token',
         'tenantId',
         'userId',
-        'usergroupId'
+        'usergroupId',
+        'is_expired'
     ];
 
     public function tenant() {

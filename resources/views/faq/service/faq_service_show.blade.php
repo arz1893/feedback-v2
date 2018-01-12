@@ -38,7 +38,7 @@
     <div class="row">
         @php $counter = 1; @endphp
         @foreach($faqServices as $faqService)
-            <div id="faq" class="col-lg-8 col-lg-offset-2">
+            <div id="faq" class="col-lg-7">
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-primary">
                         <div class="panel-heading">

@@ -45,6 +45,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function tenant() {
+        return $this->belongsTo(Tenant::class, 'tenantId', 'systemId');
+    }
+
     public function user_group() {
         return $this->belongsTo(UserGroup::class, 'usergroupId', 'systemId');
     }

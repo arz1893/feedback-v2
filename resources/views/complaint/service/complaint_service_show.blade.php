@@ -86,7 +86,7 @@
         @include('layouts.errors.error_list')
 
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-lg-8">
                 <transition name="fadeDown">
                     <div class="panel panel-danger hidden" id="panel_add_complaint">
                         <div class="panel-heading">
