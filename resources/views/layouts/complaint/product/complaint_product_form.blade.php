@@ -13,20 +13,54 @@
 <div class="form-group">
     {{ Form::label('', 'Customer Satisfaction') }} <br>
     <a class="" href="#very_bad" >
-        <i id="very_bad" class="smiley_rating material-icons text-red" style="font-size: 4em;" v-on:click="customerRating(1, $event)">sentiment_very_dissatisfied</i>
+        <i id="very_bad"
+           class="smiley_rating material-icons text-red"
+           style="font-size: 4em;"
+           v-on:click="customerRating(1, $event)"
+           data-value="1">
+            sentiment_very_dissatisfied
+        </i>
     </a>
     <a class="" href="#bad">
-        <i id="bad" class="smiley_rating material-icons text-orange" style="font-size: 4em;" v-on:click="customerRating(2, $event)">sentiment_dissatisfied</i>
+        <i id="bad"
+           class="smiley_rating material-icons text-orange"
+           style="font-size: 4em;"
+           v-on:click="customerRating(2, $event)"
+           data-value="2">
+            sentiment_dissatisfied
+        </i>
     </a>
     <a class="" href="#normal">
-        <i id="normal" class="smiley_rating material-icons text-muted" style="font-size: 4em;" v-on:click="customerRating(3, $event)">sentiment_neutral</i>
+        <i id="normal"
+           class="smiley_rating material-icons text-muted"
+           style="font-size: 4em;"
+           v-on:click="customerRating(3, $event)"
+           data-value="3">
+            sentiment_neutral
+        </i>
     </a>
     <a class="" href="#satisfied">
-        <i id="satisfied" class="smiley_rating material-icons text-aqua" style="font-size: 4em;" v-on:click="customerRating(4, $event)">sentiment_satisfied</i>
+        <i id="satisfied"
+           class="smiley_rating material-icons text-aqua"
+           style="font-size: 4em;"
+           v-on:click="customerRating(4, $event)"
+           data-value="4">
+            sentiment_satisfied
+        </i>
     </a>
     <a class="" href="#very_satisfied">
-        <i id="very_satisfied" class="smiley_rating material-icons text-green" style="font-size: 4em;" v-on:click="customerRating(5, $event)">sentiment_very_satisfied</i>
+        <i id="very_satisfied"
+           class="smiley_rating material-icons text-green"
+           style="font-size: 4em;"
+           v-on:click="customerRating(5, $event)"
+           data-value="5">
+            sentiment_very_satisfied
+        </i>
     </a>
+
+    @if($complaintProduct)
+        {{ Form::hidden('current_complaint_rating', $complaintProduct->customer_rating, ['id' => 'current_complaint_rating']) }}
+    @endif
 
     <div v-html="ratingValue"></div>
 </div>
