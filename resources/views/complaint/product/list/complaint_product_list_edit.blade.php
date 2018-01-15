@@ -1,5 +1,14 @@
 @extends('home')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/vue-animation/vue2-animate.css') }}"
+          xmlns:v-on="http://www.w3.org/1999/xhtml">
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('js/vue/vue_complaint_product.js') }}" type="text/javascript"></script>
+@endpush
+
 @section('content-header')
     <h4>Edit Complaint Product</h4>
     <ol class="breadcrumb">
@@ -10,11 +19,13 @@
 @endsection
 
 @section('main-content')
-    {{ Form::model($complaintProduct, ['method' => 'PATCH', 'action' => ['Complaint\ComplaintProductListController@update', $complaintProduct], 'id' => 'form_edit_complaint_product']) }}
+    <div id="vue_complaint_product_container">
+        {{ Form::model($complaintProduct, ['method' => 'PATCH', 'action' => ['Complaint\ComplaintProductListController@update', $complaintProduct], 'id' => 'form_edit_complaint_product']) }}
         <div class="col-lg-6 col-lg-offset-3">
             @include('layouts.complaint.product.complaint_product_form', ['submitButtonText' => 'Update Complaint Product'])
         </div>
-    {{ Form::close() }}
+        {{ Form::close() }}
+    </div>
 
     @include('customer.modal_add_customer')
 @endsection

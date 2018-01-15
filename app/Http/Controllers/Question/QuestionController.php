@@ -13,13 +13,8 @@ use Webpatser\Uuid\Uuid;
 class QuestionController extends Controller
 {
     public function index() {
-        $questions = Question::where('tenantId', Auth::user()->tenantId)->get();
-        return view('question.question_index', compact('questions'));
-    }
-
-    public function create() {
         $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->pluck('name', 'systemId');
-        return view('question.add_question', compact('selectCustomers'));
+        return view('question.question_index', compact('selectCustomers'));
     }
 
     public function store(QuestionRequest $request) {
@@ -33,11 +28,11 @@ class QuestionController extends Controller
         return redirect()->route('question.index')->with(['status' => 'Question has been added']);
     }
 
-    public function edit(Question $question) {
-        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
-        return view('question.edit_question', compact('question', 'selectCustomers'));
-    }
-
+//    public function edit(Question $question) {
+//        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
+//        return view('question.edit_question', compact('question', 'selectCustomers'));
+//    }
+//
     public function update(QuestionRequest $request, Question $question) {
         $question->update($request->all());
         return redirect('question')->with('status', 'A new question has been added');

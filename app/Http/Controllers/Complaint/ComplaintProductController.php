@@ -50,6 +50,7 @@ class ComplaintProductController extends Controller
         ComplaintProduct::create([
             'systemId' => Uuid::generate(4),
             'customer_complaint' => $request->customer_complaint,
+            'customer_rating' => $request->customer_rating,
             'is_need_call' => $request->is_need_call,
             'is_urgent' => $request->is_urgent,
             'customerId' => $request->customerId,

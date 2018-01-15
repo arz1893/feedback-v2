@@ -4,7 +4,8 @@ var complaint_product = new Vue({
         nodeTitle: '',
         productId: '',
         productCategoryId: '',
-        show: true
+        show: true,
+        ratingValue: ''
     },
     methods: {
         append: function(title, productId, productCategoryId) {
@@ -12,7 +13,7 @@ var complaint_product = new Vue({
             $('#panel_add_complaint').removeClass('hidden');
             $('#category_navigator').addClass('hidden');
             // this.show = false;
-            this.nodeTitle = '<span class="text-red"> Add complaint to </span> : ' + title;
+            this.nodeTitle = '<h4>Add Complaint to : ' + title + '</h4>';
             this.productId = '<input type="hidden" name="productId" value="' + productId +'">';
             this.productCategoryId = '<input type="hidden" name="productCategoryId" value="' + productCategoryId +'">';
         },
@@ -22,6 +23,20 @@ var complaint_product = new Vue({
             $('#btn_show_category_navigator').addClass('hidden');
             $('#panel_add_complaint').addClass('hidden');
             $('#category_navigator').removeClass('hidden');
+        },
+        
+        customerRating: function (value, event) {
+            // console.log(value);
+            // console.log(event.currentTarget.id);
+
+            $('i.smiley_rating').each(function (index, element) {
+                $(element).removeClass('is-selected');
+            });
+
+            $('#' + event.currentTarget.id).addClass('is-selected');
+
+            this.ratingValue = '<input type="hidden" name="customer_rating" value="'+ value +'">';
+
         }
     }
 });

@@ -36,10 +36,12 @@ class ComplaintServiceController extends Controller
 
     public function store(Request $request) {
         $rules = [
-            'customer_complaint' => 'required'
+            'customer_complaint' => 'required',
+            'customer_rating' => 'required'
         ];
         $messages = [
-            'customer_complaint.required' => 'please enter customer\'s complaint'
+            'customer_complaint.required' => 'please enter customer\'s complaint',
+            'customer_rating' => 'please choose customer\'s satisfaction'
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
 
@@ -50,6 +52,7 @@ class ComplaintServiceController extends Controller
         ComplaintService::create([
             'systemId' => Uuid::generate(4),
             'customer_complaint' => $request->customer_complaint,
+            'customer_rating' => $request->customer_rating,
             'is_need_call' => $request->is_need_call,
             'is_urgent' => $request->is_urgent,
             'customerId' => $request->customerId,

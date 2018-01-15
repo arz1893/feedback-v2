@@ -90,12 +90,12 @@
                 <transition name="fadeDown">
                     <div class="panel panel-danger hidden" id="panel_add_complaint">
                         <div class="panel-heading">
-                            <h4>Add Complaint</h4>
+                            <div v-html="nodeTitle"></div>
                         </div>
                         <div class="panel-body">
-                            <div class="form-group">
-                                <span v-html="nodeTitle"></span>
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<span v-html="nodeTitle"></span>--}}
+                            {{--</div>--}}
                             {{ Form::open(['action' => 'Complaint\ComplaintProductController@store', 'id' => 'form_add_complaint_product']) }}
                             <div v-html="productId"></div>
                             <div v-html="productCategoryId"></div>

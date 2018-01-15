@@ -25,6 +25,7 @@
             <th>Customer Name</th>
             <th>Product Name</th>
             <th>Category</th>
+            <th>Customer's Rating</th>
             <th>Complaint content</th>
             <th>Need Call ?</th>
             <th>Is Urgent ?</th>
@@ -47,6 +48,7 @@
                 </td>
                 <td>{{ $complaintProduct->product->name }}</td>
                 <td>{{ $complaintProduct->product_category->name }}</td>
+                <td>{{ $complaintProduct->customer_rating }}</td>
                 <td>{{ $complaintProduct->customer_complaint }}</td>
                 <td>{!! $complaintProduct->is_need_call == 1 ? '<span class="text-red">yes</span>':'<span class="blue-text">no</span>' !!}</td>
                 <td>{!! $complaintProduct->is_urgent == 1 ? '<span class="text-red">yes</span>':'<span class="blue-text">no</span>' !!}</td>

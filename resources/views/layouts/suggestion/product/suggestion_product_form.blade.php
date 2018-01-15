@@ -10,24 +10,25 @@
     </div>
 </div>
 
-<div class="form-group">
-    {{ Form::label('', 'Customer Satisfaction') }} <br>
-    <a class="smiley_rating">
-        <i class="large material-icons">sentiment_very_dissatisfied</i>
-    </a>
-    <a class="smiley_rating">
-        <i class="large material-icons">sentiment_dissatisfied</i>
-    </a>
-    <a class="smiley_rating">
-        <i class="large material-icons">sentiment_neutral</i>
-    </a>
-    <a class="smiley_rating">
-        <i class="large material-icons">sentiment_satisfied</i>
-    </a>
-    <a class="smiley_rating">
-        <i class="large material-icons">sentiment_very_satisfied</i>
-    </a>
-</div>
+{{--<div class="form-group">--}}
+    {{--{{ Form::label('', 'Customer Satisfaction') }} <br>--}}
+    {{--<a class="smiley_rating">--}}
+        {{--<i class="large material-icons">sentiment_very_dissatisfied</i>--}}
+    {{--</a>--}}
+    {{--<a class="smiley_rating">--}}
+        {{--<i class="large material-icons">sentiment_dissatisfied</i>--}}
+    {{--</a>--}}
+    {{--<a class="smiley_rating">--}}
+        {{--<i class="large material-icons">sentiment_neutral</i>--}}
+    {{--</a>--}}
+    {{--<a class="smiley_rating">--}}
+        {{--<i class="large material-icons">sentiment_satisfied</i>--}}
+    {{--</a>--}}
+    {{--<a class="smiley_rating">--}}
+        {{--<i class="large material-icons">sentiment_very_satisfied</i>--}}
+    {{--</a>--}}
+{{--</div>--}}
+
 <div class="form-group">
     {{ Form::label('customer_suggestion', 'Suggestion') }}
     {{ Form::textarea('customer_suggestion', null, ['class' => 'form-control', 'placeholder' => 'Please enter customer\'s suggestion', 'rows' => 6]) }}

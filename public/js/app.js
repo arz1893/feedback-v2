@@ -91,6 +91,7 @@ $(document).ready(function () {
     $('.selectpicker').selectpicker({
         showSubtext: true
     });
+
     $('#birthdate').dateDropper({});
     $('#modal_add_customer').modal({
         show: false,

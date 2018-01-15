@@ -297,3 +297,8 @@ span.fancytree-expander{
 .imagebox:hover .imagebox-desc {
     padding-bottom: 10%;
 }
+
+.is-selected {
+    border: 1px solid blue;
+    border-radius: 10%;
+}

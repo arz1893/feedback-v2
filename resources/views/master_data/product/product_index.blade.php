@@ -29,8 +29,6 @@
             <th>Image</th>
             <th>Name</th>
             <th>Description</th>
-            <th>Metric Unit</th>
-            <th>Price</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -44,8 +42,6 @@
                 </td>
                 <td><a href="{{ route('product.show', $product) }}">{{ $product->name }}</a></td>
                 <td>{{ $product->description }}</td>
-                <td>{{ $product->metric }}</td>
-                <td>{{ $product->price }}</td>
                 <td>
                     <a href="{{ route('product.edit', $product) }}" class="btn btn-warning">
                         <i class="fa fa-pencil-square-o"></i>

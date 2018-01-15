@@ -1,10 +1,10 @@
 <div class="row margin-bottom">
     <div class="form-group">
-        <div class="col-lg-3 col-md-3 col-xs-4">
+        <div class="col-lg-3 col-md-12 col-xs-4">
             {{ Form::label('customer_name', 'Customer :') }}
         </div>
-        <div class="col-lg-3">
-            {{ Form::select('customerId', $selectCustomers, null, ['class' => 'form-control selectpicker show-tick', 'id' => 'customer_name', 'placeholder' => 'Select Customer', 'data-live-search' => true]) }}
+        <div class="col-lg-3 col-md-4">
+            {{ Form::select('customerId', $selectCustomers, null, ['class' => 'form-control', 'id' => 'customer_name', 'placeholder' => 'Select Customer', 'data-live-search' => true]) }}
         </div>
     </div>
 </div>
@@ -14,7 +14,7 @@
         <div class="col-lg-3">
             {{ Form::label('question', 'Customer\'s Question :') }}
         </div>
-        <div class="col-lg-7">
+        <div class="col-lg-5 col-md-8">
             {{ Form::textarea('question', null, ['class' => 'form-control', 'placeholder' => 'Enter customer\'s question' ,'rows' => 3]) }}
         </div>
     </div>
@@ -30,7 +30,6 @@
                 {{ Form::hidden('is_need_call', 0) }}
                 {{ Form::checkbox('is_need_call', 1) }}
                 {{--<input type="checkbox" class="icheck-input" name="is_need_call" id="is_need_call" value="1">--}}
-                Need Call ?
             </label>
         </div>
     </div>

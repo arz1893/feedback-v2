@@ -12,7 +12,7 @@ var complaint_product = new Vue({
             $('#panel_add_suggestion_service').removeClass('hidden');
             $('#category_navigator').addClass('hidden');
             // this.show = false;
-            this.nodeTitle = '<span class="text-orange"> Add complaint to </span> : ' + title;
+            this.nodeTitle = '<span class="text-orange"> Add suggestion to </span> : ' + title;
             this.serviceId = '<input type="hidden" name="serviceId" value="' + serviceId +'">';
             this.serviceCategoryId = '<input type="hidden" name="serviceCategoryId" value="' + serviceCategoryId +'">';
         },

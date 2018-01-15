@@ -4,7 +4,8 @@ var complaint_service = new Vue({
         nodeTitle: '',
         serviceId: '',
         serviceCategoryId: '',
-        show: true
+        show: true,
+        ratingValue: ''
     },
     methods: {
         append: function (title, serviceId, serviceCategoryId) {
@@ -21,6 +22,20 @@ var complaint_service = new Vue({
             $('#btn_show_category_navigator').addClass('hidden');
             $('#panel_add_complaint').addClass('hidden');
             $('#category_navigator').removeClass('hidden');
+        },
+
+        customerRating: function (value, event) {
+            // console.log(value);
+            // console.log(event.currentTarget.id);
+
+            $('i.smiley_rating').each(function (index, element) {
+                $(element).removeClass('is-selected');
+            });
+
+            $('#' + event.currentTarget.id).addClass('is-selected');
+
+            this.ratingValue = '<input type="hidden" name="customer_rating" value="'+ value +'">';
+
         }
     }
 });

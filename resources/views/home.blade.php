@@ -106,6 +106,7 @@
                         <li><a href="{{ route('complaint_service_list.index') }}"><i class="ion ion-ios-list-outline"></i> List of Service Complaint</a></li>
                         <li><a href="{{ route('suggestion_product_list.index') }}"><i class="ion ion-ios-list-outline"></i> List of Product Suggestion</a></li>
                         <li><a href="{{ route('suggestion_service_list.index') }}"><i class="ion ion-ios-list-outline"></i> List of Service Suggestion</a></li>
+                        <li><a href="{{ route('question_list.index') }}"><i class="ion ion-ios-list-outline"></i> List of Question</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

@@ -296,7 +296,7 @@ a:focus {
   overflow: hidden;
 }
 .main-header .logo .logo-lg {
-  display: block;
+  display: inline-flex;
 }
 .main-header .logo .logo-mini {
   display: none;

@@ -85,11 +85,11 @@
         @include('layouts.errors.error_list')
 
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-lg-6">
                 <transition name="fadeDown">
                     <div class="panel panel-warning hidden" id="panel_add_suggestion_service">
                         <div class="panel-heading">
-                            <h4>Add Complaint</h4>
+                            <h4>Add Suggestion</h4>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">

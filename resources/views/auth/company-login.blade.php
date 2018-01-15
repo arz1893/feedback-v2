@@ -17,18 +17,19 @@
                 </div>
                 {{ Form::close() }}
                 <div class="row">
-                    <div class="col-xs-8"></div>
+                    {{--<div class="col-xs-7"></div>--}}
                     <!-- /.col -->
-                    <div class="col-xs-4">
+                    <div class="col-xs-12">
                         <button
                                 type="submit"
-                                class="btn btn-primary btn-block btn-flat"
+                                class="btn btn-primary"
                                 onclick="checkTenantName(this)"
                                 data-toggle="popover"
                                 data-placement="bottom"
                                 data-trigger="focus"
                                 title="Info"
-                                data-content="Please enter your company email address">
+                                data-content="Please enter your company email address"
+                                style="width: 100%;">
 
                             Sign In <i class="fa fa-sign-in"></i>
                         </button>

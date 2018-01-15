@@ -132,6 +132,10 @@ Route::post('suggestion_service_list/delete-suggestion-service', 'Suggestion\Sug
 Route::resource('question', 'Question\QuestionController');
 /* end of question routes */
 
+/* Question List Routes */
+Route::resource('question_list', 'Question\QuestionListController');
+/* end of question list routes */
+
 /* Customer Complaint Routes */
 Route::resource('customer', 'Customer\CustomerController');
 /* end of customer routes */
