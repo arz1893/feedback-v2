@@ -32,6 +32,8 @@
 @section('main-content')
     {{ Form::hidden('product_id', $product->systemId, ['id' => 'product_id']) }}
 
+    @include('layouts.errors.error_list')
+
     @if(\Session::has('status'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -82,8 +84,6 @@
                 @endforeach
             </div>
         </transition>
-
-        @include('layouts.errors.error_list')
 
         <div class="row">
             <div class="col-lg-6">

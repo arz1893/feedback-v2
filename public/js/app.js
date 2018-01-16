@@ -98,10 +98,10 @@ $(document).ready(function () {
         backdrop: 'static'
     });
 
-    $('input').iCheck({
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue'
-    });
+    // $('input').iCheck({
+    //     checkboxClass: 'icheckbox_square-blue',
+    //     radioClass: 'iradio_square-blue'
+    // });
 
     $('input[type="file"]').prettyFile();
 });

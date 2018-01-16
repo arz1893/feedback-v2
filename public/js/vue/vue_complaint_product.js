@@ -5,7 +5,12 @@ var complaint_product = new Vue({
         productId: '',
         productCategoryId: '',
         show: true,
-        ratingValue: ''
+        ratingValue: '',
+        is_anonymous: true,
+        is_customer: true
+    },
+    created: function () {
+
     },
     methods: {
         append: function(title, productId, productCategoryId) {
@@ -37,6 +42,27 @@ var complaint_product = new Vue({
 
             this.ratingValue = '<input type="hidden" name="customer_rating" value="'+ value +'">';
 
+        },
+
+        onChangeAddComplaintProduct: function (event) {
+            if(event.currentTarget.value !== '') {
+                this.is_anonymous = false;
+            } else if (event.currentTarget.value === '') {
+                this.is_anonymous = true;
+                $('#is_need_call').prop('checked', false);
+            }
+        },
+
+        onChangeEditComplaintProduct: function (event) {
+            if(event.currentTarget.value !== '') {
+                this.is_anonymous = false;
+                this.is_customer = true;
+            } else if (event.currentTarget.value === '') {
+                this.is_customer = false;
+                this.is_anonymous = true;
+                $('#is_need_call').prop('checked', false);
+            }
         }
+
     }
 });

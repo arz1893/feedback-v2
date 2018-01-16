@@ -18,7 +18,7 @@ class ComplaintProductListController extends Controller
 
     public function edit($id) {
         $complaintProduct = ComplaintProduct::findOrfail($id);
-        $selectCustomers =  Customer::where('tenantId', Auth::user()->tenantId)->pluck('name','systemId');
+        $selectCustomers =  Customer::where('tenantId', Auth::user()->tenantId)->get()->pluck('full_information', 'systemId');
         return view('complaint.product.list.complaint_product_list_edit', compact('complaintProduct', 'selectCustomers'));
     }
 

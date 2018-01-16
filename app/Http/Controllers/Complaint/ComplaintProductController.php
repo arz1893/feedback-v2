@@ -23,23 +23,25 @@ class ComplaintProductController extends Controller
         if($currentNodeId == 0) {
             $product = Product::findOrFail($id);
             $productCategories = ProductCategory::where('productId', $product->systemId)->where('parent_id', null)->get();
-            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->pluck('name', 'systemId');
+            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->get()->pluck('full_information', 'systemId');
             return view('complaint.product.complaint_product_show', compact('product', 'productCategories', 'selectCustomers'));
         } else {
             $product = Product::findOrFail($id);
             $productCategories = ProductCategory::where('parent_id', $currentNodeId)->get();
             $currentParentNode = ProductCategory::findOrFail($currentNodeId);
-            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->pluck('name', 'systemId');
+            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->get()->pluck('full_information', 'systemId');
             return view('complaint.product.complaint_product_show', compact('product', 'productCategories', 'currentParentNode', 'selectCustomers'));
         }
     }
 
     public function store(Request $request) {
         $rules = [
-            'customer_complaint' => 'required'
+            'customer_complaint' => 'required',
+            'customer_rating' => 'required'
         ];
         $messages = [
-            'customer_complaint.required' => 'please enter customer\'s complaint'
+            'customer_complaint.required' => 'please enter customer\'s complaint',
+            'customer_rating.required' => 'please select customer\'s satisfaction'
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
 

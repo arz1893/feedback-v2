@@ -28,4 +28,8 @@ class Customer extends Model
     public function tenant() {
         return $this->belongsTo(Tenant::class, 'tenantId', 'systemId');
     }
+
+    public function getFullInformationAttribute() {
+        return "{$this->name} - {$this->phone}";
+    }
 }

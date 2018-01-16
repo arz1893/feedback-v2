@@ -5,7 +5,9 @@ var complaint_service = new Vue({
         serviceId: '',
         serviceCategoryId: '',
         show: true,
-        ratingValue: ''
+        ratingValue: '',
+        is_anonymous: true,
+        is_customer: true
     },
     methods: {
         append: function (title, serviceId, serviceCategoryId) {
@@ -35,7 +37,26 @@ var complaint_service = new Vue({
             $('#' + event.currentTarget.id).addClass('is-selected');
 
             this.ratingValue = '<input type="hidden" name="customer_rating" value="'+ value +'">';
+        },
 
+        onChangeAddComplaintService: function () {
+            if(event.currentTarget.value !== '') {
+                this.is_anonymous = false;
+            } else if (event.currentTarget.value === '') {
+                this.is_anonymous = true;
+                $('#is_need_call').prop('checked', false);
+            }
+        },
+
+        onChangeEditComplaintService: function (event) {
+            if(event.currentTarget.value !== '') {
+                this.is_anonymous = false;
+                this.is_customer = true;
+            } else if (event.currentTarget.value === '') {
+                this.is_customer = false;
+                this.is_anonymous = true;
+                $('#is_need_call').prop('checked', false);
+            }
         }
     }
 });

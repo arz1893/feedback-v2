@@ -18,7 +18,7 @@ class SuggestionServiceListController extends Controller
 
     public function edit($id) {
         $suggestionService = SuggestionService::findOrFail($id);
-        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->pluck('name', 'systemId');
+        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->get()->pluck('full_information', 'systemId');
         return view('suggestion.service.list.suggestion_service_list_edit', compact('suggestionService', 'selectCustomers'));
     }
 

@@ -22,7 +22,7 @@
     <div id="vue_complaint_product_container">
         {{ Form::model($complaintProduct, ['method' => 'PATCH', 'action' => ['Complaint\ComplaintProductListController@update', $complaintProduct], 'id' => 'form_edit_complaint_product']) }}
         <div class="col-lg-6 col-lg-offset-3">
-            @include('layouts.complaint.product.complaint_product_form', ['submitButtonText' => 'Update Complaint Product'])
+            @include('layouts.complaint.product.complaint_product_form_edit', ['submitButtonText' => 'Update Complaint Product'])
         </div>
         {{ Form::close() }}
     </div>

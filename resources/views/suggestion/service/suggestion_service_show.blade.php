@@ -89,12 +89,9 @@
                 <transition name="fadeDown">
                     <div class="panel panel-warning hidden" id="panel_add_suggestion_service">
                         <div class="panel-heading">
-                            <h4>Add Suggestion</h4>
+                            <div v-html="nodeTitle"></div>
                         </div>
                         <div class="panel-body">
-                            <div class="form-group">
-                                <span v-html="nodeTitle"></span>
-                            </div>
                             {{ Form::open(['action' => 'Suggestion\SuggestionServiceController@store', 'id' => 'form_add_suggestion_service']) }}
                             <div v-html="serviceId"></div>
                             <div v-html="serviceCategoryId"></div>

@@ -1,7 +1,10 @@
 <div class="form-group">
     {{ Form::label('customerId', 'Customer') }}
     <div class="input-group input-group-md">
-        {{ Form::select('customerId', $selectCustomers, null, ['class' => 'form-control selectpicker', 'placeholder' => 'Anonymous', 'data-live-search' => 'true']) }}
+        {{ Form::select('customerId', $selectCustomers, null, ['class' => 'form-control selectpicker',
+                                                               'placeholder' => 'Anonymous',
+                                                               'data-live-search' => 'true',
+                                                               'v-on:change' => 'onChangeAddComplaintProduct($event)']) }}
         <span class="input-group-btn">
           <button type="button" class="btn btn-info btn-flat" id="btn_add_customer" data-toggle="modal" data-target="#modal_add_customer">
               <i class="fa fa-plus-circle"></i>
@@ -12,9 +15,10 @@
 
 <div class="form-group">
     {{ Form::label('', 'Customer Satisfaction') }} <br>
-    <a class="" href="#very_bad" >
+
+    <a class="" href="#very_bad">
         <i id="very_bad"
-           class="smiley_rating material-icons text-red"
+           class="smiley_rating material-icons text-maroon"
            style="font-size: 4em;"
            v-on:click="customerRating(1, $event)"
            data-value="1">
@@ -23,7 +27,7 @@
     </a>
     <a class="" href="#bad">
         <i id="bad"
-           class="smiley_rating material-icons text-orange"
+           class="smiley_rating material-icons text-red"
            style="font-size: 4em;"
            v-on:click="customerRating(2, $event)"
            data-value="2">
@@ -32,7 +36,7 @@
     </a>
     <a class="" href="#normal">
         <i id="normal"
-           class="smiley_rating material-icons text-muted"
+           class="smiley_rating material-icons text-yellow"
            style="font-size: 4em;"
            v-on:click="customerRating(3, $event)"
            data-value="3">
@@ -41,7 +45,7 @@
     </a>
     <a class="" href="#satisfied">
         <i id="satisfied"
-           class="smiley_rating material-icons text-aqua"
+           class="smiley_rating material-icons text-olive"
            style="font-size: 4em;"
            v-on:click="customerRating(4, $event)"
            data-value="4">
@@ -58,12 +62,9 @@
         </i>
     </a>
 
-    @if(isset($complaintProduct))
-        {{ Form::hidden('current_complaint_rating', $complaintProduct->customer_rating, ['id' => 'current_complaint_rating']) }}
-    @endif
-
     <div v-html="ratingValue"></div>
 </div>
+
 <div class="form-group">
     {{ Form::label('customer_complaint', 'Complaint') }}
     {{ Form::textarea('customer_complaint', null, ['class' => 'form-control', 'placeholder' => 'Please enter customer\'s complaint', 'rows' => 6]) }}
@@ -73,7 +74,7 @@
         <div class="form-group">
             <label>
                 {{ Form::hidden('is_need_call', 0) }}
-                {{ Form::checkbox('is_need_call', 1) }}
+                {{ Form::checkbox('is_need_call', 1, false, ['id' => 'is_need_call', ':disabled' => 'is_anonymous == true']) }}
                 {{--<input type="checkbox" class="icheck-input" name="is_need_call" id="is_need_call" value="1">--}}
                 Need Call ?
             </label>
