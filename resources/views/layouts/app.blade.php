@@ -147,9 +147,9 @@
                                         </ul>
                                     </li>
                                     <!-- Control Sidebar Toggle Button -->
-                                    <li>
-                                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                                    </li>
+                                    {{--<li>--}}
+                                        {{--<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>--}}
+                                    {{--</li>--}}
                                 @endguest
 
                             </ul>
@@ -172,6 +172,10 @@
     <script src="{{ asset('js/admin-lte/adminlte.min.js') }}" type="text/javascript"></script>
     <!-- Vue JS -->
     <script src="{{ asset('js/vue/vue.js') }}" type="text/javascript"></script>
+    <!-- Vee Validate -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vee-validate/2.0.3/vee-validate.js" type="text/javascript"></script>
+    <!-- Axios JS -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript"></script>
     <!-- Data Table -->
     <script src="{{ asset('js/datatables/datatables.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/datatables/dataTables.bootstrap.js') }}" type="text/javascript"></script>

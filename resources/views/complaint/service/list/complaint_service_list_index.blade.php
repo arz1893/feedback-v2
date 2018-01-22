@@ -18,15 +18,14 @@
         </div>
     @endif
 
-    <table class="table table-striped" id="table_complaint_product" style="width: 100%">
+    <table class="table table-striped table-bordered table-responsive" id="table_complaint_service" style="width: 100%">
         <thead>
         <tr>
             <th>No.</th>
             <th>Customer Name</th>
             <th>Service Name</th>
             <th>Category</th>
-            <th>Customer's Rating</th>
-            <th>Complaint content</th>
+            <th>Rating</th>
             <th>Need Call ?</th>
             <th>Is Urgent ?</th>
             <th>Action</th>
@@ -48,8 +47,35 @@
                 </td>
                 <td>{{ $complaintService->service->name }}</td>
                 <td>{{ $complaintService->service_category->name }}</td>
-                <td>{{ $complaintService->customer_rating }}</td>
-                <td>{{ $complaintService->customer_complaint }}</td>
+                <td>
+                    @switch($complaintService->customer_rating)
+                        @case(1)
+                        <i class="text-center material-icons text-maroon" style="font-size: 2em;">
+                            sentiment_very_dissatisfied
+                        </i>
+                        @break
+                        @case(2)
+                        <i class="text-center material-icons text-red" style="font-size: 2em;">
+                            sentiment_dissatisfied
+                        </i>
+                        @break
+                        @case(3)
+                        <i class="smiley_rating material-icons text-yellow" style="font-size: 2em;">
+                            sentiment_neutral
+                        </i>
+                        @break
+                        @case(4)
+                        <i class="smiley_rating material-icons text-olive" style="font-size: 2em;">
+                            sentiment_satisfied
+                        </i>
+                        @break
+                        @case(5)
+                        <i class="smiley_rating material-icons text-green" style="font-size: 2em;">
+                            sentiment_very_satisfied
+                        </i>
+                        @break
+                    @endswitch
+                </td>
                 <td>{!! $complaintService->is_need_call == 1 ? '<span class="text-red">yes</span>':'<span class="blue-text">no</span>' !!}</td>
                 <td>{!! $complaintService->is_urgent == 1 ? '<span class="text-red">yes</span>':'<span class="blue-text">no</span>' !!}</td>
                 <td>

@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#complaint_product_tree').fancytree({
         extensions: ['glyph','wide','edit'],
         glyph: {
-            preset: 'material',
+            preset: 'bootstrap',
             map: {}
         },
         source: $.ajax({

@@ -27,5 +27,5 @@
         </div>
     </div>
 
-    @include('customer.modal_add_customer')
+    @include('customer.manage_customer')
 @endsection

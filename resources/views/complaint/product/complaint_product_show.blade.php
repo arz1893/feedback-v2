@@ -6,7 +6,8 @@
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('js/vue/vue_complaint_product.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/vue_product.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/vue_customer.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')
@@ -42,7 +43,7 @@
         </div>
     @endif
 
-    <div id="vue_complaint_product_container">
+    <div id="vue_product_container">
 
         <transition name="fadeDown">
             <a href="#!" class="btn btn-link btn-lg hidden" id="btn_show_category_navigator" v-on:click="showNavigator()">
@@ -68,12 +69,12 @@
 
                 @foreach($productCategories as $productCategory)
                     @if(count($productCategory->getImmediateDescendants()) > 0)
-                        <a href="{{ route('show_complaint_product', [$product->systemId, $productCategory->id]) }}" class="btn btn-app">
+                        <a href="{{ route('show_complaint_product', [$product->systemId, $productCategory->id]) }}" class="btn btn-app bg-teal">
                             <span class="badge bg-aqua">{{ count($productCategory->getImmediateDescendants()) }}</span>
                             <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $productCategory->name }}
                         </a>
                     @elseif(count($productCategory->getImmediateDescendants()) == 0)
-                        <button class="btn btn-app active"
+                        <button class="btn btn-app bg-teal"
                                 data-node_id="{{ $productCategory->id }}"
                                 data-product_id="{{ $product->systemId }}"
                                 data-title="{{ $productCategory->name }}"
@@ -88,29 +89,26 @@
         <div class="row">
             <div class="col-lg-6">
                 <transition name="fadeDown">
-                    <div class="panel panel-danger hidden" id="panel_add_complaint">
+                    <div class="panel panel-danger hidden" id="panel_product">
                         <div class="panel-heading">
-                            <div v-html="nodeTitle"></div>
+                            <h4>Add Complaint to : @{{ nodeTitle }}</h4>
                         </div>
                         <div class="panel-body">
-                            {{--<div class="form-group">--}}
-                                {{--<span v-html="nodeTitle"></span>--}}
-                            {{--</div>--}}
                             {{ Form::open(['action' => 'Complaint\ComplaintProductController@store', 'id' => 'form_add_complaint_product']) }}
                             <div v-html="productId"></div>
                             <div v-html="productCategoryId"></div>
                             {{ Form::hidden('tenantId', Auth::user()->tenantId) }}
-                            @include('layouts.complaint.product.complaint_product_form', ['submitButtonText' => 'Add Complaint'])
+                                @include('layouts.complaint.product.complaint_product_form', ['submitButtonText' => 'Add Complaint', 'functionName' => 'onChangeCustomer($event)'])
                             {{ Form::close() }}
                         </div>
                     </div>
                 </transition>
             </div>
         </div>
-
     </div>
 
-    @include('customer.modal_add_customer')
+    @include('customer.manage_customer')
+
 
     {{--<button class="btn btn-danger btn-flat" onclick="setComplaintTarget(this)">--}}
     {{--Add Complaint <i class="ion ion-plus-circled"></i>--}}

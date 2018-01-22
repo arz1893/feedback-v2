@@ -6,7 +6,8 @@
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('js/vue/vue_complaint_service.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/vue_service.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/vue_customer.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')
@@ -40,7 +41,7 @@
         </div>
     @endif
 
-    <div id="vue_complaint_service_container">
+    <div id="vue_service_container">
 
         <transition name="fadeDown">
             <a href="#!" class="btn btn-link btn-lg hidden" id="btn_show_category_navigator" v-on:click="showNavigator()">
@@ -66,12 +67,12 @@
 
                 @foreach($serviceCategories as $serviceCategory)
                     @if(count($serviceCategory->getImmediateDescendants()) > 0)
-                        <a href="{{ route('show_complaint_service', [$service->systemId, $serviceCategory->id]) }}" class="btn btn-app">
+                        <a href="{{ route('show_complaint_service', [$service->systemId, $serviceCategory->id]) }}" class="btn btn-app bg-teal">
                             <span class="badge bg-aqua">{{ count($serviceCategory->getImmediateDescendants()) }}</span>
                             <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $serviceCategory->name }}
                         </a>
                     @elseif(count($serviceCategory->getImmediateDescendants()) == 0)
-                        <button class="btn btn-app active"
+                        <button class="btn btn-app bg-teal"
                                 data-node_id="{{ $serviceCategory->systemId }}"
                                 data-service_id="{{ $service->systemId }}"
                                 data-title="{{ $serviceCategory->name }}"
@@ -88,14 +89,11 @@
         <div class="row">
             <div class="col-lg-6">
                 <transition name="fadeDown">
-                    <div class="panel panel-danger hidden" id="panel_add_complaint">
+                    <div class="panel panel-danger hidden" id="panel_service">
                         <div class="panel-heading">
-                            <h4>Add Complaint</h4>
+                            <h4>Add complaint to : @{{ nodeTitle }}</h4>
                         </div>
                         <div class="panel-body">
-                            <div class="form-group">
-                                <span v-html="nodeTitle"></span>
-                            </div>
                             {{ Form::open(['action' => 'Complaint\ComplaintServiceController@store', 'id' => 'form_add_complaint_service']) }}
                             <div v-html="serviceId"></div>
                             <div v-html="serviceCategoryId"></div>
@@ -110,7 +108,7 @@
 
     </div>
 
-    @include('customer.modal_add_customer')
+    @include('customer.manage_customer')
 
     {{--<button class="btn btn-danger btn-flat" onclick="setComplaintTarget(this)">--}}
     {{--Add Complaint <i class="ion ion-plus-circled"></i>--}}

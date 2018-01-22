@@ -5,7 +5,7 @@
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Question List</li>
     </ol>
-    <h3> Question List </h3>
+    <h3 class="text-success"> Question List </h3>
 @endsection
 
 @section('main-content')
@@ -20,7 +20,7 @@
     @endif
 
     @php $counter = 1; @endphp
-    <table id="table_question" class="table table-responsive table-hover" style="width: 100%;">
+    <table id="table_question" class="table table-striped table-bordered table-responsive" style="width: 100%;">
         <thead>
         <tr>
             <th>Num.</th>

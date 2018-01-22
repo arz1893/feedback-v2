@@ -9,9 +9,9 @@
 @endsection
 
 @section('main-content')
-    <div class="container col-lg-offset-3 col-md-offset-2" style="margin-top: 5%">
-        <div class="row">
-            <div class="col-lg-4 col-md-3 col-sm-4 col-xs-12">
+    <div class="" style="margin-top: 5%">
+        <div class="row col-lg-offset-3">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 <a href="{{ route('complaint_product.index') }}">
                     <div class="info-box bg-red">
                         <span class="info-box-icon"><i class="fa fa-truck"></i></span>
@@ -21,6 +21,12 @@
                             {{--<span class="product-description">--}}
                             {{--{{ $productCounter }} item--}}
                             {{--</span>--}}
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                            <span class="progress-description" style="font-size: 0.8em;">
+                                Add complaint to product
+                            </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -28,7 +34,7 @@
                 </a>
             </div>
             <!-- /.col -->
-            <div class="col-lg-4 col-md-3 col-sm-4 col-xs-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 <a href="{{ route('complaint_service.index') }}">
                     <div class="info-box bg-red">
                         <span class="info-box-icon"><i class="fa fa-trophy"></i></span>
@@ -39,6 +45,12 @@
                             {{--<span class="progress-description">--}}
                             {{--{{ $serviceCounter }} item--}}
                             {{--</span>--}}
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                            <span class="progress-description" style="font-size: 0.8em;">
+                                Add complaint to service
+                            </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>

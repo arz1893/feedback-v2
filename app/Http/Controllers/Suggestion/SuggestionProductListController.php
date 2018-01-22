@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class SuggestionProductListController extends Controller
 {
     public function index() {
-        $suggestionProducts = SuggestionProduct::where('tenantId', Auth::user()->tenantId)->get();
+        $suggestionProducts = SuggestionProduct::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get();
         return view('suggestion.product.list.suggestion_product_list_index', compact('suggestionProducts'));
     }
 

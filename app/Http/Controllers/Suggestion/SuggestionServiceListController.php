@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class SuggestionServiceListController extends Controller
 {
     public function index() {
-        $suggestionServices = SuggestionService::where('tenantId', Auth::user()->tenantId)->get();
+        $suggestionServices = SuggestionService::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get();
         return view('suggestion.service.list.suggestion_service_list_index', compact('suggestionServices'));
     }
 

@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <table class="table table-striped" id="table_suggestion_product" style="width: 100%">
+    <table class="table table-striped table-bordered table-responsive" id="table_suggestion_product" style="width: 100%">
         <thead>
         <tr>
             <th>No.</th>

@@ -11,10 +11,12 @@ use Webpatser\Uuid\Uuid;
 
 class CustomerController extends Controller
 {
-    public function store(CustomerRequest $request) {
-        $birthdate = date('Y-m-d', strtotime($request->input('birthdate')));
+    public function store(Request $request) {
+//        dd($request->all());
 
-        Customer::create([
+        $birthdate = date('Y-m-d', strtotime($request->birthdate));
+
+        $customer = Customer::create([
             'systemId' => Uuid::generate(4),
             'name' => $request->name,
             'gender' => $request->gender,
@@ -28,6 +30,8 @@ class CustomerController extends Controller
             'tenantId' => Auth::user()->tenantId
         ]);
 
-        return redirect()->back()->with(['status' => 'Customer has been added']);
+        return response()->json(['form-data', $customer], 200);
+//
+//        return redirect()->back()->with(['status' => 'Customer has been added']);
     }
 }

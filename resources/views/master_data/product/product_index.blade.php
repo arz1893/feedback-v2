@@ -38,7 +38,7 @@
             <tr>
                 <td>{{ $counter }}</td>
                 <td>
-                    <img src="{{ asset($product->img) }}" width="100">
+                    <a href="{{ route('product.show', $product) }}"><img src="{{ asset($product->img) }}" width="100"></a>
                 </td>
                 <td><a href="{{ route('product.show', $product) }}">{{ $product->name }}</a></td>
                 <td>{{ $product->description }}</td>

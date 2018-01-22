@@ -5,7 +5,8 @@
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('js/vue/vue_suggestion_service.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/vue_service.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/vue_customer.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')
@@ -39,7 +40,10 @@
         </div>
     @endif
 
-    <div id="vue_suggestion_service_container">
+    @include('layouts.errors.error_list')
+
+
+    <div id="vue_service_container">
 
         <transition name="fadeDown">
             <a href="#!" class="btn btn-link btn-lg hidden" id="btn_show_category_navigator" v-on:click="showNavigator()">
@@ -65,12 +69,12 @@
 
                 @foreach($serviceCategories as $serviceCategory)
                     @if(count($serviceCategory->getImmediateDescendants()) > 0)
-                        <a href="{{ route('show_suggestion_service', [$service->systemId, $serviceCategory->id]) }}" class="btn btn-app">
+                        <a href="{{ route('show_suggestion_service', [$service->systemId, $serviceCategory->id]) }}" class="btn btn-app bg-teal">
                             <span class="badge bg-aqua">{{ count($serviceCategory->getImmediateDescendants()) }}</span>
                             <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $serviceCategory->name }}
                         </a>
                     @elseif(count($serviceCategory->getImmediateDescendants()) == 0)
-                        <button class="btn btn-app active"
+                        <button class="btn btn-app bg-teal"
                                 data-node_id="{{ $serviceCategory->id }}"
                                 data-service_id="{{ $service->systemId }}"
                                 data-title="{{ $serviceCategory->name }}"
@@ -82,12 +86,10 @@
             </div>
         </transition>
 
-        @include('layouts.errors.error_list')
-
         <div class="row">
             <div class="col-lg-6">
                 <transition name="fadeDown">
-                    <div class="panel panel-warning hidden" id="panel_add_suggestion_service">
+                    <div class="panel panel-warning hidden" id="panel_service">
                         <div class="panel-heading">
                             <div v-html="nodeTitle"></div>
                         </div>
@@ -96,7 +98,7 @@
                             <div v-html="serviceId"></div>
                             <div v-html="serviceCategoryId"></div>
                             {{ Form::hidden('tenantId', Auth::user()->tenantId) }}
-                            @include('layouts.suggestion.service.suggestion_service_form', ['submitButtonText' => 'Add Suggestion'])
+                            @include('layouts.suggestion.service.suggestion_service_form', ['submitButtonText' => 'Add Suggestion', 'functionName' => 'onChangeCustomer($event)'])
                             {{ Form::close() }}
                         </div>
                     </div>
@@ -106,7 +108,7 @@
 
     </div>
 
-    @include('customer.modal_add_customer')
+    @include('customer.manage_customer')
 
     {{--<button class="btn btn-danger btn-flat" onclick="setComplaintTarget(this)">--}}
     {{--Add Complaint <i class="ion ion-plus-circled"></i>--}}

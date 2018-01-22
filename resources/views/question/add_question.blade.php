@@ -24,6 +24,6 @@
         @include('layouts.question.add_question_form')
     {{ Form::close() }}
 
-    @include('customer.modal_add_customer')
+    @include('customer.manage_customer')
 
 @endsection

@@ -4,7 +4,7 @@
         {{ Form::select('customerId', $selectCustomers, null, ['class' => 'form-control selectpicker',
                                                                'placeholder' => 'Anonymous',
                                                                'data-live-search' => 'true',
-                                                               'v-on:change' => 'onChangeAddComplaintProduct($event)']) }}
+                                                               'v-on:change' => '' . $functionName . '']) }}
         <span class="input-group-btn">
           <button type="button" class="btn btn-info btn-flat" id="btn_add_customer" data-toggle="modal" data-target="#modal_add_customer">
               <i class="fa fa-plus-circle"></i>
@@ -16,46 +16,46 @@
 <div class="form-group">
     {{ Form::label('', 'Customer Satisfaction') }} <br>
 
-    <a class="" href="#very_bad">
+    <a class="" href="#!">
         <i id="very_bad"
            class="smiley_rating material-icons text-maroon"
-           style="font-size: 4em;"
+           style="font-size: 3.5em;"
            v-on:click="customerRating(1, $event)"
            data-value="1">
             sentiment_very_dissatisfied
         </i>
     </a>
-    <a class="" href="#bad">
+    <a class="" href="#!">
         <i id="bad"
            class="smiley_rating material-icons text-red"
-           style="font-size: 4em;"
+           style="font-size: 3.5em;"
            v-on:click="customerRating(2, $event)"
            data-value="2">
             sentiment_dissatisfied
         </i>
     </a>
-    <a class="" href="#normal">
+    <a class="" href="#!">
         <i id="normal"
            class="smiley_rating material-icons text-yellow"
-           style="font-size: 4em;"
+           style="font-size: 3.5em;"
            v-on:click="customerRating(3, $event)"
            data-value="3">
             sentiment_neutral
         </i>
     </a>
-    <a class="" href="#satisfied">
+    <a class="" href="#!">
         <i id="satisfied"
            class="smiley_rating material-icons text-olive"
-           style="font-size: 4em;"
+           style="font-size: 3.5em;"
            v-on:click="customerRating(4, $event)"
            data-value="4">
             sentiment_satisfied
         </i>
     </a>
-    <a class="" href="#very_satisfied">
+    <a class="" href="#!">
         <i id="very_satisfied"
            class="smiley_rating material-icons text-green"
-           style="font-size: 4em;"
+           style="font-size: 3.5em;"
            v-on:click="customerRating(5, $event)"
            data-value="5">
             sentiment_very_satisfied
@@ -72,7 +72,7 @@
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
         <div class="form-group">
-            <label>
+            <label v-bind:class="{'text-gray': is_anonymous == true}">
                 {{ Form::hidden('is_need_call', 0) }}
                 {{ Form::checkbox('is_need_call', 1, false, ['id' => 'is_need_call', ':disabled' => 'is_anonymous == true']) }}
                 {{--<input type="checkbox" class="icheck-input" name="is_need_call" id="is_need_call" value="1">--}}

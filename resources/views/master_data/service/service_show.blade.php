@@ -26,33 +26,28 @@
 
     <div class="span8">
 
-        <div class="visible-lg visible-md">
-            <div class="text-center">
-                @if($service->img == null)
-                    <img src="{{ asset('default-images/handshake.jpg') }}" width="200" class="" alt="{{ $service->name }}">
-                @else
-                    <img src="{{ asset($service->img) }}" width="200" class="" alt="{{ $service->name }}">
-                @endif
+        <div class="media">
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object" src="{{ asset($service->img) }}" alt="{{ $service->name }}" width="120">
+                </a>
             </div>
-            <h1>{{ $service->name }}</h1>
-
-            <p class="text-justify">
-                <b>Description :</b> <br>
-                {{ $service->description }}
-            </p>
+            <div class="media-body">
+                <h4 class="media-heading">{{ $service->name }}</h4>
+                <button class="btn btn-default"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#service_description"
+                        aria-expanded="false"
+                        aria-controls="collapseExample">
+                    Show Description
+                </button>
+            </div>
         </div>
 
-        <div class="visible-sm visible-xs">
-            <div class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object" src="{{ asset($service->img) }}" alt="{{ $service->name }}" width="120">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading">{{ $service->name }}</h4>
-                    <p>{{ $service->description }}</p>
-                </div>
+        <div class="collapse" id="service_description" style="margin-top: 2%">
+            <div class="well text-justify">
+                {{ $service->description }}
             </div>
         </div>
 

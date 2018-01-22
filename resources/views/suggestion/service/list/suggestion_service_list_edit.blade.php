@@ -1,3 +1,7 @@
+@push('scripts')
+    <script src="{{ asset('js/vue/vue_customer.js') }}" type="text/javascript"></script>
+@endpush
+
 @extends('home')
 
 @section('content-header')
@@ -16,5 +20,5 @@
         {{ Form::close() }}
     </div>
 
-    @include('customer.modal_add_customer')
+    @include('customer.manage_customer')
 @endsection

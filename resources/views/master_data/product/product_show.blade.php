@@ -25,35 +25,28 @@
     </div>
 
     <div class="span8">
-        <div class="visible-lg visible-md">
-            <div class="text-center">
-                <img src="{{ asset($product->img) }}" width="200" class="" alt="{{ $product->name }}">
-                <h1 class="text-center">{{ $product->name }}</h1>
-                @include('layouts.errors.error_list')
-                @if(\Session::has('status'))
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>Info!</strong> {{ \Session::get('status') }}
-                    </div>
-                @endif
+        <div class="media">
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object" src="{{ asset($product->img) }}" alt="{{ $product->name }}" width="120">
+                </a>
             </div>
-            <p class="text-justify">
-                <b>Description :</b> <br>
-                {{ $product->description }}
-            </p>
+            <div class="media-body">
+                <h4 class="media-heading">{{ $product->name }}</h4>
+                <button class="btn btn-default"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#product_description"
+                        aria-expanded="false"
+                        aria-controls="collapseExample">
+                    Show Description
+                </button>
+            </div>
         </div>
 
-        <div class="visible-sm visible-xs">
-            <div class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object" src="{{ asset($product->img) }}" alt="{{ $product->name }}" width="120">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading">{{ $product->name }}</h4>
-                    <p>{{ $product->description }}</p>
-                </div>
+        <div class="collapse" id="product_description" style="margin-top: 2%">
+            <div class="well text-justify">
+                {{ $product->description }}
             </div>
         </div>
 
@@ -81,7 +74,7 @@
             <i class="ion ion-network" aria-hidden="true"></i> Add sub category
         </button>
 
-        <div id="product_category_tree" class="fancytree-colorize-hover fancytree-fade-expander"></div>
+        <div id="product_category_tree" class=""></div>
 
         <button type="button"
                 class="btn btn-warning"

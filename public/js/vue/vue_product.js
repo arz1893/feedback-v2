@@ -1,5 +1,5 @@
-var complaint_product = new Vue({
-    el: '#vue_complaint_product_container',
+var product_container = new Vue({
+    el: '#vue_product_container',
     data: {
         nodeTitle: '',
         productId: '',
@@ -15,10 +15,10 @@ var complaint_product = new Vue({
     methods: {
         append: function(title, productId, productCategoryId) {
             $('#btn_show_category_navigator').removeClass('hidden');
-            $('#panel_add_complaint').removeClass('hidden');
+            $('#panel_product').removeClass('hidden');
             $('#category_navigator').addClass('hidden');
             // this.show = false;
-            this.nodeTitle = '<h4>Add Complaint to : ' + title + '</h4>';
+            this.nodeTitle = title;
             this.productId = '<input type="hidden" name="productId" value="' + productId +'">';
             this.productCategoryId = '<input type="hidden" name="productCategoryId" value="' + productCategoryId +'">';
         },
@@ -26,7 +26,7 @@ var complaint_product = new Vue({
         showNavigator: function () {
             // this.show = true;
             $('#btn_show_category_navigator').addClass('hidden');
-            $('#panel_add_complaint').addClass('hidden');
+            $('#panel_product').addClass('hidden');
             $('#category_navigator').removeClass('hidden');
         },
 
@@ -45,7 +45,7 @@ var complaint_product = new Vue({
 
         },
 
-        onChangeAddComplaintProduct: function (event) {
+        onChangeCustomer: function (event) {
             if(event.currentTarget.value !== '') {
                 this.is_anonymous = false;
             } else if (event.currentTarget.value === '') {
@@ -54,7 +54,7 @@ var complaint_product = new Vue({
             }
         },
 
-        onChangeEditComplaintProduct: function (event) {
+        onChangeEditCustomer: function (event) {
             if(event.currentTarget.value !== '') {
                 this.is_anonymous = false;
                 this.is_customer = true;

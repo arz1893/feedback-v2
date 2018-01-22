@@ -1,9 +1,9 @@
-var complaint_product = new Vue({
-    el: '#vue_complaint_product_container',
+var service_container = new Vue({
+    el: '#vue_service_container',
     data: {
         nodeTitle: '',
-        productId: '',
-        productCategoryId: '',
+        serviceId: '',
+        serviceCategoryId: '',
         show: true,
         ratingValue: '',
         is_anonymous: true,
@@ -13,20 +13,20 @@ var complaint_product = new Vue({
 
     },
     methods: {
-        append: function(title, productId, productCategoryId) {
+        append: function(title, serviceId, serviceCategoryId) {
             $('#btn_show_category_navigator').removeClass('hidden');
-            $('#panel_add_complaint').removeClass('hidden');
+            $('#panel_service').removeClass('hidden');
             $('#category_navigator').addClass('hidden');
             // this.show = false;
-            this.nodeTitle = '<h4>Add Complaint to : ' + title + '</h4>';
-            this.productId = '<input type="hidden" name="productId" value="' + productId +'">';
-            this.productCategoryId = '<input type="hidden" name="productCategoryId" value="' + productCategoryId +'">';
+            this.nodeTitle = title;
+            this.serviceId = '<input type="hidden" name="serviceId" value="' + serviceId +'">';
+            this.serviceCategoryId = '<input type="hidden" name="serviceCategoryId" value="' + serviceCategoryId +'">';
         },
 
         showNavigator: function () {
             // this.show = true;
             $('#btn_show_category_navigator').addClass('hidden');
-            $('#panel_add_complaint').addClass('hidden');
+            $('#panel_service').addClass('hidden');
             $('#category_navigator').removeClass('hidden');
         },
 
@@ -45,7 +45,7 @@ var complaint_product = new Vue({
 
         },
 
-        onChangeAddComplaintProduct: function (event) {
+        onChangeCustomer: function (event) {
             if(event.currentTarget.value !== '') {
                 this.is_anonymous = false;
             } else if (event.currentTarget.value === '') {
@@ -54,7 +54,7 @@ var complaint_product = new Vue({
             }
         },
 
-        onChangeEditComplaintProduct: function (event) {
+        onChangeEditCustomer: function (event) {
             if(event.currentTarget.value !== '') {
                 this.is_anonymous = false;
                 this.is_customer = true;

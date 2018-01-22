@@ -218,7 +218,8 @@ $(document).ready(function () {
                 required: true,
                 minlength: 9
             },
-            birthdate: 'required'
+            birthdate: 'required',
+            email: 'email'
         },
         messages: {
             name: 'please enter customer\'s name',
@@ -241,7 +242,9 @@ $(document).ready(function () {
             }
         },
         submitHandler: function (form) {
-            form.submit();
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            console.log(form.data);
+            // form.submit();
         }
     });
 
@@ -359,8 +362,9 @@ $(document).ready(function () {
         messages: {
             customer_complaint: 'please enter customer\'s complaint'
         },
-        
+
         submitHandler: function (form) {
+            console.log("submitted");
             form.submit();
         }
     });
@@ -377,6 +381,40 @@ $(document).ready(function () {
         },
 
         submitHandler: function (form) {
+            form.submit();
+        }
+    });
+
+    $('#form_add_suggestion_product').validate({
+        errorClass: "my-error-class",
+        validClass: "my-valid-class",
+
+        rules: {
+            customer_suggestion: 'required'
+        },
+        messages: {
+            customer_suggestion: 'please enter customer\'s suggestion'
+        },
+
+        submitHandler: function (form) {
+            console.log("submitted");
+            form.submit();
+        }
+    });
+
+    $('#form_add_suggestion_service').validate({
+        errorClass: "my-error-class",
+        validClass: "my-valid-class",
+
+        rules: {
+            customer_suggestion: 'required'
+        },
+        messages: {
+            customer_suggestion: 'please enter customer\'s suggestion'
+        },
+
+        submitHandler: function (form) {
+            console.log("submitted");
             form.submit();
         }
     });

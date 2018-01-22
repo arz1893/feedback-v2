@@ -9,44 +9,48 @@
 @endsection
 
 @section('main-content')
-    <div class="container col-lg-offset-3 col-md-offset-2" style="margin-top: 5%">
-        <div class="row">
-            <div class="col-lg-4 col-md-3 col-sm-4 col-xs-12">
-                <a href="{{ route('faq_product.index') }}">
-                    <div class="info-box bg-aqua">
-                        <span class="info-box-icon"><i class="fa fa-truck"></i></span>
+    <div class="row col-lg-offset-3">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <a href="{{ route('faq_product.index') }}">
+                <div class="info-box bg-aqua">
+                    <span class="info-box-icon"><i class="fa fa-truck"></i></span>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">FAQ Product</span>
-                            {{--<span class="product-description">--}}
-                                {{--{{ $productCounter }} item--}}
-                            {{--</span>--}}
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </a>
-            </div>
-            <!-- /.col -->
-            <div class="col-lg-4 col-md-3 col-sm-4 col-xs-12">
-                <a href="{{ route('faq_service.index') }}">
-                    <div class="info-box bg-aqua">
-                        <span class="info-box-icon"><i class="fa fa-trophy"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">FAQ Product</span>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">FAQ Service</span>
-                            <span class="info-box-number"></span>
-                            {{--<span class="progress-description">--}}
-                                {{--{{ $serviceCounter }} item--}}
-                            {{--</span>--}}
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
                         </div>
-                        <!-- /.info-box-content -->
+                        <span class="progress-description" style="font-size: 0.8em;">
+                            Add FAQ to product
+                        </span>
                     </div>
-                    <!-- /.info-box -->
-                </a>
-            </div>
-            <!-- /.col -->
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </a>
         </div>
-        <!-- /.row -->
+        <!-- /.col -->
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <a href="{{ route('faq_service.index') }}">
+                <div class="info-box bg-aqua">
+                    <span class="info-box-icon"><i class="fa fa-trophy"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">FAQ Service</span>
+
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <span class="progress-description" style="font-size: 0.8em;">
+                            Add FAQ to service
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </a>
+        </div>
+        <!-- /.col -->
     </div>
 @endsection
