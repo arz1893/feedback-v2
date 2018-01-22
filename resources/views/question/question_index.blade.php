@@ -1,3 +1,7 @@
+@push('scripts')
+    <script src="{{ asset('js/vue/vue_customer.js') }}" type="text/javascript"></script>
+@endpush
+
 @extends('home')
 
 @section('content-header')

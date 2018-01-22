@@ -5,7 +5,7 @@
             <div class="form-group">
                 <div class="input-group">
                     {{ Form::select('customerId', $selectCustomers, null,
-                    ['class' => 'form-control selectpicker show-tick', 'id' => 'customer_name', 'placeholder' => 'Select Customer', 'data-live-search' => true]) }}
+                    ['class' => 'form-control selectpicker show-tick', 'id' => 'customer_name', 'placeholder' => 'Select Customer', 'data-live-search' => 'true']) }}
                     {{--<select id="customer_name" name="customer_id" class="form-control selectpicker show-tick" data-live-search="true">--}}
                         {{--<option selected disabled>Select customer</option>--}}
                         {{--@foreach($selectCustomers as $selectCustomer)--}}
@@ -35,10 +35,12 @@
     </div>
 
     <div class="col-lg-11">
-        <div class="form-group">
-            <label class="checkbox-inline">
-                <input name="is_need_call" type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No"> Need Call ?
-            </label>
+        <div class="col-lg-7">
+            <div class="form-group">
+                <label class="checkbox-inline">
+                    <input name="is_need_call" type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No"> Need Call ?
+                </label>
+            </div>
         </div>
     </div>
 
