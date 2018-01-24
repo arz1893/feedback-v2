@@ -5,7 +5,7 @@
             <div class="form-group">
                 <div class="input-group">
                     {{ Form::select('customerId', $selectCustomers, null,
-                    ['class' => 'form-control selectpicker show-tick', 'id' => 'customer_name', 'placeholder' => 'Select Customer', 'data-live-search' => 'true']) }}
+                    ['class' => 'form-control selectpicker show-tick', 'id' => 'customerId', 'placeholder' => 'Select Customer', 'data-live-search' => 'true', 'ref' => 'customerId']) }}
                     {{--<select id="customer_name" name="customer_id" class="form-control selectpicker show-tick" data-live-search="true">--}}
                         {{--<option selected disabled>Select customer</option>--}}
                         {{--@foreach($selectCustomers as $selectCustomer)--}}

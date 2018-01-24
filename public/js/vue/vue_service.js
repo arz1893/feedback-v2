@@ -1,4 +1,4 @@
-var service_container = new Vue({
+var Root = new Vue({
     el: '#vue_service_container',
     data: {
         nodeTitle: '',
@@ -65,5 +65,19 @@ var service_container = new Vue({
             }
         }
 
+    }
+});
+
+var complaintServiceListContainer = new Vue({
+    el:'#complaint_service_list_show',
+    data: {
+        showReply: false,
+        replyTo: ''
+    },
+    methods: {
+        showReplyBox: function (event) {
+            this.showReply = !this.showReply
+            this.replyTo = $('#reply_to').html();
+        }
     }
 });

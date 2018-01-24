@@ -22,7 +22,7 @@
 
     @include('layouts.errors.error_list')
 
-    {{ Form::open(['action' => 'Question\QuestionController@store']) }}
+    {{ Form::open(['action' => 'Question\QuestionController@store', 'id' => 'form_add_question']) }}
         @include('layouts.question.add_question_form')
     {{ Form::close() }}
 

@@ -352,6 +352,7 @@ class ComposerStaticInit36a9065fed3ad447489d51c2f7b9f87f
         'App\\Http\\Controllers\\MasterData\\ServiceCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/MasterData/ServiceCategoryController.php',
         'App\\Http\\Controllers\\MasterData\\ServiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/MasterData/ServiceController.php',
         'App\\Http\\Controllers\\Question\\QuestionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Question/QuestionController.php',
+        'App\\Http\\Controllers\\Question\\QuestionListController' => __DIR__ . '/../..' . '/app/Http/Controllers/Question/QuestionListController.php',
         'App\\Http\\Controllers\\Suggestion\\SuggestionProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Suggestion/SuggestionProductController.php',
         'App\\Http\\Controllers\\Suggestion\\SuggestionProductListController' => __DIR__ . '/../..' . '/app/Http/Controllers/Suggestion/SuggestionProductListController.php',
         'App\\Http\\Controllers\\Suggestion\\SuggestionServiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Suggestion/SuggestionServiceController.php',

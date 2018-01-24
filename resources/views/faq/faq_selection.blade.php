@@ -9,48 +9,50 @@
 @endsection
 
 @section('main-content')
-    <div class="row col-lg-offset-3">
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <a href="{{ route('faq_product.index') }}">
-                <div class="info-box bg-aqua">
-                    <span class="info-box-icon"><i class="fa fa-truck"></i></span>
+    <div style="margin-top: 2%">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <a href="{{ route('faq_product.index') }}">
+                    <div class="info-box bg-aqua">
+                        <span class="info-box-icon"><i class="fa fa-truck"></i></span>
 
-                    <div class="info-box-content">
-                        <span class="info-box-text">FAQ Product</span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">FAQ Product</span>
 
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 100%"></div>
-                        </div>
-                        <span class="progress-description" style="font-size: 0.8em;">
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                            <span class="progress-description" style="font-size: 0.8em;">
                             Add FAQ to product
                         </span>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </a>
-        </div>
-        <!-- /.col -->
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <a href="{{ route('faq_service.index') }}">
-                <div class="info-box bg-aqua">
-                    <span class="info-box-icon"><i class="fa fa-trophy"></i></span>
-
-                    <div class="info-box-content">
-                        <span class="info-box-text">FAQ Service</span>
-
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 100%"></div>
                         </div>
-                        <span class="progress-description" style="font-size: 0.8em;">
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </a>
+            </div>
+            <!-- /.col -->
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <a href="{{ route('faq_service.index') }}">
+                    <div class="info-box bg-aqua">
+                        <span class="info-box-icon"><i class="fa fa-trophy"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">FAQ Service</span>
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                            <span class="progress-description" style="font-size: 0.8em;">
                             Add FAQ to service
                         </span>
+                        </div>
+                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </a>
+                    <!-- /.info-box -->
+                </a>
+            </div>
+            <!-- /.col -->
         </div>
-        <!-- /.col -->
     </div>
 @endsection

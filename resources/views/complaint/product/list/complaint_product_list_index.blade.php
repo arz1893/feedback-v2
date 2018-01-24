@@ -22,9 +22,10 @@
         <thead>
         <tr>
             <th>No.</th>
+            <th>Complaint</th>
+            <th>Created at</th>
             <th>Customer Name</th>
             <th>Product Name</th>
-            <th>Category</th>
             <th>Rating</th>
             <th>Need Call ?</th>
             <th>Is Urgent ?</th>
@@ -37,6 +38,10 @@
             <tr>
                 <td>{{ $counter }}</td>
                 <td>
+                    <a href="{{ route('complaint_product_list.show', $complaintProduct) }}">{{ $complaintProduct->customer_complaint }}</a>
+                </td>
+                <td>{{ $complaintProduct->created_at->format('d-M-Y') }}</td>
+                <td>
                     <a>
                         @if($complaintProduct->customerId != null)
                             {{ $complaintProduct->customer->name }}
@@ -46,7 +51,6 @@
                     </a>
                 </td>
                 <td>{{ $complaintProduct->product->name }}</td>
-                <td>{{ $complaintProduct->product_category->name }}</td>
                 <td>
                     @switch($complaintProduct->customer_rating)
                         @case(1)
@@ -80,10 +84,24 @@
                 <td>{!! $complaintProduct->is_urgent == 1 ? '<span class="text-red">yes</span>':'<span class="blue-text">no</span>' !!}</td>
                 <td>
                     @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
-                        <a href="{{ route('complaint_product_list.edit', $complaintProduct->systemId) }}" class="btn btn-warning">
+                        <a href="#!"
+                           class="btn btn-primary"
+                           data-toggle="tooltip"
+                           data-placement="bottom"
+                           title="Answer">
+                            <i class="fa fa-phone"></i>
+                        </a>
+                        <a href="{{ route('complaint_product_list.edit', $complaintProduct->systemId) }}"
+                           class="btn btn-warning"
+                           data-toggle="tooltip"
+                           data-placement="bottom"
+                           title="Edit">
                             <i class="ion ion-edit"></i>
                         </a>
-                        <button class="btn btn-danger" data-id="{{ $complaintProduct->systemId }}" onclick="deleteComplaintProduct(this)">
+                        <button class="btn btn-danger"
+                                data-id="{{ $complaintProduct->systemId }}" onclick="deleteComplaintProduct(this)"
+                                data-toggle="tooltip"
+                                data-placement="bottom" title="Delete">
                             <i class="ion ion-ios-trash"></i>
                         </button>
                     @else

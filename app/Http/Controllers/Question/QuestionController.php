@@ -13,7 +13,7 @@ use Webpatser\Uuid\Uuid;
 class QuestionController extends Controller
 {
     public function index() {
-        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->get()->pluck('full_information', 'systemId');
+        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get()->pluck('full_information', 'systemId');
         return view('question.question_index', compact('selectCustomers'));
     }
 

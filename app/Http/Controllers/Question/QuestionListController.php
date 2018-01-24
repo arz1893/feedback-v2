@@ -18,7 +18,7 @@ class QuestionListController extends Controller
 
     public function edit($id) {
         $question = Question::findOrFail($id);
-        $selectCustomers =  Customer::where('tenantId', Auth::user()->tenantId)->get()->pluck('full_information', 'systemId');
+        $selectCustomers =  Customer::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get()->pluck('full_information', 'systemId');
         return view('question.list.question_list_edit', compact('question', 'selectCustomers'));
     }
 

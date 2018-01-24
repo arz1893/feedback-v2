@@ -22,10 +22,11 @@
         <thead>
         <tr>
             <th>No.</th>
+            <th>Suggestion</th>
+            <th>Created At</th>
             <th>Customer Name</th>
             <th>Product Name</th>
             <th>Category</th>
-            <th>Suggestion</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -34,6 +35,12 @@
         @foreach($suggestionProducts as $suggestionProduct)
             <tr>
                 <td>{{ $counter }}</td>
+                <td>
+                    <a href="#!">
+                        {{ $suggestionProduct->customer_suggestion }}
+                    </a>
+                </td>
+                <td>{{ $suggestionProduct->created_at->format('d-M-Y') }}</td>
                 <td>
                     <a>
                         @if($suggestionProduct->customerId != null)
@@ -45,9 +52,15 @@
                 </td>
                 <td>{{ $suggestionProduct->product->name }}</td>
                 <td>{{ $suggestionProduct->product_category->name }}</td>
-                <td>{{ $suggestionProduct->customer_suggestion }}</td>
                 <td>
                     @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
+                        <a href="#!"
+                           class="btn btn-primary"
+                           data-toggle="tooltip"
+                           data-placement="bottom"
+                           title="Answer">
+                            <i class="fa fa-phone"></i>
+                        </a>
                         <a href="{{ route('suggestion_product_list.edit', $suggestionProduct->systemId) }}" class="btn btn-warning">
                             <i class="ion ion-edit"></i>
                         </a>

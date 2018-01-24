@@ -1,4 +1,4 @@
-var product_container = new Vue({
+var Root = new Vue({
     el: '#vue_product_container',
     data: {
         nodeTitle: '',
@@ -65,5 +65,20 @@ var product_container = new Vue({
             }
         }
 
+    }
+});
+
+var complaintProductListShow = new Vue({
+    el: '#complaint_product_list_show',
+    data: {
+        showReply: false,
+        replyTo: ''
+
+    },
+    methods: {
+        showReplyBox: function (event) {
+            this.showReply = !this.showReply
+            this.replyTo = $('#reply_to').html();
+        }
     }
 });

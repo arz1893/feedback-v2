@@ -22,10 +22,11 @@
         <thead>
         <tr>
             <th>No.</th>
+            <th>Suggestion</th>
+            <th>Created At</th>
             <th>Customer Name</th>
             <th>Service Name</th>
             <th>Category</th>
-            <th>Suggestion</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -34,6 +35,10 @@
         @foreach($suggestionServices as $suggestionService)
             <tr>
                 <td>{{ $counter }}</td>
+                <td>
+                    <a href="#!">{{ $suggestionService->customer_suggestion }}</a>
+                </td>
+                <td>{{ $suggestionService->created_at->format('d-M-Y') }}</td>
                 <td>
                     <a>
                         @if($suggestionService->customerId != null)
@@ -45,7 +50,6 @@
                 </td>
                 <td>{{ $suggestionService->service->name }}</td>
                 <td>{{ $suggestionService->service_category->name }}</td>
-                <td>{{ $suggestionService->customer_suggestion }}</td>
                 <td>
                     @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
                         <a href="{{ route('suggestion_service_list.edit', $suggestionService->systemId) }}" class="btn btn-warning">

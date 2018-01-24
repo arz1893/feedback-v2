@@ -357,6 +357,7 @@ $(document).ready(function () {
         validClass: "my-valid-class",
 
         rules: {
+            customer_rating: 'required',
             customer_complaint: 'required'
         },
         messages: {
@@ -364,7 +365,6 @@ $(document).ready(function () {
         },
 
         submitHandler: function (form) {
-            console.log("submitted");
             form.submit();
         }
     });

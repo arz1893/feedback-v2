@@ -12,14 +12,19 @@ use Illuminate\Support\Facades\Validator;
 class ComplaintServiceListController extends Controller
 {
     public function index() {
-        $complaintServices = ComplaintService::where('tenantId', Auth::user()->tenantId)->get();
+        $complaintServices = ComplaintService::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get();
         return view('complaint.service.list.complaint_service_list_index', compact('complaintServices'));
     }
 
     public function edit($id) {
         $complaintService = ComplaintService::findOrFail($id);
-        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->get()->pluck('full_information', 'systemId');
+        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get()->pluck('full_information', 'systemId');
         return view('complaint.service.list.complaint_service_list_edit', compact('complaintService', 'selectCustomers'));
+    }
+
+    public function show($id) {
+        $complaintService = ComplaintService::findOrFail($id);
+        return view('complaint.service.list.complaint_service_list_show', compact('complaintService'));
     }
 
     public function update(Request $request, $id) {

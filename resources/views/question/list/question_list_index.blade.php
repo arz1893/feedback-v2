@@ -23,9 +23,9 @@
     <table id="table_question" class="table table-striped table-bordered table-responsive" style="width: 100%;">
         <thead>
         <tr>
-            <th>Num.</th>
-            <th>Customer</th>
+            <th>No.</th>
             <th>Question</th>
+            <th>Customer</th>
             <th>Need Call ?</th>
             <th>Action</th>
         </tr>
@@ -35,6 +35,9 @@
             <tr>
                 <td>{{ $counter }}</td>
                 <td>
+                    <a href="#!">{{ $question->question }} </a>
+                </td>
+                <td>
                     @if($question->customerId == null)
                         <a>Anonymous</a>
                     @else
@@ -43,8 +46,6 @@
                         </a>
                     @endif
                 </td>
-                <td> {{ $question->question }} </td>
-
                 <td>
                     @if($question->is_need_call == 1)
                         Yes

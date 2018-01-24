@@ -12,14 +12,19 @@ use Illuminate\Support\Facades\Validator;
 class ComplaintProductListController extends Controller
 {
     public function index() {
-        $complaintProducts = ComplaintProduct::where('tenantId', Auth::user()->tenantId)->get();
+        $complaintProducts = ComplaintProduct::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get();
         return view('complaint.product.list.complaint_product_list_index', compact('complaintProducts'));
     }
 
     public function edit($id) {
         $complaintProduct = ComplaintProduct::findOrfail($id);
-        $selectCustomers =  Customer::where('tenantId', Auth::user()->tenantId)->get()->pluck('full_information', 'systemId');
+        $selectCustomers =  Customer::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get()->pluck('full_information', 'systemId');
         return view('complaint.product.list.complaint_product_list_edit', compact('complaintProduct', 'selectCustomers'));
+    }
+
+    public function show($id) {
+        $complaintProduct = ComplaintProduct::findOrFail($id);
+        return view('complaint.product.list.complaint_product_list_show', compact('complaintProduct'));
     }
 
     public function update(Request $request, $id) {
@@ -37,7 +42,7 @@ class ComplaintProductListController extends Controller
 
         $complaintProduct = ComplaintProduct::findOrFail($id);
         $complaintProduct->update($request->all());
-        return redirect('complaint_product_list')->with('status', 'Complaint has been updated');
+        return redirect()->route('complaint_product_list.show', $id)->with('status', 'Complaint has been updated');
     }
 
     public function deleteComplaintProduct(Request $request) {

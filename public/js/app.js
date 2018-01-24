@@ -38,7 +38,7 @@ $(document).ready(function () {
         responsive:true,
         scrollX: true,
         columnDefs: [ {
-            targets: [2],
+            targets: [1],
             render: function ( data, type, row ) {
                 return data.length > 10 ?
                     data.substr( 0, 50 ) +'…' :
@@ -54,22 +54,72 @@ $(document).ready(function () {
 
     $('#table_complaint_product').DataTable({
         responsive: true,
-        scrollX: true
+        scrollX: true,
+        columnDefs: [
+            {
+                "width": "25%",
+                "targets": 1,
+                "render": function(data, type, row) {
+                    return data.length > 100 ?
+                        data.substr( 0, 200 ) +'…' :
+                        data;
+                }
+            },
+            { "width": "5%", "targets": 5 },
+            { "width": "8%", "targets": 6 },
+            { "width": "8%", "targets": 7 }
+        ]
     });
 
     $('#table_complaint_service').DataTable({
         responsive: true,
-        scrollX: true
+        scrollX: true,
+        columnDefs: [
+            {
+                "width": "25%",
+                "targets": 1,
+                "render": function(data, type, row) {
+                    return data.length > 100 ?
+                        data.substr( 0, 200 ) +'…' :
+                        data;
+                }
+            },
+            { "width": "5%", "targets": 5 },
+            { "width": "8%", "targets": 6 },
+            { "width": "8%", "targets": 7 }
+        ]
     });
 
     $('#table_suggestion_product').DataTable({
         responsive: true,
-        scrollX: true
+        scrollX: true,
+        columnDefs: [
+            {
+                "width": "25%",
+                "targets": 1,
+                "render": function(data, type, row) {
+                    return data.length > 100 ?
+                        data.substr( 0, 200 ) +'…' :
+                        data;
+                }
+            }
+        ]
     });
 
     $('#table_suggestion_service').DataTable({
         responsive: true,
-        scrollX: true
+        scrollX: true,
+        columnDefs: [
+            {
+                "width": "25%",
+                "targets": 1,
+                "render": function(data, type, row) {
+                    return data.length > 100 ?
+                        data.substr( 0, 200 ) +'…' :
+                        data;
+                }
+            }
+        ]
     });
 
     $('#product_picture').on('change', function (e) {
@@ -89,7 +139,8 @@ $(document).ready(function () {
 
     // $('#tree_view').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
     $('.selectpicker').selectpicker({
-        showSubtext: true
+        showSubtext: true,
+        mobile: true
     });
 
     $('#birthdate').dateDropper({});

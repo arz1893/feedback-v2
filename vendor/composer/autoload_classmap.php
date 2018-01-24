@@ -32,6 +32,7 @@ return array(
     'App\\Http\\Controllers\\MasterData\\ServiceCategoryController' => $baseDir . '/app/Http/Controllers/MasterData/ServiceCategoryController.php',
     'App\\Http\\Controllers\\MasterData\\ServiceController' => $baseDir . '/app/Http/Controllers/MasterData/ServiceController.php',
     'App\\Http\\Controllers\\Question\\QuestionController' => $baseDir . '/app/Http/Controllers/Question/QuestionController.php',
+    'App\\Http\\Controllers\\Question\\QuestionListController' => $baseDir . '/app/Http/Controllers/Question/QuestionListController.php',
     'App\\Http\\Controllers\\Suggestion\\SuggestionProductController' => $baseDir . '/app/Http/Controllers/Suggestion/SuggestionProductController.php',
     'App\\Http\\Controllers\\Suggestion\\SuggestionProductListController' => $baseDir . '/app/Http/Controllers/Suggestion/SuggestionProductListController.php',
     'App\\Http\\Controllers\\Suggestion\\SuggestionServiceController' => $baseDir . '/app/Http/Controllers/Suggestion/SuggestionServiceController.php',

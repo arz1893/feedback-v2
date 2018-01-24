@@ -30,7 +30,7 @@ class CustomerController extends Controller
             'tenantId' => Auth::user()->tenantId
         ]);
 
-        return response()->json(['form-data', $customer], 200);
+        return response()->json(['systemId' => utf8_encode($customer->systemId), 'name' => utf8_encode($customer->name), 'phone' => utf8_encode($customer->phone)], 200);
 //
 //        return redirect()->back()->with(['status' => 'Customer has been added']);
     }
