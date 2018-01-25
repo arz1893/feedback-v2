@@ -21,7 +21,9 @@ class ComplaintProduct extends Model
         'customerId',
         'productId',
         'productCategoryId',
-        'tenantId'
+        'tenantId',
+        'attachment',
+        'is_answered'
     ];
 
     public function customer() {

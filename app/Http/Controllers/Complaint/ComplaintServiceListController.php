@@ -42,11 +42,14 @@ class ComplaintServiceListController extends Controller
 
         $complaintService = ComplaintService::findOrFail($id);
         $complaintService->update($request->all());
-        return redirect('complaint_service_list')->with('status', 'Complaint has been updated');
+        return redirect()->route('complaint_service_list.show', $id)->with('status', 'Complaint has been updated');
     }
 
     public function deleteComplaintService(Request $request) {
         $complaintService = ComplaintService::findOrFail($request->complaint_id);
+        if($complaintService->attachment != null) {
+            unlink(public_path($complaintService->attachment));
+        }
         $complaintService->delete();
         return redirect('complaint_service_list')->with('status', 'Complaint has been deleted');
     }

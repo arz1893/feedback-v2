@@ -49,17 +49,39 @@ class ComplaintServiceController extends Controller
             return redirect()->back()->withErrors($validator);
         }
 
-        ComplaintService::create([
-            'systemId' => Uuid::generate(4),
-            'customer_complaint' => $request->customer_complaint,
-            'customer_rating' => $request->customer_rating,
-            'is_need_call' => $request->is_need_call,
-            'is_urgent' => $request->is_urgent,
-            'customerId' => $request->customerId,
-            'serviceId' => $request->serviceId,
-            'serviceCategoryId' => $request->serviceCategoryId,
-            'tenantId' => $request->tenantId
-        ]);
+        $file_attachment = $request->file('attachment');
+        $id = Uuid::generate(4);
+        if(!is_null($file_attachment)) {
+            $filename = $id . '-' . $file_attachment->getClientOriginalName();
+            if(!file_exists(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $request->serviceId))) {
+                mkdir(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $request->serviceId), 0777, true);
+            }
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $request->serviceId . '/'), $filename);
+            ComplaintService::create([
+                'systemId' => $id,
+                'customer_complaint' => $request->customer_complaint,
+                'customer_rating' => $request->customer_rating,
+                'is_need_call' => $request->is_need_call,
+                'is_urgent' => $request->is_urgent,
+                'customerId' => $request->customerId,
+                'serviceId' => $request->serviceId,
+                'serviceCategoryId' => $request->serviceCategoryId,
+                'tenantId' => $request->tenantId,
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $request->serviceId . '/' . $filename
+            ]);
+        } else {
+            ComplaintService::create([
+                'systemId' => $id,
+                'customer_complaint' => $request->customer_complaint,
+                'customer_rating' => $request->customer_rating,
+                'is_need_call' => $request->is_need_call,
+                'is_urgent' => $request->is_urgent,
+                'customerId' => $request->customerId,
+                'serviceId' => $request->serviceId,
+                'serviceCategoryId' => $request->serviceCategoryId,
+                'tenantId' => $request->tenantId
+            ]);
+        }
         return redirect()->back()->with('status', 'New complaint has been added, please check your complaint service list');
     }
 }

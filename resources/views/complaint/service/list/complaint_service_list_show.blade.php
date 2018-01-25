@@ -37,7 +37,15 @@
                             <h4 class="media-heading text-danger">{{ $complaintService->service->name }} ( {{ $complaintService->service_category->name }} ) <span class="mailbox-read-time pull-right">{{ $complaintService->created_at->format('d F Y, H:iA') }}</span></h4>
                         </div>
                     </div>
-                    <h5>From: <span id="reply_to" class="text-info">{{ $complaintService->customer->name }} \ <i class="ion ion-android-call"></i> {{ $complaintService->customer->phone }}</span></h5>
+                    <h5>From:
+                        <span id="reply_to" class="text-info">
+                            @if($complaintService->customerId != null)
+                                {{ $complaintService->customer->name }} \ <i class="ion ion-android-call"></i> {{ $complaintService->customer->phone }}
+                            @else
+                                Anonymous
+                            @endif
+                        </span>
+                    </h5>
                     Satisfaction :
                     @switch($complaintService->customer_rating)
                         @case(1)
@@ -79,25 +87,6 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
-                    <!-- /.mailbox-read-info -->
-                    <div class="mailbox-controls with-border text-center">
-                        <div class="btn-group">
-                            <button type="button"
-                                    class="btn btn-danger btn-sm"
-                                    data-id="{{ $complaintService->systemId }}"
-                                    onclick="deleteComplaintService(this)"
-                                    data-toggle="tooltip"
-                                    data-placement="bottom"
-                                    title="Delete">
-                                <i class="fa fa-trash-o"></i></button>
-                            <button type="button" class="btn btn-success btn-sm" v-on:click="showReplyBox($event)" data-toggle="tooltip" data-container="body" title="Reply">
-                                <i class="fa fa-reply"></i></button>
-                            <a href="{{ route('complaint_service_list.edit', $complaintService->systemId) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-container="body" title="Edit">
-                                <i class="ion ion-edit"></i></a>
-                        </div>
-                        <!-- /.btn-group -->
-                    </div>
-                    <!-- /.mailbox-controls -->
                     <div class="mailbox-read-message">
                         <h5 class="text-navy">Complaint: </h5>
                         <p>{{ $complaintService->customer_complaint }}</p>
@@ -108,6 +97,30 @@
 
                 <!-- /.box-footer -->
                 <div class="box-footer">
+
+                    @if($complaintService->attachment != null)
+                        <span class="text-muted">Attachment : </span>
+                        <ul class="mailbox-attachments clearfix">
+                            <li>
+                                <div id="lightgallery">
+                                    <a href="{{ asset($complaintService->attachment) }}">
+                                        <span class="mailbox-attachment-icon has-img">
+                                            <img src="{{ asset($complaintService->attachment) }}" alt="Attachment">
+                                        </span>
+                                    </a>
+                                </div>
+
+                                <div class="mailbox-attachment-info">
+                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
+                                    <span class="mailbox-attachment-size">
+                                  1,245 KB
+                                  <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                </span>
+                                </div>
+                            </li>
+                        </ul>
+                    @endif
+
                     <div class="pull-right">
                         <button v-on:click="showReplyBox($event)" type="button" class="btn btn-sm btn-success"><i class="fa fa-reply"></i> Reply</button>
                         <button type="button" class="btn btn-sm btn-default"><i class="fa fa-share"></i> Forward</button>
@@ -121,7 +134,7 @@
                             title="Delete">
                         <i class="fa fa-trash-o"></i> Delete
                     </button>
-                    <a href="{{ route('complaint_product_list.edit', $complaintService->systemId) }}" class="btn btn-sm btn-warning"><i class="ion ion-edit"></i> Edit</a>
+                    <a href="{{ route('complaint_service_list.edit', $complaintService->systemId) }}" class="btn btn-sm btn-warning"><i class="ion ion-edit"></i> Edit</a>
                 </div>
                 <!-- /.box-footer -->
             </div>
@@ -154,13 +167,6 @@
                     </div>
                     <div class="form-group">
                         <textarea id="compose-textarea" class="form-control" style="height: 300px" placeholder="Reply. . ."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="btn btn-default btn-file">
-                            <i class="fa fa-paperclip"></i> Attachment
-                            <input type="file" name="attachment">
-                        </div>
-                        <p class="help-block">Max. 32MB</p>
                     </div>
                 </div>
                 <!-- /.box-body -->

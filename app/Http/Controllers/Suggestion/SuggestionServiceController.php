@@ -47,14 +47,34 @@ class SuggestionServiceController extends Controller
             return redirect()->back()->withErrors($validator);
         }
 
-        SuggestionService::create([
-            'systemId' => Uuid::generate(4),
-            'customer_suggestion' => $request->customer_suggestion,
-            'customerId' => $request->customerId,
-            'serviceId' => $request->serviceId,
-            'serviceCategoryId' => $request->serviceCategoryId,
-            'tenantId' => $request->tenantId
-        ]);
+        $file_attachment = $request->file('attachment');
+        $id = Uuid::generate(4);
+        if(!is_null($file_attachment)) {
+            $filename = $id . '-' . $file_attachment->getClientOriginalName();
+            if(!file_exists(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_service/' . $request->serviceId))) {
+                mkdir(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_service/' . $request->serviceId), 0777, true);
+            }
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_service/' . $request->serviceId . '/'), $filename);
+
+            SuggestionService::create([
+                'systemId' => $id,
+                'customer_suggestion' => $request->customer_suggestion,
+                'customerId' => $request->customerId,
+                'serviceId' => $request->serviceId,
+                'serviceCategoryId' => $request->serviceCategoryId,
+                'tenantId' => $request->tenantId,
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/suggestion_service/' . $request->serviceId . '/' . $filename
+            ]);
+        } else {
+            SuggestionService::create([
+                'systemId' => $id,
+                'customer_suggestion' => $request->customer_suggestion,
+                'customerId' => $request->customerId,
+                'serviceId' => $request->serviceId,
+                'serviceCategoryId' => $request->serviceCategoryId,
+                'tenantId' => $request->tenantId
+            ]);
+        }
 
         return redirect('suggestion_service_list')->with('status', 'A new suggestion has been added');
     }

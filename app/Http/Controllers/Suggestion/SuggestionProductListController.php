@@ -22,6 +22,11 @@ class SuggestionProductListController extends Controller
         return view('suggestion.product.list.suggestion_product_list_edit', compact('suggestionProduct', 'selectCustomers'));
     }
 
+    public function show($id) {
+        $suggestionProduct = SuggestionProduct::findOrFail($id);
+        return view('suggestion.product.list.suggestion_product_list_show', compact('suggestionProduct'));
+    }
+
     public function update(Request $request, $id) {
         $rules = [
             'customer_suggestion' => 'required'
@@ -42,6 +47,9 @@ class SuggestionProductListController extends Controller
 
     public function deleteSuggestionProduct(Request $request) {
         $suggestionProduct = SuggestionProduct::findOrFail($request->suggestion_id);
+        if($suggestionProduct->attachment != null) {
+            unlink(public_path($suggestionProduct->attachment));
+        }
         $suggestionProduct->delete();
         return redirect('suggestion_product_list')->with('status', 'Suggestion has been deleted');
     }

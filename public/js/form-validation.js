@@ -358,10 +358,59 @@ $(document).ready(function () {
 
         rules: {
             customer_rating: 'required',
-            customer_complaint: 'required'
+            customer_complaint: 'required',
+            attachment: {
+                accept: 'image/*'
+            }
         },
         messages: {
+            customer_rating: 'please select rating',
             customer_complaint: 'please enter customer\'s complaint'
+        },
+
+        errorPlacement: function(error, element)
+        {
+            if ( element.is(":radio") )
+            {
+                error.appendTo( element.parents('.error') );
+            }
+            else
+            { // This is the default behavior
+                error.insertAfter( element );
+            }
+        },
+
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
+
+    $('#form_edit_complaint_product').validate({
+        errorClass: "my-error-class",
+        validClass: "my-valid-class",
+
+        rules: {
+            customer_rating: 'required',
+            customer_complaint: 'required',
+            attachment: {
+                accept: 'image/*'
+            }
+        },
+        messages: {
+            customer_rating: 'please select rating',
+            customer_complaint: 'please enter customer\'s complaint'
+        },
+
+        errorPlacement: function(error, element)
+        {
+            if ( element.is(":radio") )
+            {
+                error.appendTo( element.parents('.error') );
+            }
+            else
+            { // This is the default behavior
+                error.insertAfter( element );
+            }
         },
 
         submitHandler: function (form) {
@@ -374,10 +423,60 @@ $(document).ready(function () {
         validClass: "my-valid-class",
 
         rules: {
-            customer_complaint: 'required'
+            customer_rating: 'required',
+            customer_complaint: 'required',
+            attachment: {
+                accept: 'image/*'
+            }
         },
         messages: {
+            customer_rating: 'please select rating',
             customer_complaint: 'please enter customer\'s complaint'
+        },
+
+        errorPlacement: function(error, element)
+        {
+            if ( element.is(":radio") )
+            {
+                error.appendTo( element.parents('.error') );
+            }
+            else
+            { // This is the default behavior
+                error.insertAfter( element );
+            }
+        },
+
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
+
+    $('#form_edit_complaint_service').validate({
+        errorClass: "my-error-class",
+        validClass: "my-valid-class",
+
+        rules: {
+            customer_rating: 'required',
+            customer_complaint: 'required',
+            attachment: {
+                accept: 'image/*'
+            }
+        },
+        messages: {
+            customer_rating: 'please select rating',
+            customer_complaint: 'please enter customer\'s complaint'
+        },
+
+        errorPlacement: function(error, element)
+        {
+            if ( element.is(":radio") )
+            {
+                error.appendTo( element.parents('.error') );
+            }
+            else
+            { // This is the default behavior
+                error.insertAfter( element );
+            }
         },
 
         submitHandler: function (form) {
@@ -390,7 +489,10 @@ $(document).ready(function () {
         validClass: "my-valid-class",
 
         rules: {
-            customer_suggestion: 'required'
+            customer_suggestion: 'required',
+            attachment: {
+                accept: 'image/*'
+            }
         },
         messages: {
             customer_suggestion: 'please enter customer\'s suggestion'

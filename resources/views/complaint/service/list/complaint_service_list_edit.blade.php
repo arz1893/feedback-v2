@@ -1,12 +1,8 @@
 @extends('home')
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('css/vue-animation/vue2-animate.css') }}"
-          xmlns:v-on="http://www.w3.org/1999/xhtml">
-@endpush
-
 @push('scripts')
-    <script src="{{ asset('js/vue/vue_complaint_service.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/vue_service.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/vue_customer.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')
@@ -19,8 +15,8 @@
 @endsection
 
 @section('main-content')
-    <div id="vue_complaint_service_container">
-        <div class="col-lg-6 col-lg-offset-3">
+    <div id="vue_service_container">
+        <div class="col-lg-6">
             {{ Form::model($complaintService, ['method' => 'PATCH', 'action' => ['Complaint\ComplaintServiceListController@update', $complaintService], 'id' => 'form_edit_complaint_service']) }}
             @include('layouts.complaint.service.complaint_service_form_edit', ['submitButtonText' => 'Update Complaint Service'])
             {{ Form::close() }}

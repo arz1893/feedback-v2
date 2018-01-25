@@ -94,7 +94,7 @@
                             <h4>Add complaint to : @{{ nodeTitle }}</h4>
                         </div>
                         <div class="panel-body">
-                            {{ Form::open(['action' => 'Complaint\ComplaintServiceController@store', 'id' => 'form_add_complaint_service']) }}
+                            {{ Form::open(['action' => 'Complaint\ComplaintServiceController@store', 'id' => 'form_add_complaint_service', 'files' => true]) }}
                             <div v-html="serviceId"></div>
                             <div v-html="serviceCategoryId"></div>
                             {{ Form::hidden('tenantId', Auth::user()->tenantId) }}

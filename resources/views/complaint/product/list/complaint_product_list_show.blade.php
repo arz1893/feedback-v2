@@ -36,8 +36,16 @@
                             <h4 class="media-heading text-danger">{{ $complaintProduct->product->name }} ( {{ $complaintProduct->product_category->name }} ) <span class="mailbox-read-time pull-right">{{ $complaintProduct->created_at->format('d F Y, H:iA') }}</span></h4>
                         </div>
                     </div>
-                    <h5>From: <span id="reply_to" class="text-info">{{ $complaintProduct->customer->name }} \ <i class="ion ion-android-call"></i> {{ $complaintProduct->customer->phone }}</span></h5>
-                    Satisfaction :
+                    <h5>From:
+                        <span id="reply_to" class="text-info">
+                            @if($complaintProduct->customerId != null)
+                                {{ $complaintProduct->customer->name }} \ <i class="ion ion-android-call"></i> {{ $complaintProduct->customer->phone }}
+                            @else
+                                Anonymous
+                            @endif
+                        </span>
+                    </h5>
+                    <span class="text-muted">Satisfaction :</span>
                     @switch($complaintProduct->customer_rating)
                         @case(1)
                         <button class="btn btn-link">
@@ -78,27 +86,8 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
-                    <!-- /.mailbox-read-info -->
-                    <div class="mailbox-controls with-border text-center">
-                        <div class="btn-group">
-                            <button type="button"
-                                    class="btn btn-danger btn-sm"
-                                    data-id="{{ $complaintProduct->systemId }}"
-                                    onclick="deleteComplaintProduct(this)"
-                                    data-toggle="tooltip"
-                                    data-placement="bottom"
-                                    title="Delete">
-                                <i class="fa fa-trash-o"></i></button>
-                            <button type="button" class="btn btn-success btn-sm" v-on:click="showReplyBox($event)" data-toggle="tooltip" data-container="body" title="Reply">
-                                <i class="fa fa-reply"></i></button>
-                            <a href="{{ route('complaint_product_list.edit', $complaintProduct->systemId) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-container="body" title="Edit">
-                                <i class="ion ion-edit"></i></a>
-                        </div>
-                        <!-- /.btn-group -->
-                    </div>
-                    <!-- /.mailbox-controls -->
                     <div class="mailbox-read-message">
-                        <h5 class="text-navy">Complaint: </h5>
+                        <h5 class="text-muted">Complaint: </h5>
                         <p>{{ $complaintProduct->customer_complaint }}</p>
                     </div>
                     <!-- /.mailbox-read-message -->
@@ -107,6 +96,28 @@
 
                 <!-- /.box-footer -->
                 <div class="box-footer">
+                    @if($complaintProduct->attachment != null)
+                        <span class="text-muted">Attachment : </span>
+                        <ul class="mailbox-attachments clearfix">
+                            <li>
+                                <div id="lightgallery">
+                                    <a href="{{ asset($complaintProduct->attachment) }}">
+                                        <span class="mailbox-attachment-icon has-img">
+                                            <img src="{{ asset($complaintProduct->attachment) }}" alt="Attachment">
+                                        </span>
+                                    </a>
+                                </div>
+
+                                <div class="mailbox-attachment-info">
+                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
+                                    <span class="mailbox-attachment-size">
+                                  1,245 KB
+                                  <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                </span>
+                                </div>
+                            </li>
+                        </ul>
+                    @endif
                     <div class="pull-right">
                         <button v-on:click="showReplyBox($event)" type="button" class="btn btn-sm btn-success"><i class="fa fa-reply"></i> Reply</button>
                         <button type="button" class="btn btn-sm btn-default"><i class="fa fa-share"></i> Forward</button>
@@ -153,13 +164,6 @@
                     </div>
                     <div class="form-group">
                     <textarea id="compose-textarea" class="form-control" style="height: 300px" placeholder="Reply. . ."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="btn btn-default btn-file">
-                            <i class="fa fa-paperclip"></i> Attachment
-                            <input type="file" name="attachment">
-                        </div>
-                        <p class="help-block">Max. 32MB</p>
                     </div>
                 </div>
                 <!-- /.box-body -->

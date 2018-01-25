@@ -21,7 +21,9 @@ class ComplaintService extends Model
         'customerId',
         'serviceId',
         'serviceCategoryId',
-        'tenantId'
+        'tenantId',
+        'attachment',
+        'is_answered'
     ];
 
     public function customer() {

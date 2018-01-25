@@ -47,6 +47,9 @@ class ComplaintProductListController extends Controller
 
     public function deleteComplaintProduct(Request $request) {
         $complaintProduct = ComplaintProduct::findOrFail($request->complaint_id);
+        if($complaintProduct->attachment != null) {
+            unlink(public_path($complaintProduct->attachment));
+        }
         $complaintProduct->delete();
         return redirect('complaint_product_list')->with('status', 'Complaint has been deleted');
     }

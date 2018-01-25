@@ -14,9 +14,11 @@
 </div>
 
 <div class="form-group">
+
     {{ Form::label('', 'Customer Satisfaction') }} <br>
 
     @if($complaintService->customer_rating == 1)
+        {{ Form::radio('customer_rating', 1, true, ['id' => 'radio_very_dissatisfied', 'class' => 'invisible']) }}
         <a class="" href="#very_bad">
             <i id="very_bad"
                class="smiley_rating material-icons text-maroon is-selected"
@@ -27,6 +29,7 @@
             </i>
         </a>
     @else
+        {{ Form::radio('customer_rating', 1, false, ['id' => 'radio_very_dissatisfied', 'class' => 'invisible']) }}
         <a class="" href="#very_bad">
             <i id="very_bad"
                class="smiley_rating material-icons text-maroon"
@@ -39,6 +42,7 @@
     @endif
 
     @if($complaintService->customer_rating == 2)
+        {{ Form::radio('customer_rating', 2, true, ['id' => 'radio_dissatisfied', 'class' => 'invisible']) }}
         <a class="" href="#bad">
             <i id="bad"
                class="smiley_rating material-icons text-red is-selected"
@@ -49,6 +53,7 @@
             </i>
         </a>
     @else
+        {{ Form::radio('customer_rating', 2, false, ['id' => 'radio_dissatisfied', 'class' => 'invisible']) }}
         <a class="" href="#bad">
             <i id="bad"
                class="smiley_rating material-icons text-red"
@@ -61,6 +66,7 @@
     @endif
 
     @if($complaintService->customer_rating == 3)
+        {{ Form::radio('customer_rating', 3, true, ['id' => 'radio_neutral', 'class' => 'invisible']) }}
         <a class="" href="#normal">
             <i id="normal"
                class="smiley_rating material-icons text-yellow is-selected"
@@ -71,6 +77,7 @@
             </i>
         </a>
     @else
+        {{ Form::radio('customer_rating', 3, false, ['id' => 'radio_neutral', 'class' => 'invisible']) }}
         <a class="" href="#normal">
             <i id="normal"
                class="smiley_rating material-icons text-yellow"
@@ -83,6 +90,7 @@
     @endif
 
     @if($complaintService->customer_rating == 4)
+        {{ Form::radio('customer_rating', 4, true, ['id' => 'radio_satisfied', 'class' => 'invisible']) }}
         <a class="" href="#satisfied">
             <i id="satisfied"
                class="smiley_rating material-icons text-olive is-selected"
@@ -93,6 +101,7 @@
             </i>
         </a>
     @else
+        {{ Form::radio('customer_rating', 4, false, ['id' => 'radio_satisfied', 'class' => 'invisible']) }}
         <a class="" href="#satisfied">
             <i id="satisfied"
                class="smiley_rating material-icons text-olive"
@@ -105,6 +114,7 @@
     @endif
 
     @if($complaintService->customer_rating == 5)
+        {{ Form::radio('customer_rating', 5, true, ['id' => 'radio_very_satisfied', 'class' => 'invisible']) }}
         <a class="" href="#very_satisfied">
             <i id="very_satisfied"
                class="smiley_rating material-icons text-green is-selected"
@@ -115,6 +125,7 @@
             </i>
         </a>
     @else
+        {{ Form::radio('customer_rating', 5, false, ['id' => 'radio_very_satisfied', 'class' => 'invisible']) }}
         <a class="" href="#very_satisfied">
             <i id="very_satisfied"
                class="smiley_rating material-icons text-green"

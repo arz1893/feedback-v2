@@ -47,14 +47,35 @@ class SuggestionProductController extends Controller
             return redirect()->back()->withErrors($validator);
         }
 
-        SuggestionProduct::create([
-            'systemId' => Uuid::generate(4),
-            'customer_suggestion' => $request->customer_suggestion,
-            'customerId' => $request->customerId,
-            'productId' => $request->productId,
-            'productCategoryId' => $request->productCategoryId,
-            'tenantId' => $request->tenantId
-        ]);
+        $file_attachment = $request->file('attachment');
+        $id = Uuid::generate(4);
+
+        if(!is_null($file_attachment)) {
+            $filename = $id . '-' . $file_attachment->getClientOriginalName();
+            if(!file_exists(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $request->productId))) {
+                mkdir(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $request->productId), 0777, true);
+            }
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $request->productId . '/'), $filename);
+
+            SuggestionProduct::create([
+                'systemId' => $id,
+                'customer_suggestion' => $request->customer_suggestion,
+                'customerId' => $request->customerId,
+                'productId' => $request->productId,
+                'productCategoryId' => $request->productCategoryId,
+                'tenantId' => $request->tenantId,
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $request->productId . '/' . $filename
+            ]);
+        } else {
+            SuggestionProduct::create([
+                'systemId' => $id,
+                'customer_suggestion' => $request->customer_suggestion,
+                'customerId' => $request->customerId,
+                'productId' => $request->productId,
+                'productCategoryId' => $request->productCategoryId,
+                'tenantId' => $request->tenantId
+            ]);
+        }
 
         return redirect('suggestion_product_list')->with('status', 'A new suggestion has been added');
     }

@@ -17,27 +17,10 @@
     {{ Form::label('customer_suggestion', 'Suggestion') }}
     {{ Form::textarea('customer_suggestion', null, ['class' => 'form-control', 'placeholder' => 'Please enter customer\'s suggestion', 'rows' => 6]) }}
 </div>
-<div class="row">
-    {{--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">--}}
-        {{--<div class="form-group">--}}
-            {{--<label>--}}
-                {{--{{ Form::hidden('is_need_call', 0) }}--}}
-                {{--{{ Form::checkbox('is_need_call', 1) }}--}}
-                {{--<input type="checkbox" class="icheck-input" name="is_need_call" id="is_need_call" value="1">--}}
-                {{--Need Call ?--}}
-            {{--</label>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">--}}
-        {{--<div class="form-group">--}}
-            {{--<label>--}}
-                {{--{{ Form::hidden('is_urgent', 0) }}--}}
-                {{--{{ Form::checkbox('is_urgent', 1) }}--}}
-                {{--<input type="checkbox" class="icheck-input" name="is_urgent" id="is_urgent" value="1">--}}
-                {{--Is Urgent ?--}}
-            {{--</label>--}}
-        {{--</div>--}}
-    {{--</div>--}}
+
+<div class="form-group">
+    {{ Form::label('attachment', 'Attach a File') }}
+    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*']) }}
 </div>
 
 <div class="row">

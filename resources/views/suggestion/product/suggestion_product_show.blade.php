@@ -93,7 +93,7 @@
                             <div v-html="nodeTitle"></div>
                         </div>
                         <div class="panel-body">
-                            {{ Form::open(['action' => 'Suggestion\SuggestionProductController@store', 'id' => 'form_add_suggestion_product']) }}
+                            {{ Form::open(['action' => 'Suggestion\SuggestionProductController@store', 'id' => 'form_add_suggestion_product', 'files' => true]) }}
                             <div v-html="productId"></div>
                             <div v-html="productCategoryId"></div>
                             {{ Form::hidden('tenantId', Auth::user()->tenantId) }}

@@ -35,6 +35,7 @@ class ComplaintProductController extends Controller
     }
 
     public function store(Request $request) {
+
         $rules = [
             'customer_complaint' => 'required',
             'customer_rating' => 'required'
@@ -49,17 +50,40 @@ class ComplaintProductController extends Controller
             return redirect()->back()->withErrors($validator);
         }
 
-        ComplaintProduct::create([
-            'systemId' => Uuid::generate(4),
-            'customer_complaint' => $request->customer_complaint,
-            'customer_rating' => $request->customer_rating,
-            'is_need_call' => $request->is_need_call,
-            'is_urgent' => $request->is_urgent,
-            'customerId' => $request->customerId,
-            'productId' => $request->productId,
-            'productCategoryId' => $request->productCategoryId,
-            'tenantId' => $request->tenantId
-        ]);
+        $file_attachment = $request->file('attachment');
+
+        $id = Uuid::generate(4);
+        if(!is_null($file_attachment)) {
+            $filename = $id . '-' . $file_attachment->getClientOriginalName();
+            if(!file_exists(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $request->productId))) {
+                mkdir(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $request->productId), 0777, true);
+            }
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $request->productId . '/'), $filename);
+            ComplaintProduct::create([
+                'systemId' => $id,
+                'customer_complaint' => $request->customer_complaint,
+                'customer_rating' => $request->customer_rating,
+                'is_need_call' => $request->is_need_call,
+                'is_urgent' => $request->is_urgent,
+                'customerId' => $request->customerId,
+                'productId' => $request->productId,
+                'productCategoryId' => $request->productCategoryId,
+                'tenantId' => $request->tenantId,
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $request->productId . '/' . $filename
+            ]);
+        } else {
+            ComplaintProduct::create([
+                'systemId' => $id,
+                'customer_complaint' => $request->customer_complaint,
+                'customer_rating' => $request->customer_rating,
+                'is_need_call' => $request->is_need_call,
+                'is_urgent' => $request->is_urgent,
+                'customerId' => $request->customerId,
+                'productId' => $request->productId,
+                'productCategoryId' => $request->productCategoryId,
+                'tenantId' => $request->tenantId
+            ]);
+        }
         return redirect()->back()->with('status', 'New complaint has been added, please check your complaint product list');
     }
 }

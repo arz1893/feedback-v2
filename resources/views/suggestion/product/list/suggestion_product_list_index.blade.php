@@ -36,7 +36,7 @@
             <tr>
                 <td>{{ $counter }}</td>
                 <td>
-                    <a href="#!">
+                    <a href="{{ route('suggestion_product_list.show', $suggestionProduct->systemId) }}">
                         {{ $suggestionProduct->customer_suggestion }}
                     </a>
                 </td>

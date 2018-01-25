@@ -14,9 +14,11 @@
 </div>
 
 <div class="form-group">
+
     {{ Form::label('', 'Customer Satisfaction') }} <br>
 
     @if($complaintProduct->customer_rating == 1)
+        {{ Form::radio('customer_rating', 1, true, ['id' => 'radio_very_dissatisfied', 'class' => 'invisible']) }}
         <a class="" href="#very_bad">
             <i id="very_bad"
                class="smiley_rating material-icons text-maroon is-selected"
@@ -27,6 +29,7 @@
             </i>
         </a>
     @else
+        {{ Form::radio('customer_rating', 1, false, ['id' => 'radio_very_dissatisfied', 'class' => 'invisible']) }}
         <a class="" href="#very_bad">
             <i id="very_bad"
                class="smiley_rating material-icons text-maroon"
@@ -39,6 +42,7 @@
     @endif
 
     @if($complaintProduct->customer_rating == 2)
+        {{ Form::radio('customer_rating', 2, true, ['id' => 'radio_dissatisfied', 'class' => 'invisible']) }}
         <a class="" href="#bad">
             <i id="bad"
                class="smiley_rating material-icons text-red is-selected"
@@ -49,6 +53,7 @@
             </i>
         </a>
     @else
+        {{ Form::radio('customer_rating', 2, false, ['id' => 'radio_dissatisfied', 'class' => 'invisible']) }}
         <a class="" href="#bad">
             <i id="bad"
                class="smiley_rating material-icons text-red"
@@ -61,6 +66,7 @@
     @endif
 
     @if($complaintProduct->customer_rating == 3)
+        {{ Form::radio('customer_rating', 3, true, ['id' => 'radio_neutral', 'class' => 'invisible']) }}
         <a class="" href="#normal">
             <i id="normal"
                class="smiley_rating material-icons text-yellow is-selected"
@@ -71,6 +77,7 @@
             </i>
         </a>
     @else
+        {{ Form::radio('customer_rating', 3, false, ['id' => 'radio_neutral', 'class' => 'invisible']) }}
         <a class="" href="#normal">
             <i id="normal"
                class="smiley_rating material-icons text-yellow"
@@ -83,6 +90,7 @@
     @endif
 
     @if($complaintProduct->customer_rating == 4)
+        {{ Form::radio('customer_rating', 4, true, ['id' => 'radio_satisfied', 'class' => 'invisible']) }}
         <a class="" href="#satisfied">
             <i id="satisfied"
                class="smiley_rating material-icons text-olive is-selected"
@@ -93,6 +101,7 @@
             </i>
         </a>
     @else
+        {{ Form::radio('customer_rating', 4, false, ['id' => 'radio_satisfied', 'class' => 'invisible']) }}
         <a class="" href="#satisfied">
             <i id="satisfied"
                class="smiley_rating material-icons text-olive"
@@ -105,6 +114,7 @@
     @endif
 
     @if($complaintProduct->customer_rating == 5)
+        {{ Form::radio('customer_rating', 5, true, ['id' => 'radio_very_satisfied', 'class' => 'invisible']) }}
         <a class="" href="#very_satisfied">
             <i id="very_satisfied"
                class="smiley_rating material-icons text-green is-selected"
@@ -115,6 +125,7 @@
             </i>
         </a>
     @else
+        {{ Form::radio('customer_rating', 5, false, ['id' => 'radio_very_satisfied', 'class' => 'invisible']) }}
         <a class="" href="#very_satisfied">
             <i id="very_satisfied"
                class="smiley_rating material-icons text-green"
@@ -128,10 +139,35 @@
 
     <div v-html="ratingValue"></div>
 </div>
+
 <div class="form-group">
     {{ Form::label('customer_complaint', 'Complaint') }}
     {{ Form::textarea('customer_complaint', null, ['class' => 'form-control', 'placeholder' => 'Please enter customer\'s complaint', 'rows' => 6]) }}
 </div>
+
+@if($complaintProduct->attachment != null)
+    <span class="text-muted">Attachment : </span>
+    <ul class="mailbox-attachments clearfix">
+        <li>
+            <div id="lightgallery">
+                <a href="{{ asset($complaintProduct->attachment) }}">
+                    <span class="mailbox-attachment-icon has-img">
+                        <img src="{{ asset($complaintProduct->attachment) }}" alt="Attachment">
+                    </span>
+                </a>
+            </div>
+
+            <div class="mailbox-attachment-info">
+                <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
+                <span class="mailbox-attachment-size">
+                  1,245 KB
+                  <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                </span>
+            </div>
+        </li>
+    </ul>
+@endif
+
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
         <div class="form-group">

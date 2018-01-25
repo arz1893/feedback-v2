@@ -19,7 +19,8 @@ class SuggestionProduct extends Model
         'customerId',
         'productId',
         'productCategoryId',
-        'tenantId'
+        'tenantId',
+        'attachment'
     ];
 
     public function customer() {

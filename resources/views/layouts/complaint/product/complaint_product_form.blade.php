@@ -13,7 +13,13 @@
     </div>
 </div>
 
-<div class="form-group">
+<div class="form-group error">
+    {{ Form::radio('customer_rating', 1, false, ['id' => 'radio_very_dissatisfied', 'class' => 'invisible']) }}
+    {{ Form::radio('customer_rating', 2, false, ['id' => 'radio_dissatisfied', 'class' => 'invisible']) }}
+    {{ Form::radio('customer_rating', 3, false, ['id' => 'radio_neutral', 'class' => 'invisible']) }}
+    {{ Form::radio('customer_rating', 4, false, ['id' => 'radio_satisfied', 'class' => 'invisible']) }}
+    {{ Form::radio('customer_rating', 5, false, ['id' => 'radio_very_satisfied', 'class' => 'invisible']) }}
+    <br>
     {{ Form::label('', 'Customer Satisfaction') }} <br>
 
     <a class="" href="#!">
@@ -61,14 +67,19 @@
             sentiment_very_satisfied
         </i>
     </a>
-
-    <div v-html="ratingValue"></div>
+    <br>
 </div>
 
 <div class="form-group">
     {{ Form::label('customer_complaint', 'Complaint') }}
     {{ Form::textarea('customer_complaint', null, ['class' => 'form-control', 'placeholder' => 'Please enter customer\'s complaint', 'rows' => 6]) }}
 </div>
+
+<div class="form-group">
+    {{ Form::label('attachment', 'Attach a File') }}
+    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*']) }}
+</div>
+
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
         <div class="form-group">
