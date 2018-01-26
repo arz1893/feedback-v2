@@ -56,6 +56,9 @@ class SuggestionServiceListController extends Controller
 
     public function deleteSuggestionService(Request $request) {
         $suggestionService = SuggestionService::findOrFail($request->suggestion_id);
+        if($suggestionService->attachment != null) {
+            unlink(public_path($suggestionService->attachment));
+        }
         $suggestionService->delete();
         return redirect('suggestion_service_list')->with('status', 'Suggestion has been deleted');
     }
