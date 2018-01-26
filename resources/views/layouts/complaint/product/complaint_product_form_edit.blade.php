@@ -136,13 +136,19 @@
             </i>
         </a>
     @endif
-
-    <div v-html="ratingValue"></div>
 </div>
 
 <div class="form-group">
     {{ Form::label('customer_complaint', 'Complaint') }}
     {{ Form::textarea('customer_complaint', null, ['class' => 'form-control', 'placeholder' => 'Please enter customer\'s complaint', 'rows' => 6]) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('attachment', 'Attach a File') }}
+    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*']) }}
+    @if($complaintProduct->attachment != null)
+        <p class="help-block">Click here to change current attachment</p>
+    @endif
 </div>
 
 @if($complaintProduct->attachment != null)
@@ -159,10 +165,7 @@
 
             <div class="mailbox-attachment-info">
                 <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
-                <span class="mailbox-attachment-size">
-                  1,245 KB
-                  <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                </span>
+                <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
             </div>
         </li>
     </ul>

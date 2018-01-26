@@ -21,7 +21,30 @@
 <div class="form-group">
     {{ Form::label('attachment', 'Attach a File') }}
     {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*']) }}
+    @isset($suggestionProduct->attachment)
+        <p class="help-block">Click here to change current attachment</p>
+    @endisset
 </div>
+
+@isset($suggestionProduct->attachment)
+    <span class="text-muted">Current Attachment :</span>
+    <ul class="mailbox-attachments clearfix">
+        <li>
+            <div id="lightgallery">
+                <a href="{{ asset($suggestionProduct->attachment) }}">
+                    <span class="mailbox-attachment-icon has-img">
+                        <img src="{{ asset($suggestionProduct->attachment) }}" alt="Attachment">
+                    </span>
+                </a>
+            </div>
+
+            <div class="mailbox-attachment-info">
+                <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Attachment</a>
+                <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+            </div>
+        </li>
+    </ul>
+@endisset
 
 <div class="row">
     <div class="col-lg-6">

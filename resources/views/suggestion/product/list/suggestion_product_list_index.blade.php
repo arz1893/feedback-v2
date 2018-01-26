@@ -77,7 +77,7 @@
         </tbody>
     </table>
 
-    <!-- Modal Remove Complaint -->
+    <!-- Modal Remove Suggestion -->
     <div class="modal fade" id="modal_remove_suggestion_product" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

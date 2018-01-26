@@ -112,10 +112,7 @@
 
                                 <div class="mailbox-attachment-info">
                                     <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
-                                    <span class="mailbox-attachment-size">
-                                  1,245 KB
-                                  <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                                </span>
+                                    <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
                                 </div>
                             </li>
                         </ul>

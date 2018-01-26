@@ -19,7 +19,8 @@ class SuggestionService extends Model
         'customerId',
         'serviceId',
         'serviceCategoryId',
-        'tenantId'
+        'tenantId',
+        'attachment'
     ];
 
     public function customer() {

@@ -13,51 +13,38 @@
     </div>
 </div>
 
-{{--<div class="form-group">--}}
-    {{--{{ Form::label('', 'Customer Satisfaction') }} <br>--}}
-    {{--<a class="smiley_rating">--}}
-        {{--<i class="large material-icons">sentiment_very_dissatisfied</i>--}}
-    {{--</a>--}}
-    {{--<a class="smiley_rating">--}}
-        {{--<i class="large material-icons">sentiment_dissatisfied</i>--}}
-    {{--</a>--}}
-    {{--<a class="smiley_rating">--}}
-        {{--<i class="large material-icons">sentiment_neutral</i>--}}
-    {{--</a>--}}
-    {{--<a class="smiley_rating">--}}
-        {{--<i class="large material-icons">sentiment_satisfied</i>--}}
-    {{--</a>--}}
-    {{--<a class="smiley_rating">--}}
-        {{--<i class="large material-icons">sentiment_very_satisfied</i>--}}
-    {{--</a>--}}
-{{--</div>--}}
-
 <div class="form-group">
     {{ Form::label('customer_suggestion', 'Suggestion') }}
     {{ Form::textarea('customer_suggestion', null, ['class' => 'form-control', 'placeholder' => 'Please enter customer\'s suggestion', 'rows' => 6]) }}
 </div>
-<div class="row">
-    {{--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">--}}
-    {{--<div class="form-group">--}}
-    {{--<label>--}}
-    {{--{{ Form::hidden('is_need_call', 0) }}--}}
-    {{--{{ Form::checkbox('is_need_call', 1) }}--}}
-    {{--<input type="checkbox" class="icheck-input" name="is_need_call" id="is_need_call" value="1">--}}
-    {{--Need Call ?--}}
-    {{--</label>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">--}}
-    {{--<div class="form-group">--}}
-    {{--<label>--}}
-    {{--{{ Form::hidden('is_urgent', 0) }}--}}
-    {{--{{ Form::checkbox('is_urgent', 1) }}--}}
-    {{--<input type="checkbox" class="icheck-input" name="is_urgent" id="is_urgent" value="1">--}}
-    {{--Is Urgent ?--}}
-    {{--</label>--}}
-    {{--</div>--}}
-    {{--</div>--}}
+
+<div class="form-group">
+    {{ Form::label('attachment', 'Attach a File') }}
+    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*']) }}
+    @isset($suggestionService->attachment)
+        <p class="help-block">Click here to change current attachment</p>
+    @endisset
 </div>
+
+@isset($suggestionService->attachment)
+    <span class="text-muted">Current Attachment :</span>
+    <ul class="mailbox-attachments clearfix">
+        <li>
+            <div id="lightgallery">
+                <a href="{{ asset($suggestionService->attachment) }}">
+                    <span class="mailbox-attachment-icon has-img">
+                        <img src="{{ asset($suggestionService->attachment) }}" alt="Attachment">
+                    </span>
+                </a>
+            </div>
+
+            <div class="mailbox-attachment-info">
+                <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Attachment</a>
+                <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+            </div>
+        </li>
+    </ul>
+@endisset
 
 <div class="row">
     <div class="col-lg-6">

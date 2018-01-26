@@ -17,7 +17,7 @@
 @section('main-content')
     <div id="vue_service_container">
         <div class="col-lg-6">
-            {{ Form::model($complaintService, ['method' => 'PATCH', 'action' => ['Complaint\ComplaintServiceListController@update', $complaintService], 'id' => 'form_edit_complaint_service']) }}
+            {{ Form::model($complaintService, ['method' => 'PATCH', 'action' => ['Complaint\ComplaintServiceListController@update', $complaintService], 'id' => 'form_edit_complaint_service', 'files' => true]) }}
             @include('layouts.complaint.service.complaint_service_form_edit', ['submitButtonText' => 'Update Complaint Service'])
             {{ Form::close() }}
         </div>

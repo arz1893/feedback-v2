@@ -14,8 +14,8 @@
 @endsection
 
 @section('main-content')
-    <div class="col-lg-6 col-lg-offset-3">
-        {{ Form::model($suggestionProduct, ['method' => 'PATCH', 'action' => ['Suggestion\SuggestionProductListController@update', $suggestionProduct], 'id' => 'form_edit_suggestion_product']) }}
+    <div class="col-lg-6">
+        {{ Form::model($suggestionProduct, ['method' => 'PATCH', 'action' => ['Suggestion\SuggestionProductListController@update', $suggestionProduct], 'id' => 'form_edit_suggestion_product', 'files' => true]) }}
             @include('layouts.suggestion.product.suggestion_product_form', ['submitButtonText' => 'Update Suggestion Product'])
         {{ Form::close() }}
     </div>

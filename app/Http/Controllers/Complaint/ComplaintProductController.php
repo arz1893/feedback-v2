@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Complaint;
 
 use App\ComplaintProduct;
 use App\Customer;
+use App\Http\Requests\Complaint\ComplaintProductRequest;
 use App\Product;
 use App\ProductCategory;
 use Illuminate\Http\Request;
@@ -34,21 +35,7 @@ class ComplaintProductController extends Controller
         }
     }
 
-    public function store(Request $request) {
-
-        $rules = [
-            'customer_complaint' => 'required',
-            'customer_rating' => 'required'
-        ];
-        $messages = [
-            'customer_complaint.required' => 'please enter customer\'s complaint',
-            'customer_rating.required' => 'please select customer\'s satisfaction'
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
-        }
+    public function store(ComplaintProductRequest $request) {
 
         $file_attachment = $request->file('attachment');
 

@@ -14,8 +14,8 @@
 @endsection
 
 @section('main-content')
-    <div class="col-lg-6 col-lg-offset-3">
-        {{ Form::model($suggestionService, ['method' => 'PATCH', 'action' => ['Suggestion\SuggestionServiceListController@update', $suggestionService], 'id' => 'form_edit_suggestion_service']) }}
+    <div class="col-lg-6">
+        {{ Form::model($suggestionService, ['method' => 'PATCH', 'action' => ['Suggestion\SuggestionServiceListController@update', $suggestionService], 'id' => 'form_edit_suggestion_service', 'files' => true]) }}
             @include('layouts.suggestion.service.suggestion_service_form', ['submitButtonText' => 'Update Suggestion Service'])
         {{ Form::close() }}
     </div>

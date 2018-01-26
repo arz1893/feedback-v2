@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Complaint;
 
 use App\ComplaintService;
 use App\Customer;
+use App\Http\Requests\Complaint\ComplaintServiceRequest;
 use App\Service;
 use App\ServiceCategory;
 use Illuminate\Http\Request;
@@ -34,20 +35,7 @@ class ComplaintServiceController extends Controller
         }
     }
 
-    public function store(Request $request) {
-        $rules = [
-            'customer_complaint' => 'required',
-            'customer_rating' => 'required'
-        ];
-        $messages = [
-            'customer_complaint.required' => 'please enter customer\'s complaint',
-            'customer_rating' => 'please choose customer\'s satisfaction'
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
-        }
+    public function store(ComplaintServiceRequest $request) {
 
         $file_attachment = $request->file('attachment');
         $id = Uuid::generate(4);

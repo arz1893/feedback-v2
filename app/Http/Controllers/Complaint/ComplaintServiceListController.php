@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Complaint;
 
 use App\ComplaintService;
 use App\Customer;
+use App\Http\Requests\Complaint\ComplaintServiceRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -27,21 +28,36 @@ class ComplaintServiceListController extends Controller
         return view('complaint.service.list.complaint_service_list_show', compact('complaintService'));
     }
 
-    public function update(Request $request, $id) {
-        $rules = [
-            'customer_complaint' => 'required'
-        ];
-        $messages = [
-            'customer_complaint.required' => 'please enter customer\'s complaint'
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+    public function update(ComplaintServiceRequest $request, $id) {
+        $complaintService = ComplaintService::findOrFail($id);
+        $file_attachment = $request->file('attachment');
+        if($file_attachment != null) {
+            $filename = $id . '-' . $file_attachment->getClientOriginalName();
+            if(!file_exists(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $complaintService->serviceId))) {
+                mkdir(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $complaintService->serviceId), 0777, true);
+            }
+            if($complaintService->attachment != null) {
+                unlink(public_path($complaintService->attachment));
+            }
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $complaintService->serviceId . '/'), $filename);
+            $complaintService->update([
+                'customerId' => $request->customerId,
+                'customer_rating' => $request->customer_rating,
+                'customer_complaint' => $request->customer_complaint,
+                'is_need_call' => $request->is_need_call,
+                'is_urgent' => $request->is_urgent,
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $complaintService->serviceId . '/' . $filename
+            ]);
+        } else {
+            $complaintService->update([
+                'customerId' => $request->customerId,
+                'customer_rating' => $request->customer_rating,
+                'customer_complaint' => $request->customer_complaint,
+                'is_need_call' => $request->is_need_call,
+                'is_urgent' => $request->is_urgent
+            ]);
         }
 
-        $complaintService = ComplaintService::findOrFail($id);
-        $complaintService->update($request->all());
         return redirect()->route('complaint_service_list.show', $id)->with('status', 'Complaint has been updated');
     }
 

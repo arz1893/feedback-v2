@@ -36,7 +36,7 @@
             <tr>
                 <td>{{ $counter }}</td>
                 <td>
-                    <a href="#!">{{ $suggestionService->customer_suggestion }}</a>
+                    <a href="{{ route('suggestion_service_list.show', $suggestionService->systemId) }}">{{ $suggestionService->customer_suggestion }}</a>
                 </td>
                 <td>{{ $suggestionService->created_at->format('d-M-Y') }}</td>
                 <td>

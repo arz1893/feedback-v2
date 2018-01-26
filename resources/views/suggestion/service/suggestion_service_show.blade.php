@@ -94,7 +94,7 @@
                             <div v-html="nodeTitle"></div>
                         </div>
                         <div class="panel-body">
-                            {{ Form::open(['action' => 'Suggestion\SuggestionServiceController@store', 'id' => 'form_add_suggestion_service']) }}
+                            {{ Form::open(['action' => 'Suggestion\SuggestionServiceController@store', 'id' => 'form_add_suggestion_service', 'files' => true]) }}
                             <div v-html="serviceId"></div>
                             <div v-html="serviceCategoryId"></div>
                             {{ Form::hidden('tenantId', Auth::user()->tenantId) }}

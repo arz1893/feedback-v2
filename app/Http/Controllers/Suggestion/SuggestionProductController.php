@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Suggestion;
 
 use App\Customer;
+use App\Http\Requests\Suggestion\SuggestionProductRequest;
 use App\Product;
 use App\ProductCategory;
 use App\SuggestionProduct;
@@ -34,19 +35,7 @@ class SuggestionProductController extends Controller
         }
     }
 
-    public function store(Request $request) {
-        $rules = [
-            'customer_suggestion' => 'required'
-        ];
-        $messages = [
-            'customer_suggestion.required' => 'please enter customer\'s suggestion'
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
-        }
-
+    public function store(SuggestionProductRequest $request) {
         $file_attachment = $request->file('attachment');
         $id = Uuid::generate(4);
 

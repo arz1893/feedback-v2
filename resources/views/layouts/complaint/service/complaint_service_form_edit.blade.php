@@ -136,13 +136,41 @@
             </i>
         </a>
     @endif
-
-    <div v-html="ratingValue"></div>
 </div>
+
 <div class="form-group">
     {{ Form::label('customer_complaint', 'Complaint') }}
     {{ Form::textarea('customer_complaint', null, ['class' => 'form-control', 'placeholder' => 'Please enter customer\'s complaint', 'rows' => 6]) }}
 </div>
+
+<div class="form-group">
+    {{ Form::label('attachment', 'Attach a File') }}
+    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*']) }}
+    @if($complaintService->attachment != null)
+        <p class="help-block">Click here to change current attachment</p>
+    @endif
+</div>
+
+@if($complaintService->attachment != null)
+    <span class="text-muted">Current Attachment : </span>
+    <ul class="mailbox-attachments clearfix">
+        <li>
+            <div id="lightgallery">
+                <a href="{{ asset($complaintService->attachment) }}">
+                                        <span class="mailbox-attachment-icon has-img">
+                                            <img src="{{ asset($complaintService->attachment) }}" alt="Attachment">
+                                        </span>
+                </a>
+            </div>
+
+            <div class="mailbox-attachment-info">
+                <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
+                <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+            </div>
+        </li>
+    </ul>
+@endif
+
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
         <div class="form-group">

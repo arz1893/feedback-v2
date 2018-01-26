@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Suggestion;
 
 use App\Customer;
+use App\Http\Requests\Suggestion\SuggestionProductRequest;
 use App\SuggestionProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,22 +28,30 @@ class SuggestionProductListController extends Controller
         return view('suggestion.product.list.suggestion_product_list_show', compact('suggestionProduct'));
     }
 
-    public function update(Request $request, $id) {
-        $rules = [
-            'customer_suggestion' => 'required'
-        ];
-        $messages = [
-            'customer_suggestion.required' => 'please enter customer\'s suggestion'
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
-        }
-
+    public function update(SuggestionProductRequest $request, $id) {
         $suggestionProduct = SuggestionProduct::findOrFail($id);
-        $suggestionProduct->update($request->all());
-        return redirect('suggestion_product_list')->with('status', 'Suggestion has been updated');
+        $file_attachment = $request->file('attachment');
+        if($file_attachment != null) {
+            $filename = $id . '-' . $file_attachment->getClientOriginalName();
+            if(!file_exists(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $suggestionProduct->productId))) {
+                mkdir(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $suggestionProduct->productId), 0777, true);
+            }
+            if($suggestionProduct->attachment != null) {
+                unlink(public_path($suggestionProduct->attachment));
+            }
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $suggestionProduct->productId . '/'), $filename);
+            $suggestionProduct->update([
+                'customerId' => $request->customerId,
+                'customer_suggestion' => $request->customer_suggestion,
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $suggestionProduct->productId . '/' . $filename
+            ]);
+        } else {
+            $suggestionProduct->update([
+                'customerId' => $request->customerId,
+                'customer_suggestion' => $request->customer_suggestion,
+            ]);
+        }
+        return redirect()->route('suggestion_product_list.show', $id)->with('status', 'Suggestion has been updated');
     }
 
     public function deleteSuggestionProduct(Request $request) {
