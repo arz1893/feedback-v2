@@ -38,7 +38,11 @@
             <tr>
                 <td>{{ $counter }}</td>
                 <td>
-                    <a href="{{ route('product.show', $product) }}"><img src="{{ asset($product->img) }}" width="100"></a>
+                    @if($product->img != null)
+                        <a href="{{ route('product.show', $product) }}"><img src="{{ asset($product->img) }}" width="100"></a>
+                    @else
+                        <a href="{{ route('product.show', $product) }}"><img src="{{ asset('default-images/no-image.jpg') }}" width="100"></a>
+                    @endif
                 </td>
                 <td><a href="{{ route('product.show', $product) }}">{{ $product->name }}</a></td>
                 <td>{{ $product->description }}</td>

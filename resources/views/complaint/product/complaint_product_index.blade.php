@@ -37,7 +37,11 @@
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                         <div class="imagebox">
                             <a href="{{ route('show_complaint_product', [$product->systemId, 0]) }}">
-                                <img src="{{ asset($product->img) }}"  class="category-banner img-responsive">
+                                @if($product->img != null)
+                                    <img src="{{ asset($product->img) }}"  class="category-banner img-responsive">
+                                @else
+                                    <img src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
+                                @endif
                                 <span class="imagebox-desc">{{ $product->name }}</span>
                             </a>
                         </div>

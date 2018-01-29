@@ -61,7 +61,7 @@ $(document).ready(function () {
                 "targets": 1,
                 "render": function(data, type, row) {
                     return data.length > 100 ?
-                        data.substr( 0, 200 ) +'…' :
+                        data.substr( 0, 150 ) +'…' :
                         data;
                 }
             },

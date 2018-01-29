@@ -25,7 +25,8 @@ class ComplaintProductListController extends Controller
 
     public function show($id) {
         $complaintProduct = ComplaintProduct::findOrFail($id);
-        return view('complaint.product.list.complaint_product_list_show', compact('complaintProduct'));
+        $complaintProductReplies = $complaintProduct->complaint_product_replies;
+        return view('complaint.product.list.complaint_product_list_show', compact('complaintProduct', 'complaintProductReplies'));
     }
 
     public function update(ComplaintProductRequest $request, $id) {

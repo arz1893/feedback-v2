@@ -28,8 +28,12 @@
 
         <div class="media">
             <div class="media-left">
-                <a href="#">
-                    <img class="media-object" src="{{ asset($service->img) }}" alt="{{ $service->name }}" width="120">
+                <a href="#!">
+                    @if($service->img != null)
+                        <img class="media-object" src="{{ asset($service->img) }}" alt="{{ $service->name }}" width="120">
+                    @else
+                        <img class="media-object" src="{{ asset('default-images/no-image.jpg') }}" alt="{{ $service->name }}" width="120">
+                    @endif
                 </a>
             </div>
             <div class="media-body">

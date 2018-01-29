@@ -38,11 +38,13 @@
             <tr>
                 <td>{{ $counter }}</td>
                 <td>
-                    @if($service->img != null)
-                        <img src="{{ asset($service->img) }}" width="100">
-                    @else
-                        <img src="{{ asset('default-images/handshake-icon.png') }}" width="100%">
-                    @endif
+                    <a href="{{ route('service.show', $service) }}">
+                        @if($service->img != null)
+                            <img src="{{ asset($service->img) }}" width="100">
+                        @else
+                            <img src="{{ asset('default-images/no-image.jpg') }}" width="100">
+                        @endif
+                    </a>
                 </td>
                 <td><a href="{{ route('service.show', $service) }}">{{ $service->name }}</a></td>
                 <td>{{ $service->description }}</td>

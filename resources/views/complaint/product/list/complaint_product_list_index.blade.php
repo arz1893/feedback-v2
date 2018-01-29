@@ -29,6 +29,7 @@
             <th>Rating</th>
             <th>Need Call ?</th>
             <th>Is Urgent ?</th>
+            <th>Is Answered ?</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -80,11 +81,12 @@
                             @break
                     @endswitch
                 </td>
-                <td>{!! $complaintProduct->is_need_call == 1 ? '<span class="text-red">yes</span>':'<span class="blue-text">no</span>' !!}</td>
-                <td>{!! $complaintProduct->is_urgent == 1 ? '<span class="text-red">yes</span>':'<span class="blue-text">no</span>' !!}</td>
+                <td>{!! $complaintProduct->is_need_call == 1 ? '<span class="text-red">yes</span>':'<span class="text-muted">no</span>' !!}</td>
+                <td>{!! $complaintProduct->is_urgent == 1 ? '<span class="text-red">yes</span>':'<span class="text-muted">no</span>' !!}</td>
+                <td>{!! $complaintProduct->is_answered == 1 ? '<span class="text-green">yes</span>':'<span class="text-muted">no</span>' !!}</td>
                 <td>
                     @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
-                        <a href="#!"
+                        <a href="{{ route('complaint_product_list.show', $complaintProduct->systemId) }}"
                            class="btn btn-primary"
                            data-toggle="tooltip"
                            data-placement="bottom"

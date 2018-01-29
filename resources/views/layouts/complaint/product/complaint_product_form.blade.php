@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="">
     {{ Form::label('customerId', 'Customer') }}
     <div class="input-group input-group-md">
         {{ Form::select('customerId', $selectCustomers, null, ['class' => 'form-control selectpicker',
@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div class="form-group error">
+<div class="error">
     {{ Form::radio('customer_rating', 1, false, ['id' => 'radio_very_dissatisfied', 'class' => 'invisible']) }}
     {{ Form::radio('customer_rating', 2, false, ['id' => 'radio_dissatisfied', 'class' => 'invisible']) }}
     {{ Form::radio('customer_rating', 3, false, ['id' => 'radio_neutral', 'class' => 'invisible']) }}
@@ -22,7 +22,7 @@
     <br>
     {{ Form::label('', 'Customer Satisfaction') }} <br>
 
-    <a class="" href="#!">
+    <a class="">
         <i id="very_bad"
            class="smiley_rating material-icons text-maroon"
            style="font-size: 3.5em;"
@@ -31,7 +31,7 @@
             sentiment_very_dissatisfied
         </i>
     </a>
-    <a class="" href="#!">
+    <a class="">
         <i id="bad"
            class="smiley_rating material-icons text-red"
            style="font-size: 3.5em;"
@@ -40,7 +40,7 @@
             sentiment_dissatisfied
         </i>
     </a>
-    <a class="" href="#!">
+    <a class="">
         <i id="normal"
            class="smiley_rating material-icons text-yellow"
            style="font-size: 3.5em;"
@@ -49,7 +49,7 @@
             sentiment_neutral
         </i>
     </a>
-    <a class="" href="#!">
+    <a class="">
         <i id="satisfied"
            class="smiley_rating material-icons text-olive"
            style="font-size: 3.5em;"
@@ -58,7 +58,7 @@
             sentiment_satisfied
         </i>
     </a>
-    <a class="" href="#!">
+    <a class="">
         <i id="very_satisfied"
            class="smiley_rating material-icons text-green"
            style="font-size: 3.5em;"

@@ -11,16 +11,14 @@
 @endpush
 
 @section('content-header')
-    <ol class="breadcrumb">
-        <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('complaint_product.index') }}"><i class="fa fa-question-circle"></i> Complaint Product </a></li>
-        <li class="active">Product</li>
-    </ol>
-
     <div class="media">
         <div class="media-left">
             <a href="#">
-                <img class="media-object" src="{{ $product->img }}" alt="..." width="64" height="64">
+                @if($product->img != null)
+                    <img class="media-object" src="{{ asset($product->img) }}" alt="..." width="64" height="64">
+                @else
+                    <img class="media-object" src="{{ asset('default-images/no-image.jpg') }}" alt="..." width="64" height="64">
+                @endif
             </a>
         </div>
         <div class="media-body">
@@ -28,6 +26,12 @@
             <small class="text-red">*Please choose category that you want to complaint</small>
         </div>
     </div>
+
+    <ol class="breadcrumb">
+        <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('complaint_product.index') }}"><i class="fa ion-settings"></i> Complaint Product </a></li>
+        <li class="active">Product</li>
+    </ol>
 @endsection
 
 @section('main-content')
@@ -69,12 +73,12 @@
 
                 @foreach($productCategories as $productCategory)
                     @if(count($productCategory->getImmediateDescendants()) > 0)
-                        <a href="{{ route('show_complaint_product', [$product->systemId, $productCategory->id]) }}" class="btn btn-app bg-teal">
+                        <a href="{{ route('show_complaint_product', [$product->systemId, $productCategory->id]) }}" class="btn btn-lg btn-app bg-teal">
                             <span class="badge bg-aqua">{{ count($productCategory->getImmediateDescendants()) }}</span>
                             <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $productCategory->name }}
                         </a>
                     @elseif(count($productCategory->getImmediateDescendants()) == 0)
-                        <button class="btn btn-app bg-teal"
+                        <button class="btn btn-lg btn-app bg-teal"
                                 data-node_id="{{ $productCategory->id }}"
                                 data-product_id="{{ $product->systemId }}"
                                 data-title="{{ $productCategory->name }}"

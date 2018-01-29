@@ -23,7 +23,9 @@ class ComplaintProduct extends Model
         'productCategoryId',
         'tenantId',
         'attachment',
-        'is_answered'
+        'is_answered',
+        'syscreator',
+        'sysupdater'
     ];
 
     public function customer() {
@@ -40,5 +42,13 @@ class ComplaintProduct extends Model
 
     public function tenant() {
         return $this->belongsTo(Tenant::class, 'tenantId', 'systemId');
+    }
+
+    public function created_by() {
+        return $this->belongsTo(User::class, 'syscreator', 'systemId');
+    }
+
+    public function complaint_product_replies() {
+        return $this->hasMany(ComplaintProductReply::class, 'complaintProductId', 'systemId');
     }
 }

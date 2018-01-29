@@ -56,7 +56,8 @@ class ComplaintProductController extends Controller
                 'productId' => $request->productId,
                 'productCategoryId' => $request->productCategoryId,
                 'tenantId' => $request->tenantId,
-                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $request->productId . '/' . $filename
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $request->productId . '/' . $filename,
+                'syscreator' => Auth::user()->systemId
             ]);
         } else {
             ComplaintProduct::create([
@@ -68,7 +69,8 @@ class ComplaintProductController extends Controller
                 'customerId' => $request->customerId,
                 'productId' => $request->productId,
                 'productCategoryId' => $request->productCategoryId,
-                'tenantId' => $request->tenantId
+                'tenantId' => $request->tenantId,
+                'syscreator' => Auth::user()->systemId
             ]);
         }
         return redirect()->back()->with('status', 'New complaint has been added, please check your complaint product list');

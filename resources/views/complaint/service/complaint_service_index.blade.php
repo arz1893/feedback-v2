@@ -38,7 +38,7 @@
                         <div class="imagebox">
                             <a href="{{ route('show_complaint_service', [$service->systemId, 0]) }}">
                                 @if($service->img == null)
-                                    <img src="{{ asset('default_images/handshake.jpg') }}" class="category-banner img-responsive">
+                                    <img src="{{ asset('default-images/no-image.jpg') }}" class="category-banner img-responsive">
                                 @else
                                     <img src="{{ asset($service->img) }}" class="category-banner img-responsive">
                                 @endif

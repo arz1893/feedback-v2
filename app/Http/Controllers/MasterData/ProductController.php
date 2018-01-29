@@ -26,25 +26,35 @@ class ProductController extends Controller
         $tenant = Tenant::findOrFail($request->tenantId);
         $id = Uuid::generate(4);
         $image = $request->file('image_cover');
-        $filename = $id . '_' . $image->getClientOriginalName();
+        if(!is_null($image)) {
+            $filename = $id . '_' . $image->getClientOriginalName();
 
-        Product::create([
-            'systemId' => $id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'metric' => $request->metric,
-            'price' => $request->price,
-            'img' => '/uploaded_images/' . $tenant->email . '/' . $filename,
-            'tenantId' => $request->tenantId
-        ]);
+            Product::create([
+                'systemId' => $id,
+                'name' => $request->name,
+                'description' => $request->description,
+                'metric' => $request->metric,
+                'price' => $request->price,
+                'img' => '/uploaded_images/' . $tenant->email . '/' . $filename,
+                'tenantId' => $request->tenantId
+            ]);
 
-        if(!file_exists(public_path('uploaded_images/' . $tenant->email))) {
-            mkdir(public_path('uploaded_images/' . $tenant->email), 0777, true);
-            $image->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
+            if(!file_exists(public_path('uploaded_images/' . $tenant->email))) {
+                mkdir(public_path('uploaded_images/' . $tenant->email), 0777, true);
+                $image->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
+            } else {
+                $image->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
+            }
         } else {
-            $image->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
+            Product::create([
+                'systemId' => $id,
+                'name' => $request->name,
+                'description' => $request->description,
+                'metric' => $request->metric,
+                'price' => $request->price,
+                'tenantId' => $request->tenantId
+            ]);
         }
-
         return redirect('product')->with('status', 'Product has been added');
     }
 

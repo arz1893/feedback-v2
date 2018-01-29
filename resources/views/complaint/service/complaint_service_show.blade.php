@@ -11,16 +11,14 @@
 @endpush
 
 @section('content-header')
-    <ol class="breadcrumb">
-        <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('complaint_service.index') }}"><i class="fa fa-question-circle"></i> Complaint Service </a></li>
-        <li class="active">Service</li>
-    </ol>
-
     <div class="media">
         <div class="media-left">
             <a href="#">
-                <img class="media-object" src="{{ $service->img }}" alt="..." width="64" height="64">
+                @if($service->img != null)
+                    <img class="media-object" src="{{ asset($service->img) }}" alt="..." width="64" height="64">
+                @else
+                    <img class="media-object" src="{{ asset('default-images/no-image.jpg') }}" alt="..." width="64" height="64">
+                @endif
             </a>
         </div>
         <div class="media-body">
@@ -28,6 +26,12 @@
             <small class="text-red">*Please choose category that you want to complaint</small>
         </div>
     </div>
+
+    <ol class="breadcrumb">
+        <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('complaint_service.index') }}"><i class="ion ion-settings"></i> Complaint Service </a></li>
+        <li class="active">Service</li>
+    </ol>
 @endsection
 
 @section('main-content')

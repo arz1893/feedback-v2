@@ -25,7 +25,7 @@
         @endif
 
         <div class="col-lg-10">
-            <div class="box box-primary">
+            <div class="box box-danger">
                 <div class="box-header with-border">
                     <div class="media">
                         <div class="media-left">
@@ -140,41 +140,33 @@
         <!-- /.col -->
 
         <div class="col-lg-10" id="reply_box" v-if="showReply == true">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Reply Complaint</h3>
-                </div>
+            <div class="box box-danger">
+                {{ Form::open(['action' => 'Complaint\ComplaintServiceReplyController@store']) }}
+                {{ Form::hidden('customerId', $complaintService->customer->systemId) }}
+                {{ Form::hidden('complaintServiceId', $complaintService->systemId) }}
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="form-group">
                         <span>Reply to : </span> <span v-html="replyTo"></span>
                     </div>
                     <div class="form-group">
-                        <span>Subject : </span>
-                        <div class="media">
-                            <div class="media-left media-middle">
-                                <a href="#">
-                                    <img class="media-object" src="{{ asset($complaintService->service->img) }}" width="100px" height="75px">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading text-danger">{{ $complaintService->service->name }} ( {{ $complaintService->service_category->name }} )</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="compose-textarea" class="form-control" style="height: 300px" placeholder="Reply. . ."></textarea>
+                        <textarea id="reply_content"
+                                  name="reply_content"
+                                  class="form-control"
+                                  placeholder="Reply. . ."
+                                  rows="6">
+                        </textarea>
                     </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="pull-right">
-                        <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+                        <button type="button" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
                     </div>
                     <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
                 </div>
                 <!-- /.box-footer -->
+                {{ Form::close() }}
             </div>
             <!-- /. box -->
         </div>

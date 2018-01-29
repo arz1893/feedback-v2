@@ -55,7 +55,8 @@ class ComplaintServiceController extends Controller
                 'serviceId' => $request->serviceId,
                 'serviceCategoryId' => $request->serviceCategoryId,
                 'tenantId' => $request->tenantId,
-                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $request->serviceId . '/' . $filename
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $request->serviceId . '/' . $filename,
+                'syscreator' => Auth::user()->systemId
             ]);
         } else {
             ComplaintService::create([
@@ -67,7 +68,8 @@ class ComplaintServiceController extends Controller
                 'customerId' => $request->customerId,
                 'serviceId' => $request->serviceId,
                 'serviceCategoryId' => $request->serviceCategoryId,
-                'tenantId' => $request->tenantId
+                'tenantId' => $request->tenantId,
+                'syscreator' => Auth::user()->systemId
             ]);
         }
         return redirect()->back()->with('status', 'New complaint has been added, please check your complaint service list');

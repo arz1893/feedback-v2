@@ -305,3 +305,7 @@ span.fancytree-expander{
     box-shadow: 0 0 10px #9ecaed;
     border-radius: 100px;
 }
+
+.smiley_rating {
+    cursor: pointer;
+}

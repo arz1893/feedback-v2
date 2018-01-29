@@ -28,7 +28,11 @@
         <div class="media">
             <div class="media-left">
                 <a href="#">
-                    <img class="media-object" src="{{ asset($product->img) }}" alt="{{ $product->name }}" width="120">
+                    @if($product->img != null)
+                        <img class="media-object" src="{{ asset($product->img) }}" alt="{{ $product->name }}" width="120">
+                    @else
+                        <img class="media-object" src="{{ asset('default-images/no-image.jpg') }}" alt="{{ $product->name }}" width="120">
+                    @endif
                 </a>
             </div>
             <div class="media-body">
