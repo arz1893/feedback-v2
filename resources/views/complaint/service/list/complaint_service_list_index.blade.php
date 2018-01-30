@@ -86,7 +86,7 @@
                 <td>{!! $complaintService->is_answered == 1 ? '<span class="text-red">yes</span>':'<span class="text-muted">no</span>' !!}</td>
                 <td>
                     @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
-                        <a href="#!"
+                        <a href="{{ route('complaint_service_list.show', $complaintService->systemId) }}"
                            class="btn btn-primary"
                            data-toggle="tooltip"
                            data-placement="bottom"

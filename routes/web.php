@@ -144,6 +144,7 @@ Route::resource('question', 'Question\QuestionController');
 
 /* Question List Routes */
 Route::resource('question_list', 'Question\QuestionListController');
+Route::post('question_list/delete-question', 'Question\QuestionListController@deleteQuestion');
 /* end of question list routes */
 
 /* Customer Complaint Routes */

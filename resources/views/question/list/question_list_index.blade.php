@@ -61,13 +61,39 @@
                     <a href="{{ route('question_list.edit', $question->systemId) }}" class="btn btn-sm btn-warning">
                         <i class="fa fa-pencil-square"></i> Edit
                     </a>
-                    {{--<a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#myModal">--}}
-                    {{--<i class="fa fa-trash"></i> Delete--}}
-                    {{--</a>--}}
+                    <a href="#"
+                       onclick="deleteItem(this)"
+                       class="btn btn-sm btn-danger"
+                       data-type="question"
+                       data-id="{{ $question->systemId }}">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>
                 </td>
             </tr>
             @php $counter++; @endphp
         @endforeach
         </tbody>
     </table>
+
+    <!-- Modal Remove Complaint -->
+    <div class="modal fade" id="modal_delete_question" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-danger" id="myModalLabel">Add Complaint</h4>
+                </div>
+                {{ Form::open(['action' => 'Question\QuestionListController@deleteQuestion', 'id' => 'form_delete_question']) }}
+
+                <div class="modal-body">
+                    Are you sure want to delete this complaint ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Remove Complaint</button>
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
 @endsection

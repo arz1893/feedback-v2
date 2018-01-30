@@ -32,4 +32,10 @@ class QuestionListController extends Controller
         $question = Question::findOrFail($id);
         return view('question.list.question_list_show', compact('question'));
     }
+
+    public function deleteQuestion(Request $request) {
+        $question = Question::findOrFail($request->question_id);
+        $question->delete();
+        return redirect('question_list')->with(['status' => 'Question has been deleted']);
+    }
 }

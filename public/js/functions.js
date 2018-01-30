@@ -45,6 +45,13 @@ function deleteItem(selected) {
             value: $(selected).data('id')
         }).appendTo('#form_delete_faq_service');
         $('#modal_delete_service_faq').modal('show');
+    } else if($(selected).data('type') === 'question') {
+        $('<input>').attr({
+            type: 'hidden',
+            name: 'question_id',
+            value: $(selected).data('id')
+        }).appendTo('#form_delete_question');
+        $('#modal_delete_question').modal('show');
     }
 }
 
