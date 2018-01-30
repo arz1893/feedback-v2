@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class QuestionListController extends Controller
 {
     public function index() {
-        $questions = Question::where('tenantId', Auth::user()->tenantId)->get();
+        $questions = Question::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get();
         return view('question.list.question_list_index', compact('questions'));
     }
 
@@ -26,5 +26,10 @@ class QuestionListController extends Controller
         $question = Question::findOrFail($id);
         $question->update($request->all());
         return redirect('question_list')->with('status', 'Question has been updated!');
+    }
+
+    public function show($id) {
+        $question = Question::findOrFail($id);
+        return view('question.list.question_list_show', compact('question'));
     }
 }

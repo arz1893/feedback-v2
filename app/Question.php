@@ -19,7 +19,10 @@ class Question extends Model
         'question',
         'answer',
         'is_need_call',
-        'tenantId'
+        'tenantId',
+        'is_answered',
+        'syscreator',
+        'sysupdater'
     ];
 
     public function customer() {
@@ -28,5 +31,9 @@ class Question extends Model
 
     public function tenant() {
         return $this->belongsTo(Tenant::class, 'tenantId', 'systemId');
+    }
+
+    public function created_by() {
+        return $this->belongsTo(User::class, 'syscreator', 'systemId');
     }
 }

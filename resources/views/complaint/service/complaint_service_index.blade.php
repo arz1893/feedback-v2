@@ -34,13 +34,13 @@
         <div id="service_panel" class="tab-pane fade in active">
             <div class="row">
                 @foreach($services as $service)
-                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" style="max-width: 150px;">
                         <div class="imagebox">
                             <a href="{{ route('show_complaint_service', [$service->systemId, 0]) }}">
                                 @if($service->img == null)
-                                    <img src="{{ asset('default-images/no-image.jpg') }}" class="category-banner img-responsive">
+                                    <img src="{{ asset('default-images/no-image.jpg') }}" class="category-banner img-responsive" style="max-height: 100px;">
                                 @else
-                                    <img src="{{ asset($service->img) }}" class="category-banner img-responsive">
+                                    <img src="{{ asset($service->img) }}" class="category-banner img-responsive" style="max-height: 100px;">
                                 @endif
                                 <span class="imagebox-desc">{{ $service->name }}</span>
                             </a>

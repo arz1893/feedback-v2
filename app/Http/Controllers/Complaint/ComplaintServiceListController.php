@@ -25,7 +25,8 @@ class ComplaintServiceListController extends Controller
 
     public function show($id) {
         $complaintService = ComplaintService::findOrFail($id);
-        return view('complaint.service.list.complaint_service_list_show', compact('complaintService'));
+        $complaintServiceReplies = $complaintService->replies;
+        return view('complaint.service.list.complaint_service_list_show', compact('complaintService', 'complaintServiceReplies'));
     }
 
     public function update(ComplaintServiceRequest $request, $id) {
@@ -68,5 +69,34 @@ class ComplaintServiceListController extends Controller
         }
         $complaintService->delete();
         return redirect('complaint_service_list')->with('status', 'Complaint has been deleted');
+    }
+
+    public function changeAttachment(Request $request, $id) {
+        $complaintService = ComplaintService::findOrFail($id);
+        $file_attachment = $request->file('attachment');
+        $filename = $id . '-' . $file_attachment->getClientOriginalName();
+
+        if($complaintService->img != null) {
+            if(file_exists(public_path($complaintService->img))) {
+                unlink(public_path($complaintService->img));
+                $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $complaintService->serviceId . '/'), $filename);
+                $complaintService->update([
+                    'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $complaintService->serviceId . '/' . $filename
+                ]);
+                return redirect()->back()->with(['status' => 'Attachment has been updated']);
+            } else {
+                $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $complaintService->serviceId . '/'), $filename);
+                $complaintService->update([
+                    'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $complaintService->serviceId . '/' . $filename
+                ]);
+                return redirect()->back()->with(['status' => 'Attachment has been updated']);
+            }
+        } else {
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $complaintService->serviceId . '/'), $filename);
+            $complaintService->update([
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_service/' . $complaintService->serviceId . '/' . $filename
+            ]);
+            return redirect()->back()->with(['status' => 'Attachment has been updated']);
+        }
     }
 }

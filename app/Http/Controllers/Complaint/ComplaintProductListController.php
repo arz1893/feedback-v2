@@ -70,4 +70,33 @@ class ComplaintProductListController extends Controller
         $complaintProduct->delete();
         return redirect('complaint_product_list')->with('status', 'Complaint has been deleted');
     }
+
+    public function changeAttachment(Request $request, $id) {
+        $complaintProduct = ComplaintProduct::findOrFail($id);
+        $file_attachment = $request->file('attachment');
+        $filename = $id . '-' . $file_attachment->getClientOriginalName();
+
+        if($complaintProduct->img != null) {
+            if(file_exists(public_path($complaintProduct->attachment))) {
+                unlink(public_path($complaintProduct->attachment));
+                $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/'), $filename);
+                $complaintProduct->update([
+                    'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/' . $filename
+                ]);
+                return redirect()->back()->with(['status' => 'Attachment has been updated']);
+            } else {
+                $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/'), $filename);
+                $complaintProduct->update([
+                    'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/' . $filename
+                ]);
+                return redirect()->back()->with(['status' => 'Attachment has been updated']);
+            }
+        } else {
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/'), $filename);
+            $complaintProduct->update([
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/' . $filename
+            ]);
+            return redirect()->back()->with(['status' => 'Attachment has been updated']);
+        }
+    }
 }

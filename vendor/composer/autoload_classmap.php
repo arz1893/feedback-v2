@@ -25,6 +25,7 @@ return array(
     'App\\Http\\Controllers\\Complaint\\ComplaintProductReplyController' => $baseDir . '/app/Http/Controllers/Complaint/ComplaintProductReplyController.php',
     'App\\Http\\Controllers\\Complaint\\ComplaintServiceController' => $baseDir . '/app/Http/Controllers/Complaint/ComplaintServiceController.php',
     'App\\Http\\Controllers\\Complaint\\ComplaintServiceListController' => $baseDir . '/app/Http/Controllers/Complaint/ComplaintServiceListController.php',
+    'App\\Http\\Controllers\\Complaint\\ComplaintServiceReplyController' => $baseDir . '/app/Http/Controllers/Complaint/ComplaintServiceReplyController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Customer\\CustomerController' => $baseDir . '/app/Http/Controllers/Customer/CustomerController.php',
     'App\\Http\\Controllers\\Faq\\FaqProductController' => $baseDir . '/app/Http/Controllers/Faq/FaqProductController.php',

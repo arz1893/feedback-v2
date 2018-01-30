@@ -18,7 +18,6 @@
     {{ Form::label('', 'Customer Satisfaction') }} <br>
 
     @if($complaintProduct->customer_rating == 1)
-        {{ Form::radio('customer_rating', 1, true, ['id' => 'radio_very_dissatisfied', 'class' => 'invisible']) }}
         <a class="" href="#very_bad">
             <i id="very_bad"
                class="smiley_rating material-icons text-maroon is-selected"
@@ -28,8 +27,8 @@
                 sentiment_very_dissatisfied
             </i>
         </a>
+        {{ Form::radio('customer_rating', 1, true, ['id' => 'radio_very_dissatisfied', 'class' => 'invisible']) }}
     @else
-        {{ Form::radio('customer_rating', 1, false, ['id' => 'radio_very_dissatisfied', 'class' => 'invisible']) }}
         <a class="" href="#very_bad">
             <i id="very_bad"
                class="smiley_rating material-icons text-maroon"
@@ -39,11 +38,11 @@
                 sentiment_very_dissatisfied
             </i>
         </a>
+        {{ Form::radio('customer_rating', 1, false, ['id' => 'radio_very_dissatisfied', 'class' => 'invisible']) }}
     @endif
 
     @if($complaintProduct->customer_rating == 2)
-        {{ Form::radio('customer_rating', 2, true, ['id' => 'radio_dissatisfied', 'class' => 'invisible']) }}
-        <a class="" href="#bad">
+        <a class="">
             <i id="bad"
                class="smiley_rating material-icons text-red is-selected"
                style="font-size: 4em;"
@@ -52,9 +51,9 @@
                 sentiment_dissatisfied
             </i>
         </a>
+        {{ Form::radio('customer_rating', 2, true, ['id' => 'radio_dissatisfied', 'class' => 'invisible']) }}
     @else
-        {{ Form::radio('customer_rating', 2, false, ['id' => 'radio_dissatisfied', 'class' => 'invisible']) }}
-        <a class="" href="#bad">
+        <a class="">
             <i id="bad"
                class="smiley_rating material-icons text-red"
                style="font-size: 4em;"
@@ -63,11 +62,11 @@
                 sentiment_dissatisfied
             </i>
         </a>
+        {{ Form::radio('customer_rating', 2, false, ['id' => 'radio_dissatisfied', 'class' => 'invisible']) }}
     @endif
 
     @if($complaintProduct->customer_rating == 3)
-        {{ Form::radio('customer_rating', 3, true, ['id' => 'radio_neutral', 'class' => 'invisible']) }}
-        <a class="" href="#normal">
+        <a class="">
             <i id="normal"
                class="smiley_rating material-icons text-yellow is-selected"
                style="font-size: 4em;"
@@ -76,9 +75,9 @@
                 sentiment_neutral
             </i>
         </a>
+        {{ Form::radio('customer_rating', 3, true, ['id' => 'radio_neutral', 'class' => 'invisible']) }}
     @else
-        {{ Form::radio('customer_rating', 3, false, ['id' => 'radio_neutral', 'class' => 'invisible']) }}
-        <a class="" href="#normal">
+        <a class="">
             <i id="normal"
                class="smiley_rating material-icons text-yellow"
                style="font-size: 4em;"
@@ -87,11 +86,11 @@
                 sentiment_neutral
             </i>
         </a>
+        {{ Form::radio('customer_rating', 3, false, ['id' => 'radio_neutral', 'class' => 'invisible']) }}
     @endif
 
     @if($complaintProduct->customer_rating == 4)
-        {{ Form::radio('customer_rating', 4, true, ['id' => 'radio_satisfied', 'class' => 'invisible']) }}
-        <a class="" href="#satisfied">
+        <a class="">
             <i id="satisfied"
                class="smiley_rating material-icons text-olive is-selected"
                style="font-size: 4em;"
@@ -100,9 +99,9 @@
                 sentiment_satisfied
             </i>
         </a>
+        {{ Form::radio('customer_rating', 4, true, ['id' => 'radio_satisfied', 'class' => 'invisible']) }}
     @else
-        {{ Form::radio('customer_rating', 4, false, ['id' => 'radio_satisfied', 'class' => 'invisible']) }}
-        <a class="" href="#satisfied">
+        <a class="">
             <i id="satisfied"
                class="smiley_rating material-icons text-olive"
                style="font-size: 4em;"
@@ -111,11 +110,11 @@
                 sentiment_satisfied
             </i>
         </a>
+        {{ Form::radio('customer_rating', 4, false, ['id' => 'radio_satisfied', 'class' => 'invisible']) }}
     @endif
 
     @if($complaintProduct->customer_rating == 5)
-        {{ Form::radio('customer_rating', 5, true, ['id' => 'radio_very_satisfied', 'class' => 'invisible']) }}
-        <a class="" href="#very_satisfied">
+        <a class="">
             <i id="very_satisfied"
                class="smiley_rating material-icons text-green is-selected"
                style="font-size: 4em;"
@@ -124,9 +123,9 @@
                 sentiment_very_satisfied
             </i>
         </a>
+        {{ Form::radio('customer_rating', 5, true, ['id' => 'radio_very_satisfied', 'class' => 'invisible']) }}
     @else
-        {{ Form::radio('customer_rating', 5, false, ['id' => 'radio_very_satisfied', 'class' => 'invisible']) }}
-        <a class="" href="#very_satisfied">
+        <a class="">
             <i id="very_satisfied"
                class="smiley_rating material-icons text-green"
                style="font-size: 4em;"
@@ -135,6 +134,7 @@
                 sentiment_very_satisfied
             </i>
         </a>
+        {{ Form::radio('customer_rating', 5, false, ['id' => 'radio_very_satisfied', 'class' => 'invisible']) }}
     @endif
 </div>
 
@@ -142,34 +142,6 @@
     {{ Form::label('customer_complaint', 'Complaint') }}
     {{ Form::textarea('customer_complaint', null, ['class' => 'form-control', 'placeholder' => 'Please enter customer\'s complaint', 'rows' => 6]) }}
 </div>
-
-<div class="form-group">
-    {{ Form::label('attachment', 'Attach a File') }}
-    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*']) }}
-    @if($complaintProduct->attachment != null)
-        <p class="help-block">Click here to change current attachment</p>
-    @endif
-</div>
-
-@if($complaintProduct->attachment != null)
-    <span class="text-muted">Attachment : </span>
-    <ul class="mailbox-attachments clearfix">
-        <li>
-            <div id="lightgallery">
-                <a href="{{ asset($complaintProduct->attachment) }}">
-                    <span class="mailbox-attachment-icon has-img">
-                        <img src="{{ asset($complaintProduct->attachment) }}" alt="Attachment">
-                    </span>
-                </a>
-            </div>
-
-            <div class="mailbox-attachment-info">
-                <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
-                <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-            </div>
-        </li>
-    </ul>
-@endif
 
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">

@@ -34,7 +34,15 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading text-danger">{{ $complaintService->service->name }} ( {{ $complaintService->service_category->name }} ) <span class="mailbox-read-time pull-right">{{ $complaintService->created_at->format('d F Y, H:iA') }}</span></h4>
+                            <span class="mailbox-read-time pull-right visible-lg visible-md">
+                                    {{ $complaintService->created_at->format('d F Y, H:iA') }}
+                            </span>
+                            <span class="mailbox-read-time visible-sm visible-xs">
+                                    {{ $complaintService->created_at->format('d F Y, H:iA') }}
+                            </span>
+                            <h4 class="media-heading text-danger">
+                                {{ $complaintService->service->name }} ( {{ $complaintService->service_category->name }} )
+                            </h4>
                         </div>
                     </div>
                     <h5>From:
@@ -90,87 +98,104 @@
                     <div class="mailbox-read-message">
                         <h5 class="text-navy">Complaint: </h5>
                         <p>{{ $complaintService->customer_complaint }}</p>
+
+                        @if($complaintService->attachment != null)
+                            <span class="text-muted">Attachment : </span>
+                            <ul class="mailbox-attachments clearfix">
+                                <li>
+                                    <div id="lightgallery">
+                                        <a href="{{ asset($complaintService->attachment) }}">
+                                        <span class="mailbox-attachment-icon has-img">
+                                            <img src="{{ asset($complaintService->attachment) }}" alt="Attachment">
+                                        </span>
+                                        </a>
+                                    </div>
+
+                                    <div class="mailbox-attachment-info">
+                                        <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
+                                        <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        @endif
+
+                        <div class="pull-right">
+                            <button v-on:click="showReplyBox($event)" type="button" class="btn btn-sm btn-success"><i class="fa fa-reply"></i> Reply</button>
+                        </div>
+                        <button type="button"
+                                class="btn btn-sm btn-danger"
+                                data-id="{{ $complaintService->systemId }}"
+                                onclick="deleteComplaintService(this)"
+                                data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="Delete">
+                            <i class="fa fa-trash-o"></i> Delete
+                        </button>
+                        <a href="{{ route('complaint_service_list.edit', $complaintService->systemId) }}" class="btn btn-sm btn-warning"><i class="ion ion-edit"></i> Edit</a>
                     </div>
                     <!-- /.mailbox-read-message -->
                 </div>
                 <!-- /.box-body -->
 
                 <!-- /.box-footer -->
-                <div class="box-footer">
-
-                    @if($complaintService->attachment != null)
-                        <span class="text-muted">Attachment : </span>
-                        <ul class="mailbox-attachments clearfix">
-                            <li>
-                                <div id="lightgallery">
-                                    <a href="{{ asset($complaintService->attachment) }}">
-                                        <span class="mailbox-attachment-icon has-img">
-                                            <img src="{{ asset($complaintService->attachment) }}" alt="Attachment">
-                                        </span>
-                                    </a>
-                                </div>
-
-                                <div class="mailbox-attachment-info">
-                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
-                                    <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                                </div>
-                            </li>
-                        </ul>
-                    @endif
-
-                    <div class="pull-right">
-                        <button v-on:click="showReplyBox($event)" type="button" class="btn btn-sm btn-success"><i class="fa fa-reply"></i> Reply</button>
-                        <button type="button" class="btn btn-sm btn-default"><i class="fa fa-share"></i> Forward</button>
-                    </div>
-                    <button type="button"
-                            class="btn btn-sm btn-danger"
-                            data-id="{{ $complaintService->systemId }}"
-                            onclick="deleteComplaintService(this)"
-                            data-toggle="tooltip"
-                            data-placement="bottom"
-                            title="Delete">
-                        <i class="fa fa-trash-o"></i> Delete
-                    </button>
-                    <a href="{{ route('complaint_service_list.edit', $complaintService->systemId) }}" class="btn btn-sm btn-warning"><i class="ion ion-edit"></i> Edit</a>
+                <div class="box-footer" id="reply_box" v-if="showReply == true">
+                    {{ Form::open(['action' => 'Complaint\ComplaintServiceReplyController@store', 'id' => 'form_complaint_service_reply']) }}
+                        {{ Form::hidden('customerId', $complaintService->customer->systemId) }}
+                        {{ Form::hidden('complaintServiceId', $complaintService->systemId) }}
+                        <div class="form-group" v-bind:class="{'has-error': errors.has('reply_content')}">
+                            {{ Form::label('reply_content', 'Reply : ') }}
+                            <textarea id="reply_content"
+                                      name="reply_content"
+                                      class="form-control"
+                                      placeholder="Content. . ."
+                                      v-validate="'required'"
+                                      rows="6">
+                            </textarea>
+                            <span class="help-block text-red" v-show="errors.has('reply_content')">
+                                @{{ errors.first('reply_content') }}
+                            </span>
+                        </div>
+                        <div class="pull-right">
+                            <button type="button" @click="submitReply($event)" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+                        </div>
+                        <button type="reset" @click="showReply = false" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
+                    {{ Form::close() }}
                 </div>
                 <!-- /.box-footer -->
             </div>
             <!-- /. box -->
+
+            <h4>All Replies</h4>
+
+            @isset($complaintServiceReplies)
+                @php $counter = 1; @endphp
+                @foreach($complaintServiceReplies as $complaintServiceReply)
+                    <div class="row">
+                        <div class="col-lg-5 col-md-7 col-sm-12">
+                            <div class="panel panel-danger">
+                                <div class="panel-heading">
+                                    <strong>
+                                        {{ $complaintServiceReply->created_by->name }} ({{ $complaintServiceReply->created_by->user_group->name }})
+                                    </strong>
+                                </div>
+                                <div class="panel-body">
+                                    {{ $complaintServiceReply->reply_content }}
+                                </div><!-- /panel-body -->
+                                <div class="panel-footer">
+                                <span class="text-muted">
+                                    Replied at {{ $complaintServiceReply->created_at->format('d F Y H:iA') }}
+                                </span>
+                                </div>
+                            </div><!-- /panel panel-default -->
+                        </div><!-- /col-sm-5 -->
+                    </div>
+                    @php $counter++; @endphp
+                @endforeach
+            @endisset
+
         </div>
         <!-- /.col -->
 
-        <div class="col-lg-10" id="reply_box" v-if="showReply == true">
-            <div class="box box-danger">
-                {{ Form::open(['action' => 'Complaint\ComplaintServiceReplyController@store']) }}
-                {{ Form::hidden('customerId', $complaintService->customer->systemId) }}
-                {{ Form::hidden('complaintServiceId', $complaintService->systemId) }}
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="form-group">
-                        <span>Reply to : </span> <span v-html="replyTo"></span>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="reply_content"
-                                  name="reply_content"
-                                  class="form-control"
-                                  placeholder="Reply. . ."
-                                  rows="6">
-                        </textarea>
-                    </div>
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    <div class="pull-right">
-                        <button type="button" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
-                    </div>
-                    <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
-                </div>
-                <!-- /.box-footer -->
-                {{ Form::close() }}
-            </div>
-            <!-- /. box -->
-        </div>
-        <!-- /.col -->
 
 
         <!-- Modal Remove Complaint -->

@@ -41,4 +41,8 @@ class ComplaintService extends Model
     public function tenant() {
         return $this->belongsTo(Tenant::class, 'tenantId', 'systemId');
     }
+
+    public function replies() {
+        return $this->hasMany(ComplaintServiceReply::class, 'complaintServiceId', 'systemId');
+    }
 }

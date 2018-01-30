@@ -25,8 +25,10 @@
         <tr>
             <th>No.</th>
             <th>Question</th>
+            <th>Created</th>
             <th>Customer</th>
             <th>Need Call ?</th>
+            <th>Is Answered ?</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -35,7 +37,10 @@
             <tr>
                 <td>{{ $counter }}</td>
                 <td>
-                    <a href="#!">{{ $question->question }} </a>
+                    <a href="{{ route('question_list.show', $question->systemId) }}">{{ $question->question }} </a>
+                </td>
+                <td>
+                    {{ $question->created_at->format('d-M-Y') }}
                 </td>
                 <td>
                     @if($question->customerId == null)
@@ -47,11 +52,10 @@
                     @endif
                 </td>
                 <td>
-                    @if($question->is_need_call == 1)
-                        Yes
-                    @else
-                        No
-                    @endif
+                    {!! $question->is_need_call == 1 ? '<span class="text-red">yes</span>':'<span class="text-muted">no</span>' !!}
+                </td>
+                <td>
+                    {!! $question->is_answered == 1 ? '<span class="text-red">yes</span>':'<span class="text-muted">no</span>' !!}
                 </td>
                 <td>
                     <a href="{{ route('question_list.edit', $question->systemId) }}" class="btn btn-sm btn-warning">

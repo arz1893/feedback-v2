@@ -24,7 +24,11 @@
     @endif
 
     <div class="text-center">
-        <img src="{{ asset($product->img) }}" width="200" class="" alt="{{ $product->name }}">
+        @if($product->img != null)
+            <img src="{{ asset($product->img) }}" width="200" class="" alt="{{ $product->name }}">
+        @else
+            <img src="{{ asset('default-images/no-image.jpg') }}" width="200" class="" alt="{{ $product->name }}">
+        @endif
     </div>
     <div class="text-center">
         <small class="text-muted">{{ $product->name }}</small>

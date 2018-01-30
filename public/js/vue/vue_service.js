@@ -93,6 +93,7 @@ if($('#vue_service_container').length > 0) {
 }
 
 if($('#complaint_service_list_show').length > 0) {
+    Vue.use(VeeValidate);
     var complaintServiceListContainer = new Vue({
         el:'#complaint_service_list_show',
         data: {
@@ -103,6 +104,24 @@ if($('#complaint_service_list_show').length > 0) {
             showReplyBox: function (event) {
                 this.showReply = !this.showReply
                 this.replyTo = $('#reply_to').html();
+            },
+            submitReply: function (event) {
+                const dict = {
+                    custom: {
+                        reply_content: {
+                            required: 'please enter reply content' // messages can be strings as well.
+                        }
+                    }
+                };
+                this.$validator.localize('en', dict);
+                this.$validator.validateAll().then((result) => {
+                    if(result) {
+                        $('#form_complaint_service_reply').submit();
+                    }
+                })
+                .catch(error => {
+                        console.log(error);
+                });
             }
         }
     });

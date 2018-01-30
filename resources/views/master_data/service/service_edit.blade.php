@@ -13,7 +13,11 @@
 
 @section('main-content')
     <div class="text-center">
-        <img src="{{ asset($service->img) }}" width="200" class="" alt="{{ $service->name }}">
+        @if($service->img != null)
+            <img src="{{ asset($service->img) }}" width="200" class="" alt="{{ $service->name }}">
+        @else
+            <img src="{{ asset('default-images/no-image.jpg') }}" width="200" class="" alt="{{ $service->name }}">
+        @endif
     </div>
     <div class="text-center">
         <small class="text-muted">{{ $service->name }}</small>

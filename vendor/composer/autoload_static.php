@@ -345,6 +345,7 @@ class ComposerStaticInit36a9065fed3ad447489d51c2f7b9f87f
         'App\\Http\\Controllers\\Complaint\\ComplaintProductReplyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Complaint/ComplaintProductReplyController.php',
         'App\\Http\\Controllers\\Complaint\\ComplaintServiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Complaint/ComplaintServiceController.php',
         'App\\Http\\Controllers\\Complaint\\ComplaintServiceListController' => __DIR__ . '/../..' . '/app/Http/Controllers/Complaint/ComplaintServiceListController.php',
+        'App\\Http\\Controllers\\Complaint\\ComplaintServiceReplyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Complaint/ComplaintServiceReplyController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Customer\\CustomerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Customer/CustomerController.php',
         'App\\Http\\Controllers\\Faq\\FaqProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Faq/FaqProductController.php',

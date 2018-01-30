@@ -84,12 +84,19 @@ class ServiceController extends Controller
         $tenant = Tenant::findOrFail($service->tenantId);
         $filename = $id . '_' . $uploadedImage->getClientOriginalName();
 
-        if(file_exists(public_path($service->img))) {
-            unlink(public_path($service->img));
-            $uploadedImage->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
-            $service->img = '/uploaded_images/' . $tenant->email . '/' . $filename;
-            $service->update();
-            return redirect()->back()->with('status', 'Product picture has been updated');
+        if($service->img != null) {
+            if(file_exists(public_path($service->img))) {
+                unlink(public_path($service->img));
+                $uploadedImage->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
+                $service->img = '/uploaded_images/' . $tenant->email . '/' . $filename;
+                $service->update();
+                return redirect()->back()->with('status', 'Product picture has been updated');
+            } else {
+                $uploadedImage->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
+                $service->img = '/uploaded_images/' . $tenant->email . '/' . $filename;
+                $service->update();
+                return redirect()->back()->with('status', 'Product picture has been updated');
+            }
         } else {
             $uploadedImage->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
             $service->img = '/uploaded_images/' . $tenant->email . '/' . $filename;

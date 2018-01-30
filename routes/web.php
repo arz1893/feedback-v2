@@ -96,6 +96,7 @@ Route::get('complaint_product/show-product/{Product}/{CurrentNodeId}', 'Complain
 /* Complaint Product List Routes */
 Route::resource('complaint_product_list', 'Complaint\ComplaintProductListController');
 Route::post('complaint_product_list/delete-complaint-product', 'Complaint\ComplaintProductListController@deleteComplaintProduct')->name('delete_complaint_product');
+Route::post('complaint_product_list/{id}/change-attachment', 'Complaint\ComplaintProductListController@changeAttachment')->name('change_complaint_product_attachment');
 /* end of complaint product list routes */
 
 /* Complaint Product Reply Routes */
@@ -110,6 +111,7 @@ Route::get('complaint_service/show-service/{Service}/{CurrentNodeId}', 'Complain
 /* Complaint Service List Routes */
 Route::resource('complaint_service_list', 'Complaint\ComplaintServiceListController');
 Route::post('complaint_service_list/delete-complaint-service', 'Complaint\ComplaintServiceListController@deleteComplaintService')->name('delete_complaint_service');
+Route::post('complaint_service_list/{id}/change-attachment', 'Complaint\ComplaintServiceListController@changeAttachment')->name('change_complaint_service_attachment');
 /* end of complaint service list routes */
 
 /* Complaint Service Reply Routes */

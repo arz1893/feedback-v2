@@ -83,12 +83,19 @@ class ProductController extends Controller
         $tenant = Tenant::findOrFail($product->tenantId);
         $filename = $id . '_' . $uploadedImage->getClientOriginalName();
 
-        if(file_exists(public_path($product->img))) {
-            unlink(public_path($product->img));
-            $uploadedImage->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
-            $product->img = '/uploaded_images/' . $tenant->email . '/' . $filename;
-            $product->update();
-            return redirect()->back()->with('status', 'Product picture has been updated');
+        if($product->img != null) {
+            if(file_exists(public_path($product->img))) {
+                unlink(public_path($product->img));
+                $uploadedImage->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
+                $product->img = '/uploaded_images/' . $tenant->email . '/' . $filename;
+                $product->update();
+                return redirect()->back()->with('status', 'Product picture has been updated');
+            } else {
+                $uploadedImage->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
+                $product->img = '/uploaded_images/' . $tenant->email . '/' . $filename;
+                $product->update();
+                return redirect()->back()->with('status', 'Product picture has been updated');
+            }
         } else {
             $uploadedImage->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
             $product->img = '/uploaded_images/' . $tenant->email . '/' . $filename;

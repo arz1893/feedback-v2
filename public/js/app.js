@@ -40,8 +40,8 @@ $(document).ready(function () {
         columnDefs: [ {
             targets: [1],
             render: function ( data, type, row ) {
-                return data.length > 10 ?
-                    data.substr( 0, 50 ) +'…' :
+                return data.length > 100 ?
+                    data.substr( 0, 150 ) +'…' :
                     data;
             }
         } ]
