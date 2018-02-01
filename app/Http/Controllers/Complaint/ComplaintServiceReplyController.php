@@ -26,4 +26,10 @@ class ComplaintServiceReplyController extends Controller
 
         return redirect()->back()->with(['status' => 'complaint has been replied']);
     }
+
+    public function deleteReply(Request $request) {
+        $complaintServiceReply = ComplaintServiceReply::findOrFail($request->id);
+        $complaintServiceReply->delete();
+        return redirect()->back()->with(['status' => 'reply has been deleted']);
+    }
 }

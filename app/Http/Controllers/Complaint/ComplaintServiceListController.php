@@ -25,7 +25,7 @@ class ComplaintServiceListController extends Controller
 
     public function show($id) {
         $complaintService = ComplaintService::findOrFail($id);
-        $complaintServiceReplies = $complaintService->replies;
+        $complaintServiceReplies = $complaintService->complaint_service_replies;
         return view('complaint.service.list.complaint_service_list_show', compact('complaintService', 'complaintServiceReplies'));
     }
 

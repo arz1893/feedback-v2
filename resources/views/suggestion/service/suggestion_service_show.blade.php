@@ -54,7 +54,9 @@
         <transition name="fadeDown">
             <div id="category_navigator" v-if="show">
                 <h3>Categories</h3>
-
+                @if(count($serviceCategories) == 0)
+                    <span class="text-danger">Sorry you haven't add some category to this service, please add it first on master data</span>
+                @endif
                 @if(isset($currentParentNode))
                     @if($currentParentNode->parent_id == null)
                         <a href="{{ route('show_suggestion_service', [$service->systemId, 0]) }}" class="btn btn-link btn-lg">
@@ -69,12 +71,12 @@
 
                 @foreach($serviceCategories as $serviceCategory)
                     @if(count($serviceCategory->getImmediateDescendants()) > 0)
-                        <a href="{{ route('show_suggestion_service', [$service->systemId, $serviceCategory->id]) }}" class="btn btn-app bg-teal">
+                        <a href="{{ route('show_suggestion_service', [$service->systemId, $serviceCategory->id]) }}" class="btn btn-lg btn-info btn3d">
                             <span class="badge bg-aqua">{{ count($serviceCategory->getImmediateDescendants()) }}</span>
                             <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $serviceCategory->name }}
                         </a>
                     @elseif(count($serviceCategory->getImmediateDescendants()) == 0)
-                        <button class="btn btn-app bg-teal"
+                        <button class="btn btn-lg btn-info btn3d"
                                 data-node_id="{{ $serviceCategory->id }}"
                                 data-service_id="{{ $service->systemId }}"
                                 data-title="{{ $serviceCategory->name }}"

@@ -58,6 +58,9 @@
         <transition name="fadeDown">
             <div id="category_navigator" v-if="show">
                 <h3>Categories</h3>
+                @if(count($productCategories) == 0)
+                    <span class="text-danger">Sorry you haven't add some category to this product, please add it first on master data</span>
+                @endif
 
                 @if(isset($currentParentNode))
                     @if($currentParentNode->parent_id == null)
@@ -73,12 +76,12 @@
 
                 @foreach($productCategories as $productCategory)
                     @if(count($productCategory->getImmediateDescendants()) > 0)
-                        <a href="{{ route('show_complaint_product', [$product->systemId, $productCategory->id]) }}" class="btn btn-lg btn-app bg-teal">
-                            <span class="badge bg-aqua">{{ count($productCategory->getImmediateDescendants()) }}</span>
+                        <a href="{{ route('show_complaint_product', [$product->systemId, $productCategory->id]) }}" class="btn btn-lg btn-info btn3d">
                             <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $productCategory->name }}
+                            <span class="badge bg-teal">{{ count($productCategory->getImmediateDescendants()) }}</span>
                         </a>
                     @elseif(count($productCategory->getImmediateDescendants()) == 0)
-                        <button class="btn btn-lg btn-app bg-teal"
+                        <button class="btn btn-lg btn-info btn3d"
                                 data-node_id="{{ $productCategory->id }}"
                                 data-product_id="{{ $product->systemId }}"
                                 data-title="{{ $productCategory->name }}"

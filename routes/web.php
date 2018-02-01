@@ -101,6 +101,7 @@ Route::post('complaint_product_list/{id}/change-attachment', 'Complaint\Complain
 
 /* Complaint Product Reply Routes */
 Route::resource('complaint_product_reply', 'Complaint\ComplaintProductReplyController');
+Route::post('complaint_product_reply/delete-reply', 'Complaint\ComplaintProductReplyController@deleteReply');
 /* end of complaint product reply routes */
 
 /* Complaint Service Routes */
@@ -116,6 +117,7 @@ Route::post('complaint_service_list/{id}/change-attachment', 'Complaint\Complain
 
 /* Complaint Service Reply Routes */
 Route::resource('complaint_service_reply', 'Complaint\ComplaintServiceReplyController');
+Route::post('complaint_service_reply/delete-reply', 'Complaint\ComplaintServiceReplyController@deleteReply');
 /* end of complaint service reply routes */
 
 /* Suggestion Product Routes */

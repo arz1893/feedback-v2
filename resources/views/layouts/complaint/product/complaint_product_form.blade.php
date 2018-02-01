@@ -77,7 +77,15 @@
 
 <div class="form-group">
     {{ Form::label('attachment', 'Attach a File') }}
-    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*']) }}
+    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*', 'v-on:change' => 'previewAttachment($event)']) }}
+</div>
+
+<div class="form-group" v-if="showAttachment" style="width: 125px;">
+    <span class="mailbox-attachment-icon has-img"><img src="" id="preview"></span>
+
+    <div class="mailbox-attachment-info">
+        <a class="mailbox-attachment-name"><i class="fa fa-camera"></i> attachment</a>
+    </div>
 </div>
 
 <div class="row">

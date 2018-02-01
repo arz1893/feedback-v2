@@ -34,15 +34,15 @@
                             </a>
                         </div>
                         <div class="media-body">
+                            <h4 class="media-heading text-danger">
+                                {{ $complaintService->service->name }} ( {{ $complaintService->service_category->name }} )
+                            </h4>
                             <span class="mailbox-read-time pull-right visible-lg visible-md">
                                     {{ $complaintService->created_at->format('d F Y, H:iA') }}
                             </span>
                             <span class="mailbox-read-time visible-sm visible-xs">
                                     {{ $complaintService->created_at->format('d F Y, H:iA') }}
                             </span>
-                            <h4 class="media-heading text-danger">
-                                {{ $complaintService->service->name }} ( {{ $complaintService->service_category->name }} )
-                            </h4>
                         </div>
                     </div>
                     <h5>From:
@@ -102,7 +102,7 @@
                         @if($complaintService->attachment != null)
                             <span class="text-muted">Attachment : </span>
                             <ul class="mailbox-attachments clearfix">
-                                <li>
+                                <li style="width: 150px;">
                                     <div id="lightgallery">
                                         <a href="{{ asset($complaintService->attachment) }}">
                                         <span class="mailbox-attachment-icon has-img">
@@ -120,7 +120,13 @@
                         @endif
 
                         <div class="pull-right">
-                            <button v-on:click="showReplyBox($event)" type="button" class="btn btn-sm btn-success"><i class="fa fa-reply"></i> Reply</button>
+                            @isset($complaintService->customer->systemId)
+                                <button v-on:click="showReplyBox($event)" type="button" class="btn btn-sm btn-success"><i class="fa fa-reply"></i> Reply</button>
+                            @else
+                                <button disabled type="button" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Cannot reply on anonymous">
+                                    <i class="fa fa-reply"></i> Reply
+                                </button>
+                            @endisset
                         </div>
                         <button type="button"
                                 class="btn btn-sm btn-danger"
@@ -140,7 +146,9 @@
                 <!-- /.box-footer -->
                 <div class="box-footer" id="reply_box" v-if="showReply == true">
                     {{ Form::open(['action' => 'Complaint\ComplaintServiceReplyController@store', 'id' => 'form_complaint_service_reply']) }}
+                        @isset($complaintService->customer->systemId)
                         {{ Form::hidden('customerId', $complaintService->customer->systemId) }}
+                        @endisset
                         {{ Form::hidden('complaintServiceId', $complaintService->systemId) }}
                         <div class="form-group" v-bind:class="{'has-error': errors.has('reply_content')}">
                             {{ Form::label('reply_content', 'Reply : ') }}
@@ -165,38 +173,50 @@
             </div>
             <!-- /. box -->
 
-            <h4>All Replies</h4>
+            <h4>
+                <a data-toggle="collapse" href="#collapseReply" aria-expanded="false" aria-controls="collapseReply">
+                    <i class="fa fa-chevron-right"></i> View All Replies
+                </a>
+            </h4>
 
-            @isset($complaintServiceReplies)
-                @php $counter = 1; @endphp
-                @foreach($complaintServiceReplies as $complaintServiceReply)
-                    <div class="row">
-                        <div class="col-lg-5 col-md-7 col-sm-12">
-                            <div class="panel panel-danger">
-                                <div class="panel-heading">
-                                    <strong>
-                                        {{ $complaintServiceReply->created_by->name }} ({{ $complaintServiceReply->created_by->user_group->name }})
-                                    </strong>
+            <div class="collapse" id="collapseReply">
+                <div class="well col-lg-10 col-md-7 col-sm-12">
+                    @if(count($complaintServiceReplies) == 0)
+                        <span class="text-danger">This complaint doesn't have any replies yet</span>
+                    @endif
+                    @isset($complaintServiceReplies)
+                        @php $counter = 1; @endphp
+                        @foreach($complaintServiceReplies as $complaintServiceReply)
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        <strong>
+                                            {{ $complaintServiceReply->created_by->name }} ({{ $complaintServiceReply->created_by->user_group->name }})
+                                        </strong>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>{{ $complaintServiceReply->reply_content }}</p>
+                                        <button class="btn btn-sm btn-danger"
+                                                data-id="{{ $complaintServiceReply->systemId }}"
+                                                @click="deleteReply($event)">
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-warning">
+                                            <i class="fa fa-pencil-square-o"></i>
+                                        </button>
+                                    </div>
+                                    <div class="panel-footer">
+                                    <span class="text-muted">
+                                        Replied at {{ $complaintServiceReply->created_at->format('d F Y H:iA') }}
+                                    </span>
+                                    </div>
                                 </div>
-                                <div class="panel-body">
-                                    {{ $complaintServiceReply->reply_content }}
-                                </div><!-- /panel-body -->
-                                <div class="panel-footer">
-                                <span class="text-muted">
-                                    Replied at {{ $complaintServiceReply->created_at->format('d F Y H:iA') }}
-                                </span>
-                                </div>
-                            </div><!-- /panel panel-default -->
-                        </div><!-- /col-sm-5 -->
-                    </div>
-                    @php $counter++; @endphp
-                @endforeach
-            @endisset
-
+                            @php $counter++; @endphp
+                        @endforeach
+                    @endisset
+                </div>
+            </div>
         </div>
         <!-- /.col -->
-
-
 
         <!-- Modal Remove Complaint -->
         <div class="modal fade" id="modal_remove_complaint_service" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -204,7 +224,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title text-danger" id="myModalLabel">Add Complaint</h4>
+                        <h4 class="modal-title text-danger" id="myModalLabel">Remove Complaint</h4>
                     </div>
                     {{ Form::open(['action' => 'Complaint\ComplaintServiceListController@deleteComplaintService', 'id' => 'form_delete_complaint_service']) }}
 
@@ -214,6 +234,28 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Remove Complaint</button>
+                    </div>
+                    {{ Form::close() }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Remove Reply -->
+        <div class="modal fade" id="modal_remove_complaint_service_reply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title text-danger" id="myModalLabel">Remove Reply</h4>
+                    </div>
+                    {{ Form::open(['action' => 'Complaint\ComplaintServiceReplyController@deleteReply', 'id' => 'form_delete_complaint_service_reply']) }}
+                    <div v-html="replyId"></div>
+                    <div class="modal-body">
+                        Are you sure want to delete this reply ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Remove Reply</button>
                     </div>
                     {{ Form::close() }}
                 </div>

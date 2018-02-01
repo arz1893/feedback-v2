@@ -26,4 +26,10 @@ class ComplaintProductReplyController extends Controller
 
         return redirect()->back()->with(['status' => 'A new complaint has been added']);
     }
+
+    public function deleteReply(Request $request) {
+        $complaintProductReply = ComplaintProductReply::findOrFail($request->id);
+        $complaintProductReply->delete();
+        return redirect()->back()->with(['status' => 'Reply has been deleted']);
+    }
 }

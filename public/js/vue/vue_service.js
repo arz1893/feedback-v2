@@ -8,7 +8,8 @@ if($('#vue_service_container').length > 0) {
             show: true,
             ratingValue: '',
             is_anonymous: true,
-            is_customer: true
+            is_customer: true,
+            showAttachment: false
         },
         created: function () {
 
@@ -86,8 +87,19 @@ if($('#vue_service_container').length > 0) {
                     this.is_anonymous = true;
                     $('#is_need_call').prop('checked', false);
                 }
-            }
+            },
 
+            previewAttachment: function (event) {
+                var attachment = event.target;
+                if(attachment.files && attachment.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#preview').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(attachment.files[0]);
+                }
+                this.showAttachment = true;
+            }
         }
     });
 }
@@ -98,7 +110,8 @@ if($('#complaint_service_list_show').length > 0) {
         el:'#complaint_service_list_show',
         data: {
             showReply: false,
-            replyTo: ''
+            replyTo: '',
+            replyId: ''
         },
         methods: {
             showReplyBox: function (event) {
@@ -122,6 +135,12 @@ if($('#complaint_service_list_show').length > 0) {
                 .catch(error => {
                         console.log(error);
                 });
+            },
+            
+            deleteReply: function (event) {
+                console.log(event.currentTarget.getAttribute('data-id'));
+                this.replyId = '<input type="hidden" name="id" value="' + event.currentTarget.getAttribute('data-id') + '">';
+                $('#modal_remove_complaint_service_reply').modal('show');
             }
         }
     });

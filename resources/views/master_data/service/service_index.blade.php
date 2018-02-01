@@ -40,9 +40,9 @@
                 <td>
                     <a href="{{ route('service.show', $service) }}">
                         @if($service->img != null)
-                            <img src="{{ asset($service->img) }}" width="100">
+                            <img src="{{ asset($service->img) }}" width="75">
                         @else
-                            <img src="{{ asset('default-images/no-image.jpg') }}" width="100">
+                            <img src="{{ asset('default-images/no-image.jpg') }}" width="75">
                         @endif
                     </a>
                 </td>

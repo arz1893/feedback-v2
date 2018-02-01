@@ -26,32 +26,29 @@
         @endif
 
         <div class="row">
-            {{ Form::model($complaintProduct, ['method' => 'PATCH', 'action' => ['Complaint\ComplaintProductListController@update', $complaintProduct], 'id' => 'form_edit_complaint_product', 'files' => true]) }}
             <div class="col-lg-6">
+                {{ Form::model($complaintProduct, ['method' => 'PATCH', 'action' => ['Complaint\ComplaintProductListController@update', $complaintProduct], 'id' => 'form_edit_complaint_product', 'files' => true]) }}
                 @include('layouts.complaint.product.complaint_product_form_edit', ['submitButtonText' => 'Update Complaint Product'])
+                {{ Form::close() }}
             </div>
-            {{ Form::close() }}
 
             <div class="col-lg-4">
-                {{ Form::open(['action' => ['Complaint\ComplaintProductListController@changeAttachment', $complaintProduct->systemId], 'files' => true ,'id' => 'form_change_complaint_product_attachment']) }}
+                {{ Form::open(['action' => ['Complaint\ComplaintProductListController@changeAttachment', $complaintProduct->systemId], 'id' => 'form_change_attachment', 'files' => true]) }}
                 <div class="form-group">
                     {{ Form::label('attachment', 'Attach a File') }}
-                    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*', 'onchange' => '$("#form_change_complaint_product_attachment").submit()']) }}
-                    @if($complaintProduct->attachment != null)
-                        <p class="help-block">Click here to change current attachment</p>
-                    @endif
+                    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*', 'v-on:change' => 'submitFormAttachment($event)']) }}
                 </div>
                 {{ Form::close() }}
 
                 @if($complaintProduct->attachment != null)
-                    <span class="text-muted">Attachment : </span>
+                    <span class="text-muted">Current Attachment : </span>
                     <ul class="mailbox-attachments clearfix">
                         <li>
                             <div id="lightgallery">
                                 <a href="{{ asset($complaintProduct->attachment) }}">
-                    <span class="mailbox-attachment-icon has-img">
-                        <img src="{{ asset($complaintProduct->attachment) }}" alt="Attachment">
-                    </span>
+                                <span class="mailbox-attachment-icon has-img">
+                                    <img src="{{ asset($complaintProduct->attachment) }}" alt="Attachment">
+                                </span>
                                 </a>
                             </div>
 
@@ -61,8 +58,8 @@
                             </div>
                         </li>
                     </ul>
+                @endif
             </div>
-            @endif
         </div>
     </div>
 

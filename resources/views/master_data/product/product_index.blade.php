@@ -39,9 +39,9 @@
                 <td>{{ $counter }}</td>
                 <td>
                     @if($product->img != null)
-                        <a href="{{ route('product.show', $product) }}"><img src="{{ asset($product->img) }}" width="100"></a>
+                        <a href="{{ route('product.show', $product) }}"><img src="{{ asset($product->img) }}" width="75"></a>
                     @else
-                        <a href="{{ route('product.show', $product) }}"><img src="{{ asset('default-images/no-image.jpg') }}" width="100"></a>
+                        <a href="{{ route('product.show', $product) }}"><img src="{{ asset('default-images/no-image.jpg') }}" width="50"></a>
                     @endif
                 </td>
                 <td><a href="{{ route('product.show', $product) }}">{{ $product->name }}</a></td>

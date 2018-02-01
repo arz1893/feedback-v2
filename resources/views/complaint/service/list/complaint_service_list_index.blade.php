@@ -81,9 +81,9 @@
                         @break
                     @endswitch
                 </td>
-                <td>{!! $complaintService->is_need_call == 1 ? '<span class="text-red">yes</span>':'<span class="text-muted">no</span>' !!}</td>
-                <td>{!! $complaintService->is_urgent == 1 ? '<span class="text-red">yes</span>':'<span class="text-muted">no</span>' !!}</td>
-                <td>{!! $complaintService->is_answered == 1 ? '<span class="text-red">yes</span>':'<span class="text-muted">no</span>' !!}</td>
+                <td>{!! $complaintService->is_need_call == 1 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
+                <td>{!! $complaintService->is_urgent == 1 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
+                <td>{!! count($complaintService->complaint_service_replies) > 0 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
                 <td>
                     @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
                         <a href="{{ route('complaint_service_list.show', $complaintService->systemId) }}"
