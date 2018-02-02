@@ -358,10 +358,7 @@ $(document).ready(function () {
 
         rules: {
             customer_rating: 'required',
-            customer_complaint: 'required',
-            attachment: {
-                accept: 'image/*'
-            }
+            customer_complaint: 'required'
         },
         messages: {
             customer_rating: 'please select rating',
@@ -424,10 +421,7 @@ $(document).ready(function () {
 
         rules: {
             customer_rating: 'required',
-            customer_complaint: 'required',
-            attachment: {
-                accept: 'image/*'
-            }
+            customer_complaint: 'required'
         },
         messages: {
             customer_rating: 'please select rating',
@@ -457,10 +451,7 @@ $(document).ready(function () {
 
         rules: {
             customer_rating: 'required',
-            customer_complaint: 'required',
-            attachment: {
-                accept: 'image/*'
-            }
+            customer_complaint: 'required'
         },
         messages: {
             customer_rating: 'please select rating',
@@ -489,10 +480,7 @@ $(document).ready(function () {
         validClass: "my-valid-class",
 
         rules: {
-            customer_suggestion: 'required',
-            attachment: {
-                accept: 'image/*'
-            }
+            customer_suggestion: 'required'
         },
         messages: {
             customer_suggestion: 'please enter customer\'s suggestion'

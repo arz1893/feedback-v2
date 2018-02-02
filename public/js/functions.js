@@ -52,6 +52,13 @@ function deleteItem(selected) {
             value: $(selected).data('id')
         }).appendTo('#form_delete_question');
         $('#modal_delete_question').modal('show');
+    } else if($(selected).data('type') === 'delete_complaint_product_attachment') {
+        $('<input>').attr({
+            type: 'hidden',
+            name: 'complaint_product_id',
+            value: $(selected).data('id')
+        }).appendTo($('#form_delete_complaint_product_attachment'));
+        $('#modal_remove_complaint_product_attachment').modal('show');
     }
 }
 

@@ -154,7 +154,7 @@ $(document).ready(function () {
     //     radioClass: 'iradio_square-blue'
     // });
 
-    $('input[type="file"]').prettyFile();
+    // $('input[type="file"]').prettyFile();
 
     $('#lightgallery').lightGallery();
 });

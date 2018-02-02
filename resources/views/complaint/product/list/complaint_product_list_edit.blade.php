@@ -53,12 +53,42 @@
                             </div>
 
                             <div class="mailbox-attachment-info">
+                                <a class="btn btn-danger btn-xs pull-right"
+                                   data-id="{{ $complaintProduct->systemId  }}"
+                                   data-type="delete_complaint_product_attachment"
+                                   onclick="deleteItem(this)"
+                                   data-toggle="tooltip"
+                                   data-placement="bottom"
+                                   title="delete attachment">
+                                    <i class="fa fa-close"></i>
+                                </a>
                                 <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
-                                <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
                             </div>
                         </li>
                     </ul>
                 @endif
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Remove Complaint -->
+    <div class="modal fade" id="modal_remove_complaint_product_attachment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-danger" id="myModalLabel">Remove Attachment</h4>
+                </div>
+                {{ Form::open(['action' => 'Complaint\ComplaintProductListController@deleteAttachment', 'id' => 'form_delete_complaint_product_attachment']) }}
+
+                <div class="modal-body">
+                    Are you sure want to delete this attachment ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Remove Attachment</button>
+                </div>
+                {{ Form::close() }}
             </div>
         </div>
     </div>

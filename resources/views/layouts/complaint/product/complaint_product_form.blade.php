@@ -80,10 +80,13 @@
     {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*', 'v-on:change' => 'previewAttachment($event)']) }}
 </div>
 
-<div class="form-group" v-if="showAttachment" style="width: 125px;">
+<div class="form-group" v-if="showAttachment" style="width: 180px;">
     <span class="mailbox-attachment-icon has-img"><img src="" id="preview"></span>
 
     <div class="mailbox-attachment-info">
+        <a @click="clearAttachment($event)" class="btn btn-danger btn-xs pull-right" data-toggle="tooltip" data-placement="bottom" title="delete attachment">
+            <i class="fa fa-close"></i>
+        </a>
         <a class="mailbox-attachment-name"><i class="fa fa-camera"></i> attachment</a>
     </div>
 </div>

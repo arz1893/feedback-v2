@@ -101,6 +101,12 @@ if($('#vue_product_container').length > 0) {
                 this.showAttachment = true;
             },
 
+            clearAttachment: function(event) {
+                $('#preview').removeAttr('src');
+                $('#attachment').val("");
+                this.showAttachment = false;
+            },
+
             submitFormAttachment: function (event) {
                 $('#form_change_attachment').submit();
             }
