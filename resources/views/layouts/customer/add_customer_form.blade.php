@@ -2,7 +2,7 @@
     <div class="row form-margin-bottom">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             <label for="name" class="control-label">
-                Customer's name <span class="text-danger">*</span>
+                Name <span class="text-danger">*</span>
             </label>
         </div>
         <div class=" col-lg-7 col-md-7 col-sm-7 col-xs-8" v-bind:class="{'has-error': errors.has('name')}">
@@ -44,7 +44,7 @@
         <div class="form-group">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 <label for="phone" class="control-label">
-                    Customer's phone <span class="text-danger">*</span>
+                    Phone <span class="text-danger">*</span>
                 </label>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8" v-bind:class="{'has-error': errors.has('phone')}">
@@ -91,7 +91,7 @@
     <div class="row form-margin-bottom">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             <label for="email" class="control-label">
-                Email address
+                Email
             </label>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-8" v-bind:class="{'has-error': errors.has('email')}">
@@ -109,7 +109,7 @@
     </div>
 
     <div class="form-group form-margin-bottom">
-        {{ Form::label('address', 'Customer\'s address', ['class' => 'control-label']) }}
+        {{ Form::label('address', 'Address', ['class' => 'control-label']) }}
         {{ Form::textarea('address', null, ['class' => 'form-control', 'placeholder' => 'Enter customer\'s address', 'rows' => 2, 'v-model' => 'customer.address']) }}
 
     </div>
