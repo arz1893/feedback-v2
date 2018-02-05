@@ -102,7 +102,9 @@ class ComplaintProductListController extends Controller
 
     public function deleteAttachment(Request $request) {
         $complaintProduct = ComplaintProduct::findOrFail($request->complaint_product_id);
-        unlink(public_path($complaintProduct->attachment));
+        if(file_exists(public_path($complaintProduct->attachment))) {
+            unlink(public_path($complaintProduct->attachment));
+        }
         $complaintProduct->attachment = null;
         $complaintProduct->update();
         return redirect()->back()->with(['status' => 'Attachment has been deleted']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Complaint;
 use App\ComplaintService;
 use App\Customer;
 use App\Http\Requests\Complaint\ComplaintServiceRequest;
+use App\Question;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -98,5 +99,15 @@ class ComplaintServiceListController extends Controller
             ]);
             return redirect()->back()->with(['status' => 'Attachment has been updated']);
         }
+    }
+
+    public function deleteAttachment(Request $request) {
+        $complaintService = ComplaintService::findOrFail($request->complaint_service_id);
+        if(file_exists(public_path($complaintService->attachment))) {
+            unlink(public_path($complaintService->attachment));
+        }
+        $complaintService->attachment = null;
+        $complaintService->update();
+        return redirect()->back()->with(['status' => 'Attachment has been deleted']);
     }
 }

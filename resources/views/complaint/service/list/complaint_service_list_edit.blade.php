@@ -10,6 +10,7 @@
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="{{ route('complaint_service_list.index') }}"><i class="ion ion-clipboard"></i>Complaint Service List</a></li>
+        <li><a href="{{ route('complaint_service_list.show', $complaintService->systemId) }}"><i class="ion ion-ios-search"></i>Complaint Service Detail</a></li>
         <li class="active">Edit Complaint Service</li>
     </ol>
 @endsection
@@ -48,21 +49,48 @@
                         <li>
                             <div id="lightgallery">
                                 <a href="{{ asset($complaintService->attachment) }}">
-                                            <span class="mailbox-attachment-icon has-img">
-                                                <img src="{{ asset($complaintService->attachment) }}" alt="Attachment">
-                                            </span>
+                                    <span class="mailbox-attachment-icon has-img">
+                                        <img src="{{ asset($complaintService->attachment) }}" alt="Attachment">
+                                    </span>
                                 </a>
                             </div>
 
                             <div class="mailbox-attachment-info">
-                                <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
-                                <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                <a class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> attachment</a>
+                                <a class="btn btn-danger btn-xs pull-right"
+                                        data-id="{{ $complaintService->systemId }}"
+                                        data-type="delete_complaint_service_attachment"
+                                        onclick="deleteItem(this)">
+                                    <i class="fa fa-close"></i>
+                                </a>
                             </div>
                         </li>
                     </ul>
                 @endif
             </div>
             {{ Form::close() }}
+        </div>
+    </div>
+
+    <!-- Modal Remove Complaint -->
+    <div class="modal fade" id="modal_remove_complaint_service_attachment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-danger" id="myModalLabel">Remove Attachment</h4>
+                </div>
+                {{ Form::open(['action' => 'Complaint\ComplaintServiceListController@deleteAttachment', 'id' => 'form_delete_complaint_service_attachment']) }}
+
+                <div class="modal-body">
+                    Are you sure want to delete this attachment ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Remove Attachment</button>
+                </div>
+                {{ Form::close() }}
+            </div>
         </div>
     </div>
 

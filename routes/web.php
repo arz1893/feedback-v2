@@ -114,6 +114,7 @@ Route::get('complaint_service/show-service/{Service}/{CurrentNodeId}', 'Complain
 Route::resource('complaint_service_list', 'Complaint\ComplaintServiceListController');
 Route::post('complaint_service_list/delete-complaint-service', 'Complaint\ComplaintServiceListController@deleteComplaintService')->name('delete_complaint_service');
 Route::post('complaint_service_list/{id}/change-attachment', 'Complaint\ComplaintServiceListController@changeAttachment')->name('change_complaint_service_attachment');
+Route::post('complaint_service_list/delete-attachment', 'Complaint\ComplaintServiceListController@deleteAttachment')->name('delete_complaint_service_attachment');
 /* end of complaint service list routes */
 
 /* Complaint Service Reply Routes */
