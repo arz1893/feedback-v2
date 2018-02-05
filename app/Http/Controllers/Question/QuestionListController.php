@@ -38,4 +38,31 @@ class QuestionListController extends Controller
         $question->delete();
         return redirect('question_list')->with(['status' => 'Question has been deleted']);
     }
+
+    public function answerQuestion(Request $request, $id) {
+        $question = Question::findOrFail($id);
+        $question->update([
+            'answer' => $request->answer,
+            'is_answered' => 1
+        ]);
+        return redirect()->back()->with(['status' => 'Question has been answered']);
+    }
+
+    public function updateAnswer(Request $request, $id) {
+        $question = Question::findOrFail($id);
+        $question->update([
+            'answer' => $request->answer,
+            'is_answered' => 1
+        ]);
+        return redirect()->back()->with(['status' => 'Answer has been updated']);
+    }
+
+    public function deleteAnswer(Request $request) {
+        $question = Question::findOrFail($request->question_id);
+        $question->update([
+            'answer' => null,
+            'is_answered' => 0
+        ]);
+        return redirect()->back()->with(['status' => 'Answer has been deleted']);
+    }
 }

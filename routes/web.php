@@ -148,6 +148,9 @@ Route::resource('question', 'Question\QuestionController');
 /* Question List Routes */
 Route::resource('question_list', 'Question\QuestionListController');
 Route::post('question_list/delete-question', 'Question\QuestionListController@deleteQuestion');
+Route::post('question_list/{id}/answer-question', 'Question\QuestionListController@answerQuestion')->name('answer_question');
+Route::post('question_list/{id}/update-answer', 'Question\QuestionListController@updateAnswer')->name('update_answer');
+Route::post('question/delete-answer', 'Question\QuestionListController@deleteAnswer')->name('delete_answer');
 /* end of question list routes */
 
 /* Customer Complaint Routes */

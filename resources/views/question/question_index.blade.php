@@ -22,9 +22,13 @@
 
     @include('layouts.errors.error_list')
 
-    {{ Form::open(['action' => 'Question\QuestionController@store', 'id' => 'form_add_question']) }}
-        @include('layouts.question.add_question_form')
-    {{ Form::close() }}
+    <div class="row">
+        <div class="col-lg-6">
+            {{ Form::open(['action' => 'Question\QuestionController@store', 'id' => 'form_add_question']) }}
+                @include('layouts.question.add_question_form')
+            {{ Form::close() }}
+        </div>
+    </div>
 
     @include('customer.manage_customer')
 @endsection

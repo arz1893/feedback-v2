@@ -52,21 +52,24 @@
                     @endif
                 </td>
                 <td>
-                    {!! $question->is_need_call == 1 ? '<span class="text-red">yes</span>':'<span class="text-muted">no</span>' !!}
+                    {!! $question->is_need_call == 1 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}
                 </td>
                 <td>
-                    {!! $question->is_answered == 1 ? '<span class="text-red">yes</span>':'<span class="text-muted">no</span>' !!}
+                    {!! $question->is_answered == 1 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}
                 </td>
                 <td>
+                    <a href="{{ route('question_list.show', $question->systemId) }}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-phone"></i>
+                    </a>
                     <a href="{{ route('question_list.edit', $question->systemId) }}" class="btn btn-sm btn-warning">
-                        <i class="fa fa-pencil-square"></i> Edit
+                        <i class="fa fa-pencil-square"></i>
                     </a>
                     <a href="#"
                        onclick="deleteItem(this)"
                        class="btn btn-sm btn-danger"
                        data-type="question"
                        data-id="{{ $question->systemId }}">
-                        <i class="fa fa-trash"></i> Delete
+                        <i class="fa fa-trash"></i>
                     </a>
                 </td>
             </tr>

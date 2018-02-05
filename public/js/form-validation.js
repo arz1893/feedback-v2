@@ -504,7 +504,52 @@ $(document).ready(function () {
         },
 
         submitHandler: function (form) {
-            console.log("submitted");
+            form.submit();
+        }
+    });
+
+    $('#form_add_question').validate({
+        errorClass: "my-error-class",
+        validClass: "my-valid-class",
+
+        rules: {
+            customerId: 'required',
+            question: 'required'
+        },
+        messages: {
+            customerId: 'please select customer',
+            question: 'please enter customer\'s question'
+        },
+
+        errorPlacement: function(error, element)
+        {
+            if ( element.is("select#customerId") )
+            {
+                error.appendTo( element.parents('.form-group') );
+            }
+            else
+            { // This is the default behavior
+                error.insertAfter( element );
+            }
+        },
+
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
+
+    $('#form_answer_question').validate({
+        errorClass: "my-error-class",
+        validClass: "my-valid-class",
+
+        rules: {
+            answer: 'required'
+        },
+        messages: {
+            answer: 'please enter the answer'
+        },
+
+        submitHandler: function (form) {
             form.submit();
         }
     });

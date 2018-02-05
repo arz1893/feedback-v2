@@ -2,7 +2,6 @@ $(document).ready(function () {
 
     $('#table_product').DataTable({
         responsive: true,
-        scrollX: true,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: 2 },
@@ -19,7 +18,6 @@ $(document).ready(function () {
 
     $('#table_service').DataTable({
         responsive: true,
-        scrollX: true,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: 2 },
@@ -36,7 +34,6 @@ $(document).ready(function () {
 
     $('#table_question').DataTable({
         responsive:true,
-        scrollX: true,
         columnDefs: [ {
             targets: [1],
             render: function ( data, type, row ) {
@@ -54,7 +51,6 @@ $(document).ready(function () {
 
     $('#table_complaint_product').DataTable({
         responsive: true,
-        scrollX: true,
         columnDefs: [
             {
                 "width": "25%",
@@ -73,7 +69,6 @@ $(document).ready(function () {
 
     $('#table_complaint_service').DataTable({
         responsive: true,
-        scrollX: true,
         columnDefs: [
             {
                 "width": "25%",
@@ -92,7 +87,6 @@ $(document).ready(function () {
 
     $('#table_suggestion_product').DataTable({
         responsive: true,
-        scrollX: true,
         columnDefs: [
             {
                 "width": "25%",
@@ -108,7 +102,6 @@ $(document).ready(function () {
 
     $('#table_suggestion_service').DataTable({
         responsive: true,
-        scrollX: true,
         columnDefs: [
             {
                 "width": "25%",
