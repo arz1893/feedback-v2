@@ -30,7 +30,7 @@
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="{{ route('complaint_product.index') }}"><i class="fa ion-settings"></i> Complaint Product </a></li>
-        <li class="active">Product</li>
+        <li class="active">Add Complaint</li>
     </ol>
 @endsection
 

@@ -89,14 +89,14 @@ if($('#vue_product_container').length > 0) {
                 }
             },
             
-            previewAttachment: function (event) {
-                var attachment = event.target;
-                if(attachment.files && attachment.files[0]) {
+            previewImage: function (event) {
+                var uploadedImage = event.target;
+                if(uploadedImage.files && uploadedImage.files[0]) {
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         $('#preview').attr('src', e.target.result);
                     };
-                    reader.readAsDataURL(attachment.files[0]);
+                    reader.readAsDataURL(uploadedImage.files[0]);
                 }
                 this.showAttachment = true;
             },
@@ -104,6 +104,7 @@ if($('#vue_product_container').length > 0) {
             clearAttachment: function(event) {
                 $('#preview').removeAttr('src');
                 $('#attachment').val("");
+                $('#image_cover').val("");
                 this.showAttachment = false;
             },
 

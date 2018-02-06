@@ -32,6 +32,10 @@ $(document).ready(function () {
         ]
     });
 
+    $('#table_tags').DataTable({
+        responsive: true
+    });
+
     $('#table_question').DataTable({
         responsive:true,
         columnDefs: [ {
@@ -150,4 +154,6 @@ $(document).ready(function () {
     // $('input[type="file"]').prettyFile();
 
     $('#lightgallery').lightGallery();
+
+    
 });

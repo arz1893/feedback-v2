@@ -22,7 +22,7 @@
         </div>
     @endif
 
-    <table class="table table-hover table-condensed" cellspacing="0" width="100%" id="table_product">
+    <table class="table table-bordered table-hover table-responsive" cellspacing="0" width="100%" id="table_product">
         <thead>
         <tr>
             <th>No.</th>
@@ -39,9 +39,9 @@
                 <td>{{ $counter }}</td>
                 <td>
                     @if($product->img != null)
-                        <a href="{{ route('product.show', $product) }}"><img src="{{ asset($product->img) }}" width="75"></a>
+                        <a href="{{ route('product.show', $product) }}"><img src="{{ asset($product->img) }}" style="max-width: 75px; max-height: 50px;"></a>
                     @else
-                        <a href="{{ route('product.show', $product) }}"><img src="{{ asset('default-images/no-image.jpg') }}" width="50"></a>
+                        <a href="{{ route('product.show', $product) }}"><img src="{{ asset('default-images/no-image.jpg') }}" style="max-width: 75px; max-height: 50px;"></a>
                     @endif
                 </td>
                 <td><a href="{{ route('product.show', $product) }}">{{ $product->name }}</a></td>

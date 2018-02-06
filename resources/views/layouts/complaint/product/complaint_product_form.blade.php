@@ -77,7 +77,7 @@
 
 <div class="form-group">
     {{ Form::label('attachment', 'Attach a File') }}
-    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*', 'v-on:change' => 'previewAttachment($event)']) }}
+    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*', 'v-on:change' => 'previewImage($event)']) }}
 </div>
 
 <div class="form-group" v-if="showAttachment" style="width: 180px;">

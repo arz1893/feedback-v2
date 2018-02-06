@@ -203,6 +203,9 @@
     <script src="{{ asset('js/pretty-file-upload/bootstrap-prettyfile.js') }}" type="text/javascript"></script>
     <!-- Light Gallery -->
     <script src="{{ asset('js/lightgallery/lightgallery.js') }}" type="text/javascript"></script>
+    <!-- Chart JS -->
+    <script src="{{ asset('js/chartjs/Chart.min.js') }}" type="text/javascript"></script>
+
     @stack('scripts')
 
     <script src="{{ asset('js/app.js') }}"></script>

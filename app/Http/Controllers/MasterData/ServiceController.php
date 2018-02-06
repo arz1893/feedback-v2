@@ -14,7 +14,7 @@ use Webpatser\Uuid\Uuid;
 class ServiceController extends Controller
 {
     public function index() {
-        $services = Service::where('tenantId', Auth::user()->tenantId)->get();
+        $services = Service::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
         return view('master_data.service.service_index', compact('services'));
     }
 

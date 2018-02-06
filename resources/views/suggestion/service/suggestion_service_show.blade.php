@@ -12,8 +12,8 @@
 @section('content-header')
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('suggestion_service.index') }}"><i class="fa fa-question-circle"></i> Suggestion Service </a></li>
-        <li class="active">Service</li>
+        <li><a href="{{ route('suggestion_service.index') }}"><i class="ion ion-ribbon-a"></i> Suggestion Service </a></li>
+        <li class="active">Add Suggestion</li>
     </ol>
 
     <div class="media">

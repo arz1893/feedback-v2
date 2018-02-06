@@ -89,7 +89,7 @@ if($('#vue_service_container').length > 0) {
                 }
             },
 
-            previewAttachment: function (event) {
+            previewImage: function (event) {
                 var attachment = event.target;
                 if(attachment.files && attachment.files[0]) {
                     var reader = new FileReader();
@@ -99,6 +99,13 @@ if($('#vue_service_container').length > 0) {
                     reader.readAsDataURL(attachment.files[0]);
                 }
                 this.showAttachment = true;
+            },
+
+            clearAttachment: function(event) {
+                $('#preview').removeAttr('src');
+                $('#attachment').val("");
+                $('#image_cover').val("");
+                this.showAttachment = false;
             }
         }
     });

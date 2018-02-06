@@ -16,7 +16,7 @@ use Webpatser\Uuid\Uuid;
 class ComplaintProductController extends Controller
 {
     public function index() {
-        $products = Product::where('tenantId', Auth::user()->tenantId)->paginate(6);
+        $products = Product::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->paginate(6);
         return view('complaint.product.complaint_product_index', compact('products'));
     }
 

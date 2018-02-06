@@ -16,7 +16,7 @@ use Webpatser\Uuid\Uuid;
 class ComplaintServiceController extends Controller
 {
     public function index() {
-        $services = Service::where('tenantId', Auth::user()->tenantId)->paginate(6);
+        $services = Service::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->paginate(6);
         return view('complaint.service.complaint_service_index', compact('services'));
     }
 

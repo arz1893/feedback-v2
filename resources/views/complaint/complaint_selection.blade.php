@@ -14,7 +14,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <a href="{{ route('complaint_product.index') }}">
                     <div class="info-box bg-red">
-                        <span class="info-box-icon"><i class="fa fa-truck"></i></span>
+                        <span class="info-box-icon"><i class="ion ion-filing"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">Complaint Product</span>
@@ -37,7 +37,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <a href="{{ route('complaint_service.index') }}">
                     <div class="info-box bg-red">
-                        <span class="info-box-icon"><i class="fa fa-trophy"></i></span>
+                        <span class="info-box-icon"><i class="ion ion-bowtie"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">Complaint Service</span>

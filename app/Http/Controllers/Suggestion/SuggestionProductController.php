@@ -16,7 +16,7 @@ use Webpatser\Uuid\Uuid;
 class SuggestionProductController extends Controller
 {
     public function index() {
-        $products = Product::where('tenantId', Auth::user()->tenantId)->paginate(6);
+        $products = Product::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->paginate(6);
         return view('suggestion.product.suggestion_product_index', compact('products'));
     }
 

@@ -78,6 +78,10 @@ Route::post('service_category/delete-node', 'MasterData\ServiceCategoryControlle
 Route::resource('service_category', 'MasterData\ServiceCategoryController');
 /* end of service category route */
 
+/* Tag Routes */
+Route::resource('tag', 'MasterData\TagController');
+/* end of tag routes */
+
 /* Faq Product Routes */
 Route::resource('faq_product', 'Faq\FaqProductController');
 Route::post('faq_product/delete-faq-product', 'Faq\FaqProductController@deleteFaqProduct')->name('delete_faq_product');
@@ -164,3 +168,7 @@ Route::post('user/invite', 'User\UserController@sendInvitation');
 Route::get('register/accept/{token}', 'Auth\RegisterController@acceptInvitation');
 Route::post('register/via-invitation/{id}', 'Auth\RegisterController@registerViaEmail')->name('register_via_invitation');
 /* end of user management */
+
+/* Complaint Product Report Routes */
+Route::resource('complaint_product_report', 'Report\ComplaintProductReport');
+/* end of complaint product routes */

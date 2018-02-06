@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Service;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,7 @@ class HomeController extends Controller
     {
         $totalProduct = count(Product::where('tenantId', Auth::user()->tenantId)->get());
         $totalService = count(Service::where('tenantId', Auth::user()->tenantId)->get());
-        return view('home', compact('totalProduct', 'totalService'));
+        $totalTag = count(Tag::where('recOwner', Auth::user()->tenantId)->get());
+        return view('home', compact('totalProduct', 'totalService', 'totalTag'));
     }
 }

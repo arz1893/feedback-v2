@@ -14,7 +14,7 @@ use Webpatser\Uuid\Uuid;
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::where('tenantId', Auth::user()->tenantId)->get();
+        $products = Product::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
         return view('master_data.product.product_index', compact('products'));
     }
 

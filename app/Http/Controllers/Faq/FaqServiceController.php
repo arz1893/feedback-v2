@@ -14,7 +14,7 @@ use Webpatser\Uuid\Uuid;
 class FaqServiceController extends Controller
 {
     public function index() {
-        $services = Service::where('tenantId', Auth::user()->tenantId)->paginate(6);
+        $services = Service::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->paginate(6);
         return view('faq.service.faq_service_index', compact('services'));
     }
 
