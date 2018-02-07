@@ -13,7 +13,7 @@
     <div class="container">
         <div class="col-lg-offset-3">
             {{ Form::model($tag, ['method' => 'PATCH', 'action' => ['MasterData\TagController@update', $tag], 'id' => 'form_tag']) }}
-                @include('layouts.master_data.tags.tag_form', ['submitButtonText' => 'Add Tag'])
+                @include('layouts.master_data.tags.tag_form', ['submitButtonText' => 'Update Tag'])
             {{ Form::close() }}
         </div>
     </div>

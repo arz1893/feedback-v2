@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MasterData;
 use App\Http\Requests\MasterData\ProductRequest;
 use App\Product;
 use App\ProductCategory;
+use App\Tag;
 use App\Tenant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,7 +20,8 @@ class ProductController extends Controller
     }
 
     public function create() {
-        return view('master_data.product.product_add');
+        $selectTags = Tag::where('recOwner', Auth::user()->tenantId)->pluck('name', 'systemId');
+        return view('master_data.product.product_add', compact('selectTags'));
     }
 
     public function store(ProductRequest $request) {

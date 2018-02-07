@@ -15,7 +15,7 @@
     <div class="container">
         <div class="col-lg-offset-3">
             {{ Form::open(['action' => 'MasterData\TagController@store', 'id' => 'form_tag']) }}
-                @include('layouts.master_data.tags.tag_form', ['submitButtonText' => 'Update Tag'])
+                @include('layouts.master_data.tags.tag_form', ['submitButtonText' => 'Add Tag'])
             {{ Form::close() }}
         </div>
     </div>

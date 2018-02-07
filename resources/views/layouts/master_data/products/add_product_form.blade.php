@@ -9,6 +9,12 @@
             {{ Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Enter Your Product\'s Description', 'rows' => 6]) }}
         </div>
     </div>
+    <div class="col-md-7">
+        <div class="form-group">
+            {{ Form::label('tag', 'Select tag') }}
+            {{ Form::select('tag', $selectTags, null, ['class' => 'form-control selectpicker', 'multiple' => true,'data-live-search' => 'true', 'title' => 'Select Tag...']) }}
+        </div>
+    </div>
 </div>
 <div class="col-md-6">
     <div class="col-md-11">
