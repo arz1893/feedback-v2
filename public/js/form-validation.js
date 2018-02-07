@@ -602,4 +602,34 @@ $(document).ready(function () {
             form.submit();
         }
     });
+
+    $('#form_tag').validate({
+        errorClass: "my-error-class",
+        validClass: "my-valid-class",
+
+        rules: {
+            name: 'required',
+            bgColor: 'required'
+        },
+        messages: {
+            name: 'please enter tag name',
+            bgColor: 'please select tag color'
+        },
+
+        errorPlacement: function(error, element)
+        {
+            if ( element.is(":radio") )
+            {
+                error.appendTo( element.parents('.error') );
+            }
+            else
+            { // This is the default behavior
+                error.insertAfter( element );
+            }
+        },
+
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
 });

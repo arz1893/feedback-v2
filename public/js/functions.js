@@ -31,6 +31,13 @@ function deleteItem(selected) {
             value: $(selected).data('id')
         }).appendTo('#form_delete_service');
         $('#modal_delete_service').modal('show');
+    } else if($(selected).data('type') === 'tag') {
+        $('<input>').attr({
+            type: 'hidden',
+            name: 'tag_id',
+            value: $(selected).data('id')
+        }).appendTo('#form_delete_tag');
+        $('#modal_delete_tag').modal('show');
     } else if($(selected).data('type') === 'faq_product') {
         $('<input>').attr({
             type: 'hidden',
@@ -120,4 +127,56 @@ function deleteSuggestionService(selected) {
         value: $(selected).data('id')
     }).appendTo('#form_delete_suggestion_service');
     $('#modal_remove_suggestion_service').modal('show');
+}
+
+function selectColor(selected) {
+    var id = $(selected).data('id').toString();
+    $('a.btn-select-color').each(function (index, element) {
+        $(element).removeClass('is-selected-color');
+    });
+    $(selected).addClass('is-selected-color');
+    $('input[name=bgColor]').removeAttr('checked');
+
+    switch($(selected).data('id')) {
+        case 777777: {
+            $('#777777').attr('checked', 'checked');
+            break;
+        }
+        case '7E8C8D': {
+            $('#7E8C8D').attr('checked', 'checked');
+            break;
+        }
+        case 'C6382E': {
+            $('#C6382E').attr('checked', 'checked');
+            break;
+        }
+        case 'D55005': {
+            $('#D55005').attr('checked', 'checked');
+            break;
+        }
+        case 'EF9E0E': {
+            $('#EF9E0E').attr('checked', 'checked');
+            break;
+        }
+        case '25AF62': {
+            $('#25AF62').attr('checked', 'checked');
+            break;
+        }
+        case '13A388': {
+            $('#13A388').attr('checked', 'checked');
+            break;
+        }
+        case '2482C0': {
+            $('#2482C0').attr('checked', 'checked');
+            break;
+        }
+        case '8D45AB': {
+            $('#8D45AB').attr('checked', 'checked');
+            break;
+        }
+        case '2E3E4E': {
+            $('#2E3E4E').attr('checked', 'checked');
+            break;
+        }
+    }
 }

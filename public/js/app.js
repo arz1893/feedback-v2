@@ -154,6 +154,4 @@ $(document).ready(function () {
     // $('input[type="file"]').prettyFile();
 
     $('#lightgallery').lightGallery();
-
-    
 });

@@ -399,3 +399,10 @@ span.fancytree-expander{
     box-shadow:0 0 0 1px #9a00cd inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
     background-color: #bb39d7;
 }
+
+.is-selected-color {
+    border: 3px solid;
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 20px #9ecaed;
+}

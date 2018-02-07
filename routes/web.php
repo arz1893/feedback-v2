@@ -80,6 +80,7 @@ Route::resource('service_category', 'MasterData\ServiceCategoryController');
 
 /* Tag Routes */
 Route::resource('tag', 'MasterData\TagController');
+Route::post('tag/delete-tag', 'MasterData\TagController@deleteTag');
 /* end of tag routes */
 
 /* Faq Product Routes */

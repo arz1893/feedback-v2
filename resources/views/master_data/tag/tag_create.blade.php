@@ -10,10 +10,12 @@
 @endsection
 
 @section('main-content')
+    @include('layouts.errors.error_list')
+
     <div class="container">
-        <div class="col-lg-offset-2">
-            {{ Form::open() }}
-                @include('layouts.master_data.tags.tag_form')
+        <div class="col-lg-offset-3">
+            {{ Form::open(['action' => 'MasterData\TagController@store', 'id' => 'form_tag']) }}
+                @include('layouts.master_data.tags.tag_form', ['submitButtonText' => 'Update Tag'])
             {{ Form::close() }}
         </div>
     </div>
