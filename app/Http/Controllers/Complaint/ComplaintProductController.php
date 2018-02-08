@@ -36,7 +36,6 @@ class ComplaintProductController extends Controller
     }
 
     public function store(ComplaintProductRequest $request) {
-        dd($request->all());
         $file_attachment = $request->file('attachment');
 
         $id = Uuid::generate(4);

@@ -82,8 +82,9 @@ class ServiceController extends Controller
         if(count($serviceCategories) > 0) {
             $hasCategory = true;
         }
+        $serviceTags = $service->tags;
 
-        return view('master_data.service.service_show', compact('service', 'hasCategory'));
+        return view('master_data.service.service_show', compact('service', 'hasCategory', 'serviceTags'));
     }
 
     public function changePicture(Request $request, $id) {

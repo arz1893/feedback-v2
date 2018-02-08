@@ -134,7 +134,11 @@ $(document).ready(function () {
         }
     });
 
-    // $('#tree_view').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
+
+    $('.select2').select2({
+        theme: 'bootstrap'
+    });
+
     $('.select2-tag').select2({
         placeholder: 'Select Tag',
         theme: 'bootstrap'

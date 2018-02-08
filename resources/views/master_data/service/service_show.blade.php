@@ -38,6 +38,14 @@
             </div>
             <div class="media-body">
                 <h4 class="media-heading">{{ $service->name }}</h4>
+                <div class="form-group">
+                    Tags:
+                    @if(count($serviceTags) > 0)
+                        @foreach($serviceTags as $tag)
+                            <span class="label" style="background: {{ $tag->bgColor }}">{{ $tag->name }}</span>
+                        @endforeach
+                    @endif
+                </div>
                 <button class="btn btn-default"
                         type="button"
                         data-toggle="collapse"
