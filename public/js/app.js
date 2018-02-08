@@ -135,9 +135,17 @@ $(document).ready(function () {
     });
 
     // $('#tree_view').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
-    $('.selectpicker').selectpicker({
-        showSubtext: true,
-        mobile: true
+    $('.select2-tag').select2({
+        placeholder: 'Select Tag',
+        theme: 'bootstrap'
+    });
+
+    $('.select2-customer').select2({
+        theme: 'bootstrap'
+    });
+
+    $('.select2-on-edit-customer').select2({
+        theme: 'bootstrap'
     });
 
     $('#birthdate').dateDropper({});

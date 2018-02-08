@@ -29,6 +29,7 @@
             <th>Image</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Tags</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -48,6 +49,11 @@
                 </td>
                 <td><a href="{{ route('service.show', $service) }}">{{ $service->name }}</a></td>
                 <td>{{ $service->description }}</td>
+                <td>
+                    @foreach($service->tags as $tag)
+                        <span class="label" style="background: {{ $tag->bgColor }}">{{ $tag->name }}</span>
+                    @endforeach
+                </td>
                 <td>
                     <a href="{{ route('service.edit', $service) }}" class="btn btn-warning">
                         <i class="fa fa-pencil-square-o"></i>

@@ -34,4 +34,12 @@ class Tag extends Model
     public function updated_by() {
         return $this->belongsTo(User::class, 'syslastupdater', 'systemId');
     }
+
+    public function products() {
+        return $this->belongsToMany(Product::class, 'product_tag', 'tagId', 'productId')->withTimestamps();
+    }
+
+    public function services() {
+        return $this->belongsToMany(Service::class, 'service_tag', 'tagId', 'serviceId')->withTimestamps();
+    }
 }

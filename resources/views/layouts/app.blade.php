@@ -28,8 +28,9 @@
     <link rel="stylesheet" href="{{ asset('css/datatables/datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables/responsive.dataTables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables/responsive.bootstrap.css') }}">
-    <!-- Bootstrap Select -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css" rel="stylesheet">
+    <!-- Select 2 -->
+    <link href="{{ asset('css/select2/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/select2/select2-bootstrap.min.css') }}" rel="stylesheet">
     <!-- Date dropper -->
     <link href="{{ asset('css/date-dropper/datedropper.css') }}" rel="stylesheet">
     <!-- Fancy Tree -->
@@ -185,8 +186,8 @@
     <script src="{{ asset('js/jquery-validate/jquery.validate.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/functions.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/form-validation.js') }}" type="text/javascript"></script>
-    <!-- Bootstrap Select -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <!-- Select 2 -->
+    <script src="{{ asset('js/select2/select2.min.js') }}" type="text/javascript"></script>
     <!-- Date dropper -->
     <script src="{{ asset('js/date-dropper/datedropper.js') }}" type="text/javascript"></script>
     <!-- Fancy Tree -->

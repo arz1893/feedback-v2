@@ -35,4 +35,8 @@ class Service extends Model
     public function faq_services() {
         return $this->hasMany(FaqService::class);
     }
+
+    public function tags() {
+        return $this->belongsToMany(Tag::class, 'service_tag', 'serviceId', 'tagId')->withTimestamps();
+    }
 }

@@ -37,7 +37,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             {{ Form::open(['method' => 'PUT', 'action' => ['MasterData\ProductController@changePicture', $product], 'id' => 'form_change_product_picture', 'files' => true]) }}
-                <div class="form-group col-lg-6 col-lg-offset-3">
+                <div class="form-group col-lg-6 col-lg-offset-4">
                     <input type="file" id="product_picture" name="product_picture" accept="image/*" onchange="$('#form_change_product_picture').submit()">
                     <p class="help-block">Change your product picture</p>
                 </div>

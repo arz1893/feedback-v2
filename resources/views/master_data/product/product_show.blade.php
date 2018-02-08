@@ -37,6 +37,14 @@
             </div>
             <div class="media-body">
                 <h4 class="media-heading">{{ $product->name }}</h4>
+                <div class="form-group">
+                    Tags :
+                    @if(count($productTags) > 0)
+                        @foreach($productTags as $tag)
+                            <span class="label" style="background: {{ $tag->bgColor }}">{{ $tag->name }}</span>
+                        @endforeach
+                    @endif
+                </div>
                 <button class="btn btn-default"
                         type="button"
                         data-toggle="collapse"

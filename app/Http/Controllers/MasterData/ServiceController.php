@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MasterData;
 use App\Http\Requests\MasterData\ServiceRequest;
 use App\Service;
 use App\ServiceCategory;
+use App\Tag;
 use App\Tenant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,7 +20,8 @@ class ServiceController extends Controller
     }
 
     public function create() {
-        return view('master_data.service.service_add');
+        $selectTags = Tag::where('recOwner', Auth::user()->tenantId)->orderBy('name')->pluck('name', 'systemId');
+        return view('master_data.service.service_add', compact('selectTags'));
     }
 
     public function store(ServiceRequest $request) {
@@ -30,13 +32,15 @@ class ServiceController extends Controller
             $tenant = Tenant::findOrFail(Auth::user()->tenantId);
             $filename = $id . '_' . $image->getClientOriginalName();
 
-            Service::create([
+            $service = Service::create([
                 'systemId' => $id,
                 'name' => $request->name,
                 'description' => $request->description,
                 'img' => '/uploaded_images/' . $tenant->email . '/' . $filename,
                 'tenantId' => Auth::user()->tenantId
             ]);
+
+            $service->tags()->sync($request->input('tags'));
 
             if(!file_exists(public_path('uploaded_images/' . $tenant->email))) {
                 mkdir(public_path('uploaded_images/' . $tenant->email), 0777, true);
@@ -47,23 +51,27 @@ class ServiceController extends Controller
 
             return redirect('service')->with('status', 'A new service has been added');
         } else {
-            Service::create([
+            $service = Service::create([
                 'systemId' => Uuid::generate(4),
                 'name' => $request->name,
                 'description' => $request->description,
                 'tenantId' => Auth::user()->tenantId
             ]);
 
+            $service->tags()->sync($request->input('tags'));
+
             return redirect('service')->with('status', 'A new service has been added');
         }
     }
 
     public function edit(Service $service) {
-        return view('master_data.service.service_edit', compact('service'));
+        $selectTags = Tag::where('recOwner', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
+        return view('master_data.service.service_edit', compact('service', 'selectTags'));
     }
 
     public function update(ServiceRequest $request, Service $service) {
         $service->update($request->all());
+        $service->tags()->sync($request->input('tags'));
         return redirect('service')->with('status', 'Service has been updated');
     }
 

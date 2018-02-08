@@ -15,6 +15,13 @@
 
     <div class="col-md-6 col-lg-offset-3">
         <div class="form-group">
+            {{ Form::label('tags', 'Select tag') }}
+            {{ Form::select('tags[]', $selectTags, null, ['class' => 'form-control select2-tag', 'multiple' => true, 'data-placeholder' => 'Select Tag...']) }}
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-offset-3">
+        <div class="form-group">
             <div class="form-group">
                 <label for="image_cover">Choose image</label>
                 <input type="file" accept="image/*" class="form-control-file" name="image_cover" id="image_cover" aria-describedby="fileHelp" v-on:change="previewImage($event)">

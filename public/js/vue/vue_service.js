@@ -69,12 +69,12 @@ if($('#vue_service_container').length > 0) {
 
             },
 
-            onChangeCustomer: function (event) {
-                if(event.currentTarget.value !== '') {
-                    this.is_anonymous = false;
-                } else if (event.currentTarget.value === '') {
+            onChangeCustomer: function (value) {
+                if(value.length === 0) {
                     this.is_anonymous = true;
                     $('#is_need_call').prop('checked', false);
+                } else {
+                    this.is_anonymous = false;
                 }
             },
 
@@ -108,6 +108,10 @@ if($('#vue_service_container').length > 0) {
                 this.showAttachment = false;
             }
         }
+    });
+
+    $('#customerId').on("change", function () {
+        Root.onChangeCustomer($(this).val());
     });
 }
 

@@ -31,7 +31,7 @@ class ProductController extends Controller
         if(!is_null($image)) {
             $filename = $id . '_' . $image->getClientOriginalName();
 
-            Product::create([
+            $product = Product::create([
                 'systemId' => $id,
                 'name' => $request->name,
                 'description' => $request->description,
@@ -41,6 +41,8 @@ class ProductController extends Controller
                 'tenantId' => $request->tenantId
             ]);
 
+            $product->tags()->sync($request->input('tags'));
+
             if(!file_exists(public_path('uploaded_images/' . $tenant->email))) {
                 mkdir(public_path('uploaded_images/' . $tenant->email), 0777, true);
                 $image->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
@@ -48,7 +50,7 @@ class ProductController extends Controller
                 $image->move(public_path('uploaded_images/' . $tenant->email . '/'), $filename);
             }
         } else {
-            Product::create([
+            $product = Product::create([
                 'systemId' => $id,
                 'name' => $request->name,
                 'description' => $request->description,
@@ -56,6 +58,9 @@ class ProductController extends Controller
                 'price' => $request->price,
                 'tenantId' => $request->tenantId
             ]);
+
+            $product->tags()->sync($request->input('tags'));
+
         }
         return redirect('product')->with('status', 'Product has been added');
     }
@@ -66,16 +71,20 @@ class ProductController extends Controller
         if(count($productCategories) > 0) {
             $hasCategory = true;
         }
+        $productTags = $product->tags;
 
-        return view('master_data.product.product_show', compact('product', 'hasCategory'));
+        return view('master_data.product.product_show', compact('product', 'hasCategory', 'productTags'));
     }
 
     public function edit(Product $product) {
-        return view('master_data.product.product_edit', compact('product'));
+        $selectTags = Tag::where('recOwner', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
+        $selectedTags = $product->tags->pluck('name', 'systemId');
+        return view('master_data.product.product_edit', compact('product', 'selectTags', 'selectedTags'));
     }
 
     public function update(ProductRequest $request, Product $product) {
         $product->update($request->all());
+        $product->tags()->sync($request->input('tags'));
         return redirect('product')->with('status', 'Product has been updated');
     }
 
@@ -108,7 +117,9 @@ class ProductController extends Controller
 
     public function deleteProduct(Request $request) {
         $product = Product::findOrFail($request->product_id);
-        unlink(public_path($product->img));
+        if(file_exists(public_path($product->img))) {
+            unlink(public_path($product->img));
+        }
         $product->delete();
         return redirect('product')->with('status', 'Product has been deleted');
     }

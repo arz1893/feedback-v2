@@ -43,4 +43,8 @@ class Product extends Model
     public function faq_products() {
         return $this->hasMany(FaqProduct::class);
     }
+
+    public function tags() {
+        return $this->belongsToMany(Tag::class, 'product_tag', 'productId', 'tagId')->withTimestamps();
+    }
 }

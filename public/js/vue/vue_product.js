@@ -69,25 +69,27 @@ if($('#vue_product_container').length > 0) {
 
             },
 
-            onChangeCustomer: function (event) {
-                if(event.currentTarget.value !== '') {
-                    this.is_anonymous = false;
-                } else if (event.currentTarget.value === '') {
-                    this.is_anonymous = true;
-                    $('#is_need_call').prop('checked', false);
-                }
-            },
-
-            onChangeEditCustomer: function (event) {
-                if(event.currentTarget.value !== '') {
-                    this.is_anonymous = false;
-                    this.is_customer = true;
-                } else if (event.currentTarget.value === '') {
+            onChangeCustomer: function (value) {
+                if(value.length === 0) {
                     this.is_customer = false;
                     this.is_anonymous = true;
                     $('#is_need_call').prop('checked', false);
+                } else {
+                    this.is_anonymous = false;
+                    this.is_customer = true;
                 }
             },
+
+            // onChangeEditCustomer: function (event) {
+            //     if(event.currentTarget.value !== '') {
+            //         this.is_anonymous = false;
+            //         this.is_customer = true;
+            //     } else if (event.currentTarget.value === '') {
+            //         this.is_customer = false;
+            //         this.is_anonymous = true;
+            //         $('#is_need_call').prop('checked', false);
+            //     }
+            // },
             
             previewImage: function (event) {
                 var uploadedImage = event.target;
@@ -112,6 +114,10 @@ if($('#vue_product_container').length > 0) {
                 $('#form_change_attachment').submit();
             }
         }
+    });
+
+    $('#customerId').on("change", function () {
+        Root.onChangeCustomer($(this).val());
     });
 }
 

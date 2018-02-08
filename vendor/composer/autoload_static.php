@@ -12,8 +12,8 @@ class ComposerStaticInit36a9065fed3ad447489d51c2f7b9f87f
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
-        'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
@@ -74,6 +74,7 @@ class ComposerStaticInit36a9065fed3ad447489d51c2f7b9f87f
         array (
             'League\\Flysystem\\' => 17,
             'Laravel\\Tinker\\' => 15,
+            'Laracasts\\Generators\\' => 21,
         ),
         'I' => 
         array (
@@ -111,8 +112,8 @@ class ComposerStaticInit36a9065fed3ad447489d51c2f7b9f87f
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -221,6 +222,10 @@ class ComposerStaticInit36a9065fed3ad447489d51c2f7b9f87f
         'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
+        ),
+        'Laracasts\\Generators\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laracasts/generators/src',
         ),
         'Illuminate\\' => 
         array (
@@ -355,6 +360,7 @@ class ComposerStaticInit36a9065fed3ad447489d51c2f7b9f87f
         'App\\Http\\Controllers\\MasterData\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/MasterData/ProductController.php',
         'App\\Http\\Controllers\\MasterData\\ServiceCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/MasterData/ServiceCategoryController.php',
         'App\\Http\\Controllers\\MasterData\\ServiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/MasterData/ServiceController.php',
+        'App\\Http\\Controllers\\MasterData\\TagController' => __DIR__ . '/../..' . '/app/Http/Controllers/MasterData/TagController.php',
         'App\\Http\\Controllers\\Question\\QuestionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Question/QuestionController.php',
         'App\\Http\\Controllers\\Question\\QuestionListController' => __DIR__ . '/../..' . '/app/Http/Controllers/Question/QuestionListController.php',
         'App\\Http\\Controllers\\Report\\ComplaintProductReport' => __DIR__ . '/../..' . '/app/Http/Controllers/Report/ComplaintProductReport.php',
@@ -376,6 +382,7 @@ class ComposerStaticInit36a9065fed3ad447489d51c2f7b9f87f
         'App\\Http\\Requests\\Faq\\FaqServiceRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Faq/FaqServiceRequest.php',
         'App\\Http\\Requests\\MasterData\\ProductRequest' => __DIR__ . '/../..' . '/app/Http/Requests/MasterData/ProductRequest.php',
         'App\\Http\\Requests\\MasterData\\ServiceRequest' => __DIR__ . '/../..' . '/app/Http/Requests/MasterData/ServiceRequest.php',
+        'App\\Http\\Requests\\MasterData\\TagRequest' => __DIR__ . '/../..' . '/app/Http/Requests/MasterData/TagRequest.php',
         'App\\Http\\Requests\\Question\\QuestionRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Question/QuestionRequest.php',
         'App\\Http\\Requests\\Suggestion\\SuggestionProductRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Suggestion/SuggestionProductRequest.php',
         'App\\Http\\Requests\\Suggestion\\SuggestionServiceRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Suggestion/SuggestionServiceRequest.php',
@@ -1815,6 +1822,14 @@ class ComposerStaticInit36a9065fed3ad447489d51c2f7b9f87f
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
+        'Laracasts\\Generators\\Commands\\MigrationMakeCommand' => __DIR__ . '/..' . '/laracasts/generators/src/Commands/MigrationMakeCommand.php',
+        'Laracasts\\Generators\\Commands\\PivotMigrationMakeCommand' => __DIR__ . '/..' . '/laracasts/generators/src/Commands/PivotMigrationMakeCommand.php',
+        'Laracasts\\Generators\\Commands\\SeedMakeCommand' => __DIR__ . '/..' . '/laracasts/generators/src/Commands/SeedMakeCommand.php',
+        'Laracasts\\Generators\\GeneratorException' => __DIR__ . '/..' . '/laracasts/generators/src/GeneratorException.php',
+        'Laracasts\\Generators\\GeneratorsServiceProvider' => __DIR__ . '/..' . '/laracasts/generators/src/GeneratorsServiceProvider.php',
+        'Laracasts\\Generators\\Migrations\\NameParser' => __DIR__ . '/..' . '/laracasts/generators/src/Migrations/NameParser.php',
+        'Laracasts\\Generators\\Migrations\\SchemaParser' => __DIR__ . '/..' . '/laracasts/generators/src/Migrations/SchemaParser.php',
+        'Laracasts\\Generators\\Migrations\\SyntaxBuilder' => __DIR__ . '/..' . '/laracasts/generators/src/Migrations/SyntaxBuilder.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',

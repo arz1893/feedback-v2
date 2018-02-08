@@ -9,6 +9,10 @@
             {{ Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Enter your product description']) }}
         </div>
         <div class="form-group">
+            {{ Form::label('tags', 'Select tag') }}
+            {{ Form::select('tags[]', $selectTags, null, ['class' => 'form-control select2-tag', 'multiple' => true, 'data-placeholder' => 'Select Tag...']) }}
+        </div>
+        <div class="form-group">
             {{ Form::label('metric', 'Product\'s metric') }}
             {{ Form::select('metric', [
                     'Pcs' => 'Pcs',
