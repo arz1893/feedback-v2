@@ -44,6 +44,14 @@ class Product extends Model
         return $this->hasMany(FaqProduct::class);
     }
 
+    public function complaint_products() {
+        return $this->hasMany(ComplaintProduct::class);
+    }
+
+    public function suggestion_products() {
+        return $this->hasMany(SuggestionProduct::class);
+    }
+
     public function tags() {
         return $this->belongsToMany(Tag::class, 'product_tag', 'productId', 'tagId')->withTimestamps();
     }
