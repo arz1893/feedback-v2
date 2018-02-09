@@ -13,5 +13,5 @@
 @endsection
 
 @section('main-content')
-    <canvas class="col-lg-12" id="complaint_product_chart"></canvas>
+    <canvas id="complaint_product_chart" height="30vh" width="80vw"></canvas>
 @endsection

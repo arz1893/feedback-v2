@@ -23,6 +23,12 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading">{{ $product->name }}</h4>
+            @if(count($product->tags) > 0)
+                @foreach($product->tags as $tag)
+                    <span class="label" style="background: {{ $tag->bgColor }}">{{ $tag->name }}</span>
+                @endforeach
+            @endif
+            <br>
             <small class="text-red">*Please choose category that you want to complaint</small>
         </div>
     </div>
@@ -77,7 +83,7 @@
                 @foreach($productCategories as $productCategory)
                     @if(count($productCategory->getImmediateDescendants()) > 0)
                         <a href="{{ route('show_complaint_product', [$product->systemId, $productCategory->id]) }}" class="btn btn-lg btn-info btn3d">
-                            <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $productCategory->name }}
+                            <i class="ion ion-navigate" aria-hidden="true"></i> {{ $productCategory->name }}
                             <span class="badge bg-teal">{{ count($productCategory->getImmediateDescendants()) }}</span>
                         </a>
                     @elseif(count($productCategory->getImmediateDescendants()) == 0)
@@ -86,7 +92,7 @@
                                 data-product_id="{{ $product->systemId }}"
                                 data-title="{{ $productCategory->name }}"
                                 v-on:click="append('{{ $productCategory->name }}', '{{ $product->systemId }}', '{{ $productCategory->id }}')">
-                            <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $productCategory->name }}
+                            <i class="ion ion-navigate" aria-hidden="true"></i> {{ $productCategory->name }}
                         </button>
                     @endif
                 @endforeach

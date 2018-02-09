@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Http\Requests\MasterData\ProductRequest;
+use App\Http\Resources\ProductCollection;
 use App\Product;
 use App\ProductCategory;
 use App\Tag;
@@ -11,11 +12,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Webpatser\Uuid\Uuid;
+use App\Http\Resources\Product as ProductResource;
 
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
+        $products = Product::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get();
         return view('master_data.product.product_index', compact('products'));
     }
 
@@ -122,5 +124,10 @@ class ProductController extends Controller
         }
         $product->delete();
         return redirect('product')->with('status', 'Product has been deleted');
+    }
+
+    public function getProductList($tenant_id) {
+        $products = Product::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->get();
+        return new ProductCollection($products);
     }
 }

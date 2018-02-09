@@ -1,17 +1,13 @@
 var ctx = document.getElementById('complaint_product_chart');
 var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: ["January", "February", "March", "April", "May", "June", "July", "Augustus", "September", "October", "November", "December"],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)'
-            ],
+            label: 'Complaint per Month',
+            data: [12, 19, 3, 5, 2, 3, 4, 6, 8, 11, 12, 13],
+            backgroundColor: 'orange',
+            borderColor: 'rgba(255,99,132,1)',
             borderWidth: 1
         }]
     },
@@ -26,8 +22,7 @@ var myChart = new Chart(ctx, {
         elements: {
             line: {
                 tension: 0 // disables bezier curves
-            },
-            fill: false
+            }
         }
     }
 });

@@ -31,14 +31,10 @@
     <!-- Select 2 -->
     <link href="{{ asset('css/select2/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2/select2-bootstrap.min.css') }}" rel="stylesheet">
-    <!-- Date dropper -->
-    <link href="{{ asset('css/date-dropper/datedropper.css') }}" rel="stylesheet">
     <!-- Fancy Tree -->
     <link href="{{ asset('css/fancytree/skin-material/ui.fancytree.css') }}" rel="stylesheet" class="skinswitcher">
     <!-- Context Menu Dependency -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.2.3/jquery.contextMenu.min.css" />
-    <!-- Icheck -->
-    <link rel="stylesheet" href="{{ asset('css/icheck/all.css') }}">
     <!-- Light Gallery -->
     <link rel="stylesheet" href="{{ asset('css/lightgallery/css/lightgallery.css') }}">
 
@@ -188,8 +184,6 @@
     <script src="{{ asset('js/form-validation.js') }}" type="text/javascript"></script>
     <!-- Select 2 -->
     <script src="{{ asset('js/select2/select2.min.js') }}" type="text/javascript"></script>
-    <!-- Date dropper -->
-    <script src="{{ asset('js/date-dropper/datedropper.js') }}" type="text/javascript"></script>
     <!-- Fancy Tree -->
     <script src="{{ asset('js/fancytree/jquery.fancytree-all-deps.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/fancytree/jquery.fancytree.glyph.js') }}" type="text/javascript"></script>
@@ -198,10 +192,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.2.3/jquery.contextMenu.min.js"></script>
     <!-- Fancy Tree Context Menu -->
     <script src="{{ asset('js/fancytree/jquery.ui-contextmenu.js') }}" type="text/javascript"></script>
-    <!-- Icheck -->
-    <script src="{{ asset('js/icheck/icheck.min.js') }}" type="text/javascript"></script>
-    <!-- Pretty file upload -->
-    <script src="{{ asset('js/pretty-file-upload/bootstrap-prettyfile.js') }}" type="text/javascript"></script>
     <!-- Light Gallery -->
     <script src="{{ asset('js/lightgallery/lightgallery.js') }}" type="text/javascript"></script>
     <!-- Chart JS -->

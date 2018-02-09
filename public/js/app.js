@@ -152,7 +152,6 @@ $(document).ready(function () {
         theme: 'bootstrap'
     });
 
-    $('#birthdate').dateDropper({});
     $('#modal_add_customer').modal({
         show: false,
         backdrop: 'static'

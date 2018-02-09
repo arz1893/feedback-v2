@@ -163,3 +163,30 @@ if($('#complaint_product_list_show').length > 0) {
         }
     });
 }
+
+if($('#complaint_product_index').length > 0) {
+    var complaintProductIndex = new Vue({
+        el: '#complaint_product_index',
+        created() {
+            // this.getUser($('#tenantId').val());
+        },
+        data: {
+            tenantId: $('#tenantId').val(),
+            products: Array
+        },
+        methods: {
+            getUser: function (id) {
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + this.tenantId + '/get-product-list';
+
+                axios.get(url).then(response => {
+                    this.products = response.data;
+                    console.log(response.data);
+                }).catch(error => {
+                    console.log(Object.assign({}, error));
+                });
+
+                console.log(this.products);
+            }
+        }
+    });
+}
