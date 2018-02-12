@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Http\Requests\MasterData\ServiceRequest;
+use App\Http\Resources\ServiceCollection;
 use App\Service;
 use App\ServiceCategory;
 use App\Tag;
@@ -121,5 +122,10 @@ class ServiceController extends Controller
         }
         $service->delete();
         return redirect('service')->with('status', 'Service has been deleted');
+    }
+
+    public function getServiceList($tenant_id) {
+        $services = Service::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->get();
+        return new ServiceCollection($services);
     }
 }

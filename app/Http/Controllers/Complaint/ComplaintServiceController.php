@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Complaint;
 use App\ComplaintService;
 use App\Customer;
 use App\Http\Requests\Complaint\ComplaintServiceRequest;
+use App\Http\Resources\ServiceCollection;
 use App\Service;
 use App\ServiceCategory;
 use App\Tag;

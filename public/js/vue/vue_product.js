@@ -165,28 +165,67 @@ if($('#complaint_product_list_show').length > 0) {
 }
 
 if($('#complaint_product_index').length > 0) {
+
     var complaintProductIndex = new Vue({
         el: '#complaint_product_index',
         created() {
-            // this.getUser($('#tenantId').val());
+            let tenantId = $('#tenantId').val();
+            this.getProducts(tenantId);
+            this.getTags(tenantId);
         },
         data: {
             tenantId: $('#tenantId').val(),
-            products: Array
+            tags: [],
+            selectOptions:[],
+            products: [],
+            links: [],
+            meta: [],
+            searchString: '',
+            searchTags: []
+        },
+        computed: {
+            filteredProducts: function () {
+                return this.products.filter((product) => {
+                    return product.name.toLowerCase().match(this.searchString.toLowerCase());
+                });
+            }
         },
         methods: {
-            getUser: function (id) {
+            getProducts: function (id) {
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + this.tenantId + '/get-product-list';
 
                 axios.get(url).then(response => {
-                    this.products = response.data;
-                    console.log(response.data);
+                    this.products = response.data.data;
+                    this.links = response.data.links;
+                    this.meta = response.data.meta;
+                    console.log(this.links, this.meta);
+
                 }).catch(error => {
                     console.log(Object.assign({}, error));
                 });
 
-                console.log(this.products);
+            },
+            getTags: function (id) {
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/tag/' + this.tenantId + '/get-tag-list';
+
+                axios.get(url).then(response => {
+                    let rawOptions = [];
+                    $.each(response.data.data, function (index, value) {
+                        rawOptions.push({
+                            id: value.systemId,
+                            text: value.name
+                        });
+                    });
+                    this.selectOptions = rawOptions;
+                }).catch(error => {
+                    console.log(Object.assign({}, error));
+                });
+            },
+            filterByTag: function (value) {
+                this.searchTags = value;
+                console.log(this.searchTags);
             }
         }
     });
+
 }

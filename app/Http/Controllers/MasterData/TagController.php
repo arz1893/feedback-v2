@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Http\Requests\MasterData\TagRequest;
+use App\Http\Resources\TagCollection;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -45,5 +46,10 @@ class TagController extends Controller
         $tag = Tag::findOrFail($request->tag_id);
         $tag->delete();
         return redirect('tag')->with(['status' => 'Tag has been deleted']);
+    }
+
+    public function getTagList($tenant_id) {
+        $tags = Tag::where('recOwner', $tenant_id)->orderBy('name', 'asc')->get();
+        return new TagCollection($tags);
     }
 }

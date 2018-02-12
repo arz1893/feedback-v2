@@ -156,3 +156,35 @@ if($('#complaint_service_list_show').length > 0) {
         }
     });
 }
+
+if($('#complaint_service_index').length > 0) {
+    var complaintServiceIndex = new Vue({
+        el: '#complaint_service_index',
+        created() {
+            let tenantId = $('#tenantId').val();
+            this.getServices(tenantId);
+        },
+        data: {
+            tenantId : $('#tenantId').val(),
+            tags: [],
+            services: [],
+            searchString: ''
+        },
+        computed: {
+            filteredServices: function () {
+                return this.services.filter((service) => {
+                    return service.name.toLowerCase().match(this.searchString.toLowerCase());
+                });
+            }  
+        },
+        methods: {
+            getServices: function () {
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + this.tenantId + '/get-service-list';
+
+                axios.get(url).then(response => {
+                    this.services = response.data.data;
+                });
+            }
+        }
+    });
+}
