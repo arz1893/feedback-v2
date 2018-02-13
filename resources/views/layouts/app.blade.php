@@ -31,6 +31,8 @@
     <!-- Select 2 -->
     <link href="{{ asset('css/select2/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2/select2-bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Selectize -->
+    <link href="{{ asset('css/selectize/selectize.css') }}" rel="stylesheet">
     <!-- Fancy Tree -->
     <link href="{{ asset('css/fancytree/skin-material/ui.fancytree.css') }}" rel="stylesheet" class="skinswitcher">
     <!-- Context Menu Dependency -->
@@ -169,6 +171,8 @@
     <script src="{{ asset('js/admin-lte/adminlte.min.js') }}" type="text/javascript"></script>
     <!-- Vue JS -->
     <script src="{{ asset('js/vue/vue.js') }}" type="text/javascript"></script>
+    <!-- Lodash JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js" type="text/javascript"></script>
     <!-- Vee Validate -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vee-validate/2.0.3/vee-validate.js" type="text/javascript"></script>
     <!-- Axios JS -->
@@ -184,6 +188,8 @@
     <script src="{{ asset('js/form-validation.js') }}" type="text/javascript"></script>
     <!-- Select 2 -->
     <script src="{{ asset('js/select2/select2.min.js') }}" type="text/javascript"></script>
+    <!-- Selectize -->
+    <script src="{{ asset('js/selectize/selectize.min.js') }}" type="text/javascript"></script>
     <!-- Fancy Tree -->
     <script src="{{ asset('js/fancytree/jquery.fancytree-all-deps.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/fancytree/jquery.fancytree.glyph.js') }}" type="text/javascript"></script>

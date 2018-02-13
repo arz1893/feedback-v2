@@ -19,5 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('product/{tenant_id}/get-product-list', 'MasterData\ProductController@getProductList');
+Route::post('product/{tenant_id}/filter-product-list', 'MasterData\ProductController@filterProductList');
+
 Route::get('service/{tenant_id}/get-service-list', 'MasterData\ServiceController@getServiceList');
 Route::get('tag/{tenant_id}/get-tag-list', 'MasterData\TagController@getTagList');

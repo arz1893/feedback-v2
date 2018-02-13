@@ -34,15 +34,11 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
-                        <div class="input-group">
-                            <script type="text/x-template" id="select2-template">
-                                <select>
-                                    <slot></slot>
-                                </select>
-                            </script>
-                            {{ Form::select('tags[]', $selectTags, null, ['id' => 'select_tags', 'class' => 'select2-tag', 'multiple' => true,'style' => 'width: 100%;', 'v-bind:value' => 'searchTags']) }}
-                        </div><!-- /input-group -->
+                        {{ Form::select('tags[]', $selectTags, null, ['id' => 'select_tags', 'class' => 'selectize', 'style' => '', 'multiple' => true]) }}
                     </div>
+                    <span>
+                        @{{ searchStatus }}
+                    </span>
                 </div>
             </div>
         </div>
@@ -59,9 +55,9 @@
                             </span>
                         </a>
                     </div>
-                    {{--<ul v-for="tag in product.productTags">--}}
-                        {{--<li>@{{ tag.name }}</li>--}}
-                    {{--</ul>--}}
+                    <div v-for="tag in product.productTags">
+                        <div v-bind:item="searchTags" v-bind:key="tag.systemId" v-bind:title="tag.name">@{{ tag.name }}</div>
+                    </div>
                 </div>
             </div>
 

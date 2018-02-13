@@ -152,6 +152,14 @@ $(document).ready(function () {
         theme: 'bootstrap'
     });
 
+    $('#select_tags').selectize({
+        plugins: ['remove_button'],
+        delimiter: ',',
+        persist: false,
+        placeholder: 'Select Tag',
+        width: '100%'
+    });
+
     $('#modal_add_customer').modal({
         show: false,
         backdrop: 'static'

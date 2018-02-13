@@ -171,17 +171,25 @@ if($('#complaint_product_index').length > 0) {
         created() {
             let tenantId = $('#tenantId').val();
             this.getProducts(tenantId);
-            this.getTags(tenantId);
+            // this.getTags(tenantId);
         },
         data: {
             tenantId: $('#tenantId').val(),
             tags: [],
-            selectOptions:[],
             products: [],
             links: [],
             meta: [],
             searchString: '',
-            searchTags: []
+            searchTags: [],
+            searchStatus: '',
+            productPanel: ''
+        },
+        watch: {
+            searchTags: function () {
+                if(this.searchTags.length > 0) {
+                    this.filterByTag();
+                }
+            }
         },
         computed: {
             filteredProducts: function () {
@@ -196,10 +204,6 @@ if($('#complaint_product_index').length > 0) {
 
                 axios.get(url).then(response => {
                     this.products = response.data.data;
-                    this.links = response.data.links;
-                    this.meta = response.data.meta;
-                    console.log(this.links, this.meta);
-
                 }).catch(error => {
                     console.log(Object.assign({}, error));
                 });
@@ -209,23 +213,30 @@ if($('#complaint_product_index').length > 0) {
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/tag/' + this.tenantId + '/get-tag-list';
 
                 axios.get(url).then(response => {
-                    let rawOptions = [];
-                    $.each(response.data.data, function (index, value) {
-                        rawOptions.push({
-                            id: value.systemId,
-                            text: value.name
-                        });
-                    });
-                    this.selectOptions = rawOptions;
+                    this.tags = response.data.data;
                 }).catch(error => {
                     console.log(Object.assign({}, error));
                 });
             },
-            filterByTag: function (value) {
-                this.searchTags = value;
-                console.log(this.searchTags);
-            }
+            filterByTag: _.debounce(function () {
+                const vm = this;
+                this.searchStatus = "Searching...";
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + this.tenantId + '/filter-product-list';
+                axios.post(url, {
+                    tags: this.searchTags
+                })
+                .then(function (response) {
+                    this.products = response.data.data;
+                    this.$forceUpdate();
+                    console.log(this.products);
+                });
+                vm.$forceUpdate();
+                this.searchStatus = '';
+            }, 500)
         }
     });
-
+    
+    $('#select_tags').on('change', function () {
+        complaintProductIndex.searchTags  = $(this).val();
+    });
 }

@@ -406,3 +406,8 @@ span.fancytree-expander{
     border-color: #9ecaed;
     box-shadow: 0 0 20px #9ecaed;
 }
+
+.selectize .select2-container .select2-search__field:not([placeholder='']) {
+    width: 100% !important;
+    margin-right: 100000px;
+}

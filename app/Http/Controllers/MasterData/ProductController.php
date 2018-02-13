@@ -130,4 +130,12 @@ class ProductController extends Controller
         $products = Product::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->get();
         return new ProductCollection($products);
     }
+
+    public function filterProductList(Request $request, $tenant_id) {
+        $tagIds = $request->tags;
+        $filteredProducts = Product::where('tenantId', $tenant_id)->whereHas('tags', function ($q) use ($tagIds){
+            $q->where('systemId', $tagIds);
+        })->orderBy('created_at', 'desc')->get();
+        return response()->json(new ProductCollection($filteredProducts), 200);
+    }
 }
