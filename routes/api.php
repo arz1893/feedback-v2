@@ -22,4 +22,6 @@ Route::get('product/{tenant_id}/get-product-list', 'MasterData\ProductController
 Route::post('product/{tenant_id}/filter-product-list', 'MasterData\ProductController@filterProductList');
 
 Route::get('service/{tenant_id}/get-service-list', 'MasterData\ServiceController@getServiceList');
+Route::post('service/{tenant_id}/filter-service-list', 'MasterData\ServiceController@filterServiceList');
+
 Route::get('tag/{tenant_id}/get-tag-list', 'MasterData\TagController@getTagList');

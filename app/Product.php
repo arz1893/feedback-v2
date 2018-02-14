@@ -55,4 +55,8 @@ class Product extends Model
     public function tags() {
         return $this->belongsToMany(Tag::class, 'product_tag', 'productId', 'tagId')->withTimestamps();
     }
+
+    public function filterByTags($tagIds) {
+        return $this->belongsToMany(Tag::class, 'product_tag', 'productId', 'tagId')->wherePivotIn('tagId', $tagIds);
+    }
 }

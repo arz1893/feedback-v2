@@ -7,6 +7,7 @@ use App\Http\Requests\Suggestion\SuggestionServiceRequest;
 use App\Service;
 use App\ServiceCategory;
 use App\SuggestionService;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,9 @@ use Webpatser\Uuid\Uuid;
 class SuggestionServiceController extends Controller
 {
     public function index() {
+        $selectTags = Tag::where('recOwner', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
         $services = Service::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->paginate(6);
-        return view('suggestion.service.suggestion_service_index', compact('services'));
+        return view('suggestion.service.suggestion_service_index', compact('services', 'selectTags'));
     }
 
     public function showService($id, $currentNodeId) {

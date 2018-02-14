@@ -1,76 +1,77 @@
 @extends('home')
 
+@push('scripts')
+    <script src="{{ asset('js/vue/vue_service.js') }}" type="text/javascript"></script>
+@endpush
+
 @section('content-header')
 
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ url('/suggestion') }}"><i class="ion ion-ribbon-a"></i> Suggestion selection</a></li>
-        <li class="active">Suggestion Service</li>
+        <li><a href="{{ url('/suggestion') }}"><i class="ion ion-settings"></i> Suggestion selection</a></li>
+        <li class="active">Suggestion Product</li>
     </ol>
-
-    <h2 class="text-center text-orange">Suggestion</h2>
-
-    <div class="centered-pills" style="margin-top: 5px;">
-        <ul class="nav nav-pills">
-            <li><a href="{{ route('suggestion_product.index') }}">Product</a></li>
-            <li role="presentation" class="active"><a data-toggle="pill" href="#service_panel">Service</a></li>
-        </ul>
-    </div>
+    <span class="text-orange" style="font-size: 2em; position: relative; top: 5px;">Suggestion</span>
+    <a href="{{ route('suggestion_product.index') }}" class="btn btn-sm btn-link">Product</a>
+    <a href="{{ route('suggestion_service.index') }}" class="btn btn-sm btn-flat bg-aqua">Service</a>
 @endsection
 
 @section('main-content')
-    <div class="row">
-        <div class="col-lg-6 col-lg-offset-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-info btn-flat" type="button">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </span>
-            </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-    </div>
-    <br>
-
-    <div class="col-lg-11">
-        <div class="tab-content">
-            <div id="service_panel" class="tab-pane fade in active">
-                <div class="row visible-lg visible-md visible-sm">
-                    @foreach($services as $service)
-                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">
-                            <div class="imagebox">
-                                <a href="{{ route('show_suggestion_service', [$service->systemId, 0]) }}">
-                                    @if($service->img != null)
-                                        <img src="{{ asset($service->img) }}"  class="category-banner img-responsive">
-                                    @else
-                                        <img src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
-                                    @endif
-                                    <span class="imagebox-desc">{{ $service->name }}</span>
-                                </a>
-                            </div>
+    <div id="service_index">
+        {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for..." v-model="searchString">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="ion ion-search"></i>
+                                </button>
+                            </span>
                         </div>
-                    @endforeach
-                </div>
-
-                <div class="row visible-xs">
-                    <div class="list-group">
-                        @foreach($services as $service)
-                            <a href="{{ route('show_suggestion_service', [$service->systemId, 0]) }}" class="list-group-item">
-                                @if($service->img != null)
-                                    <img src="{{ asset($service->img) }}" style="max-width: 75px; max-height: 50px;">
-                                @else
-                                    <img src="{{ asset('default-images/no-image.jpg') }}" style="max-width: 75px; max-height: 50px;">
-                                @endif
-                                {{ $service->name }}
-                            </a>
-                        @endforeach
                     </div>
                 </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        {{ Form::select('tags[]', $selectTags, null, ['id' => 'select_tags', 'class' => 'selectize', 'style' => '', 'multiple' => true]) }}
+                        <span class="visible-md visible-sm visible-xs">
+                            <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-4 visible-lg">
+                    <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
+                </div>
+            </div>
+        </div>
 
-                <div class="row">
-                    <div class="text-center">
-                        {{ $services->links() }}
+        <div id="service_panel" class="col-lg-12">
+            <div class="row visible-lg visible-md visible-sm">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="service in filteredServices">
+                    <div class="imagebox">
+                        <a v-bind:href="service.show_suggestion_url">
+                            <img v-show="service.img !== ''" v-bind:src="service.img"  class="category-banner img-responsive">
+                            <img v-show="service.img === ''" src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
+                            <span class="imagebox-desc">
+                                @{{ service.name }}
+                            </span>
+                        </a>
+                    </div>
+                    {{--<div v-for="tag in product.productTags">--}}
+                    {{--<div v-bind:item="searchTags" v-bind:key="tag.systemId" v-bind:title="tag.name">@{{ tag.name }}</div>--}}
+                    {{--</div>--}}
+                </div>
+            </div>
+
+            <div class="row visible-xs">
+                <div class="list-group">
+                    <div v-for="service in filteredServices">
+                        <a v-bind:href="service.show_suggestion_url" class="list-group-item">
+                            <img v-bind:src="service.img" style="width: 40px; height: 30px;">
+                            @{{ service.name }}
+                        </a>
                     </div>
                 </div>
             </div>

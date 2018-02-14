@@ -126,16 +126,24 @@ class ProductController extends Controller
         return redirect('product')->with('status', 'Product has been deleted');
     }
 
-    public function getProductList($tenant_id) {
-        $products = Product::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->get();
-        return new ProductCollection($products);
+    public function getProductList(Request $request, $tenant_id) {
+        if(!is_null($request->pageNumber)) {
+//            dd($request->pageNumber);
+//            $products = Product::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->simplePaginate(5);
+//            return new ProductCollection($products->url($request->pageNumber));
+            return response()->json($request->pageNumber, 200);
+        } else {
+            $products = Product::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->get();
+            return new ProductCollection($products);
+        }
     }
 
     public function filterProductList(Request $request, $tenant_id) {
         $tagIds = $request->tags;
+
         $filteredProducts = Product::where('tenantId', $tenant_id)->whereHas('tags', function ($q) use ($tagIds){
-            $q->where('systemId', $tagIds);
+            $q->whereIn('systemId', $tagIds);
         })->orderBy('created_at', 'desc')->get();
-        return response()->json(new ProductCollection($filteredProducts), 200);
+        return new ProductCollection($filteredProducts);
     }
 }

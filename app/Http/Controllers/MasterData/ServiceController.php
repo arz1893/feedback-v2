@@ -128,4 +128,12 @@ class ServiceController extends Controller
         $services = Service::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->get();
         return new ServiceCollection($services);
     }
+
+    public function filterServiceList(Request $request, $tenant_id) {
+        $tagIds = $request->tags;
+        $filteredServices = Service::where('tenantId', $tenant_id)->whereHas('tags', function ($q) use($tagIds){
+            $q->whereIn('systemId', $tagIds);
+        })->orderBy('created_at', 'desc')->get();
+        return new ServiceCollection($filteredServices);
+    }
 }

@@ -164,10 +164,10 @@ if($('#complaint_product_list_show').length > 0) {
     });
 }
 
-if($('#complaint_product_index').length > 0) {
+if($('#product_index').length > 0) {
 
-    var complaintProductIndex = new Vue({
-        el: '#complaint_product_index',
+    let productIndex = new Vue({
+        el: '#product_index',
         created() {
             let tenantId = $('#tenantId').val();
             this.getProducts(tenantId);
@@ -175,21 +175,13 @@ if($('#complaint_product_index').length > 0) {
         },
         data: {
             tenantId: $('#tenantId').val(),
-            tags: [],
             products: [],
-            links: [],
-            meta: [],
+            pagination: {},
             searchString: '',
-            searchTags: [],
             searchStatus: '',
-            productPanel: ''
         },
         watch: {
-            searchTags: function () {
-                if(this.searchTags.length > 0) {
-                    this.filterByTag();
-                }
-            }
+
         },
         computed: {
             filteredProducts: function () {
@@ -200,43 +192,67 @@ if($('#complaint_product_index').length > 0) {
         },
         methods: {
             getProducts: function (id) {
-                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + this.tenantId + '/get-product-list';
-
+                let vm = this;
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + id + '/get-product-list';
                 axios.get(url).then(response => {
                     this.products = response.data.data;
+                    // vm.makePagination(response.data);
                 }).catch(error => {
-                    console.log(Object.assign({}, error));
-                });
-
-            },
-            getTags: function (id) {
-                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/tag/' + this.tenantId + '/get-tag-list';
-
-                axios.get(url).then(response => {
-                    this.tags = response.data.data;
-                }).catch(error => {
+                    console.log('something wrong within the process');
                     console.log(Object.assign({}, error));
                 });
             },
-            filterByTag: _.debounce(function () {
-                const vm = this;
-                this.searchStatus = "Searching...";
-                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + this.tenantId + '/filter-product-list';
-                axios.post(url, {
-                    tags: this.searchTags
-                })
-                .then(function (response) {
-                    this.products = response.data.data;
-                    this.$forceUpdate();
-                    console.log(this.products);
-                });
-                vm.$forceUpdate();
-                this.searchStatus = '';
-            }, 500)
+            
+            makePagination: function (data) {
+                let vm = this;
+                let paging = {
+                    current_page: data.meta.current_page,
+                    first_page: data.links.first,
+                    last_page: data.links.last,
+                    next_page: data.links.next
+                };
+                // console.log(paging);
+                vm.products = paging;
+            }
         }
     });
     
     $('#select_tags').on('change', function () {
-        complaintProductIndex.searchTags  = $(this).val();
+        let tagIds = $(this).val();
+        let tenantId = $('#tenantId').val();
+        if(tagIds.length > 0) {
+            const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + tenantId + '/filter-product-list';
+            productIndex.searchStatus = 'Searching...';
+            function filterProducts() {
+
+                axios.post(url, {
+                    tags: tagIds
+                })
+                .then(function (response) {
+                    productIndex.products = response.data.data;
+                    productIndex.searchStatus = '';
+                })
+                .catch(error => {
+                    console.log(Object.assign({}, error));
+                });
+            }
+            //debounce buat trigger function setelah 0.5 detik
+            let debounceFunction = _.debounce(filterProducts, 1000);
+            debounceFunction();
+        } else {
+            const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + tenantId + '/get-product-list';
+            productIndex.searchStatus = 'Loading...';
+            function getProducts() {
+                axios.get(url).then(response => {
+                    productIndex.products = response.data.data;
+                    productIndex.searchStatus = '';
+                }).catch(error => {
+                    console.log(Object.assign({}, error));
+                });
+            }
+            //debounce buat trigger function setelah 0.5 detik
+            let debounceFunction = _.debounce(getProducts, 1000);
+            debounceFunction();
+        }
     });
 }

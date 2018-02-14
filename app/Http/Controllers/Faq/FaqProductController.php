@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Faq;
 use App\FaqProduct;
 use App\Http\Requests\Faq\FaqProductRequest;
 use App\Product;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,9 @@ use Webpatser\Uuid\Uuid;
 class FaqProductController extends Controller
 {
     public function index() {
+        $selectTags = Tag::where('recOwner', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
         $products = Product::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->paginate(6);
-        return view('faq.product.faq_product_index', compact('products'));
+        return view('faq.product.faq_product_index', compact('products', 'selectTags'));
     }
 
     public function show($id) {

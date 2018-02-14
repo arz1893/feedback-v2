@@ -19,7 +19,9 @@ class Product extends Resource
             'name' => $this->name,
             'img' => asset($this->img),
             'productTags' => $this->tags,
-            'show_url' => route('show_complaint_product', [$this->systemId, 0])
+            'show_faq_url' => route('faq_product.show', $this->systemId),
+            'show_complaint_url' => route('show_complaint_product', [$this->systemId, 0]),
+            'show_suggestion_url' => route('show_suggestion_product', [$this->systemId, 0])
         ];
     }
 }

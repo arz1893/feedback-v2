@@ -6,6 +6,7 @@ use App\FaqService;
 use App\Http\Requests\Faq\FaqServiceRequest;
 use App\Product;
 use App\Service;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,9 @@ use Webpatser\Uuid\Uuid;
 class FaqServiceController extends Controller
 {
     public function index() {
+        $selectTags = Tag::where('recOwner', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
         $services = Service::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->paginate(6);
-        return view('faq.service.faq_service_index', compact('services'));
+        return view('faq.service.faq_service_index', compact('services', 'selectTags'));
     }
 
     public function show($id) {

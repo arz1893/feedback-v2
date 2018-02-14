@@ -16,7 +16,7 @@
 @endsection
 
 @section('main-content')
-    <div id="complaint_product_index">
+    <div id="product_index">
         {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
         <div class="row">
             <div class="col-lg-12">
@@ -35,10 +35,13 @@
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
                         {{ Form::select('tags[]', $selectTags, null, ['id' => 'select_tags', 'class' => 'selectize', 'style' => '', 'multiple' => true]) }}
+                        <span class="visible-md visible-sm visible-xs">
+                            <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
+                        </span>
                     </div>
-                    <span>
-                        @{{ searchStatus }}
-                    </span>
+                </div>
+                <div class="col-lg-4 visible-lg">
+                    <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
                 </div>
             </div>
         </div>
@@ -47,7 +50,7 @@
             <div class="row visible-lg visible-md visible-sm">
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="product in filteredProducts">
                     <div class="imagebox">
-                        <a v-bind:href="product.show_url">
+                        <a v-bind:href="product.show_complaint_url">
                             <img v-show="product.img !== ''" v-bind:src="product.img"  class="category-banner img-responsive">
                             <img v-show="product.img === ''" src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
                             <span class="imagebox-desc">
@@ -55,64 +58,34 @@
                             </span>
                         </a>
                     </div>
-                    <div v-for="tag in product.productTags">
-                        <div v-bind:item="searchTags" v-bind:key="tag.systemId" v-bind:title="tag.name">@{{ tag.name }}</div>
-                    </div>
+                    {{--<div v-for="tag in product.productTags">--}}
+                        {{--<div v-bind:item="searchTags" v-bind:key="tag.systemId" v-bind:title="tag.name">@{{ tag.name }}</div>--}}
+                    {{--</div>--}}
                 </div>
             </div>
 
             <div class="row visible-xs">
                 <div class="list-group">
                     <div v-for="product in filteredProducts">
-                        <a v-bind:href="product.show_url" class="list-group-item">
+                        <a v-bind:href="product.show_complaint_url" class="list-group-item">
                             <img v-bind:src="product.img" style="width: 40px; height: 30px;">
                             @{{ product.name }}
                         </a>
                     </div>
                 </div>
             </div>
+        </div>
 
-            {{--@if(count($products) == 0)--}}
-                {{--<div class="well">--}}
-                    {{--<h4 class="text-center">Sorry you don't have any product yet</h4>--}}
-                {{--</div>--}}
-            {{--@endif--}}
-            {{--<div class="row visible-lg visible-md visible-sm">--}}
-                {{--@foreach($products as $product)--}}
-                    {{--<div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">--}}
-                        {{--<div class="imagebox">--}}
-                            {{--<a href="{{ route('show_complaint_product', [$product->systemId, 0]) }}">--}}
-                                {{--@if($product->img != null)--}}
-                                    {{--<img src="{{ asset($product->img) }}"  class="category-banner img-responsive">--}}
-                                {{--@else--}}
-                                    {{--<img src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">--}}
-                                {{--@endif--}}
-                                {{--<span class="imagebox-desc">{{ $product->name }}</span>--}}
-                            {{--</a>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--@endforeach--}}
-            {{--</div>--}}
-
-            {{--<div class="row visible-xs">--}}
-                {{--<div class="list-group">--}}
-                    {{--@foreach($products as $product)--}}
-                        {{--<a href="{{ route('show_complaint_product', [$product->systemId, 0]) }}" class="list-group-item">--}}
-                            {{--@if($product->img != null)--}}
-                                {{--<img src="{{ asset($product->img) }}" style="width: 40px; height: 30px;">--}}
-                            {{--@else--}}
-                                {{--<img src="{{ asset('default-images/no-image.jpg') }}" style="width: 40px; height: 30px;">--}}
-                            {{--@endif--}}
-                            {{--{{ $product->name }}--}}
-                        {{--</a>--}}
-                    {{--@endforeach--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="row">--}}
-                {{--<div class="text-center">--}}
-                    {{--{{ $products->links() }}--}}
-                {{--</div>--}}
-            {{--</div>--}}
+        <div class="col-lg-offset-4">
+            <ul class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                <li><a @click="getProducts(tenantId, pagination.first_page)">1</a></li>
+                <li><a @click="getProducts(tenantId, pagination.next_page)">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
         </div>
     </div>
 @endsection

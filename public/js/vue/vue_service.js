@@ -157,9 +157,9 @@ if($('#complaint_service_list_show').length > 0) {
     });
 }
 
-if($('#complaint_service_index').length > 0) {
-    var complaintServiceIndex = new Vue({
-        el: '#complaint_service_index',
+if($('#service_index').length > 0) {
+    let serviceIndex = new Vue({
+        el: '#service_index',
         created() {
             let tenantId = $('#tenantId').val();
             this.getServices(tenantId);
@@ -168,7 +168,8 @@ if($('#complaint_service_index').length > 0) {
             tenantId : $('#tenantId').val(),
             tags: [],
             services: [],
-            searchString: ''
+            searchString: '',
+            searchStatus: ''
         },
         computed: {
             filteredServices: function () {
@@ -187,4 +188,43 @@ if($('#complaint_service_index').length > 0) {
             }
         }
     });
+
+    $('#select_tags').on('change', function () {
+        let tagIds = $(this).val();
+        let tenantId = $('#tenantId').val();
+        if(tagIds.length > 0) {
+            const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/filter-service-list';
+            serviceIndex.searchStatus = 'Searching...';
+            function filterProducts() {
+                axios.post(url, {
+                    tags: tagIds
+                })
+                    .then(function (response) {
+                        serviceIndex.services = response.data.data;
+                        serviceIndex.searchStatus = '';
+                    })
+                    .catch(error => {
+                        console.log(Object.assign({}, error));
+                    });
+            }
+            //debounce buat trigger function setelah 1 detik
+            let debounceFunction = _.debounce(filterProducts, 1000);
+            debounceFunction();
+        } else {
+            const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/get-service-list';
+            serviceIndex.searchStatus = 'Loading...';
+            function getProducts() {
+                axios.get(url).then(response => {
+                    serviceIndex.services = response.data.data;
+                    serviceIndex.searchStatus = '';
+                }).catch(error => {
+                    console.log(Object.assign({}, error));
+                });
+            }
+            //debounce buat trigger function setelah 1 detik
+            let debounceFunction = _.debounce(getProducts, 1000);
+            debounceFunction();
+        }
+    });
 }
+

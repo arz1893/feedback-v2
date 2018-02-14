@@ -16,7 +16,7 @@
 @endsection
 
 @section('main-content')
-    <div id="complaint_service_index">
+    <div id="service_index">
         {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
         <div class="row">
             <div class="col-lg-12">
@@ -34,10 +34,14 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
-                        <div class="input-group">
-                            {{ Form::select('tags[]', $selectTags, null, ['class' => 'select2-tag', 'multiple' => true,'style' => 'width: 100%;']) }}
-                        </div><!-- /input-group -->
+                        {{ Form::select('tags[]', $selectTags, null, ['id' => 'select_tags', 'class' => 'selectize', 'style' => '', 'multiple' => true]) }}
+                        <span class="visible-md visible-sm visible-xs">
+                            <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
+                        </span>
                     </div>
+                </div>
+                <div class="col-lg-4 visible-lg">
+                    <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
                 </div>
             </div>
         </div>
@@ -51,7 +55,7 @@
             <div class="row visible-lg visible-md visible-sm">
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="service in filteredServices">
                     <div class="imagebox">
-                        <a v-bind:href="service.show_url">
+                        <a v-bind:href="service.show_complaint_url">
                             <img v-show="service.img !== ''" v-bind:src="service.img"  class="category-banner img-responsive">
                             <img v-show="service.img === ''" src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
                             <span class="imagebox-desc">
@@ -59,13 +63,16 @@
                             </span>
                         </a>
                     </div>
+                    {{--<div v-for="tag in service.serviceTags">--}}
+                        {{--<div v-bind:key="tag.systemId" v-bind:title="tag.name">@{{ tag.name }}</div>--}}
+                    {{--</div>--}}
                 </div>
             </div>
 
             <div class="row visible-xs">
                 <div class="list-group">
                     <div v-for="service in filteredServices">
-                        <a v-bind:href="service.show_url" class="list-group-item">
+                        <a v-bind:href="service.show_complaint_url" class="list-group-item">
                             <img v-bind:src="service.img" style="width: 40px; height: 30px;">
                             @{{ service.name }}
                         </a>

@@ -1,76 +1,85 @@
 @extends('home')
 
-@section('content-header')
+@push('scripts')
+    <script src="{{ asset('js/vue/vue_product.js') }}" type="text/javascript"></script>
+@endpush
 
+@section('content-header')
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ url('/faq') }}"><i class="fa fa-question-circle"></i> FAQ selection</a></li>
-        <li class="active">FAQ Product</li>
+        <li><a href="{{ url('/faq') }}"><i class="ion ion-settings"></i> Faq selection</a></li>
+        <li class="active">Faq Product</li>
     </ol>
-
-    <h2 class="text-center text-light-blue">FAQ</h2>
-
-    <div class="centered-pills" style="margin-top: 5px;">
-        <ul class="nav nav-pills">
-            <li role="presentation" class="active"><a data-toggle="pill" href="#product_panel">Product</a></li>
-            <li><a href="{{ route('faq_service.index') }}">Service</a></li>
-        </ul>
-    </div>
+    <span class="text-info" style="font-size: 2em; position: relative; top: 5px;">FAQ</span>
+    <a href="{{ route('faq_product.index') }}" class="btn btn-sm btn-flat bg-aqua">Product</a>
+    <a href="{{ route('faq_service.index') }}" class="btn btn-sm btn-link">Service</a>
 @endsection
 
 @section('main-content')
-    <div class="row">
-        <div class="col-lg-6 col-lg-offset-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-info btn-flat" type="button">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </span>
-            </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-    </div>
-    <br>
+    @if(\Session::has('status'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Success!</strong> {{ \Session::get('status') }}
+        </div>
+    @endif
 
-    <div class="col-lg-11">
-        <div class="tab-content">
-            <div id="product_panel" class="tab-pane fade in active">
-                <div class="row visible-lg visible-md visible-sm">
-                    @foreach($products as $product)
-                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">
-                            <div class="imagebox">
-                                <a href="{{ route('faq_product.show', $product->systemId) }}">
-                                    @if($product->img != null)
-                                        <img src="{{ asset($product->img) }}"  class="category-banner img-responsive">
-                                    @else
-                                        <img src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
-                                    @endif
-                                    <span class="imagebox-desc">{{ $product->name }}</span>
-                                </a>
-                            </div>
+    @include('layouts.errors.error_list')
+
+    <div id="product_index">
+        {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for..." v-model="searchString">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="ion ion-search"></i>
+                                </button>
+                            </span>
                         </div>
-                    @endforeach
-                </div>
-
-                <div class="row visible-xs">
-                    <div class="list-group">
-                        @foreach($products as $product)
-                            <a href="{{ route('faq_product.show', $product->systemId) }}" class="list-group-item">
-                                @if($product->img != null)
-                                    <img src="{{ asset($product->img) }}" style="max-width: 75px; max-height: 50px;">
-                                @else
-                                    <img src="{{ asset('default-images/no-image.jpg') }}" style="max-width: 75px; max-height: 50px;">
-                                @endif
-                                {{ $product->name }}
-                            </a>
-                        @endforeach
                     </div>
                 </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        {{ Form::select('tags[]', $selectTags, null, ['id' => 'select_tags', 'class' => 'selectize', 'style' => '', 'multiple' => true]) }}
+                        <span class="visible-md visible-sm visible-xs">
+                            <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-4 visible-lg">
+                    <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
+                </div>
+            </div>
+        </div>
 
-                <div class="row">
-                    <div class="text-center">
-                        {{ $products->links() }}
+        <div id="product_panel" class="col-lg-12">
+            <div class="row visible-lg visible-md visible-sm">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="product in filteredProducts">
+                    <div class="imagebox">
+                        <a v-bind:href="product.show_faq_url">
+                            <img v-show="product.img !== ''" v-bind:src="product.img"  class="category-banner img-responsive">
+                            <img v-show="product.img === ''" src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
+                            <span class="imagebox-desc">
+                                @{{ product.name }}
+                            </span>
+                        </a>
+                    </div>
+                    {{--<div v-for="tag in product.productTags">--}}
+                    {{--<div v-bind:item="searchTags" v-bind:key="tag.systemId" v-bind:title="tag.name">@{{ tag.name }}</div>--}}
+                    {{--</div>--}}
+                </div>
+            </div>
+
+            <div class="row visible-xs">
+                <div class="list-group">
+                    <div v-for="product in filteredProducts">
+                        <a v-bind:href="product.show_faq_url" class="list-group-item">
+                            <img v-bind:src="product.img" style="width: 40px; height: 30px;">
+                            @{{ product.name }}
+                        </a>
                     </div>
                 </div>
             </div>
