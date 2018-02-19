@@ -59,32 +59,36 @@
                             <img v-show="service.img !== ''" v-bind:src="service.img"  class="category-banner img-responsive">
                             <img v-show="service.img === ''" src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
                             <span class="imagebox-desc">
-                                @{{ service.name }}
-                            </span>
+                            @{{ service.name }}
+                        </span>
                         </a>
                     </div>
                     {{--<div v-for="tag in service.serviceTags">--}}
-                        {{--<div v-bind:key="tag.systemId" v-bind:title="tag.name">@{{ tag.name }}</div>--}}
+                    {{--<div v-bind:key="tag.systemId" v-bind:title="tag.name">@{{ tag.name }}</div>--}}
                     {{--</div>--}}
                 </div>
             </div>
+        </div>
 
-            <div class="row visible-xs">
-                <div class="list-group">
-                    <div v-for="service in filteredServices">
-                        <a v-bind:href="service.show_complaint_url" class="list-group-item">
-                            <img v-bind:src="service.img" style="width: 40px; height: 30px;">
-                            @{{ service.name }}
-                        </a>
-                    </div>
+        <div class="row visible-xs col-lg-12">
+            <div class="list-group">
+                <div v-for="service in filteredServices">
+                    <a v-bind:href="service.show_complaint_url" class="list-group-item">
+                        <img v-bind:src="service.img" style="width: 40px; height: 30px;">
+                        @{{ service.name }}
+                    </a>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="text-center">
-                    {{ $services->links() }}
-                </div>
-            </div>
+        <div class="col-lg-12">
+            <ul class="pager">
+                <li v-show="pagination.prev_page_link === null" v-bind:class="{'disabled' : pagination.prev_page_link === null}"><a href="#prev">&larr; Prev</a></li>
+                <li v-show="pagination.prev_page_link !== null"><a href="#prev" @click="nextPage(pagination.prev_page_link)">&larr; Prev</a></li>
+                <li v-show="pagination.next_page_link === null" v-bind:class="{'disabled' : pagination.next_page_link === null}"><a href="#next">Next &rarr;</a></li>
+                <li v-show="pagination.next_page_link !== null"><a href="#next" @click="nextPage(pagination.next_page_link)">Next &rarr;</a></li>
+            </ul>
+            <div class="text-center">Page @{{ pagination.current_page }} of @{{ pagination.total_page }}</div>
         </div>
     </div>
 @endsection

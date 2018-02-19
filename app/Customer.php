@@ -29,6 +29,10 @@ class Customer extends Model
         return $this->belongsTo(Tenant::class, 'tenantId', 'systemId');
     }
 
+    public function complaint_products() {
+        return $this->hasMany(ComplaintProduct::class);
+    }
+
     public function getFullInformationAttribute() {
         return "{$this->name} - {$this->phone}";
     }

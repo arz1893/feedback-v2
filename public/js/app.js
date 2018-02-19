@@ -2,22 +2,23 @@ $(document).ready(function () {
 
     $('#table_product').DataTable({
         responsive: true,
+        bLengthChange: false,
+        iDisplayLength: 20,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: 2 },
-            {
-                targets: [3],
-                render: function ( data, type, row ) {
-                    return data.length > 10 ?
-                        data.substr( 0, 50 ) +'…' :
-                        data;
-                }
-            }
+            { "width": "5%", "targets": 0 },
+            { "width": "8%", "targets": 1 },
+            { "width": "40%", "targets": 3 },
+            { "width": "15%", "targets": 4 },
+
         ]
     });
 
     $('#table_service').DataTable({
         responsive: true,
+        bLengthChange: false,
+        iDisplayLength: 20,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: 2 },
@@ -33,11 +34,15 @@ $(document).ready(function () {
     });
 
     $('#table_tags').DataTable({
-        responsive: true
+        responsive: true,
+        bLengthChange: false,
+        iDisplayLength: 20
     });
 
     $('#table_question').DataTable({
         responsive:true,
+        bLengthChange: false,
+        iDisplayLength: 20,
         columnDefs: [ {
             targets: [1],
             render: function ( data, type, row ) {
@@ -50,32 +55,32 @@ $(document).ready(function () {
 
     $('#table_user').DataTable({
         responsive: true,
-        scrollX: true
+        scrollX: true,
+        bLengthChange: false,
+        iDisplayLength: 20
     });
 
     $('#table_complaint_product').DataTable({
         responsive: true,
+        bLengthChange: false,
+        iDisplayLength: 20,
         columnDefs: [
-            {
-                "width": "25%",
-                "targets": 1,
-                "render": function(data, type, row) {
-                    return data.length > 100 ?
-                        data.substr( 0, 150 ) +'…' :
-                        data;
-                }
-            },
-            { "width": "5%", "targets": 5 },
+            { "width": "5%", "targets": 0 },
+            { "width": "10%","targets": 1 },
+            { "width": "8%", "targets": 5 },
             { "width": "8%", "targets": 6 },
-            { "width": "8%", "targets": 7 }
+            { "width": "9%", "targets": 7 }
         ]
     });
 
     $('#table_complaint_service').DataTable({
         responsive: true,
+        bLengthChange: false,
+        iDisplayLength: 20,
         columnDefs: [
+            { "width": "5%", "targets": 0 },
             {
-                "width": "25%",
+                "width": "10%",
                 "targets": 1,
                 "render": function(data, type, row) {
                     return data.length > 100 ?
@@ -83,17 +88,19 @@ $(document).ready(function () {
                         data;
                 }
             },
-            { "width": "5%", "targets": 5 },
+            { "width": "8%", "targets": 5 },
             { "width": "8%", "targets": 6 },
-            { "width": "8%", "targets": 7 }
+            { "width": "9%", "targets": 7 }
         ]
     });
 
     $('#table_suggestion_product').DataTable({
         responsive: true,
+        bLengthChange: false,
+        iDisplayLength: 20,
         columnDefs: [
             {
-                "width": "25%",
+                "width": "10%",
                 "targets": 1,
                 "render": function(data, type, row) {
                     return data.length > 100 ?
@@ -106,9 +113,11 @@ $(document).ready(function () {
 
     $('#table_suggestion_service').DataTable({
         responsive: true,
+        bLengthChange: false,
+        iDisplayLength: 20,
         columnDefs: [
             {
-                "width": "25%",
+                "width": "10%",
                 "targets": 1,
                 "render": function(data, type, row) {
                     return data.length > 100 ?

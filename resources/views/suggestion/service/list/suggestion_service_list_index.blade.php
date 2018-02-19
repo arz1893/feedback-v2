@@ -22,7 +22,6 @@
         <thead>
         <tr>
             <th>No.</th>
-            <th>Suggestion</th>
             <th>Created At</th>
             <th>Customer Name</th>
             <th>Service Name</th>
@@ -35,12 +34,9 @@
         @foreach($suggestionServices as $suggestionService)
             <tr>
                 <td>{{ $counter }}</td>
-                <td>
-                    <a href="{{ route('suggestion_service_list.show', $suggestionService->systemId) }}">{{ $suggestionService->customer_suggestion }}</a>
-                </td>
                 <td>{{ $suggestionService->created_at->format('d-M-Y') }}</td>
                 <td>
-                    <a>
+                    <a href="{{ route('suggestion_service_list.show', $suggestionService->systemId) }}">
                         @if($suggestionService->customerId != null)
                             {{ $suggestionService->customer->name }}
                         @else

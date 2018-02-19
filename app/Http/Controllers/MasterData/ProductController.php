@@ -127,15 +127,8 @@ class ProductController extends Controller
     }
 
     public function getProductList(Request $request, $tenant_id) {
-        if(!is_null($request->pageNumber)) {
-//            dd($request->pageNumber);
-//            $products = Product::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->simplePaginate(5);
-//            return new ProductCollection($products->url($request->pageNumber));
-            return response()->json($request->pageNumber, 200);
-        } else {
-            $products = Product::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->get();
-            return new ProductCollection($products);
-        }
+        $products = Product::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->paginate(12);
+        return new ProductCollection($products);
     }
 
     public function filterProductList(Request $request, $tenant_id) {

@@ -125,7 +125,7 @@ class ServiceController extends Controller
     }
 
     public function getServiceList($tenant_id) {
-        $services = Service::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->get();
+        $services = Service::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->paginate(6);
         return new ServiceCollection($services);
     }
 

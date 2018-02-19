@@ -22,7 +22,6 @@
         <thead>
         <tr>
             <th>No.</th>
-            <th>Complaint</th>
             <th>Created At</th>
             <th>Customer Name</th>
             <th>Service Name</th>
@@ -38,12 +37,9 @@
         @foreach($complaintServices as $complaintService)
             <tr>
                 <td>{{ $counter }}</td>
-                <td>
-                    <a href="{{ route('complaint_service_list.show', $complaintService->systemId) }}">{{ $complaintService->customer_complaint }}</a>
-                </td>
                 <td>{{ $complaintService->created_at->format('d-M-Y') }}</td>
                 <td>
-                    <a>
+                    <a href="{{ route('complaint_service_list.show', $complaintService->systemId) }}">
                         @if($complaintService->customerId != null)
                             {{ $complaintService->customer->name }}
                         @else

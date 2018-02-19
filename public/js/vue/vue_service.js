@@ -168,6 +168,15 @@ if($('#service_index').length > 0) {
             tenantId : $('#tenantId').val(),
             tags: [],
             services: [],
+            pagination: {
+                current_page: '',
+                first_page_link: '',
+                last_page_link: '',
+                next_page_link: '',
+                prev_page_link: '',
+                total_page: '',
+                path: '',
+            },
             searchString: '',
             searchStatus: ''
         },
@@ -184,7 +193,39 @@ if($('#service_index').length > 0) {
 
                 axios.get(url).then(response => {
                     this.services = response.data.data;
+                    this.makePagination(response.data);
+                }).catch(error => {
+                    console.log('something wrong within the process');
                 });
+            },
+
+            makePagination: function (data) {
+                let vm = this;
+                vm.pagination.current_page = data.meta.current_page;
+                vm.pagination.first_page_link = data.links.first;
+                vm.pagination.last_page_link = data.links.last;
+                vm.pagination.next_page_link = data.links.next;
+                vm.pagination.prev_page_link = data.links.prev;
+                vm.pagination.total_page = data.meta.last_page;
+                vm.pagination.path = data.meta.path;
+            },
+
+            nextPage: function (url) {
+                let vm = this;
+                vm.searchStatus = 'Loading...';
+                function fireRequest(vm) {
+                    axios.get(url).then(response => {
+                        vm.services = response.data.data;
+                        vm.makePagination(response.data);
+                        vm.searchStatus = '';
+                    }).catch(error => {
+                        console.log('something wrong within the process');
+                        console.log(Object.assign({}, error));
+                    });
+                }
+
+                let debounceFunction = _.debounce(fireRequest, 1000);
+                debounceFunction(vm);
             }
         }
     });

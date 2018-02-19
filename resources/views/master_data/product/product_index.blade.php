@@ -28,7 +28,6 @@
             <th>No.</th>
             <th>Image</th>
             <th>Name</th>
-            <th>Description</th>
             <th>Tags</th>
             <th>Action</th>
         </tr>
@@ -46,7 +45,6 @@
                     @endif
                 </td>
                 <td><a href="{{ route('product.show', $product) }}">{{ $product->name }}</a></td>
-                <td>{{ $product->description }}</td>
                 <td>
                     @foreach($product->tags as $tag)
                         <span class="label" style="background: {{ $tag->bgColor }}">{{ $tag->name }}</span>

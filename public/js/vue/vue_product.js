@@ -121,19 +121,45 @@ if($('#vue_product_container').length > 0) {
     });
 }
 
-if($('#complaint_product_list_show').length > 0) {
+if($('#complaint_product_list_index').length > 0) {
     Vue.use(VeeValidate);
 
-    var complaintProductListShow = new Vue({
-        el: '#complaint_product_list_show',
+    let complaintProductListIndex = new Vue({
+        el: '#complaint_product_list_index',
         data: {
+            complaintProduct: {
+                systemId: '',
+                customer_rating: '',
+                customer_complaint: '',
+                is_need_call: '',
+                is_urgent: '',
+                customer: Array,
+                product: Array,
+                product_category: Array,
+                is_answered: '',
+                attachment: ''
+            },
             showReply: false,
             replyTo: '',
             replyId: ''
         },
         methods: {
+            showComplaintDetail: function (event) {
+                let vm = this;
+                let complaint_id = $(event.currentTarget).data('complaint_id');
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + complaint_id + '/get-complaint-product';
+
+                axios.get(url).then(function (response) {
+                    console.log(response.data.data);
+                })
+                .catch(error => {
+                    alert('something wrong within the process');
+                    console.log(error);
+                });
+            },
+
             showReplyBox: function (event) {
-                this.showReply = !this.showReply
+                this.showReply = !this.showReply;
                 this.replyTo = $('#reply_to').html();
             },
             submitReply: function (event) {
@@ -176,7 +202,15 @@ if($('#product_index').length > 0) {
         data: {
             tenantId: $('#tenantId').val(),
             products: [],
-            pagination: {},
+            pagination: {
+                current_page: '',
+                first_page_link: '',
+                last_page_link: '',
+                next_page_link: '',
+                prev_page_link: '',
+                total_page: '',
+                path: '',
+            },
             searchString: '',
             searchStatus: '',
         },
@@ -196,7 +230,7 @@ if($('#product_index').length > 0) {
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + id + '/get-product-list';
                 axios.get(url).then(response => {
                     this.products = response.data.data;
-                    // vm.makePagination(response.data);
+                    vm.makePagination(response.data);
                 }).catch(error => {
                     console.log('something wrong within the process');
                     console.log(Object.assign({}, error));
@@ -205,14 +239,31 @@ if($('#product_index').length > 0) {
             
             makePagination: function (data) {
                 let vm = this;
-                let paging = {
-                    current_page: data.meta.current_page,
-                    first_page: data.links.first,
-                    last_page: data.links.last,
-                    next_page: data.links.next
-                };
-                // console.log(paging);
-                vm.products = paging;
+                vm.pagination.current_page = data.meta.current_page;
+                vm.pagination.first_page_link = data.links.first;
+                vm.pagination.last_page_link = data.links.last;
+                vm.pagination.next_page_link = data.links.next;
+                vm.pagination.prev_page_link = data.links.prev;
+                vm.pagination.total_page = data.meta.last_page;
+                vm.pagination.path = data.meta.path;
+            },
+            
+            nextPage: function (url) {
+                let vm = this;
+                vm.searchStatus = 'Loading...';
+                function fireRequest(vm) {
+                    axios.get(url).then(response => {
+                        vm.products = response.data.data;
+                        vm.makePagination(response.data);
+                        vm.searchStatus = '';
+                    }).catch(error => {
+                        console.log('something wrong within the process');
+                        console.log(Object.assign({}, error));
+                    });
+                }
+
+                let debounceFunction = _.debounce(fireRequest, 1000);
+                debounceFunction(vm);
             }
         }
     });

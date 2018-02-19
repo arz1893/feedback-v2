@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Webpatser\Uuid\Uuid;
+use App\Http\Resources\ComplaintProduct as ComplaintProductResource;
 
 class ComplaintProductController extends Controller
 {
@@ -75,5 +76,10 @@ class ComplaintProductController extends Controller
             ]);
         }
         return redirect()->back()->with('status', 'New complaint has been added, please check your complaint product list');
+    }
+
+    public function getComplaintProduct(Request $request, $complaintId) {
+        $complaintProduct = ComplaintProduct::findOrFail($complaintId);
+        return new ComplaintProductResource($complaintProduct);
     }
 }

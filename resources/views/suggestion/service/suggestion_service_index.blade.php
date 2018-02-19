@@ -76,5 +76,15 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-12">
+            <ul class="pager">
+                <li v-show="pagination.prev_page_link === null" v-bind:class="{'disabled' : pagination.prev_page_link === null}"><a href="#prev">&larr; Prev</a></li>
+                <li v-show="pagination.prev_page_link !== null"><a href="#prev" @click="nextPage(pagination.prev_page_link)">&larr; Prev</a></li>
+                <li v-show="pagination.next_page_link === null" v-bind:class="{'disabled' : pagination.next_page_link === null}"><a href="#next">Next &rarr;</a></li>
+                <li v-show="pagination.next_page_link !== null"><a href="#next" @click="nextPage(pagination.next_page_link)">Next &rarr;</a></li>
+            </ul>
+            <div class="text-center">Page @{{ pagination.current_page }} of @{{ pagination.total_page }}</div>
+        </div>
     </div>
 @endsection
