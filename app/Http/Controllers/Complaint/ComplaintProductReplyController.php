@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Complaint;
 use App\ComplaintProduct;
 use App\ComplaintProductReply;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ComplaintProductReplyCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Webpatser\Uuid\Uuid;
@@ -31,5 +32,10 @@ class ComplaintProductReplyController extends Controller
         $complaintProductReply = ComplaintProductReply::findOrFail($request->id);
         $complaintProductReply->delete();
         return redirect()->back()->with(['status' => 'Reply has been deleted']);
+    }
+
+    public function getComplaintProductReplies(Request $request, $complaint_product_id) {
+        $complaintProductReplies = ComplaintProductReply::where('complaintProductId', $complaint_product_id)->orderBy('created_at', 'asc')->get();
+        return new ComplaintProductReplyCollection($complaintProductReplies);
     }
 }

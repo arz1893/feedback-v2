@@ -133,15 +133,29 @@ if($('#complaint_product_list_index').length > 0) {
                 customer_complaint: '',
                 is_need_call: '',
                 is_urgent: '',
-                customer: Array,
-                product: Array,
-                product_category: Array,
+                customer: [],
+                product: [],
+                productCategory: [],
+                tenantId: '',
                 is_answered: '',
-                attachment: ''
+                attachment: '',
+                created_by: '',
+                created_at: ''
+            },
+            complaintReplies: {
+                systemId: '',
+                reply_content: '',
+                created_by: []
             },
             showReply: false,
             replyTo: '',
-            replyId: ''
+            replyId: '',
+            showDetail: false
+        },
+        watch: {
+            complaintProduct: function () {
+                console.log(this.complaintProduct.product.img);
+            }
         },
         methods: {
             showComplaintDetail: function (event) {
@@ -150,7 +164,38 @@ if($('#complaint_product_list_index').length > 0) {
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + complaint_id + '/get-complaint-product';
 
                 axios.get(url).then(function (response) {
-                    console.log(response.data.data);
+                    vm.complaintProduct.systemId = response.data.data.systemId;
+                    vm.complaintProduct.customer_rating = response.data.data.customer_rating;
+                    vm.complaintProduct.customer_complaint = response.data.data.customer_complaint;
+                    vm.complaintProduct.is_need_call = response.data.data.is_need_call;
+                    vm.complaintProduct.is_urgent = response.data.data.is_urgent;
+                    vm.complaintProduct.customer = response.data.data.customer;
+                    vm.complaintProduct.product = response.data.data.product;
+                    vm.complaintProduct.productCategory = response.data.data.product_category;
+                    vm.complaintReplies = response.data.data.complaint_replies;
+                    vm.complaintProduct.tenantId = response.data.data.tenantId;
+                    vm.complaintProduct.is_answered = response.data.data.is_answered;
+                    vm.complaintProduct.attachment = response.data.data.attachment;
+                    vm.complaintProduct.created_by = response.data.data.created_by;
+                    vm.complaintProduct.created_at = response.data.data.created_at;
+                })
+                .catch(error => {
+                    alert('something wrong within the process');
+                    console.log(error);
+                });
+                this.showDetail = true;
+                $('#modal_complaint_product_show').modal('show');
+            },
+            
+            showComplaintReplies: function (event) {
+                let vm = this;
+                let complaint_product_id = this.complaintProduct.systemId;
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product_reply/' + complaint_product_id + '/get-complaint-product-replies';
+
+                axios.get(url).then(function (response) {
+                    vm.complaintReplies.systemId = response.data.data.systemId;
+                    vm.reply_content = response.data.data.reply_content;
+                    vm.reply_content = response.data.data.created_by;
                 })
                 .catch(error => {
                     alert('something wrong within the process');

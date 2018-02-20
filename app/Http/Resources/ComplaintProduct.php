@@ -21,10 +21,13 @@ class ComplaintProduct extends Resource
             'is_need_call' => $this->is_need_call,
             'is_urgent' => $this->is_urgent,
             'customer' => $this->customer,
-            'product' => $this->product,
+            'product' => new Product($this->product),
             'product_category' => $this->product_category,
+            'complaint_replies' => ($this->complaint_product_replies == null ? null:$this->complaint_product_replies),
             'tenant_id' => $this->tenantId,
-            'attachment' => $this->attachment
+            'attachment' => ($this->attachment == null ? null:asset($this->attachment)),
+            'created_by' => $this->created_by->name,
+            'created_at' => $this->created_at->format('d F Y, H:iA')
         ];
     }
 }

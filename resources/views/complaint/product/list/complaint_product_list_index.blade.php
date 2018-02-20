@@ -5,6 +5,7 @@
 @endpush
 
 @section('content-header')
+    <h3 class="text-red" style="margin-top: -0.5%;">Complaint Product List</h3>
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Complaint Product List</li>
@@ -12,8 +13,6 @@
 @endsection
 
 @section('main-content')
-    <h3 class="text-red">Complaint Product List</h3>
-
     @if(\Session::has('status'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -43,12 +42,12 @@
                 <tr>
                     <td>{{ $counter }}</td>
                     <td>
-                        <a href="#!" data-toggle="modal" data-target="#modal_complaint_product_show" data-complaint_id="{{ $complaintProduct->systemId }}" @click="showComplaintDetail($event)">
+                        <a href="#!" data-complaint_id="{{ $complaintProduct->systemId }}" @click="showComplaintDetail($event)">
                             {{ $complaintProduct->created_at->format('d-M-Y') }}
                         </a>
                     </td>
                     <td>
-                        <a href="#!" data-toggle="modal" data-target="#modal_complaint_product_show" data-complaint_id="{{ $complaintProduct->systemId }}" @click="showComplaintDetail($event)">
+                        <a href="#!" data-complaint_id="{{ $complaintProduct->systemId }}" @click="showComplaintDetail($event)">
                             @if($complaintProduct->customerId != null)
                                 {{ $complaintProduct->customer->name }}
                             @else

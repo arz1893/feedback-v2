@@ -411,3 +411,8 @@ span.fancytree-expander{
     width: 100% !important;
     margin-right: 100000px;
 }
+
+.modal-body {
+    max-height: calc(100vh - 212px);
+    overflow-y: auto;
+}
