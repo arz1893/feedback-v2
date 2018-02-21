@@ -20,7 +20,8 @@ class SuggestionProduct extends Model
         'productId',
         'productCategoryId',
         'tenantId',
-        'attachment'
+        'attachment',
+        'syscreator'
     ];
 
     public function customer() {
@@ -33,6 +34,10 @@ class SuggestionProduct extends Model
 
     public function product_category() {
         return $this->belongsTo(ProductCategory::class, 'productCategoryId', 'id');
+    }
+
+    public function created_by() {
+        return $this->belongsTo(User::class, 'syscreator', 'systemId');
     }
 
     public function tenant() {

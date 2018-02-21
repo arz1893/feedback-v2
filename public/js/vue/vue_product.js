@@ -1,5 +1,5 @@
 if($('#vue_product_container').length > 0) {
-    var Root = new Vue({
+    let Root = new Vue({
         el: '#vue_product_container',
         data: {
             nodeTitle: '',
@@ -92,9 +92,9 @@ if($('#vue_product_container').length > 0) {
             // },
             
             previewImage: function (event) {
-                var uploadedImage = event.target;
+                let uploadedImage = event.target;
                 if(uploadedImage.files && uploadedImage.files[0]) {
-                    var reader = new FileReader();
+                    let reader = new FileReader();
                     reader.onload = function (e) {
                         $('#preview').attr('src', e.target.result);
                     };
@@ -355,27 +355,28 @@ if($('#complaint_product_list_index').length > 0) {
             }
         }
     });
+}
 
-    // $('#collapseAllReplies').on('show.bs.collapse', function () {
-    //     let complaint_product_id = complaintProductListIndex.complaintProduct.systemId;
-    //     const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product_reply/' + complaint_product_id + '/get-complaint-product-replies';
-    //     complaintProductListIndex.searchStatus = 'Loading Data...';
-    //     function getComplaintReplies() {
-    //         axios.get(url).then(function (response) {
-    //             if(response.data === '') {
-    //                 complaintProductListIndex.complaintReplies = null;
-    //             } else {
-    //                 complaintProductListIndex.complaintReplies = response.data;
-    //                 complaintProductListIndex.searchStatus = '';
-    //             }
-    //         })
-    //             .catch(error => {
-    //                 alert('something wrong within the process');
-    //                 console.log(error);
-    //             });
-    //     }
-    //
-    //     let debounceFunction = _.debounce(getComplaintReplies, 1000);
-    //     debounceFunction();
-    // });
+if($('#suggestion_product_list_container').length > 0) {
+    let suggestionProductList = new Vue({
+        el: '#suggestion_product_list_container',
+        data: {
+            suggestionProduct: {
+                systemId: '',
+                customer_suggestion: '',
+                customer: [],
+                product: [],
+                productCategory: [],
+                tenantId: '',
+                created_by: '',
+                created_at: '',
+                attachment: ''
+            }
+        },
+        methods: {
+            showSuggestionDetail: function () {
+                
+            }
+        }
+    });
 }

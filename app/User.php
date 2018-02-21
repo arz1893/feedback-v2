@@ -56,4 +56,20 @@ class User extends Authenticatable
     public function invites() {
         return $this->hasMany(Invite::class);
     }
+
+    public function complaint_products() {
+        return $this->hasMany(ComplaintProduct::class);
+    }
+
+    public function complaint_services() {
+        return $this->hasMany(ComplaintService::class);
+    }
+
+    public function suggestion_products() {
+        return $this->hasMany(SuggestionProduct::class);
+    }
+
+    public function suggestion_services() {
+        return $this->hasMany(SuggestionService::class);
+    }
 }

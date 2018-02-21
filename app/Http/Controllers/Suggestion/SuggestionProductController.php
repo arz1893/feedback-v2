@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Webpatser\Uuid\Uuid;
+use App\Http\Resources\SuggestionProduct as SuggestionProductResource;
 
 class SuggestionProductController extends Controller
 {
@@ -71,7 +72,8 @@ class SuggestionProductController extends Controller
         return redirect('suggestion_product_list')->with('status', 'A new suggestion has been added');
     }
 
-    public function edit($id) {
-        dd($id);
+    public function getSuggestionProduct(Request $request, $suggestion_product_id) {
+        $suggestionProduct = SuggestionProduct::findOrFail($suggestion_product_id);
+        return new SuggestionProductResource($suggestionProduct);
     }
 }
