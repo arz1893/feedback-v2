@@ -115,48 +115,6 @@ if($('#vue_service_container').length > 0) {
     });
 }
 
-if($('#complaint_service_list_show').length > 0) {
-    Vue.use(VeeValidate);
-    var complaintServiceListContainer = new Vue({
-        el:'#complaint_service_list_show',
-        data: {
-            showReply: false,
-            replyTo: '',
-            replyId: ''
-        },
-        methods: {
-            showReplyBox: function (event) {
-                this.showReply = !this.showReply
-                this.replyTo = $('#reply_to').html();
-            },
-            submitReply: function (event) {
-                const dict = {
-                    custom: {
-                        reply_content: {
-                            required: 'please enter reply content' // messages can be strings as well.
-                        }
-                    }
-                };
-                this.$validator.localize('en', dict);
-                this.$validator.validateAll().then((result) => {
-                    if(result) {
-                        $('#form_complaint_service_reply').submit();
-                    }
-                })
-                .catch(error => {
-                        console.log(error);
-                });
-            },
-            
-            deleteReply: function (event) {
-                console.log(event.currentTarget.getAttribute('data-id'));
-                this.replyId = '<input type="hidden" name="id" value="' + event.currentTarget.getAttribute('data-id') + '">';
-                $('#modal_remove_complaint_service_reply').modal('show');
-            }
-        }
-    });
-}
-
 if($('#service_index').length > 0) {
     let serviceIndex = new Vue({
         el: '#service_index',
@@ -236,7 +194,7 @@ if($('#service_index').length > 0) {
         if(tagIds.length > 0) {
             const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/filter-service-list';
             serviceIndex.searchStatus = 'Searching...';
-            function filterProducts() {
+            function filterServices() {
                 axios.post(url, {
                     tags: tagIds
                 })
@@ -249,12 +207,12 @@ if($('#service_index').length > 0) {
                     });
             }
             //debounce buat trigger function setelah 1 detik
-            let debounceFunction = _.debounce(filterProducts, 1000);
+            let debounceFunction = _.debounce(filterServices, 1000);
             debounceFunction();
         } else {
             const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/get-service-list';
             serviceIndex.searchStatus = 'Loading...';
-            function getProducts() {
+            function getServices() {
                 axios.get(url).then(response => {
                     serviceIndex.services = response.data.data;
                     serviceIndex.searchStatus = '';
@@ -263,9 +221,141 @@ if($('#service_index').length > 0) {
                 });
             }
             //debounce buat trigger function setelah 1 detik
-            let debounceFunction = _.debounce(getProducts, 1000);
+            let debounceFunction = _.debounce(getServices, 1000);
             debounceFunction();
         }
     });
+}
+
+if($('#complaint_service_list_index').length > 0) {
+    Vue.use(VeeValidate);
+    let complaintServiceListIndex = new Vue({
+        el: '#complaint_service_list_index',
+        data: {
+            complaintService: {
+                systemId: '',
+                customer_rating: '',
+                customer_complaint: '',
+                is_need_call: '',
+                is_urgent: '',
+                customer: [],
+                service: [],
+                serviceCategory: [],
+                tenantId: '',
+                is_answered: '',
+                attachment: '',
+                created_by: '',
+                created_at: ''
+            },
+            complaintReplies: null,
+            showReply: false,
+            showDetail: false,
+            searchStatus: ''
+        },
+        methods: {
+            showComplaintDetail: function (event) {
+                let vm = this;
+                let complaint_id = $(event.currentTarget).data('complaint_id');
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service/' + complaint_id + '/get-complaint-service';
+
+                axios.get(url).then(function (response) {
+                    vm.complaintService.systemId = response.data.data.systemId;
+                    vm.complaintService.customer_rating = response.data.data.customer_rating;
+                    vm.complaintService.customer_complaint = response.data.data.customer_complaint;
+                    vm.complaintService.is_need_call = response.data.data.is_need_call;
+                    vm.complaintService.is_urgent = response.data.data.is_urgent;
+                    vm.complaintService.customer = response.data.data.customer;
+                    vm.complaintService.service = response.data.data.service;
+                    vm.complaintService.serviceCategory = response.data.data.service_category;
+                    vm.complaintService.tenantId = response.data.data.tenant_id;
+                    vm.complaintService.is_answered = response.data.data.is_answered;
+                    vm.complaintService.attachment = response.data.data.attachment;
+                    vm.complaintService.created_at = response.data.data.created_at;
+
+                    if(response.data.data.customer !== null) {
+                        vm.showAllComplaintReplies(response.data.data.systemId);
+                    }
+                })
+                .catch(error => {
+                    alert('something wrong within the process');
+                    console.log(error);
+                });
+                $('#modal_complaint_service_show').modal('show');
+            },
+
+            showAllComplaintReplies: function (complaint_service_id) {
+                let vm = this;
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service_reply/' + complaint_service_id + '/get-complaint-service-replies';
+                this.searchStatus = 'Loading Data...';
+                function getComplaintReplies() {
+                    axios.get(url).then(function (response) {
+                        if(response.data === '') {
+                            vm.complaintReplies = null;
+                            vm.searchStatus = '';
+                        } else {
+                            vm.complaintReplies = response.data;
+                            vm.searchStatus = '';
+                        }
+                    })
+                    .catch(error => {
+                        alert('something wrong within the process');
+                        console.log(error);
+                    });
+                }
+
+                let debounceFunction = _.debounce(getComplaintReplies, 1000);
+                debounceFunction();
+            },
+
+            submitReply: function (event) {
+                const dict = {
+                    custom: {
+                        reply_content: {
+                            required: 'please enter reply content' // messages can be strings as well.
+                        }
+                    }
+                };
+                this.$validator.localize('en', dict);
+                this.$validator.validateAll().then((result) => {
+                    if(result) {
+                        $('#form_complaint_service_reply').submit();
+                    }
+                })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            },
+
+            deleteReply: function (event) {
+                console.log(event.currentTarget.getAttribute('data-id'));
+                this.replyId = '<input type="hidden" name="id" value="' + event.currentTarget.getAttribute('data-id') + '">';
+                $('#modal_remove_complaint_service_reply').modal('show');
+            }
+        }
+    });
+
+    // $('#collapseAllReplies').on('show.bs.collapse', function () {
+    //     let complaint_service_id = complaintServiceListIndex.complaintService.systemId;
+    //     const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service_reply/' + complaint_service_id + '/get-complaint-service-replies';
+    //     complaintServiceListIndex.searchStatus = 'Loading Data...';
+    //     function getComplaintReplies() {
+    //         axios.get(url).then(function (response) {
+    //             if(response.data === '') {
+    //                 complaintServiceListIndex.complaintReplies = null;
+    //                 complaintServiceListIndex.searchStatus = '';
+    //             } else {
+    //                 complaintServiceListIndex.complaintReplies = response.data;
+    //                 complaintServiceListIndex.searchStatus = '';
+    //             }
+    //         })
+    //             .catch(error => {
+    //                 alert('something wrong within the process');
+    //                 console.log(error);
+    //             });
+    //     }
+    //
+    //     let debounceFunction = _.debounce(getComplaintReplies, 1000);
+    //     debounceFunction();
+    // });
 }
 

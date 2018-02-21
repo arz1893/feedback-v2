@@ -31,5 +31,11 @@ Route::get('complaint_product_reply/{complaint_product_id}/get-complaint-product
 Route::get('service/{tenant_id}/get-service-list', 'MasterData\ServiceController@getServiceList');
 Route::post('service/{tenant_id}/filter-service-list', 'MasterData\ServiceController@filterServiceList');
 
+/* Complaint Service List API */
+Route::get('complaint_service/{complaint_id}/get-complaint-service', 'Complaint\ComplaintServiceController@getComplaintService');
+
+/* Complaint Service Replies API */
+Route::get('complaint_service_reply/{complaint_service_id}/get-complaint-service-replies', 'Complaint\ComplaintServiceReplyController@getComplaintServiceReplies');
+
 /* Tag List API */
 Route::get('tag/{tenant_id}/get-tag-list', 'MasterData\TagController@getTagList');

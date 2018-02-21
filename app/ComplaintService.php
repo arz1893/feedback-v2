@@ -23,7 +23,9 @@ class ComplaintService extends Model
         'serviceCategoryId',
         'tenantId',
         'attachment',
-        'is_answered'
+        'is_answered',
+        'syscreator',
+        'sysupdater'
     ];
 
     public function customer() {
@@ -36,6 +38,10 @@ class ComplaintService extends Model
 
     public function service_category() {
         return $this->belongsTo(ServiceCategory::class, 'serviceCategoryId', 'id');
+    }
+
+    public function created_by() {
+        return $this->belongsTo(User::class, 'syscreator', 'systemId');
     }
 
     public function tenant() {

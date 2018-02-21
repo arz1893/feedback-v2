@@ -36,6 +36,10 @@ class ComplaintProductReplyController extends Controller
 
     public function getComplaintProductReplies(Request $request, $complaint_product_id) {
         $complaintProductReplies = ComplaintProductReply::where('complaintProductId', $complaint_product_id)->orderBy('created_at', 'asc')->get();
-        return new ComplaintProductReplyCollection($complaintProductReplies);
+        if(count($complaintProductReplies) > 0) {
+            return new ComplaintProductReplyCollection($complaintProductReplies);
+        } else {
+            return null;
+        }
     }
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Webpatser\Uuid\Uuid;
+use App\Http\Resources\ComplaintService as ComplaintServiceResource;
 
 class ComplaintServiceController extends Controller
 {
@@ -76,5 +77,10 @@ class ComplaintServiceController extends Controller
             ]);
         }
         return redirect()->back()->with('status', 'New complaint has been added, please check your complaint service list');
+    }
+
+    public function getComplaintService(Request $request, $complaint_id) {
+        $complaintService = ComplaintService::findOrFail($complaint_id);
+        return new ComplaintServiceResource($complaintService);
     }
 }

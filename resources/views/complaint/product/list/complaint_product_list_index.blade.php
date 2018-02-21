@@ -90,13 +90,13 @@
                     <td>{!! count($complaintProduct->complaint_product_replies) > 0 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
                     <td>
                         @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
-                            <a href="{{ route('complaint_product_list.show', $complaintProduct->systemId) }}"
-                               class="btn btn-primary"
-                               data-toggle="tooltip"
-                               data-placement="bottom"
-                               title="Answer">
-                                <i class="fa fa-phone"></i>
-                            </a>
+                            {{--<a href="{{ route('complaint_product_list.show', $complaintProduct->systemId) }}"--}}
+                               {{--class="btn btn-primary"--}}
+                               {{--data-toggle="tooltip"--}}
+                               {{--data-placement="bottom"--}}
+                               {{--title="Answer">--}}
+                                {{--<i class="fa fa-phone"></i>--}}
+                            {{--</a>--}}
                             <a href="{{ route('complaint_product_list.edit', $complaintProduct->systemId) }}"
                                class="btn btn-warning"
                                data-toggle="tooltip"

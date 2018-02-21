@@ -110,4 +110,5 @@ class ComplaintServiceListController extends Controller
         $complaintService->update();
         return redirect()->back()->with(['status' => 'Attachment has been deleted']);
     }
+
 }

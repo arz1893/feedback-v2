@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Complaint;
 
 use App\ComplaintService;
 use App\ComplaintServiceReply;
+use App\Http\Resources\ComplaintServiceReplyCollection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -31,5 +32,14 @@ class ComplaintServiceReplyController extends Controller
         $complaintServiceReply = ComplaintServiceReply::findOrFail($request->id);
         $complaintServiceReply->delete();
         return redirect()->back()->with(['status' => 'reply has been deleted']);
+    }
+
+    public function getComplaintServiceReplies(Request $request, $complaint_service_id) {
+        $complaintServiceReplies = ComplaintServiceReply::where('complaintServiceId', $complaint_service_id)->orderBy('created_at', 'asc')->get();
+        if(count($complaintServiceReplies) > 0) {
+            return new ComplaintServiceReplyCollection($complaintServiceReplies);
+        } else {
+            return null;
+        }
     }
 }
