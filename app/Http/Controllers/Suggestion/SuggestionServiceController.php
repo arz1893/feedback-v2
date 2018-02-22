@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Webpatser\Uuid\Uuid;
+use App\Http\Resources\SuggestionService as SuggestionServiceResource;
 
 class SuggestionServiceController extends Controller
 {
@@ -54,7 +55,8 @@ class SuggestionServiceController extends Controller
                 'serviceId' => $request->serviceId,
                 'serviceCategoryId' => $request->serviceCategoryId,
                 'tenantId' => $request->tenantId,
-                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/suggestion_service/' . $request->serviceId . '/' . $filename
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/suggestion_service/' . $request->serviceId . '/' . $filename,
+                'syscreator' => Auth::user()->systemId
             ]);
         } else {
             SuggestionService::create([
@@ -63,10 +65,16 @@ class SuggestionServiceController extends Controller
                 'customerId' => $request->customerId,
                 'serviceId' => $request->serviceId,
                 'serviceCategoryId' => $request->serviceCategoryId,
-                'tenantId' => $request->tenantId
+                'tenantId' => $request->tenantId,
+                'syscreator' => Auth::user()->systemId
             ]);
         }
 
         return redirect('suggestion_service_list')->with('status', 'A new suggestion has been added');
+    }
+
+    public function getSuggestionService(Request $request, $suggestion_service_id) {
+        $suggestionService = SuggestionService::findOrFail($suggestion_service_id);
+        return new SuggestionServiceResource($suggestionService);
     }
 }

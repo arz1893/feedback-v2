@@ -108,10 +108,6 @@ if($('#vue_product_container').length > 0) {
                 $('#attachment').val("");
                 $('#image_cover').val("");
                 this.showAttachment = false;
-            },
-
-            submitFormAttachment: function (event) {
-                $('#form_change_attachment').submit();
             }
         }
     });
@@ -263,7 +259,8 @@ if($('#complaint_product_list_index').length > 0) {
             complaintReplies: null,
             showReply: false,
             showDetail: false,
-            searchStatus: ''
+            searchStatus: '',
+            reply_content: ''
         },
         watch: {
             complaintProduct: function () {
@@ -330,6 +327,7 @@ if($('#complaint_product_list_index').length > 0) {
                 this.replyTo = $('#reply_to').html();
             },
             submitReply: function (event) {
+                let vm = this;
                 const dict = {
                     custom: {
                         reply_content: {
@@ -340,12 +338,32 @@ if($('#complaint_product_list_index').length > 0) {
                 this.$validator.localize('en', dict);
                 this.$validator.validateAll().then((result) => {
                     if(result) {
-                        $('#form_complaint_product_reply').submit();
+                        let complaintProductId  = $('#complaintProductId').val();
+                        let customerId = (($('#customerId').length > 0) ? $('#customerId').val():null);
+                        let reply_content = vm.reply_content;
+                        let creatorId = $('#creatorId').val();
+                        const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product_reply/' + complaintProductId + '/post-reply';
+
+                        axios.post(url, {
+                            complaintProductId: complaintProductId,
+                            customerId: customerId,
+                            reply_content: reply_content,
+                            creatorId: creatorId
+                        }).then(function (response) {
+                            if(response.data.status === true) {
+                                vm.showAllComplaintReplies(complaintProductId);
+                            }
+                        })
+                        .catch(error => {
+                            alert('whoops! there something wrong within the process');
+                            console.log(error);
+                        });
+                        // $('#form_complaint_product_reply').submit();
                     }
                 })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                .catch(error => {
+                    console.log(error);
+                });
             },
 
             deleteReply: function (event) {
@@ -371,11 +389,32 @@ if($('#suggestion_product_list_container').length > 0) {
                 created_by: '',
                 created_at: '',
                 attachment: ''
-            }
+            },
+            searchStatus: ''
         },
         methods: {
-            showSuggestionDetail: function () {
-                
+            showSuggestionDetail: function (event) {
+                let vm = this;
+                let suggestion_id = $(event.currentTarget).data('suggestion_product_id');
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_product/' + suggestion_id + '/get-suggestion-product';
+
+                axios.get(url).then(function (response) {
+                    vm.suggestionProduct.systemId = response.data.data.systemId;
+                    vm.suggestionProduct.customer_suggestion = response.data.data.customer_suggestion;
+                    vm.suggestionProduct.customer = response.data.data.customer;
+                    vm.suggestionProduct.product = response.data.data.product;
+                    vm.suggestionProduct.productCategory = response.data.data.productCategory;
+                    vm.suggestionProduct.tenantId = response.data.data.tenantId;
+                    vm.suggestionProduct.created_by = response.data.data.created_by;
+                    vm.suggestionProduct.created_at = response.data.data.created_at;
+                    vm.suggestionProduct.attachment = response.data.data.attachment;
+                })
+                .catch(error => {
+                    alert('whoops! something wrong within the process');
+                    console.log(error);
+                });
+
+                $('#modal_suggestion_product_show').modal('show');
             }
         }
     });

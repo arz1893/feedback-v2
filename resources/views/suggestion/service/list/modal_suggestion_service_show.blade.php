@@ -1,4 +1,4 @@
-<div id="modal_suggestion_product_show" class="modal fade" tabindex="-1" role="dialog">
+<div id="modal_suggestion_service_show" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,25 +6,25 @@
                 <h4 class="modal-title text-orange">Suggestion Detail</h4>
                 <div>
                     <span class="text-muted">Posted By:</span>
-                    <span class="text-blue"> @{{ suggestionProduct.created_by }} </span>
+                    <span class="text-blue"> @{{ suggestionService.created_by }} </span>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="media">
                     <div class="media-left">
                         <a href="#">
-                            <img class="media-object" v-if="suggestionProduct.product.img !== ''" v-bind:src="suggestionProduct.product.img" width="125px">
+                            <img class="media-object" v-if="suggestionService.service.img !== ''" v-bind:src="suggestionService.service.img" width="125px">
                             <img class="media-object" v-else src="{{ asset('default-images/no-image.jpg') }}" width="125px">
                         </a>
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading text-orange">
-                            @{{ suggestionProduct.product.name }} (@{{ suggestionProduct.productCategory.name }}) <br>
-                            <span class="mailbox-read-time">@{{ suggestionProduct.created_at }}</span>
+                            @{{ suggestionService.service.name }} (@{{ suggestionService.serviceCategory.name }}) <br>
+                            <span class="mailbox-read-time">@{{ suggestionService.created_at }}</span>
                         </h4>
                         <div>Suggestion from:
                             <span id="reply_to" class="text-info">
-                                <span v-if="suggestionProduct.customer !== null">@{{ suggestionProduct.customer.name }}</span>
+                                <span v-if="suggestionService.customer !== null">@{{ suggestionService.customer.name }}</span>
                                 <span v-else> Anonymous </span>
                             </span>
                         </div>
@@ -35,11 +35,11 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <dl>
                             <dt class="text-muted">Suggestion:</dt>
-                            <dd>@{{ suggestionProduct.customer_suggestion }}</dd>
+                            <dd>@{{ suggestionService.customer_suggestion }}</dd>
                         </dl>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <div v-show="suggestionProduct.attachment != null">
+                        <div v-show="suggestionService.attachment != null">
                             <dl>
                                 <dt class="text-muted">Attachment :</dt>
                                 <dd>
@@ -47,7 +47,7 @@
                                         <li style="width: 155px;">
                                             <a>
                                         <span class="mailbox-attachment-icon has-img">
-                                            <img v-bind:src="suggestionProduct.attachment" alt="Attachment">
+                                            <img v-bind:src="suggestionService.attachment" alt="Attachment">
                                         </span>
                                             </a>
                                             <div class="mailbox-attachment-info">

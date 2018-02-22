@@ -42,4 +42,20 @@ class ComplaintProductReplyController extends Controller
             return null;
         }
     }
+
+    public function postReply(Request $request, $complaintProductId) {
+        ComplaintProductReply::create([
+            'systemId' => Uuid::generate(4),
+            'reply_content' => $request->reply_content,
+            'customerId' => $request->customerId,
+            'complaintProductId' => $complaintProductId,
+            'syscreator' => $request->creatorId
+        ]);
+
+        $complaintProduct = ComplaintProduct::findOrFail($request->complaintProductId);
+        $complaintProduct->is_answered = 1;
+        $complaintProduct->update();
+
+        return ['status' => true];
+    }
 }

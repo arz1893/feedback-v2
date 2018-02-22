@@ -400,6 +400,7 @@ class ComposerStaticInit36a9065fed3ad447489d51c2f7b9f87f
         'App\\Http\\Resources\\Service' => __DIR__ . '/../..' . '/app/Http/Resources/Service.php',
         'App\\Http\\Resources\\ServiceCollection' => __DIR__ . '/../..' . '/app/Http/Resources/ServiceCollection.php',
         'App\\Http\\Resources\\SuggestionProduct' => __DIR__ . '/../..' . '/app/Http/Resources/SuggestionProduct.php',
+        'App\\Http\\Resources\\SuggestionService' => __DIR__ . '/../..' . '/app/Http/Resources/SuggestionService.php',
         'App\\Http\\Resources\\Tag' => __DIR__ . '/../..' . '/app/Http/Resources/Tag.php',
         'App\\Http\\Resources\\TagCollection' => __DIR__ . '/../..' . '/app/Http/Resources/TagCollection.php',
         'App\\Http\\Resources\\User' => __DIR__ . '/../..' . '/app/Http/Resources/User.php',

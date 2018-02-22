@@ -76,21 +76,13 @@ class ComplaintProductListController extends Controller
         $file_attachment = $request->file('attachment');
         $filename = $id . '-' . $file_attachment->getClientOriginalName();
 
-        if($complaintProduct->img != null) {
-            if(file_exists(public_path($complaintProduct->attachment))) {
-                unlink(public_path($complaintProduct->attachment));
-                $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/'), $filename);
-                $complaintProduct->update([
-                    'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/' . $filename
-                ]);
-                return redirect()->back()->with(['status' => 'Attachment has been updated']);
-            } else {
-                $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/'), $filename);
-                $complaintProduct->update([
-                    'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/' . $filename
-                ]);
-                return redirect()->back()->with(['status' => 'Attachment has been updated']);
-            }
+        if($complaintProduct->attachment != null) {
+            unlink(public_path($complaintProduct->attachment));
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/'), $filename);
+            $complaintProduct->update([
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/' . $filename
+            ]);
+            return redirect()->back()->with(['status' => 'Attachment has been updated']);
         } else {
             $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/complaint_product/' . $complaintProduct->productId . '/'), $filename);
             $complaintProduct->update([

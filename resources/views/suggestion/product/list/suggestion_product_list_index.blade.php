@@ -5,6 +5,7 @@
 @endpush
 
 @section('content-header')
+    <h3 class="text-orange" style="margin-top: -0.5%;">Suggestion Product List</h3>
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Suggestion Product List</li>
@@ -12,8 +13,6 @@
 @endsection
 
 @section('main-content')
-    <h3 class="text-orange">Suggestion Product List</h3>
-
     @if(\Session::has('status'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -40,12 +39,12 @@
                 <tr>
                     <td>{{ $counter }}</td>
                     <td>
-                        <a href="#!" data-suggestion_product_id="{{ $suggestionProduct->systemId }}">
+                        <a href="#!" data-suggestion_product_id="{{ $suggestionProduct->systemId }}" @click="showSuggestionDetail($event)">
                             {{ $suggestionProduct->created_at->format('d-M-Y') }}
                         </a>
                     </td>
                     <td>
-                        <a href="#!" data-suggestion_product_id="{{ $suggestionProduct->systemId }}">
+                        <a href="#!" data-suggestion_product_id="{{ $suggestionProduct->systemId }}" @click="showSuggestionDetail($event)">
                             @if($suggestionProduct->customerId != null)
                                 {{ $suggestionProduct->customer->name }}
                             @else
@@ -57,13 +56,6 @@
                     <td>{{ $suggestionProduct->product_category->name }}</td>
                     <td>
                         @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
-                            <a href="#!"
-                               class="btn btn-primary"
-                               data-toggle="tooltip"
-                               data-placement="bottom"
-                               title="Answer">
-                                <i class="fa fa-phone"></i>
-                            </a>
                             <a href="{{ route('suggestion_product_list.edit', $suggestionProduct->systemId) }}" class="btn btn-warning">
                                 <i class="ion ion-edit"></i>
                             </a>
@@ -79,6 +71,8 @@
             @endforeach
             </tbody>
         </table>
+
+        @include('suggestion.product.list.modal_suggestion_product_show')
 
         <!-- Modal Remove Suggestion -->
         <div class="modal fade" id="modal_remove_suggestion_product" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

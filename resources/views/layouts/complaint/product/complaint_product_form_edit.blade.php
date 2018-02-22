@@ -2,7 +2,7 @@
     {{ Form::label('customerId', 'Customer') }}
     <div class="input-group input-group-md">
         {{ Form::select('customerId', $selectCustomers, null, ['class' => 'form-control select2-on-edit-customer',
-                                                               'placeholder' => 'Anonymous']) }}
+                                                               'placeholder' => 'Anonymous', 'style' => 'width:100%']) }}
         <span class="input-group-btn">
           <button type="button" class="btn btn-info btn-flat" id="btn_add_customer" data-toggle="modal" data-target="#modal_add_customer">
               <i class="fa fa-plus-circle"></i>

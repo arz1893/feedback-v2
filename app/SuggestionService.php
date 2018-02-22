@@ -20,7 +20,8 @@ class SuggestionService extends Model
         'serviceId',
         'serviceCategoryId',
         'tenantId',
-        'attachment'
+        'attachment',
+        'syscreator'
     ];
 
     public function customer() {
@@ -33,6 +34,10 @@ class SuggestionService extends Model
 
     public function service_category() {
         return $this->belongsTo(ServiceCategory::class, 'serviceCategoryId', 'id');
+    }
+
+    public function created_by() {
+        return $this->belongsTo(User::class, 'syscreator', 'systemId');
     }
 
     public function tenant() {

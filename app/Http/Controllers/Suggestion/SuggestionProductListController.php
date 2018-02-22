@@ -51,7 +51,7 @@ class SuggestionProductListController extends Controller
                 'customer_suggestion' => $request->customer_suggestion,
             ]);
         }
-        return redirect()->route('suggestion_product_list.show', $id)->with('status', 'Suggestion has been updated');
+        return redirect('suggestion_product_list')->with('status', 'Suggestion has been updated');
     }
 
     public function deleteSuggestionProduct(Request $request) {
@@ -61,5 +61,43 @@ class SuggestionProductListController extends Controller
         }
         $suggestionProduct->delete();
         return redirect('suggestion_product_list')->with('status', 'Suggestion has been deleted');
+    }
+
+    public function changeAttachment(Request $request, $id) {
+        $suggestionProduct = SuggestionProduct::findOrFail($id);
+        $file_attachment = $request->file('attachment');
+        $filename = $id . '-' . $file_attachment->getClientOriginalName();
+
+        if($suggestionProduct->attachment != null) {
+            unlink(public_path($suggestionProduct->attachment));
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $suggestionProduct->productId . '/'), $filename);
+            $suggestionProduct->update([
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $suggestionProduct->productId . '/' . $filename
+            ]);
+            return redirect()->back()->with(['status' => 'Attachment has been updated']);
+        } else {
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $suggestionProduct->productId . '/'), $filename);
+            $suggestionProduct->update([
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $suggestionProduct->productId . '/' . $filename
+            ]);
+            return redirect()->back()->with(['status' => 'Attachment has been updated']);
+        }
+    }
+
+    public function deleteAttachment(Request $request) {
+        $suggestionProduct = SuggestionProduct::findOrFail($request->suggestionProductId);
+
+        if(file_exists(public_path($suggestionProduct->attachment))) {
+            unlink(public_path($suggestionProduct->attachment));
+            $suggestionProduct->update([
+                'attachment' => null
+            ]);
+            return redirect()->back()->with(['status' => 'Attachment has been deleted']);
+        } else {
+            $suggestionProduct->update([
+                'attachment' => null
+            ]);
+            return redirect()->back()->with(['status' => 'Attachment has been deleted']);
+        }
     }
 }

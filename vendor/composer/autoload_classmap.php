@@ -75,6 +75,7 @@ return array(
     'App\\Http\\Resources\\Service' => $baseDir . '/app/Http/Resources/Service.php',
     'App\\Http\\Resources\\ServiceCollection' => $baseDir . '/app/Http/Resources/ServiceCollection.php',
     'App\\Http\\Resources\\SuggestionProduct' => $baseDir . '/app/Http/Resources/SuggestionProduct.php',
+    'App\\Http\\Resources\\SuggestionService' => $baseDir . '/app/Http/Resources/SuggestionService.php',
     'App\\Http\\Resources\\Tag' => $baseDir . '/app/Http/Resources/Tag.php',
     'App\\Http\\Resources\\TagCollection' => $baseDir . '/app/Http/Resources/TagCollection.php',
     'App\\Http\\Resources\\User' => $baseDir . '/app/Http/Resources/User.php',

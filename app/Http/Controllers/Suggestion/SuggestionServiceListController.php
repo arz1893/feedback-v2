@@ -62,4 +62,42 @@ class SuggestionServiceListController extends Controller
         $suggestionService->delete();
         return redirect('suggestion_service_list')->with('status', 'Suggestion has been deleted');
     }
+
+    public function changeAttachment(Request $request, $id) {
+        $suggestionService = SuggestionService::findOrFail($id);
+        $file_attachment = $request->file('attachment');
+        $filename = $id . '-' . $file_attachment->getClientOriginalName();
+
+        if($suggestionService->attachment != null) {
+            unlink(public_path($suggestionService->attachment));
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_service/' . $suggestionService->serviceId . '/'), $filename);
+            $suggestionService->update([
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/suggestion_service/' . $suggestionService->serviceId . '/' . $filename
+            ]);
+            return redirect()->back()->with(['status' => 'Attachment has been updated']);
+        } else {
+            $file_attachment->move(public_path('attachment/' . Auth::user()->tenant->email . '/suggestion_service/' . $suggestionService->serviceId . '/'), $filename);
+            $suggestionService->update([
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/suggestion_service/' . $suggestionService->serviceId . '/' . $filename
+            ]);
+            return redirect()->back()->with(['status' => 'Attachment has been updated']);
+        }
+    }
+
+    public function deleteAttachment(Request $request) {
+        $suggestionService = SuggestionService::findOrFail($request->suggestionServiceId);
+
+        if(file_exists(public_path($suggestionService->attachment))) {
+            unlink(public_path($suggestionService->attachment));
+            $suggestionService->update([
+                'attachment' => null
+            ]);
+            return redirect()->back()->with(['status' => 'Attachment has been deleted!']);
+        } else {
+            $suggestionService->update([
+                'attachment' => null
+            ]);
+            return redirect()->back()->with(['status' => 'Attachment has been deleted!']);
+        }
+    }
 }

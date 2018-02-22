@@ -333,29 +333,52 @@ if($('#complaint_service_list_index').length > 0) {
             }
         }
     });
-
-    // $('#collapseAllReplies').on('show.bs.collapse', function () {
-    //     let complaint_service_id = complaintServiceListIndex.complaintService.systemId;
-    //     const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service_reply/' + complaint_service_id + '/get-complaint-service-replies';
-    //     complaintServiceListIndex.searchStatus = 'Loading Data...';
-    //     function getComplaintReplies() {
-    //         axios.get(url).then(function (response) {
-    //             if(response.data === '') {
-    //                 complaintServiceListIndex.complaintReplies = null;
-    //                 complaintServiceListIndex.searchStatus = '';
-    //             } else {
-    //                 complaintServiceListIndex.complaintReplies = response.data;
-    //                 complaintServiceListIndex.searchStatus = '';
-    //             }
-    //         })
-    //             .catch(error => {
-    //                 alert('something wrong within the process');
-    //                 console.log(error);
-    //             });
-    //     }
-    //
-    //     let debounceFunction = _.debounce(getComplaintReplies, 1000);
-    //     debounceFunction();
-    // });
 }
+
+if($('#suggestion_service_list_container').length > 0) {
+    let suggestionServiceList = new Vue({
+        el: '#suggestion_service_list_container',
+        data: {
+            suggestionService: {
+                systemId: '',
+                customer_suggestion: '',
+                customer: [],
+                service: [],
+                serviceCategory: [],
+                tenantId: '',
+                created_by: '',
+                created_at: '',
+                attachment: ''
+            },
+            searchStatus: ''
+        },
+        methods: {
+            showSuggestionDetail: function (event) {
+                let vm = this;
+                let suggestion_id = $(event.currentTarget).data('suggestion_service_id');
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_service/' + suggestion_id + '/get-suggestion-service';
+
+                axios.get(url).then(function (response) {
+                    vm.suggestionService.systemId = response.data.data.systemId;
+                    vm.suggestionService.customer_suggestion = response.data.data.customer_suggestion;
+                    vm.suggestionService.customer = response.data.data.customer;
+                    vm.suggestionService.service = response.data.data.service;
+                    vm.suggestionService.serviceCategory = response.data.data.serviceCategory;
+                    vm.suggestionService.tenantId = response.data.data.tenantId;
+                    vm.suggestionService.created_by = response.data.data.created_by;
+                    vm.suggestionService.created_at = response.data.data.created_at;
+                    vm.suggestionService.attachment = response.data.data.attachment;
+                })
+                    .catch(error => {
+                        alert('whoops! something wrong within the process');
+                        console.log(error);
+                    });
+
+                $('#modal_suggestion_service_show').modal('show');
+            }
+        }
+    });
+}
+
+
 

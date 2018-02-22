@@ -26,6 +26,10 @@ Route::get('complaint_product/{complaint_id}/get-complaint-product', 'Complaint\
 
 /* Complaint Product Replies API */
 Route::get('complaint_product_reply/{complaint_product_id}/get-complaint-product-replies', 'Complaint\ComplaintProductReplyController@getComplaintProductReplies');
+Route::post('complaint_product_reply/{complaint_product_id}/post-reply', 'Complaint\ComplaintProductReplyController@postReply');
+
+/* Suggestion Product List API */
+Route::get('suggestion_product/{suggestion_product_id}/get-suggestion-product', 'Suggestion\SuggestionProductController@getSuggestionProduct');
 
 /* Service List API */
 Route::get('service/{tenant_id}/get-service-list', 'MasterData\ServiceController@getServiceList');
@@ -36,6 +40,9 @@ Route::get('complaint_service/{complaint_id}/get-complaint-service', 'Complaint\
 
 /* Complaint Service Replies API */
 Route::get('complaint_service_reply/{complaint_service_id}/get-complaint-service-replies', 'Complaint\ComplaintServiceReplyController@getComplaintServiceReplies');
+
+/* Suggestion Service List API */
+Route::get('suggestion_service/{suggestion_service_id}/get-suggestion-service', 'Suggestion\SuggestionServiceController@getSuggestionService');
 
 /* Tag List API */
 Route::get('tag/{tenant_id}/get-tag-list', 'MasterData\TagController@getTagList');

@@ -122,28 +122,32 @@
                                     title="Can't reply on anonymous">
                                 <i class="ion ion-chatbubble-working"></i> Reply
                             </button>
+                            {{--<span class="text-green">--}}
+                                {{--<i class="fa fa-check"></i> reply has been added--}}
+                            {{--</span>--}}
                         </div>
-
                         <div class="form-group">
                             <div class="collapse" id="collapseReply">
                                 {{ Form::open(['action' => 'Complaint\ComplaintProductReplyController@store', 'id' => 'form_complaint_product_reply']) }}
-                                <input type="hidden" name="complaintProductId" v-bind:value="complaintProduct.systemId">
-                                <input v-if="complaintProduct.customer !== null" type="hidden" name="customerId" v-bind:value="complaintProduct.customer.systemId">
-                                <div class="" v-bind:class="{'has-error': errors.has('reply_content')}">
-                                <textarea id="reply_content"
-                                          name="reply_content"
-                                          class="form-control"
-                                          placeholder="Content. . ."
-                                          rows="4"
-                                          v-validate="'required'">
-                                </textarea>
-                                    <span class="help-block text-red pull-left" v-show="errors.has('reply_content')">
-                                    @{{ errors.first('reply_content') }}
-                                </span>
-                                    <button @click="submitReply($event)" type="button" class="btn btn-success pull-right" style="margin-top: 2%;">
-                                        Submit <i class="ion ion-android-send"></i>
-                                    </button>
-                                </div>
+                                    <input type="hidden" name="complaintProductId" id="complaintProductId" v-bind:value="complaintProduct.systemId">
+                                    <input v-if="complaintProduct.customer !== null" type="hidden" name="customerId" id="customerId" v-bind:value="complaintProduct.customer.systemId">
+                                    <input type="hidden" name="creatorId" id="creatorId" value="{{ Auth::user()->systemId }}">
+                                    <div class="" v-bind:class="{'has-error': errors.has('reply_content')}">
+                                    <textarea id="reply_content"
+                                              name="reply_content"
+                                              class="form-control"
+                                              placeholder="Content. . ."
+                                              rows="4"
+                                              v-validate="'required'"
+                                              v-model="reply_content">
+                                    </textarea>
+                                        <span class="help-block text-red pull-left" v-show="errors.has('reply_content')">
+                                        @{{ errors.first('reply_content') }}
+                                    </span>
+                                        <button @click="submitReply($event)" type="button" class="btn btn-success pull-right" style="margin-top: 2%;">
+                                            Submit <i class="ion ion-android-send"></i>
+                                        </button>
+                                    </div>
                                 {{ Form::close() }}
                             </div>
                         </div>

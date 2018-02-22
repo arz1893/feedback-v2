@@ -56,7 +56,8 @@ class SuggestionProductController extends Controller
                 'productId' => $request->productId,
                 'productCategoryId' => $request->productCategoryId,
                 'tenantId' => $request->tenantId,
-                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $request->productId . '/' . $filename
+                'attachment' => 'attachment/' . Auth::user()->tenant->email . '/suggestion_product/' . $request->productId . '/' . $filename,
+                'syscreator' => Auth::user()->systemId
             ]);
         } else {
             SuggestionProduct::create([
@@ -65,7 +66,8 @@ class SuggestionProductController extends Controller
                 'customerId' => $request->customerId,
                 'productId' => $request->productId,
                 'productCategoryId' => $request->productCategoryId,
-                'tenantId' => $request->tenantId
+                'tenantId' => $request->tenantId,
+                'syscreator' => Auth::user()->systemId
             ]);
         }
 

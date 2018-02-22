@@ -31,14 +31,17 @@
                 {{ Form::model($complaintProduct, ['method' => 'PATCH', 'action' => ['Complaint\ComplaintProductListController@update', $complaintProduct], 'id' => 'form_edit_complaint_product', 'files' => true]) }}
                 @include('layouts.complaint.product.complaint_product_form_edit', ['submitButtonText' => 'Update Complaint Product'])
                 {{ Form::close() }}
-            </div>
+            </div> <br>
 
             <div class="col-lg-4">
                 {{ Form::open(['action' => ['Complaint\ComplaintProductListController@changeAttachment', $complaintProduct->systemId], 'id' => 'form_change_attachment', 'files' => true]) }}
-                <div class="form-group">
-                    {{ Form::label('attachment', 'Attach a File') }}
-                    {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*', 'v-on:change' => 'submitFormAttachment($event)']) }}
-                </div>
+                    <div class="form-group">
+                        {{ Form::label('attachment', 'Change or add attachment') }}
+                        {{ Form::file('attachment', ['class' => 'form-control-file', 'accept' => 'image/*', 'onchange' => '$("#form_change_attachment").submit()']) }}
+                        @if($complaintProduct->attachment == null)
+                            <p class="help-block">You don't have any attachment yet</p>
+                        @endif
+                    </div>
                 {{ Form::close() }}
 
                 @if($complaintProduct->attachment != null)
