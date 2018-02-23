@@ -27,6 +27,7 @@ Route::get('complaint_product/{complaint_id}/get-complaint-product', 'Complaint\
 /* Complaint Product Replies API */
 Route::get('complaint_product_reply/{complaint_product_id}/get-complaint-product-replies', 'Complaint\ComplaintProductReplyController@getComplaintProductReplies');
 Route::post('complaint_product_reply/{complaint_product_id}/post-reply', 'Complaint\ComplaintProductReplyController@postReply');
+Route::post('complaint_product_reply/delete-reply', 'Complaint\ComplaintProductReplyController@deleteReply');
 
 /* Suggestion Product List API */
 Route::get('suggestion_product/{suggestion_product_id}/get-suggestion-product', 'Suggestion\SuggestionProductController@getSuggestionProduct');
@@ -40,6 +41,8 @@ Route::get('complaint_service/{complaint_id}/get-complaint-service', 'Complaint\
 
 /* Complaint Service Replies API */
 Route::get('complaint_service_reply/{complaint_service_id}/get-complaint-service-replies', 'Complaint\ComplaintServiceReplyController@getComplaintServiceReplies');
+Route::post('complaint_service_reply/{complaint_service_id}/post-reply', 'Complaint\ComplaintServiceReplyController@postReply');
+Route::post('complaint_service_reply/delete-reply', 'Complaint\ComplaintServiceReplyController@deleteReply');
 
 /* Suggestion Service List API */
 Route::get('suggestion_service/{suggestion_service_id}/get-suggestion-service', 'Suggestion\SuggestionServiceController@getSuggestionService');

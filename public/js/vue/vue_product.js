@@ -260,7 +260,8 @@ if($('#complaint_product_list_index').length > 0) {
             showReply: false,
             showDetail: false,
             searchStatus: '',
-            reply_content: ''
+            reply_content: '',
+            showConfirmDelete: false
         },
         watch: {
             complaintProduct: function () {
@@ -285,6 +286,7 @@ if($('#complaint_product_list_index').length > 0) {
                     vm.complaintProduct.tenantId = response.data.data.tenant_id;
                     vm.complaintProduct.is_answered = response.data.data.is_answered;
                     vm.complaintProduct.attachment = response.data.data.attachment;
+                    vm.complaintProduct.created_by = response.data.data.created_by;
                     vm.complaintProduct.created_at = response.data.data.created_at;
 
                     if(response.data.data.customer !== null) {
@@ -358,7 +360,9 @@ if($('#complaint_product_list_index').length > 0) {
                             alert('whoops! there something wrong within the process');
                             console.log(error);
                         });
-                        // $('#form_complaint_product_reply').submit();
+                        $('#collapseReply').collapse('hide');
+                        $('#reply_content').val('');
+                        vm.reply_content = '';
                     }
                 })
                 .catch(error => {
@@ -367,11 +371,33 @@ if($('#complaint_product_list_index').length > 0) {
             },
 
             deleteReply: function (event) {
-                console.log(event.currentTarget.getAttribute('data-id'));
-                this.replyId = '<input type="hidden" name="id" value="' + event.currentTarget.getAttribute('data-id') + '">';
-                $('#modal_remove_complaint_product_reply').modal('show');
+                let vm = this;
+                let complaintProductId = vm.complaintProduct.systemId;
+                let replyId = event.currentTarget.getAttribute('data-id');
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product_reply/delete-reply';
+
+                axios.post(url, {
+                    replyId: replyId
+                })
+                .then(response => {
+                    if(response.data.status === true) {
+                        vm.showAllComplaintReplies(complaintProductId);
+                    }
+                })
+                .catch(error => {
+                    alert('whoops! there is something wrong within the process');
+                    console.log(error)
+                });
             }
         }
+    });
+
+    $('#modal_complaint_product_show').on('hidden.bs.modal', function (e) {
+        $('#collapseReply').collapse('hide');
+        $('#reply_content').val('');
+        complaintProductListIndex.reply_content = '';
+        complaintProductListIndex.complaintReplies = null;
+        $('#collapseAllReplies').collapse('hide');
     });
 }
 

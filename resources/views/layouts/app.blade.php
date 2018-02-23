@@ -167,6 +167,7 @@
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ asset('js/bootstrap/bootstrap.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/bootstrap/tooltip.js') }}" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('js/admin-lte/adminlte.min.js') }}" type="text/javascript"></script>
     <!-- Vue JS -->

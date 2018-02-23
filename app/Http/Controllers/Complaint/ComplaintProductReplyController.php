@@ -28,12 +28,6 @@ class ComplaintProductReplyController extends Controller
         return redirect()->back()->with(['status' => 'A new complaint has been added']);
     }
 
-    public function deleteReply(Request $request) {
-        $complaintProductReply = ComplaintProductReply::findOrFail($request->id);
-        $complaintProductReply->delete();
-        return redirect()->back()->with(['status' => 'Reply has been deleted']);
-    }
-
     public function getComplaintProductReplies(Request $request, $complaint_product_id) {
         $complaintProductReplies = ComplaintProductReply::where('complaintProductId', $complaint_product_id)->orderBy('created_at', 'asc')->get();
         if(count($complaintProductReplies) > 0) {
@@ -44,7 +38,7 @@ class ComplaintProductReplyController extends Controller
     }
 
     public function postReply(Request $request, $complaintProductId) {
-        ComplaintProductReply::create([
+        $complaintProductReply = ComplaintProductReply::create([
             'systemId' => Uuid::generate(4),
             'reply_content' => $request->reply_content,
             'customerId' => $request->customerId,
@@ -52,10 +46,20 @@ class ComplaintProductReplyController extends Controller
             'syscreator' => $request->creatorId
         ]);
 
-        $complaintProduct = ComplaintProduct::findOrFail($request->complaintProductId);
-        $complaintProduct->is_answered = 1;
-        $complaintProduct->update();
+        if($complaintProductReply) {
+            $complaintProduct = ComplaintProduct::findOrFail($request->complaintProductId);
+            $complaintProduct->is_answered = 1;
+            $complaintProduct->update();
 
+            return ['status' => true];
+        } else {
+            return ['status' => false];
+        }
+    }
+
+    public function deleteReply(Request $request) {
+        $complaintProductReply = ComplaintProductReply::findOrFail($request->replyId);
+        $complaintProductReply->delete();
         return ['status' => true];
     }
 }

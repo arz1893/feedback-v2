@@ -142,8 +142,8 @@
                                               v-model="reply_content">
                                     </textarea>
                                         <span class="help-block text-red pull-left" v-show="errors.has('reply_content')">
-                                        @{{ errors.first('reply_content') }}
-                                    </span>
+                                            @{{ errors.first('reply_content') }}
+                                        </span>
                                         <button @click="submitReply($event)" type="button" class="btn btn-success pull-right" style="margin-top: 2%;">
                                             Submit <i class="ion ion-android-send"></i>
                                         </button>
@@ -189,18 +189,23 @@
                                 </div>
                                 <div class="panel-body">
                                     <p>@{{ complaintReply.reply_content }}</p>
-                                    <button class="btn btn-sm btn-danger"
-                                            @click="deleteReply($event)">
+                                    <button v-bind:data-id="complaintReply.systemId" class="btn btn-sm btn-danger" onclick="$('div#'+$(this).data('id')).toggleClass('invisible')">
                                         <i class="fa fa-trash-o"></i>
                                     </button>
-                                    <button class="btn btn-sm btn-warning">
-                                        <i class="fa fa-pencil-square-o"></i>
-                                    </button>
+                                    <div class="inline invisible" v-bind:id="complaintReply.systemId">
+                                        Delete this Reply ?
+                                        <a role="button" v-bind:data-id="complaintReply.systemId" onclick="$('div#'+$(this).data('id')).addClass('invisible')">
+                                            <span class="label label-default">No</span>
+                                        </a>
+                                        <a role="button" v-bind:data-id="complaintReply.systemId" @click="deleteReply($event)">
+                                            <span class="label label-danger">Yes</span>
+                                        </a>
+                                    </div>
                                 </div><!-- /panel-body -->
                                 <div class="panel-footer">
-                            <span class="text-muted">
-                                Replied at @{{ complaintReply.created_at }}
-                            </span>
+                                    <span class="text-muted">
+                                        Replied at @{{ complaintReply.created_at }}
+                                    </span>
                                 </div>
                             </div><!-- /panel panel-default -->
                         </div>

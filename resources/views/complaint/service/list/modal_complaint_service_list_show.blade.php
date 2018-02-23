@@ -127,22 +127,24 @@
                         <div class="form-group">
                             <div class="collapse" id="collapseReply">
                                 {{ Form::open(['action' => 'Complaint\ComplaintServiceReplyController@store', 'id' => 'form_complaint_service_reply']) }}
-                                <input type="hidden" name="complaintServiceId" v-bind:value="complaintService.systemId">
-                                <input v-if="complaintService.customer !== null" type="hidden" name="customerId" v-bind:value="complaintService.customer.systemId">
+                                <input type="hidden" name="complaintServiceId" id="complaintServiceId" v-bind:value="complaintService.systemId">
+                                <input v-if="complaintService.customer !== null" type="hidden" name="customerId" id="customerId" v-bind:value="complaintService.customer.systemId">
+                                <input type="hidden" name="creatorId" id="creatorId" value="{{ Auth::user()->systemId }}">
                                 <div class="" v-bind:class="{'has-error': errors.has('reply_content')}">
                                 <textarea id="reply_content"
                                           name="reply_content"
                                           class="form-control"
                                           placeholder="Content. . ."
                                           rows="4"
-                                          v-validate="'required'">
+                                          v-validate="'required'"
+                                          v-model="reply_content">
                                 </textarea>
-                                    <span class="help-block text-red pull-left" v-show="errors.has('reply_content')">
-                                        @{{ errors.first('reply_content') }}
-                                    </span>
-                                    <button @click="submitReply($event)" type="button" class="btn btn-success pull-right" style="margin-top: 2%;">
-                                        Submit <i class="ion ion-android-send"></i>
-                                    </button>
+                                <span class="help-block text-red pull-left" v-show="errors.has('reply_content')">
+                                    @{{ errors.first('reply_content') }}
+                                </span>
+                                <button @click="submitReply($event)" type="button" class="btn btn-success pull-right" style="margin-top: 2%;">
+                                    Submit <i class="ion ion-android-send"></i>
+                                </button>
                                 </div>
                                 {{ Form::close() }}
                             </div>
@@ -185,13 +187,18 @@
                                     </div>
                                     <div class="panel-body">
                                         <p>@{{ complaintReply.reply_content }}</p>
-                                        <button class="btn btn-sm btn-danger"
-                                                @click="deleteReply($event)">
+                                        <button v-bind:data-id="complaintReply.systemId" class="btn btn-sm btn-danger" onclick="$('div#'+$(this).data('id')).toggleClass('invisible')">
                                             <i class="fa fa-trash-o"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-warning">
-                                            <i class="fa fa-pencil-square-o"></i>
-                                        </button>
+                                        <div class="inline invisible" v-bind:id="complaintReply.systemId">
+                                            <span class="text-orange">Delete this Reply ?</span>
+                                            <a role="button" v-bind:data-id="complaintReply.systemId" onclick="$('div#'+$(this).data('id')).addClass('invisible')">
+                                                <span class="label label-default">No</span>
+                                            </a>
+                                            <a role="button" v-bind:data-id="complaintReply.systemId" @click="deleteReply($event)">
+                                                <span class="label label-danger">Yes</span>
+                                            </a>
+                                        </div>
                                     </div><!-- /panel-body -->
                                     <div class="panel-footer">
                                         <span class="text-muted">

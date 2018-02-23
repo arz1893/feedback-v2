@@ -28,18 +28,42 @@ class ComplaintServiceReplyController extends Controller
         return redirect()->back()->with(['status' => 'complaint has been replied']);
     }
 
-    public function deleteReply(Request $request) {
-        $complaintServiceReply = ComplaintServiceReply::findOrFail($request->id);
-        $complaintServiceReply->delete();
-        return redirect()->back()->with(['status' => 'reply has been deleted']);
-    }
-
     public function getComplaintServiceReplies(Request $request, $complaint_service_id) {
         $complaintServiceReplies = ComplaintServiceReply::where('complaintServiceId', $complaint_service_id)->orderBy('created_at', 'asc')->get();
         if(count($complaintServiceReplies) > 0) {
             return new ComplaintServiceReplyCollection($complaintServiceReplies);
         } else {
             return null;
+        }
+    }
+
+    public function postReply(Request $request, $complaint_service_id) {
+        $complaintServiceReply = ComplaintServiceReply::create([
+            'systemId' => Uuid::generate(4),
+            'reply_content' => $request->reply_content,
+            'customerId' => $request->customerId,
+            'complaintServiceId' => $complaint_service_id,
+            'syscreator' => $request->creatorId
+        ]);
+
+        if($complaintServiceReply) {
+            $complaintService = ComplaintService::findOrFail($request->complaintServiceId);
+            $complaintService->is_answered = 1;
+            $complaintService->update();
+
+            return ['status' => true];
+        } else {
+            return  ['status' => false];
+        }
+    }
+
+    public function deleteReply(Request $request) {
+        $complaintServiceReply = ComplaintServiceReply::findOrFail($request->replyId);
+        $is_deleted = $complaintServiceReply->delete();
+        if($is_deleted) {
+            return ['status' => true];
+        } else {
+            return ['status' => false];
         }
     }
 }

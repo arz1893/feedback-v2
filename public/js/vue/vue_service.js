@@ -247,6 +247,7 @@ if($('#complaint_service_list_index').length > 0) {
                 created_by: '',
                 created_at: ''
             },
+            reply_content: '',
             complaintReplies: null,
             showReply: false,
             showDetail: false,
@@ -308,6 +309,7 @@ if($('#complaint_service_list_index').length > 0) {
             },
 
             submitReply: function (event) {
+                let vm = this;
                 const dict = {
                     custom: {
                         reply_content: {
@@ -318,21 +320,65 @@ if($('#complaint_service_list_index').length > 0) {
                 this.$validator.localize('en', dict);
                 this.$validator.validateAll().then((result) => {
                     if(result) {
-                        $('#form_complaint_service_reply').submit();
+                        let complaint_service_id = $('#complaintServiceId').val();
+                        let customerId = (($('#customerId').length > 0) ? $('#customerId').val():null);
+                        let reply_content = vm.reply_content;
+                        let creatorId = $('#creatorId').val();
+                        const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service_reply/' + complaint_service_id + '/post-reply';
+
+                        axios.post(url, {
+                            complaintServiceId: complaint_service_id,
+                            reply_content: reply_content,
+                            customerId: customerId,
+                            creatorId: creatorId
+                        })
+                        .then(response => {
+                            if(response.data.status === true) {
+                                vm.showAllComplaintReplies(complaint_service_id);
+                            }
+                        })
+                        .catch(error => {
+                            alert('whoops! there something wrong within the process');
+                            console.log(error);
+                        });
+                        vm.reply_content = '';
+                        $('#reply_content').val('');
+                        $('#collapseReply').collapse('hide');
                     }
                 })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                .catch(error => {
+                    console.log(error);
+                });
             },
 
             deleteReply: function (event) {
-                console.log(event.currentTarget.getAttribute('data-id'));
-                this.replyId = '<input type="hidden" name="id" value="' + event.currentTarget.getAttribute('data-id') + '">';
-                $('#modal_remove_complaint_service_reply').modal('show');
+                let vm = this;
+                let complaintServiceId = vm.complaintService.systemId;
+                let replyId = event.currentTarget.getAttribute('data-id');
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service_reply/delete-reply';
+
+                axios.post(url, {
+                    replyId: replyId
+                })
+                .then(response => {
+                    if(response.data.status === true) {
+                        vm.showAllComplaintReplies(complaintServiceId);
+                    }
+                })
+                .catch(error => {
+
+                });
             }
         }
     });
+
+    $('#modal_complaint_service_show').on('hidden.bs.modal', function (e) {
+        $('#collapseReply').collapse('hide');
+        $('#reply_content').val('');
+        complaintServiceListIndex.reply_content = '';
+        complaintServiceListIndex.complaintReplies = null;
+        $('#collapseAllReplies').collapse('hide');
+    })
 }
 
 if($('#suggestion_service_list_container').length > 0) {
