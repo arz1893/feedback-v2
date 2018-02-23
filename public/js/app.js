@@ -81,12 +81,7 @@ $(document).ready(function () {
             { "width": "5%", "targets": 0 },
             {
                 "width": "10%",
-                "targets": 1,
-                "render": function(data, type, row) {
-                    return data.length > 100 ?
-                        data.substr( 0, 200 ) +'…' :
-                        data;
-                }
+                "targets": 1
             },
             { "width": "8%", "targets": 5 },
             { "width": "8%", "targets": 6 },

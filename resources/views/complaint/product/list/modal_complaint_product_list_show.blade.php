@@ -193,7 +193,7 @@
                                         <i class="fa fa-trash-o"></i>
                                     </button>
                                     <div class="inline invisible" v-bind:id="complaintReply.systemId">
-                                        Delete this Reply ?
+                                        <span class="text-orange">Delete this Reply ?</span>
                                         <a role="button" v-bind:data-id="complaintReply.systemId" onclick="$('div#'+$(this).data('id')).addClass('invisible')">
                                             <span class="label label-default">No</span>
                                         </a>
