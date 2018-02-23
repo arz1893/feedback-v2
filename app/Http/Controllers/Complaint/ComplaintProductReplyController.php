@@ -59,7 +59,17 @@ class ComplaintProductReplyController extends Controller
 
     public function deleteReply(Request $request) {
         $complaintProductReply = ComplaintProductReply::findOrFail($request->replyId);
-        $complaintProductReply->delete();
-        return ['status' => true];
+        $complaintProduct = ComplaintProduct::findOrFail($complaintProductReply->complaintProductId);
+
+        if(count($complaintProduct->complaint_product_replies) == 0) {
+            $complaintProduct->is_answered = 0;
+        }
+
+        $is_deleted = $complaintProductReply->delete();
+        if($is_deleted) {
+            return ['status' => true];
+        } else {
+            return ['status' => false];
+        }
     }
 }

@@ -59,6 +59,12 @@ class ComplaintServiceReplyController extends Controller
 
     public function deleteReply(Request $request) {
         $complaintServiceReply = ComplaintServiceReply::findOrFail($request->replyId);
+        $complaintService = ComplaintService::findOrFail($complaintServiceReply->complaintServiceId);
+
+        if(count($complaintService->complaint_service_replies) == 0) {
+            $complaintService->is_answered = 0;
+        }
+
         $is_deleted = $complaintServiceReply->delete();
         if($is_deleted) {
             return ['status' => true];

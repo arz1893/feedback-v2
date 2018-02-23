@@ -10,7 +10,6 @@
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="{{ route('complaint_product_list.index') }}"><i class="ion ion-clipboard"></i>Complaint Product List</a></li>
-        <li><a href="{{ route('complaint_product_list.show', $complaintProduct->systemId) }}"><i class="ion ion-ios-search"></i>Complaint Product Detail</a></li>
         <li class="active">Edit Complaint Product</li>
     </ol>
 @endsection

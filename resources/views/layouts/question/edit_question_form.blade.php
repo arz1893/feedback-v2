@@ -5,9 +5,8 @@
         </div>
         <div class="col-lg-6 col-md-6">
             <div class="input-group input-group-md">
-                {{ Form::select('customerId', $selectCustomers, null, ['class' => 'form-control selectpicker',
-                                                                       'placeholder' => 'Anonymous',
-                                                                       'data-live-search' => 'true']) }}
+                {{ Form::select('customerId', $selectCustomers, null, ['class' => 'form-control select2',
+                                                                       'placeholder' => 'Anonymous', 'style' => 'width:100%']) }}
                 <span class="input-group-btn">
                   <button type="button" class="btn btn-info btn-flat" id="btn_add_customer" data-toggle="modal" data-target="#modal_add_customer">
                       <i class="fa fa-plus-circle"></i>

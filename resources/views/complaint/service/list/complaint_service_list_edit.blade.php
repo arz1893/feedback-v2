@@ -10,7 +10,6 @@
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="{{ route('complaint_service_list.index') }}"><i class="ion ion-clipboard"></i>Complaint Service List</a></li>
-        <li><a href="{{ route('complaint_service_list.show', $complaintService->systemId) }}"><i class="ion ion-ios-search"></i>Complaint Service Detail</a></li>
         <li class="active">Edit Complaint Service</li>
     </ol>
 @endsection
