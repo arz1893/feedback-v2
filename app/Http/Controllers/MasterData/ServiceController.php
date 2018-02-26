@@ -117,8 +117,10 @@ class ServiceController extends Controller
 
     public function deleteService(Request $request) {
         $service = Service::findOrFail($request->service_id);
-        if(file_exists(public_path($service->img))) {
-            unlink(public_path($service->img));
+        if($service->img != null) {
+            if(file_exists(public_path($service->img))) {
+                unlink(public_path($service->img));
+            }
         }
         $service->delete();
         return redirect('service')->with('status', 'Service has been deleted');

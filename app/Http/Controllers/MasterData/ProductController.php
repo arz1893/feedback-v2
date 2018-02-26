@@ -119,8 +119,10 @@ class ProductController extends Controller
 
     public function deleteProduct(Request $request) {
         $product = Product::findOrFail($request->product_id);
-        if(file_exists(public_path($product->img))) {
-            unlink(public_path($product->img));
+        if($product->img != null) {
+            if(file_exists(public_path($product->img))) {
+                unlink(public_path($product->img));
+            }
         }
         $product->delete();
         return redirect('product')->with('status', 'Product has been deleted');
