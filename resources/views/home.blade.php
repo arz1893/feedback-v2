@@ -163,7 +163,7 @@
 
                     <ul class="treeview-menu">
                         <li><a href="{{ route('complaint_product_report.index') }}"><i class="fa fa-bar-chart"></i> Complaint Product Report</a></li>
-                        <li><a href="#!"><i class="fa fa-bar-chart"></i> Complaint Service Report</a></li>
+                        <li><a href="{{ route('complaint_service_report.index') }}"><i class="fa fa-bar-chart"></i> Complaint Service Report</a></li>
                     </ul>
                 </li>
 

@@ -175,5 +175,9 @@ Route::post('register/via-invitation/{id}', 'Auth\RegisterController@registerVia
 /* end of user management */
 
 /* Complaint Product Report Routes */
-Route::resource('complaint_product_report', 'Report\ComplaintProductReport');
+Route::resource('complaint_product_report', 'Report\ComplaintProductReportController');
 /* end of complaint product routes */
+
+/* Complaint Service Report Routes */
+Route::resource('complaint_service_report', 'Report\ComplaintServiceReportController');
+/* end of complaint service routes */

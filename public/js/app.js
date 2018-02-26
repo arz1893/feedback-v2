@@ -103,15 +103,7 @@ $(document).ready(function () {
         bLengthChange: false,
         iDisplayLength: 20,
         columnDefs: [
-            {
-                "width": "10%",
-                "targets": 1,
-                "render": function(data, type, row) {
-                    return data.length > 100 ?
-                        data.substr( 0, 200 ) +'…' :
-                        data;
-                }
-            }
+            {"width": "5%","targets": 0}
         ]
     });
 

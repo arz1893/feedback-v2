@@ -1,6 +1,6 @@
-if($('#complaint_product_chart').length > 0) {
-    let ctx = document.getElementById('complaint_product_chart');
-    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product_report/get-all-statistic';
+if($('#complaint_service_chart').length > 0) {
+    let ctx = document.getElementById('complaint_service_chart');
+    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service_report/get-all-statistic';
     let complaintPerMonth = [];
     axios.get(url).then(response => {
         complaintPerMonth = response.data;
@@ -33,8 +33,8 @@ if($('#complaint_product_chart').length > 0) {
             }
         });
     })
-    .catch(error => {
-        console.log(error);
-    });
+        .catch(error => {
+            console.log(error);
+        });
 
 }
