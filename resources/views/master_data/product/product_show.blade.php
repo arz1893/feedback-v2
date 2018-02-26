@@ -58,7 +58,11 @@
 
         <div class="collapse" id="product_description" style="margin-top: 2%">
             <div class="well text-justify">
-                {{ $product->description }}
+                @if($product->description != null)
+                    {{ $product->description }}
+                @else
+                    This product doesn't have any description yet
+                @endif
             </div>
         </div>
 

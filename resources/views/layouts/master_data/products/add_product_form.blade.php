@@ -21,6 +21,7 @@
         <div class="form-group">
             {{ Form::label('metric', 'Product\'s metric') }}
             {{ Form::select('metric', [
+                    'Porsi' => 'Porsi',
                     'Pcs' => 'Pcs',
                     'Kg' => 'Kg',
                     'Meter' => 'Meter'

@@ -17,7 +17,7 @@ class Product extends Resource
         return [
             'systemId' => $this->systemId,
             'name' => $this->name,
-            'img' => asset($this->img),
+            'img' => ($this->img == null ? asset('default-images/no-image.jpg'):asset($this->img)),
             'productTags' => $this->tags,
             'show_faq_url' => route('faq_product.show', $this->systemId),
             'show_complaint_url' => route('show_complaint_product', [$this->systemId, 0]),

@@ -81,7 +81,6 @@ $(document).ready(function () {
 
         rules: {
             name: 'required',
-            description: 'required',
             metric: {
                 required: true
             },
@@ -89,14 +88,10 @@ $(document).ready(function () {
                 required: true,
                 number: true,
                 min: 0
-            },
-            image_cover: {
-                required: true
             }
         },
         messages: {
             name: 'please enter your product name',
-            description: 'please enter your product description',
             metric: {
                 required: 'please choose product\'s metric unit'
             },
@@ -104,9 +99,6 @@ $(document).ready(function () {
                 required: 'please inster product\'s price',
                 number: 'price must be numeric',
                 min: 'price must be positive number'
-            },
-            image_cover: {
-                required: 'please insert your product picture'
             }
         }
     });

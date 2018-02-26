@@ -17,7 +17,7 @@ class Service extends Resource
         return [
             'systemId' => $this->systemId,
             'name' => $this->name,
-            'img' => $this->img,
+            'img' => ($this->img == null ? asset('default-images/no-image.jpg'):asset($this->img)),
             'serviceTags' => $this->tags,
             'show_faq_url' => route('faq_service.show', $this->systemId),
             'show_complaint_url' => route('show_complaint_service', [$this->systemId, 0]),
