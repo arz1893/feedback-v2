@@ -12,7 +12,7 @@ if($('#complaint_product_chart').length > 0) {
                 datasets: [{
                     label: 'Complaint',
                     data: complaintPerMonth,
-                    backgroundColor: 'orange',
+                    backgroundColor: 'maroon',
                     borderColor: 'rgba(255,99,132,1)',
                     borderWidth: 1
                 }]

@@ -21,8 +21,7 @@
                         <p>You can reset your password here.</p>
                         <div class="panel-body">
 
-                            {!! Form::open(['url' => 'password/email', 'method' => 'POST']) !!}
-
+                            {!! Form::open(['url' => 'password/email/', 'method' => 'POST']) !!}
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
@@ -30,8 +29,8 @@
                                     </div>
                                     @if ($errors->has('email'))
                                         <span class="help-block text-red">
-                                                <strong>{{ $errors->first('email') }}</strong>
-                                            </span>
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
 

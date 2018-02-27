@@ -3,13 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2" style="margin-top: 5%">
             <div class="panel panel-default">
                 <div class="panel-heading">Reset Password</div>
 
                 <div class="panel-body">
-                    {{--<form class="form-horizontal" method="POST" action="{{ route('password.request') }}">--}}
-                    {!! Form::open(['url' => 'password/reset', 'method' => 'POST']) !!}
+                    <form class="form-horizontal" method="POST" action="{{ url('password/reset') }}">
 
                         <input type="hidden" name="token" value="{{ $token }}">
 
@@ -62,7 +61,7 @@
                                 </button>
                             </div>
                         </div>
-                    {!! Form::close() !!}
+                    </form>
                 </div>
             </div>
         </div>

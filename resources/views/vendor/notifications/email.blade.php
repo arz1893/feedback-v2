@@ -30,7 +30,7 @@
             $color = 'blue';
     }
 ?>
-@component('mail::button', ['url' => route('password.reset'), 'color' => $color])
+@component('mail::button', ['url' => route('password.reset', csrf_token()), 'color' => $color])
 {{ $actionText }}
 @endcomponent
 @endisset

@@ -15,12 +15,12 @@ use Webpatser\Uuid\Uuid;
 class UserController extends Controller
 {
     public function index() {
-        $users = User::where('tenantId', Auth::user()->tenantId)->get();
+        $users = User::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'asc')->get();
         return view('user.user_index', compact('users'));
     }
 
     public function create() {
-        $userGroups = UserGroup::where('recOwner', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
+        $userGroups = UserGroup::orderBy('name', 'asc')->pluck('name', 'systemId');
         return view('user.user_add', compact('userGroups'));
     }
 

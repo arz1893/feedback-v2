@@ -88,11 +88,7 @@ class RegisterController extends Controller
         ]);
 
 
-        $userGroup = UserGroup::create([
-            'systemId' => Uuid::generate(4),
-            'name' => 'Administrator',
-            'recOwner' => $tenant->systemId
-        ]);
+        $userGroup = UserGroup::where('name', 'Administrator')->first();
 
         $user = User::create([
             'systemId' => Uuid::generate(4),

@@ -22,6 +22,13 @@
                     <label for="txt_password">Password</label>
                     <input type="password" name="password" id="txt_password" class="form-control" placeholder="Enter your password">
                 </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember"> Remember me ?
+                        </label>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xs-8">
                         <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
