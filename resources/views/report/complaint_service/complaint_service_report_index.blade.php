@@ -14,13 +14,13 @@
         <!-- Heading Row -->
         <div class="row">
             <!-- /.col-md-8 -->
-            <div class="col-md-5">
+            <div class="col-lg-6 col-md-4 col-sm-4">
+                <img class="img-responsive img-rounded" src="{{ asset('default-images/37.svg') }}">
+            </div>
+
+            <div class="col-md-5 col-sm-4">
                 <h4 class="text-info">Welcome to Complaint Service Report</h4>
                 <p align="justify">This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-            </div>
-            <!-- /.col-md-4 -->
-            <div class="col-md-7">
-                <img class="img-responsive img-rounded" src="{{ asset('default-images/37.svg') }}" style="width: 900px; height: 350px;">
             </div>
         </div>
         <!-- /.row -->
