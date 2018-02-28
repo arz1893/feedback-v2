@@ -2,7 +2,10 @@ if($('#complaint_product_chart').length > 0) {
     let ctx = document.getElementById('complaint_product_chart');
     const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product_report/get-all-statistic/' + new Date().getFullYear();
     let complaintPerMonth = [];
-    axios.get(url).then(response => {
+    let tenantId = $('#tenant_id').val();
+    axios.post(url, {
+        tenantId: tenantId
+    }).then(response => {
         complaintPerMonth = response.data;
 
         if(complaintPerMonth !== null) {

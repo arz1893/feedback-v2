@@ -14,6 +14,7 @@
 @endsection
 
 @section('main-content')
+    {{ Form::hidden('tenant_id', Auth::user()->tenantId, ['id' => 'tenant_id']) }}
     <div class="row">
         <div class="col-lg-6">
             <div class="btn-group" role="group" aria-label="...">
