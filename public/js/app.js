@@ -122,17 +122,9 @@ $(document).ready(function () {
         }
     });
 
-    let data = [];
-    for (let i=2000;i<=parseInt(new Date().getFullYear());i++) {
-        data.push({id: i, text: i});
-    }
     $('.select2-year').select2({
         theme: 'bootstrap',
-        data: data,
-        placeholder: {
-            id: '-1', // the value of the option
-            text: 'Select Year'
-        }
+        placeholder: "Choose..."
     });
 
     $('.select2-tag').select2({

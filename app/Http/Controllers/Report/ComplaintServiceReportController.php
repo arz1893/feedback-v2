@@ -19,4 +19,8 @@ class ComplaintServiceReportController extends Controller
         }
         return $complaintPerMonth;
     }
+
+    public function showMonthlyGraph(Request $request) {
+        return view('report.complaint_service.complaint_service_report_monthly');
+    }
 }

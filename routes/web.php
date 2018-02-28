@@ -175,9 +175,11 @@ Route::post('register/via-invitation/{id}', 'Auth\RegisterController@registerVia
 /* end of user management */
 
 /* Complaint Product Report Routes */
+Route::get('complaint_product_report/monthly', 'Report\ComplaintProductReportController@showMonthlyGraph')->name('product_report_monthly');
 Route::resource('complaint_product_report', 'Report\ComplaintProductReportController');
 /* end of complaint product routes */
 
 /* Complaint Service Report Routes */
+Route::get('complaint_service_report/monthly', 'Report\ComplaintServiceReportController@showMonthlyGraph')->name('service_report_monthly');
 Route::resource('complaint_service_report', 'Report\ComplaintServiceReportController');
 /* end of complaint service routes */

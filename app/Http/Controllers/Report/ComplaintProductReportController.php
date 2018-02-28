@@ -12,11 +12,20 @@ class ComplaintProductReportController extends Controller
         return view('report.complaint_product.complaint_product_report_index');
     }
 
-    public function getAllStatistic(Request $request) {
+    public function showMonthlyGraph(Request $request) {
+        return view('report.complaint_product.complaint_product_report_monthly');
+    }
+
+    public function getAllStatistic(Request $request, $year) {
         $complaintPerMonth = [];
         for($i=1;$i<=12;$i++) {
-            array_push($complaintPerMonth, count(ComplaintProduct::whereMonth('created_at', '=', $i)->get()));
+            array_push($complaintPerMonth, count(ComplaintProduct::whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $i)->get()));
         }
-        return $complaintPerMonth;
+
+        if(count($complaintPerMonth) > 0) {
+            return $complaintPerMonth;
+        } else {
+            return null;
+        }
     }
 }

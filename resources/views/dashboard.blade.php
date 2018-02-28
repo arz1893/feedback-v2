@@ -88,68 +88,13 @@
             <!-- /.info-box -->
         </div>
     </a>
-
-
 </div>
 <!-- /.row -->
-
-{{--<div class="row">--}}
-    {{--<section class="content-header">--}}
-        {{--<div class="page-header">--}}
-            {{--<h2>List</h2>--}}
-        {{--</div>--}}
-    {{--</section>--}}
-
-    {{--<div class="content">--}}
-        {{--<div class="row">--}}
-            {{--<div class="col-lg-3 col-sm-6 col-md-4">--}}
-                {{--<div class="thumbnail">--}}
-                    {{--<img src="{{ asset('default-images/complaint-image.jpg') }}" style="height: 175px;">--}}
-                    {{--<div class="caption">--}}
-                        {{--<h4>List of complaints</h4>--}}
-                        {{--<small>Choose which list you want to see</small>--}}
-                        {{--<p>--}}
-                            {{--<a href="{{ route('complaint_product_list.index') }}" class="btn btn-flat bg-red" role="button">Product</a>--}}
-                            {{--<a href="{{ route('complaint_service_list.index') }}" class="btn btn-flat bg-red" role="button">Service</a>--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-            {{--<div class="col-lg-3 col-sm-6 col-md-4">--}}
-                {{--<div class="thumbnail">--}}
-                    {{--<img src="{{ asset('default-images/suggestion-image.png') }}" style="height: 175px;">--}}
-                    {{--<div class="caption">--}}
-                        {{--<h4>List of suggestions</h4>--}}
-                        {{--<small>Choose which list you want to see</small>--}}
-                        {{--<p>--}}
-                            {{--<a href="{{ route('suggestion_product_list.index') }}" class="btn btn-flat bg-orange" role="button">Product</a>--}}
-                            {{--<a href="{{ route('suggestion_service_list.index') }}" class="btn btn-flat bg-orange" role="button">Service</a>--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-            {{--<div class="col-lg-3 col-sm-6 col-md-4">--}}
-                {{--<div class="thumbnail">--}}
-                    {{--<img src="{{ asset('default-images/questions-image.jpg') }}" style="height: 175px;">--}}
-                    {{--<div class="caption">--}}
-                        {{--<h4>List of questions</h4>--}}
-                        {{--<small>Click here to see all questions</small>--}}
-                        {{--<p>--}}
-                            {{--<a href="{{ route('question_list.index') }}" class="btn btn-flat bg-green" role="button">Show Questions</a>--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</div>--}}
 
 <div class="row">
     <section class="content-header">
         <div class="page-header">
-            <h2>Master Data <small>All of main data source</small></h2>
+            <h3>Master Data <small>All of main data source</small></h3>
         </div>
     </section>
     <div class="content">
@@ -212,7 +157,37 @@
                     <!-- /.info-box -->
                 </div>
             </a>
-
         </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top: -4%;">
+    <section class="content-header">
+        <div class="page-header">
+            <h3>Charts & Statistic</h3>
+        </div>
+    </section>
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-3">
+                <a href="{{ route('complaint_product_report.index') }}">
+                    <img class="img-circle center-block" src="{{ asset('default-images/chart-icon.png') }}" alt="Generic placeholder image" width="140" height="140">
+                </a>
+                <a href="{{ route('complaint_product_report.index') }}">
+                    <h3 class="text-center">Complaint Product Chart</h3>
+                </a>
+                <p align="center">Contains all complaint product charts and statistic</p>
+            </div><!-- /.col-lg-4 -->
+
+            <div class="col-lg-3">
+                <a href="{{ route('complaint_service_report.index') }}">
+                    <img class="img-circle center-block" src="{{ asset('default-images/chart-icon2.png') }}" alt="Generic placeholder image" width="140" height="140">
+                </a>
+                <a href="{{ route('complaint_service_report.index') }}">
+                    <h3 class="text-center">Complaint Service Chart</h3>
+                </a>
+                <p align="center">Contains all complaint service charts and statistic</p>
+            </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
     </div>
 </div>
