@@ -54,4 +54,4 @@ Route::get('tag/{tenant_id}/get-tag-list', 'MasterData\TagController@getTagList'
 Route::post('complaint_product_report/get-all-statistic/{year}', 'Report\ComplaintProductReportController@getAllStatistic');
 
 /* Complaint Service Report API */
-Route::get('complaint_service_report/get-all-statistic', 'Report\ComplaintServiceReportController@getAllStatistic');
+Route::post('complaint_service_report/get-all-statistic/{year}', 'Report\ComplaintServiceReportController@getAllStatistic');

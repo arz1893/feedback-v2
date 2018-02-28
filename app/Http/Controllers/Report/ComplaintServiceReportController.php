@@ -12,10 +12,11 @@ class ComplaintServiceReportController extends Controller
         return view('report.complaint_service.complaint_service_report_index');
     }
 
-    public function getAllStatistic(Request $request) {
+    public function getAllStatistic(Request $request, $year) {
         $complaintPerMonth = [];
         for($i=1;$i<=12;$i++) {
-            array_push($complaintPerMonth, count(ComplaintService::whereMonth('created_at', '=', $i)->get()));
+            $totalPerMonth = count(ComplaintService::where('tenantId', $request->tenantId)->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $i)->get());
+            array_push($complaintPerMonth, $totalPerMonth);
         }
         return $complaintPerMonth;
     }
