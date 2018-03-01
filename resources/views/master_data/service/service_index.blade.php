@@ -1,7 +1,7 @@
 @extends('home')
 
 @section('content-header')
-    <h4> Master Service </h4>
+    <h4 class="text-orange"> Master Service </h4>
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Service</li>

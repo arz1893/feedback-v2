@@ -30,9 +30,9 @@
                 <th>Customer Name</th>
                 <th>Product Name</th>
                 <th>Rating</th>
-                <th>Need Call ?</th>
-                <th>Is Urgent ?</th>
-                <th>Is Answered ?</th>
+                <th>Need Call?</th>
+                <th>Urgent?</th>
+                <th>Answered?</th>
                 <th>Action</th>
             </tr>
             </thead>

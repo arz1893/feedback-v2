@@ -1,10 +1,9 @@
 @extends('home')
 
 @section('content-header')
-    <ol class="breadcrumb">
-        <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><i class="fa fa-bar-chart"></i> Complaint Product Report </li>
-    </ol>
+    <a href="{{ url('/home') }}" class="btn btn-link">
+        <i class="fa fa-arrow-circle-left"></i> Back to dashboard
+    </a>
 @endsection
 
 @section('main-content')
@@ -19,7 +18,7 @@
             </div>
 
             <div class="col-md-5 col-sm-4">
-                <h4 class="text-info">Welcome to Complaint Product Report</h4>
+                <h4 class="text-danger">Welcome to Complaint Product Report</h4>
                 <p align="justify">This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
             </div>
             <!-- /.col-md-4 -->
