@@ -51,7 +51,7 @@ Route::get('suggestion_service/{suggestion_service_id}/get-suggestion-service', 
 Route::get('tag/{tenant_id}/get-tag-list', 'MasterData\TagController@getTagList');
 
 /* Complaint Product Report API */
-Route::post('complaint_product_report/get-all-statistic/{year}', 'Report\ComplaintProductReportController@getAllStatistic');
+Route::post('complaint_product_report/get-monthly-complaint/{year}', 'Report\ComplaintProductReportController@getMonthlyComplaint');
 
 /* Complaint Service Report API */
-Route::post('complaint_service_report/get-all-statistic/{year}', 'Report\ComplaintServiceReportController@getAllStatistic');
+Route::post('complaint_service_report/get-monthly-complaint/{year}', 'Report\ComplaintServiceReportController@getMonthlyComplaint');

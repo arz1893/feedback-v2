@@ -16,7 +16,7 @@ class ComplaintProductReportController extends Controller
         return view('report.complaint_product.complaint_product_report_monthly');
     }
 
-    public function getAllStatistic(Request $request, $year) {
+    public function getMonthlyComplaint(Request $request, $year) {
         $complaintPerMonth = [];
         for($i=1;$i<=12;$i++) {
             $totalPerMonth = count(ComplaintProduct::where('tenantId', $request->tenantId)->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $i)->get());

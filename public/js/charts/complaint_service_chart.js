@@ -1,6 +1,6 @@
 if($('#complaint_service_chart').length > 0) {
     let ctx = document.getElementById('complaint_service_chart');
-    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service_report/get-all-statistic/' + new Date().getFullYear();
+    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service_report/get-monthly-complaint/' + new Date().getFullYear();
     let complaintPerMonth = [];
     let tenantId = $('#tenant_id').val();
     axios.post(url, {
