@@ -81,25 +81,11 @@ $(document).ready(function () {
 
         rules: {
             name: 'required',
-            metric: {
-                required: true
-            },
-            price: {
-                required: true,
-                number: true,
-                min: 0
-            }
+            description: 'required'
         },
         messages: {
             name: 'please enter your product name',
-            metric: {
-                required: 'please choose product\'s metric unit'
-            },
-            price: {
-                required: 'please inster product\'s price',
-                number: 'price must be numeric',
-                min: 'price must be positive number'
-            }
+            description: 'please enter product description'
         }
     });
 

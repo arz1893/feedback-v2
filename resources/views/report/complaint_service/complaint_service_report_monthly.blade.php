@@ -36,5 +36,15 @@
         </div>
     </div>
 
+    <div class="row">
+        <h4 class="text-center text-info">Complaint in {!! date('Y') !!}</h4>
+    </div>
+
     <canvas id="complaint_service_chart" height="30vh" width="80vw"></canvas>
+
+    <div class="col-lg-6 col-lg-offset-3" style="margin-top: 3%;">
+        <div id="no_data_found" class="well text-center invisible">
+            There is no data in current year
+        </div>
+    </div>
 @endsection

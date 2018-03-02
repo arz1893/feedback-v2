@@ -18,15 +18,19 @@ class ComplaintProductReportController extends Controller
 
     public function getMonthlyComplaint(Request $request, $year) {
         $complaintPerMonth = [];
+        $is_null = 0;
         for($i=1;$i<=12;$i++) {
             $totalPerMonth = count(ComplaintProduct::where('tenantId', $request->tenantId)->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $i)->get());
+            if($totalPerMonth == 0) {
+                $is_null++;
+            }
             array_push($complaintPerMonth, $totalPerMonth);
         }
 
-        if(count($complaintPerMonth) > 0) {
-            return $complaintPerMonth;
-        } else {
+        if($is_null == 12) {
             return null;
+        } else {
+            return $complaintPerMonth;
         }
     }
 }

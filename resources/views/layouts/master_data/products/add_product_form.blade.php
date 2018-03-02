@@ -18,19 +18,19 @@
 </div>
 <div class="col-md-6">
     <div class="col-md-11">
-        <div class="form-group">
-            {{ Form::label('metric', 'Product\'s metric') }}
-            {{ Form::select('metric', [
-                    'Porsi' => 'Porsi',
-                    'Pcs' => 'Pcs',
-                    'Kg' => 'Kg',
-                    'Meter' => 'Meter'
-            ], null, ['class' => 'form-control', 'placeholder' => 'Select metric']) }}
-        </div>
-        <div class="form-group">
-            {{ Form::label('price', 'Product\'s price') }}
-            {{ Form::input('number', 'price', null, ['class' => 'form-control', 'placeholder' => 'Enter product\'s price', 'step' => 'any']) }}
-        </div>
+        {{--<div class="form-group">--}}
+            {{--{{ Form::label('metric', 'Product\'s metric') }}--}}
+            {{--{{ Form::select('metric', [--}}
+                    {{--'Porsi' => 'Porsi',--}}
+                    {{--'Pcs' => 'Pcs',--}}
+                    {{--'Kg' => 'Kg',--}}
+                    {{--'Meter' => 'Meter'--}}
+            {{--], null, ['class' => 'form-control', 'placeholder' => 'Select metric']) }}--}}
+        {{--</div>--}}
+        {{--<div class="form-group">--}}
+            {{--{{ Form::label('price', 'Product\'s price') }}--}}
+            {{--{{ Form::input('number', 'price', null, ['class' => 'form-control', 'placeholder' => 'Enter product\'s price', 'step' => 'any']) }}--}}
+        {{--</div>--}}
 
         <div class="form-group">
             <label for="image_cover">Choose image</label>

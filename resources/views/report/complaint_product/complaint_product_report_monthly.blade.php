@@ -19,7 +19,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6 form-inline">
             <div class="form-group">
                 <label for="select_year">Select year:</label>
-                <select name="select_year" id="select_year" class="form-control">
+                <select name="select_year" id="select_year" class="form-control" v-model="selectedYear">
                     <option value="0" selected disabled>Choose...</option>
                     @for($i=2000;$i<=intval(date('Y'));$i++)
                         <option value="{{ $i }}">{{ $i }}</option>
@@ -44,5 +44,9 @@
 
     <canvas id="complaint_product_chart" height="30vh" width="80vw" style="position: relative"></canvas>
 
-    <div id="no_data_found" class="well invisible"></div>
+    <div class="col-lg-6 col-lg-offset-3" style="margin-top: 3%;">
+        <div id="no_data_found" class="well text-center invisible">
+            There is no data in current year
+        </div>
+    </div>
 @endsection

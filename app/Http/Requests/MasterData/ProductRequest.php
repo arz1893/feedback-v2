@@ -25,8 +25,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'metric' => 'required',
-            'price' => 'required|numeric'
+            'description' => 'required'
         ];
     }
 
@@ -34,9 +33,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'name.required' => 'Please enter your product name',
-            'metric.required' => 'Please enter product\'s metric',
-            'price.required' => 'Please enter product\'s price',
-            'price.numeric' => 'Price must be numeric'
+            'description.required' => 'Please enter product description'
         ];
     }
 }
