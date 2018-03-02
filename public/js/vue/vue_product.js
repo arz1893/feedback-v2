@@ -1,5 +1,5 @@
 if($('#vue_product_container').length > 0) {
-    let Root = new Vue({
+    var Root = new Vue({
         el: '#vue_product_container',
         data: {
             nodeTitle: '',
@@ -92,9 +92,9 @@ if($('#vue_product_container').length > 0) {
             // },
             
             previewImage: function (event) {
-                let uploadedImage = event.target;
+                var uploadedImage = event.target;
                 if(uploadedImage.files && uploadedImage.files[0]) {
-                    let reader = new FileReader();
+                    var reader = new FileReader();
                     reader.onload = function (e) {
                         $('#preview').attr('src', e.target.result);
                     };
@@ -119,10 +119,10 @@ if($('#vue_product_container').length > 0) {
 
 if($('#product_index').length > 0) {
 
-    let productIndex = new Vue({
+    var productIndex = new Vue({
         el: '#product_index',
         created() {
-            let tenantId = $('#tenantId').val();
+            var tenantId = $('#tenantId').val();
             this.getProducts(tenantId);
             // this.getTags(tenantId);
         },
@@ -153,7 +153,7 @@ if($('#product_index').length > 0) {
         },
         methods: {
             getProducts: function (id) {
-                let vm = this;
+                var vm = this;
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + id + '/get-product-list';
                 axios.get(url).then(response => {
                     this.products = response.data.data;
@@ -165,7 +165,7 @@ if($('#product_index').length > 0) {
             },
             
             makePagination: function (data) {
-                let vm = this;
+                var vm = this;
                 vm.pagination.current_page = data.meta.current_page;
                 vm.pagination.first_page_link = data.links.first;
                 vm.pagination.last_page_link = data.links.last;
@@ -176,7 +176,7 @@ if($('#product_index').length > 0) {
             },
             
             nextPage: function (url) {
-                let vm = this;
+                var vm = this;
                 vm.searchStatus = 'Loading...';
                 function fireRequest(vm) {
                     axios.get(url).then(response => {
@@ -189,15 +189,15 @@ if($('#product_index').length > 0) {
                     });
                 }
 
-                let debounceFunction = _.debounce(fireRequest, 1000);
+                var debounceFunction = _.debounce(fireRequest, 1000);
                 debounceFunction(vm);
             }
         }
     });
     
     $('#select_tags').on('change', function () {
-        let tagIds = $(this).val();
-        let tenantId = $('#tenantId').val();
+        var tagIds = $(this).val();
+        var tenantId = $('#tenantId').val();
         if(tagIds.length > 0) {
             const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + tenantId + '/filter-product-list';
             productIndex.searchStatus = 'Searching...';
@@ -215,7 +215,7 @@ if($('#product_index').length > 0) {
                 });
             }
             //debounce buat trigger function setelah 0.5 detik
-            let debounceFunction = _.debounce(filterProducts, 1000);
+            var debounceFunction = _.debounce(filterProducts, 1000);
             debounceFunction();
         } else {
             const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + tenantId + '/get-product-list';
@@ -229,7 +229,7 @@ if($('#product_index').length > 0) {
                 });
             }
             //debounce buat trigger function setelah 0.5 detik
-            let debounceFunction = _.debounce(getProducts, 1000);
+            var debounceFunction = _.debounce(getProducts, 1000);
             debounceFunction();
         }
     });
@@ -238,7 +238,7 @@ if($('#product_index').length > 0) {
 if($('#complaint_product_list_index').length > 0) {
     Vue.use(VeeValidate);
 
-    let complaintProductListIndex = new Vue({
+    var complaintProductListIndex = new Vue({
         el: '#complaint_product_list_index',
         data: {
             complaintProduct: {
@@ -270,8 +270,8 @@ if($('#complaint_product_list_index').length > 0) {
         },
         methods: {
             showComplaintDetail: function (event) {
-                let vm = this;
-                let complaint_id = $(event.currentTarget).data('complaint_id');
+                var vm = this;
+                var complaint_id = $(event.currentTarget).data('complaint_id');
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + complaint_id + '/get-complaint-product';
 
                 axios.get(url).then(function (response) {
@@ -301,7 +301,7 @@ if($('#complaint_product_list_index').length > 0) {
             },
             
             showAllComplaintReplies: function (complaint_product_id) {
-                let vm = this;
+                var vm = this;
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product_reply/' + complaint_product_id + '/get-complaint-product-replies';
                 this.searchStatus = 'Loading Data...';
                 function getComplaintReplies() {
@@ -320,7 +320,7 @@ if($('#complaint_product_list_index').length > 0) {
                     });
                 }
 
-                let debounceFunction = _.debounce(getComplaintReplies, 1000);
+                var debounceFunction = _.debounce(getComplaintReplies, 1000);
                 debounceFunction();
             },
 
@@ -329,7 +329,7 @@ if($('#complaint_product_list_index').length > 0) {
                 this.replyTo = $('#reply_to').html();
             },
             submitReply: function (event) {
-                let vm = this;
+                var vm = this;
                 const dict = {
                     custom: {
                         reply_content: {
@@ -340,10 +340,10 @@ if($('#complaint_product_list_index').length > 0) {
                 this.$validator.localize('en', dict);
                 this.$validator.validateAll().then((result) => {
                     if(result) {
-                        let complaintProductId  = $('#complaintProductId').val();
-                        let customerId = (($('#customerId').length > 0) ? $('#customerId').val():null);
-                        let reply_content = vm.reply_content;
-                        let creatorId = $('#creatorId').val();
+                        var complaintProductId  = $('#complaintProductId').val();
+                        var customerId = (($('#customerId').length > 0) ? $('#customerId').val():null);
+                        var reply_content = vm.reply_content;
+                        var creatorId = $('#creatorId').val();
                         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product_reply/' + complaintProductId + '/post-reply';
 
                         axios.post(url, {
@@ -371,9 +371,9 @@ if($('#complaint_product_list_index').length > 0) {
             },
 
             deleteReply: function (event) {
-                let vm = this;
-                let complaintProductId = vm.complaintProduct.systemId;
-                let replyId = event.currentTarget.getAttribute('data-id');
+                var vm = this;
+                var complaintProductId = vm.complaintProduct.systemId;
+                var replyId = event.currentTarget.getAttribute('data-id');
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product_reply/delete-reply';
 
                 axios.post(url, {
@@ -402,7 +402,7 @@ if($('#complaint_product_list_index').length > 0) {
 }
 
 if($('#suggestion_product_list_container').length > 0) {
-    let suggestionProductList = new Vue({
+    var suggestionProductList = new Vue({
         el: '#suggestion_product_list_container',
         data: {
             suggestionProduct: {
@@ -420,8 +420,8 @@ if($('#suggestion_product_list_container').length > 0) {
         },
         methods: {
             showSuggestionDetail: function (event) {
-                let vm = this;
-                let suggestion_id = $(event.currentTarget).data('suggestion_product_id');
+                var vm = this;
+                var suggestion_id = $(event.currentTarget).data('suggestion_product_id');
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_product/' + suggestion_id + '/get-suggestion-product';
 
                 axios.get(url).then(function (response) {
