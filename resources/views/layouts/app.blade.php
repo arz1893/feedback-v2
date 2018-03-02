@@ -45,7 +45,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
+    @guest()
+        <div class="">
+    @else
+        <div class="wrapper">
+    @endguest
         <!-- Main Header -->
             <header class="main-header">
 
@@ -149,8 +153,7 @@
             </header>
 
             @yield('content')
-
-        </div>
+    </div>
 
     <!-- REQUIRED JS SCRIPTS -->
 
