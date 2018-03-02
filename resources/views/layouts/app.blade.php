@@ -46,7 +46,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 @guest
-    <div class="" style="margin-bottom: 10px;">
+    <div class="">
         @else
         <div class="wrapper">
         @endguest
