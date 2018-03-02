@@ -48,117 +48,113 @@
 @guest
     <div class="" style="margin-bottom: 50px;">
         @else
-            <div class="wrapper">
+        <div class="wrapper">
+        @endguest
+        <!-- Main Header -->
+            <header class="main-header">
+
+            <!-- Logo -->
+            @guest
+                <a href="{{ url('/') }}" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b>C</b>F</span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>Customer</b>Feedback</span>
+                </a>
+            @else
+                <a href="{{ url('/home') }}" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b>C</b>F</span>
+                    <!-- logo for regular state and mobile devices -->
+
+                    <span class="logo-lg"><b>Customer</b>Feedback</span>
+                </a>
             @endguest
-            <!-- Main Header -->
-                <header class="main-header">
 
-                <!-- Logo -->
-                @guest
-                    <a href="{{ url('/') }}" class="logo">
-                        <!-- mini logo for sidebar mini 50x50 pixels -->
-                        <span class="logo-mini"><b>C</b>F</span>
-                        <!-- logo for regular state and mobile devices -->
-                        <span class="logo-lg"><b>Customer</b>Feedback</span>
-                    </a>
-                @else
-                    <a href="{{ url('/home') }}" class="logo">
-                        <!-- mini logo for sidebar mini 50x50 pixels -->
-                        <span class="logo-mini"><b>C</b>F</span>
-                        <!-- logo for regular state and mobile devices -->
+            <!-- Header Navbar -->
+                <nav class="navbar navbar-static-top" role="navigation">
+                @if(Auth::check())
+                    <!-- Sidebar toggle button-->
+                        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                            <span class="sr-only">Toggle navigation</span>
+                        </a>
+                @endif
+                <!-- Navbar Right Menu -->
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            @guest
+                                <li>
+                                    <a href="#">About</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('company_login') }}">Sign in <i class="fa fa-sign-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('register') }}">Register <i class="fa fa-user-plus"></i></a>
+                                </li>
+                            @else
+                                <!-- User Account Menu -->
+                                <li class="dropdown user user-menu">
+                                    <!-- Menu Toggle Button -->
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <!-- The user image in the navbar-->
+                                        <img src="{{ asset('default-images/admin-user.png') }}" class="user-image" alt="User Image">
+                                        <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                        <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <!-- The user image in the menu -->
+                                        <li class="user-header">
+                                            <img src="{{ asset('default-images/admin-user.png') }}" class="img-circle" alt="User Image">
 
-                        <span class="logo-lg"><b>Customer</b>Feedback</span>
-                    </a>
-                @endguest
-
-                <!-- Header Navbar -->
-                    <nav class="navbar navbar-static-top" role="navigation">
-                    @if(Auth::check())
-                        <!-- Sidebar toggle button-->
-                            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                                <span class="sr-only">Toggle navigation</span>
-                            </a>
-                    @endif
-                    <!-- Navbar Right Menu -->
-                        <div class="navbar-custom-menu">
-                            <ul class="nav navbar-nav">
-                                @guest
-                                    <li>
-                                        <a href="#">About</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('company_login') }}">Sign in <i class="fa fa-sign-in"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('register') }}">Register <i class="fa fa-user-plus"></i></a>
-                                    </li>
-                                @else
-                                    <!-- User Account Menu -->
-                                    <li class="dropdown user user-menu">
-                                        <!-- Menu Toggle Button -->
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <!-- The user image in the navbar-->
-                                            <img src="{{ asset('default-images/admin-user.png') }}" class="user-image" alt="User Image">
-                                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                            <span class="hidden-xs">{{ Auth::user()->name }}</span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <!-- The user image in the menu -->
-                                            <li class="user-header">
-                                                <img src="{{ asset('default-images/admin-user.png') }}" class="img-circle" alt="User Image">
-
-                                                <p>
-                                                    {{ Auth::user()->name }} - {{ Auth::user()->user_group->name }}
-                                                    <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
-                                                </p>
-                                            </li>
-                                            <!-- Menu Body -->
-                                            <li class="user-body">
-                                                <div class="row">
-                                                    <div class="col-xs-4 text-center">
-                                                        <a href="#">Followers</a>
-                                                    </div>
-                                                    <div class="col-xs-4 text-center">
-                                                        <a href="#">Sales</a>
-                                                    </div>
-                                                    <div class="col-xs-4 text-center">
-                                                        <a href="#">Friends</a>
-                                                    </div>
+                                            <p>
+                                                {{ Auth::user()->name }} - {{ Auth::user()->user_group->name }}
+                                                <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
+                                            </p>
+                                        </li>
+                                        <!-- Menu Body -->
+                                        <li class="user-body">
+                                            <div class="row">
+                                                <div class="col-xs-4 text-center">
+                                                    <a href="#">Followers</a>
                                                 </div>
-                                                <!-- /.row -->
-                                            </li>
-                                            <!-- Menu Footer-->
-                                            <li class="user-footer">
-                                                <div class="pull-left">
-                                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                                <div class="col-xs-4 text-center">
+                                                    <a href="#">Sales</a>
                                                 </div>
-                                                <div class="pull-right">
-                                                    <a href="{{ route('logout') }}"
-                                                       onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();"
-                                                       class="btn btn-default btn-flat">Sign out</a>
+                                                <div class="col-xs-4 text-center">
+                                                    <a href="#">Friends</a>
                                                 </div>
+                                            </div>
+                                            <!-- /.row -->
+                                        </li>
+                                        <!-- Menu Footer-->
+                                        <li class="user-footer">
+                                            <div class="pull-left">
+                                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                            </div>
+                                            <div class="pull-right">
+                                                <a href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();"
+                                                   class="btn btn-default btn-flat">Sign out</a>
+                                            </div>
 
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    {{ csrf_field() }}
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- Control Sidebar Toggle Button -->
-                                    {{--<li>--}}
-                                        {{--<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>--}}
-                                    {{--</li>--}}
-                                @endguest
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endguest
 
-                            </ul>
-                        </div>
-                    </nav>
-                </header>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
 
-                @yield('content')
+            @yield('content')
 
-            </div>
+        </div>
     </div>
 
     <!-- REQUIRED JS SCRIPTS -->
