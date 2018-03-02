@@ -45,16 +45,12 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-@guest
-    <div class="">
-        @else
-        <div class="wrapper">
-        @endguest
+    <div class="wrapper">
         <!-- Main Header -->
             <header class="main-header">
 
             <!-- Logo -->
-            @guest
+            @guest()
                 <a href="{{ url('/') }}" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>C</b>F</span>
@@ -155,7 +151,6 @@
             @yield('content')
 
         </div>
-    </div>
 
     <!-- REQUIRED JS SCRIPTS -->
 
