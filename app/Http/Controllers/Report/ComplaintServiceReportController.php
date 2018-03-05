@@ -12,11 +12,29 @@ class ComplaintServiceReportController extends Controller
         return view('report.complaint_service.complaint_service_report_index');
     }
 
-    public function showMonthlyGraph(Request $request) {
-        return view('report.complaint_service.complaint_service_report_monthly');
+    public function showAllYearGraph(Request $request) {
+        return view('report.complaint_service.complaint_service_report_all_year');
     }
 
-    public function getMonthlyComplaint(Request $request, $year) {
+    public function showMonthlyGraph(Request $request) {
+        return view('report.complaint_service.complaint_service_report_yearly');
+    }
+
+    public function getAllYearComplaint(Request $request) {
+        $oldest = ComplaintService::where('tenantId', $request->tenantId)->oldest()->first()->created_at->format('Y');
+        $latest = ComplaintService::where('tenantId', $request->tenantId)->latest()->first()->created_at->format('Y');
+        $labels = [];
+        $complaintPerYear = [];
+
+        for($i=intval($oldest);$i<=intval($latest);$i++) {
+            array_push($labels, strval($i));
+            array_push($complaintPerYear, count(ComplaintService::where('tenantId', $request->tenantId)->whereYear('created_at', '=', $i)->get()));
+        }
+
+        return array($labels, $complaintPerYear);
+    }
+
+    public function getYearlyComplaint(Request $request, $year) {
         $complaintPerMonth = [];
         $is_null = 0;
         for($i=1;$i<=12;$i++) {

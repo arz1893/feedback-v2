@@ -12,11 +12,15 @@ class ComplaintProductReportController extends Controller
         return view('report.complaint_product.complaint_product_report_index');
     }
 
-    public function showMonthlyGraph(Request $request) {
-        return view('report.complaint_product.complaint_product_report_monthly');
+    public function showAllYearGraph(Request $request) {
+        return view('report.complaint_product.complaint_product_report_all_year');
     }
 
-    public function getMonthlyComplaint(Request $request, $year) {
+    public function showYearlyGraph(Request $request) {
+        return view('report.complaint_product.complaint_product_report_yearly');
+    }
+
+    public function getYearlyComplaint(Request $request, $year) {
         $complaintPerMonth = [];
         $is_null = 0;
         for($i=1;$i<=12;$i++) {
@@ -32,5 +36,19 @@ class ComplaintProductReportController extends Controller
         } else {
             return $complaintPerMonth;
         }
+    }
+
+    public function getAllYearComplaint(Request $request) {
+        $oldest = ComplaintProduct::where('tenantId', $request->tenantId)->oldest()->first()->created_at->format('Y');
+        $latest = ComplaintProduct::where('tenantId', $request->tenantId)->latest()->first()->created_at->format('Y');
+        $labels = [];
+        $complaintPerYear = [];
+
+        for($i=intval($oldest);$i<=intval($latest);$i++) {
+            array_push($labels, strval($i));
+            array_push($complaintPerYear, count(ComplaintProduct::where('tenantId', $request->tenantId)->whereYear('created_at', '=', $i)->get()));
+        }
+
+        return array($labels, $complaintPerYear);
     }
 }

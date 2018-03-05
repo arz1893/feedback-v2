@@ -28,23 +28,23 @@
         <!-- Content Row -->
         <div class="row">
             <div class="col-md-4">
-                <h2 class="text-info">Yearly <i class="fa fa-line-chart"></i></h2>
+                <h2 class="text-info">All Year <i class="fa fa-line-chart"></i></h2>
                 <p>Vie statistic of complaint from past to current year</p>
-                <a class="btn btn-danger" href="#">
+                <a class="btn btn-danger" href="{{ route('product_report_all_year') }}">
                     Show <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
             <!-- /.col-md-4 -->
             <div class="col-md-4">
-                <h2 class="text-info">Monthly <i class="fa fa-line-chart"></i></h2>
+                <h2 class="text-info">Yearly <i class="fa fa-line-chart"></i></h2>
                 <p>View statistic for complaint per month</p>
-                <a class="btn btn-warning" href="{{ route('product_report_monthly') }}">Show
+                <a class="btn btn-warning" href="{{ route('product_report_yearly') }}">Show
                     <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
             <!-- /.col-md-4 -->
             <div class="col-md-4">
-                <h2 class="text-info">Weekly <i class="fa fa-line-chart"></i></h2>
+                <h2 class="text-info">Monthly <i class="fa fa-line-chart"></i></h2>
                 <p>View statistic for complaint per week</p>
                 <a class="btn btn-success" href="#">
                     Show <i class="fa fa-arrow-circle-right"></i>
