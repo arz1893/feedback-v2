@@ -12,26 +12,27 @@
 @endsection
 
 @section('main-content')
-    <div class="text-center">
-        @if($service->img != null)
-            <img src="{{ asset($service->img) }}" width="200" class="" alt="{{ $service->name }}">
-        @else
-            <img src="{{ asset('default-images/no-image.jpg') }}" width="200" class="" alt="{{ $service->name }}">
-        @endif
-    </div>
-    <div class="text-center">
-        <small class="text-muted">{{ $service->name }}</small>
-    </div>
 
     <div class="row">
-        <div class="col-md-8 col-lg-offset-2">
-            {{ Form::open(['method' => 'PUT', 'action' => ['MasterData\ServiceController@changePicture', $service], 'id' => 'form_change_service_picture', 'files' => true]) }}
-            <div class="form-group col-lg-6 col-lg-offset-5">
-                <input type="file" id="service_picture" name="service_picture" accept="image/*" onchange="$('#form_change_service_picture').submit()">
-                <p class="help-block">Change your product picture</p>
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-2">
+                <div class="imagebox" style="width: 225px;">
+                    <a role="button" onclick="$('#service_picture').trigger('click');">
+                        @if($service->img != null)
+                            <img src="{{ asset($service->img) }}" width="200" class="" alt="{{ $service->name }}">
+                        @else
+                            <img src="{{ asset('default-images/no-image.jpg') }}" width="200" class="" alt="{{ $service->name }}">
+                        @endif
+                        <span class="imagebox-desc">
+                            click to change picture <i class="fa fa-pencil"></i>
+                        </span>
+                    </a>
+                </div>
             </div>
+
+            {{ Form::open(['method' => 'PUT', 'action' => ['MasterData\ServiceController@changePicture', $service], 'id' => 'form_change_service_picture', 'files' => true]) }}
+                <input type="file" id="service_picture" name="service_picture" accept="image/*" style="display: none;" onchange="$('#form_change_service_picture').submit()">
             {{ Form::close() }}
-            <br>
 
             {{ Form::model($service, ['method' => 'PATCH', 'action' => ['MasterData\ServiceController@update', $service]]) }}
                 @include('layouts.master_data.services.edit_service_form', ['submitButtonText' => 'Update Service'])

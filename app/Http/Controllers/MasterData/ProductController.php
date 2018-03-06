@@ -138,7 +138,7 @@ class ProductController extends Controller
 
         $filteredProducts = Product::where('tenantId', $tenant_id)->whereHas('tags', function ($q) use ($tagIds){
             $q->whereIn('systemId', $tagIds);
-        })->orderBy('created_at', 'desc')->get();
+        })->orderBy('created_at', 'desc')->paginate(12);
         return new ProductCollection($filteredProducts);
     }
 }

@@ -16,8 +16,9 @@ class FaqProductController extends Controller
 {
     public function index() {
         $selectTags = Tag::where('recOwner', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
+        $defaultTags = Tag::where('recOwner', Auth::user()->tenantId)->where('defValue', 1)->orderBy('name', 'asc')->pluck('systemId');
         $products = Product::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->paginate(6);
-        return view('faq.product.faq_product_index', compact('products', 'selectTags'));
+        return view('faq.product.faq_product_index', compact('products', 'selectTags', 'defaultTags'));
     }
 
     public function show($id) {

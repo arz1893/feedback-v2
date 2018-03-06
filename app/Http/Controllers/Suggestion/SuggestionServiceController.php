@@ -19,8 +19,9 @@ class SuggestionServiceController extends Controller
 {
     public function index() {
         $selectTags = Tag::where('recOwner', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
+        $defaultTags = Tag::where('recOwner', Auth::user()->tenantId)->where('defValue', 1)->orderBy('name', 'asc')->pluck('systemId');
         $services = Service::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->paginate(6);
-        return view('suggestion.service.suggestion_service_index', compact('services', 'selectTags'));
+        return view('suggestion.service.suggestion_service_index', compact('services', 'selectTags', 'defaultTags'));
     }
 
     public function showService($id, $currentNodeId) {

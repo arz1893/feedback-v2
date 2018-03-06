@@ -23,26 +23,27 @@
         </div>
     @endif
 
-    <div class="text-center">
-        @if($product->img != null)
-            <img src="{{ asset($product->img) }}" width="200" class="" alt="{{ $product->name }}">
-        @else
-            <img src="{{ asset('default-images/no-image.jpg') }}" width="200" class="" alt="{{ $product->name }}">
-        @endif
-    </div>
-    <div class="text-center">
-        <small class="text-muted">{{ $product->name }}</small>
-    </div>
 
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            {{ Form::open(['method' => 'PUT', 'action' => ['MasterData\ProductController@changePicture', $product], 'id' => 'form_change_product_picture', 'files' => true]) }}
-                <div class="form-group col-lg-6 col-lg-offset-4">
-                    <input type="file" id="product_picture" name="product_picture" accept="image/*" onchange="$('#form_change_product_picture').submit()">
-                    <p class="help-block">Change your product picture</p>
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-2">
+                <div class="imagebox" style="width: 225px;">
+                    <a role="button" onclick="$('#product_picture').trigger('click');">
+                        @if($product->img != null)
+                            <img src="{{ asset($product->img) }}" class="" alt="{{ $product->name }}">
+                        @else
+                            <img src="{{ asset('default-images/no-image.jpg') }}" class="" alt="{{ $product->name }}">
+                        @endif
+                        <span class="imagebox-desc">
+                            click to change picture <i class="fa fa-pencil"></i>
+                        </span>
+                    </a>
                 </div>
+            </div>
+
+            {{ Form::open(['method' => 'PUT', 'action' => ['MasterData\ProductController@changePicture', $product], 'id' => 'form_change_product_picture', 'files' => true]) }}
+                <input type="file" id="product_picture" name="product_picture" style="display: none;" accept="image/*" onchange="$('#form_change_product_picture').submit()">
             {{ Form::close() }}
-            <br>
 
             {{ Form::model($product, ['method' => 'PATCH', 'action' => ['MasterData\ProductController@update', $product], 'id' => 'form_edit_product']) }}
                 @include('layouts.master_data.products.edit_product_form')

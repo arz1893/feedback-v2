@@ -123,7 +123,8 @@ if($('#product_index').length > 0) {
         el: '#product_index',
         created() {
             var tenantId = $('#tenantId').val();
-            this.getProducts(tenantId);
+            var tags = $('#select_tags').val();
+            this.getProducts(tenantId, tags);
             // this.getTags(tenantId);
         },
         data: {
@@ -152,16 +153,30 @@ if($('#product_index').length > 0) {
             }
         },
         methods: {
-            getProducts: function (id) {
+            getProducts: function (id, tags) {
                 var vm = this;
-                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + id + '/get-product-list';
-                axios.get(url).then(response => {
-                    this.products = response.data.data;
-                    vm.makePagination(response.data);
-                }).catch(error => {
-                    console.log('something wrong within the process');
-                    console.log(Object.assign({}, error));
-                });
+                if(tags.length === 0) {
+                    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + id + '/get-product-list';
+                    axios.get(url).then(response => {
+                        this.products = response.data.data;
+                        vm.makePagination(response.data);
+                    }).catch(error => {
+                        console.log('something wrong within the process');
+                        console.log(Object.assign({}, error));
+                    });
+                } else {
+                    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + id + '/filter-product-list';
+                    axios.post(url, {
+                        tags: tags
+                    })
+                    .then(function (response) {
+                        vm.products = response.data.data;
+                        vm.makePagination(response.data);
+                    })
+                    .catch(error => {
+                        console.log(Object.assign({}, error));
+                    });
+                }
             },
             
             makePagination: function (data) {

@@ -120,7 +120,8 @@ if($('#service_index').length > 0) {
         el: '#service_index',
         created() {
             let tenantId = $('#tenantId').val();
-            this.getServices(tenantId);
+            let tags = $('#select_tags').val();
+            this.getServices(tenantId, tags);
         },
         data: {
             tenantId : $('#tenantId').val(),
@@ -146,15 +147,32 @@ if($('#service_index').length > 0) {
             }  
         },
         methods: {
-            getServices: function () {
-                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + this.tenantId + '/get-service-list';
+            getServices: function (id, tags) {
+                let vm = this;
+                if(tags.length === 0) {
+                    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + id + '/get-service-list';
 
-                axios.get(url).then(response => {
-                    this.services = response.data.data;
-                    this.makePagination(response.data);
-                }).catch(error => {
-                    console.log('something wrong within the process');
-                });
+                    axios.get(url).then(response => {
+                        vm.services = response.data.data;
+                        vm.makePagination(response.data);
+                    }).catch(error => {
+                        console.log('something wrong within the process');
+                    });
+                } else {
+                    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/filter-service-list';
+                    axios.post(url, {
+                        tags: tags
+                    })
+                    .then(function (response) {
+                        console.log(response.data);
+                        vm.services = response.data.data;
+                        vm.makePagination(response.data);
+                    })
+                    .catch(error => {
+                        console.log(Object.assign({}, error));
+                    });
+                }
+
             },
 
             makePagination: function (data) {

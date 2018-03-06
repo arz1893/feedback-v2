@@ -423,3 +423,105 @@ span.fancytree-expander{
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
 }
+
+.intro {
+    min-height: 20vh;
+    height: 50vh;
+}
+@media (max-width: 767px) {
+    .intro {
+        height: auto;
+        min-height: 60vh;
+    }
+}
+.intro-left {
+    height: 100%;
+    background: #fff;
+}
+.intro-left-content {
+}
+@media (min-width: 767px) {
+    .intro-left-content {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+@media (max-width: 991px) {
+    .intro-left-content h1 {
+        font-size: 30px;
+    }
+}
+.intro-right {
+    height: 900px;
+    background: url('../default-images/pexels-photo-40120.jpg') center center no-repeat;
+    background-size: cover;
+}
+
+.credit {
+    font-size: 13px;
+    color: #999999;
+}
+.credit a,
+.credit a:hover,
+.credit a:focus {
+    color: #999999;
+}
+/*
+
+=====================
+SOCIAL LINKS
+=====================
+
+*/
+.social {
+    text-align: left;
+    margin-top: 40px;
+}
+.social a {
+    margin: 0 10px 0 0;
+    color: #333;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    line-height: 40px;
+    font-size: 13px;
+    text-align: center;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    vertical-align: bottom;
+    border: solid 1px #333;
+}
+.social a i {
+    vertical-align: bottom;
+    line-height: 40px;
+}
+.social a:hover {
+    background: transparent;
+}
+.social a:hover.facebook {
+    color: #4460ae;
+    border-color: #4460ae;
+}
+.social a:hover.gplus {
+    color: #c21f25;
+    border-color: #c21f25;
+}
+.social a:hover.twitter {
+    color: #3cf;
+    border-color: #3cf;
+}
+.social a:hover.instagram {
+    color: #cd4378;
+    border-color: #cd4378;
+}
+.social a:hover.email {
+    color: #4a7f45;
+    border-color: #4a7f45;
+}
+.social a:hover.link {
+    color: #871AFF;
+    border-color: #871AFF;
+}
