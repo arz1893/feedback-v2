@@ -16,8 +16,12 @@ class ComplaintServiceReportController extends Controller
         return view('report.complaint_service.complaint_service_report_all_year');
     }
 
-    public function showMonthlyGraph(Request $request) {
+    public function showYearlyGraph(Request $request) {
         return view('report.complaint_service.complaint_service_report_yearly');
+    }
+
+    public function showMonthlyGraph(Request $request) {
+        return view('report.complaint_service.complaint_service_report_monthly');
     }
 
     public function getAllYearComplaint(Request $request) {
@@ -52,4 +56,5 @@ class ComplaintServiceReportController extends Controller
 
         }
     }
+
 }

@@ -25,7 +25,6 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'description' => 'required'
         ];
     }
 
@@ -33,7 +32,6 @@ class ProductRequest extends FormRequest
     {
         return [
             'name.required' => 'Please enter your product name',
-            'description.required' => 'Please enter product description'
         ];
     }
 }

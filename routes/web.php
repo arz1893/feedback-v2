@@ -177,11 +177,13 @@ Route::post('register/via-invitation/{id}', 'Auth\RegisterController@registerVia
 /* Complaint Product Report Routes */
 Route::get('complaint_product_report/all-year', 'Report\ComplaintProductReportController@showAllYearGraph')->name('product_report_all_year');
 Route::get('complaint_product_report/yearly', 'Report\ComplaintProductReportController@showYearlyGraph')->name('product_report_yearly');
+Route::get('complaint_product_report/monthly', 'Report\ComplaintProductReportController@showMonthlyGraph')->name('product_report_monthly');
 Route::resource('complaint_product_report', 'Report\ComplaintProductReportController');
 /* end of complaint product routes */
 
 /* Complaint Service Report Routes */
 Route::get('complaint_service_report/all-year', 'Report\ComplaintServiceReportController@showAllYearGraph')->name('service_report_all_year');
-Route::get('complaint_service_report/yearly', 'Report\ComplaintServiceReportController@showMonthlyGraph')->name('service_report_yearly');
+Route::get('complaint_service_report/yearly', 'Report\ComplaintServiceReportController@showYearlyGraph')->name('service_report_yearly');
+Route::get('complaint_service_report/monthly', 'Report\ComplaintServiceReportController@showMonthlyGraph')->name('service_report_monthly');
 Route::resource('complaint_service_report', 'Report\ComplaintServiceReportController');
 /* end of complaint service routes */

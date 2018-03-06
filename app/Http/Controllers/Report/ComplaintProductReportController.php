@@ -20,6 +20,10 @@ class ComplaintProductReportController extends Controller
         return view('report.complaint_product.complaint_product_report_yearly');
     }
 
+    public function showMonthlyGraph(Request $request) {
+        return view('report.complaint_product.complaint_product_report_monthly');
+    }
+
     public function getYearlyComplaint(Request $request, $year) {
         $complaintPerMonth = [];
         $is_null = 0;

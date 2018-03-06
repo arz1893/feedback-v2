@@ -37,15 +37,15 @@
             <div class="col-md-4">
                 <h2 class="text-info">Yearly <i class="fa fa-line-chart"></i></h2>
                 <p>View statistic for complaint per month</p>
-                <a class="btn btn-warning" href="{{ route('service_report_yearly') }}">Show
-                    <i class="fa fa-arrow-circle-right"></i>
+                <a class="btn btn-warning" href="{{ route('service_report_yearly') }}">
+                    Show <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
             <!-- /.col-md-4 -->
             <div class="col-md-4">
                 <h2 class="text-info">Monthly <i class="fa fa-line-chart"></i></h2>
                 <p>View statistic for complaint per week</p>
-                <a class="btn btn-success" href="#">
+                <a class="btn btn-success" href="{{ route('service_report_monthly') }}">
                     Show <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>

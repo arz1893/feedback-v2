@@ -162,8 +162,35 @@
                     </a>
 
                     <ul class="treeview-menu">
-                        <li><a href="{{ route('complaint_product_report.index') }}"><i class="fa fa-bar-chart"></i> Complaint Product Report</a></li>
-                        <li><a href="{{ route('complaint_service_report.index') }}"><i class="fa fa-bar-chart"></i> Complaint Service Report</a></li>
+
+                        <li class="treeview">
+                            <a href="#!">
+                                <i class="fa fa-bar-chart"></i>Complaint Product
+                                <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ route('product_report_all_year') }}">All Year</a></li>
+                                <li><a href="{{ route('product_report_yearly') }}">Yearly</a></li>
+                                <li><a href="{{ route('product_report_monthly') }}">Monthly</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#!">
+                                <i class="fa fa-bar-chart"></i>Complaint Service
+                                <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ route('service_report_all_year') }}">All Year</a></li>
+                                <li><a href="{{ route('service_report_yearly') }}">Yearly</a></li>
+                                <li><a href="{{ route('service_report_monthly') }}">Monthly</a></li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </li>
 

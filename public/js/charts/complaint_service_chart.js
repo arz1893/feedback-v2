@@ -34,7 +34,7 @@ if($('#complaint_service_chart_all_year').length > 0) {
                 }
             });
         } else {
-            $('#complaint_service_chart').css('display', '');
+            $('#complaint_service_chart_all_year').css('display', '');
             $('#no_data_found').css('display', 'none');
         }
     }).catch(error => {
@@ -79,7 +79,7 @@ if($('#complaint_service_chart_yearly').length > 0) {
                 }
             });
         } else {
-            $('#complaint_service_chart').css('display', '');
+            $('#complaint_service_chart_yearly').css('display', '');
             $('#no_data_found').css('display', 'none');
         }
     }).catch(error => {
@@ -124,10 +124,10 @@ if($('#complaint_service_chart_yearly').length > 0) {
                         }
                     }
                 });
-                $('#complaint_service_chart').css('display', '');
+                $('#complaint_service_chart_yearly').css('display', '');
                 $('#no_data_found').css('display', 'none');
             } else {
-                $('#complaint_service_chart').css('display', 'none');
+                $('#complaint_service_chart_yearly').css('display', 'none');
                 $('#no_data_found').css('display', '');
             }
         }).catch(error => {

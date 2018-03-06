@@ -25,7 +25,6 @@ class ServiceRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'description' => 'required'
         ];
     }
 
@@ -33,7 +32,6 @@ class ServiceRequest extends FormRequest
     {
         return [
             'name.required' => 'Please enter service\'s name',
-            'description.required' => 'Please enter service\'s description'
         ];
     }
 }

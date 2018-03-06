@@ -81,11 +81,9 @@ $(document).ready(function () {
 
         rules: {
             name: 'required',
-            description: 'required'
         },
         messages: {
             name: 'please enter your product name',
-            description: 'please enter product description'
         }
     });
 
@@ -113,11 +111,9 @@ $(document).ready(function () {
 
         rules: {
             name: 'required',
-            description: 'required'
         },
         messages: {
             name: 'please enter your product name',
-            description: 'please enter your product description'
         }
     });
 
@@ -127,11 +123,9 @@ $(document).ready(function () {
 
         rules: {
             name: 'required',
-            description: 'required'
         },
         messages: {
             name: 'please enter your service name',
-            description: 'please enter your service description'
         }
     });
 
