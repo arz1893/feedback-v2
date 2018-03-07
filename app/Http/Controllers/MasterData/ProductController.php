@@ -18,16 +18,6 @@ class ProductController extends Controller
 {
     public function index() {
         $products = Product::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get();
-
-        foreach ($products as $product) {
-            if(count($product->product_categories) == 0) {
-                ProductCategory::create([
-                    'name' => 'General',
-                    'productId' => $product->systemId
-                ]);
-            }
-        }
-
         return view('master_data.product.product_index', compact('products'));
     }
 
