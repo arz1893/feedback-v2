@@ -163,8 +163,8 @@ if($('#service_index').length > 0) {
 
                     axios.get(url).then(response => {
                         if(response.data.data.length === 0) {
-                            vm.errorMessage = 'no data found';
                             vm.services = response.data.data;
+                            vm.errorMessage = 'no data found';
                         } else {
                             vm.services = response.data.data;
                             vm.errorMessage = '';

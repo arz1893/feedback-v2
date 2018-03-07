@@ -47,16 +47,9 @@
         </div>
 
         <div id="service_panel" class="col-lg-12">
-            @if(count($services) == 0)
-                <div class="well">
-                    <h4 class="text-center">Sorry you don't have any service yet</h4>
-                </div>
-            @endif
             <div class="row visible-lg visible-md visible-sm">
-                <div v-show="errorMessage !== ''">
-                    <div class="well text-center">
-                        @{{ errorMessage }}
-                    </div>
+                <div class="well text-center" v-show="errorMessage !== ''">
+                    @{{ errorMessage }}
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="service in filteredServices">
                     <div class="imagebox">

@@ -19,7 +19,11 @@
     <div class="media">
         <div class="media-left">
             <a href="#">
-                <img class="media-object" src="{{ $service->img }}" alt="..." width="64" height="64">
+                @if($service->img != null)
+                    <img class="media-object" src="{{ asset($service->img) }}" alt="..." width="64" height="64">
+                @else
+                    <img class="media-object" src="{{ asset('default-images/no-image.jpg') }}" alt="..." width="64" height="64">
+                @endif
             </a>
         </div>
         <div class="media-body">
@@ -73,7 +77,7 @@
                     @if(count($serviceCategory->getImmediateDescendants()) > 0)
                         <a href="{{ route('show_suggestion_service', [$service->systemId, $serviceCategory->id]) }}" class="btn btn-lg btn-info btn3d">
                             <span class="badge bg-aqua">{{ count($serviceCategory->getImmediateDescendants()) }}</span>
-                            <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $serviceCategory->name }}
+                            <i class="ion ion-navigate" aria-hidden="true"></i> {{ $serviceCategory->name }}
                         </a>
                     @elseif(count($serviceCategory->getImmediateDescendants()) == 0)
                         <button class="btn btn-lg btn-info btn3d"
@@ -81,7 +85,7 @@
                                 data-service_id="{{ $service->systemId }}"
                                 data-title="{{ $serviceCategory->name }}"
                                 v-on:click="append('{{ $serviceCategory->name }}', '{{ $service->systemId }}', '{{ $serviceCategory->id }}')">
-                            <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $serviceCategory->name }}
+                            <i class="ion ion-navigate" aria-hidden="true"></i> {{ $serviceCategory->name }}
                         </button>
                     @endif
                 @endforeach

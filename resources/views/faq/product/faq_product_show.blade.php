@@ -11,7 +11,11 @@
     <div class="media">
         <div class="media-left">
             <a href="#">
-                <img class="media-object" src="{{ $product->img }}" alt="..." width="64" height="64">
+                @if($product->img != null)
+                    <img class="media-object" src="{{ asset($product->img) }}" alt="..." width="64" height="64">
+                @else
+                    <img class="media-object" src="{{ asset('default-images/no-image.jpg') }}" alt="..." width="64" height="64">
+                @endif
             </a>
         </div>
         <div class="media-body">

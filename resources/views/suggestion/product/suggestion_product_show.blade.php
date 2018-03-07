@@ -19,7 +19,11 @@
     <div class="media">
         <div class="media-left">
             <a href="#">
-                <img class="media-object" src="{{ $product->img }}" alt="..." width="64" height="64">
+                @if($product->img != null)
+                    <img class="media-object" src="{{ asset($product->img) }}" alt="..." width="64" height="64">
+                @else
+                    <img class="media-object" src="{{ asset('default-images/no-image.jpg') }}" alt="..." width="64" height="64">
+                @endif
             </a>
         </div>
         <div class="media-body">
@@ -72,7 +76,7 @@
                 @foreach($productCategories as $productCategory)
                     @if(count($productCategory->getImmediateDescendants()) > 0)
                         <a href="{{ route('show_suggestion_product', [$product->systemId, $productCategory->id]) }}" class="btn btn-lg btn-info btn3d">
-                            <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $productCategory->name }}
+                            <i class="ion ion-navigate" aria-hidden="true"></i> {{ $productCategory->name }}
                             <span class="badge bg-aqua">{{ count($productCategory->getImmediateDescendants()) }}</span>
                         </a>
                     @elseif(count($productCategory->getImmediateDescendants()) == 0)
@@ -81,7 +85,7 @@
                                 data-product_id="{{ $product->systemId }}"
                                 data-title="{{ $productCategory->name }}"
                                 v-on:click="append('{{ $productCategory->name }}', '{{ $product->systemId }}', '{{ $productCategory->id }}')">
-                            <i class="ion ion-pricetag" aria-hidden="true"></i> {{ $productCategory->name }}
+                            <i class="ion ion-navigate" aria-hidden="true"></i> {{ $productCategory->name }}
                         </button>
                     @endif
                 @endforeach
