@@ -1,22 +1,26 @@
 @extends('home')
 
 @push('scripts')
-    <script src="{{ asset('js/vue/vue_service.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/vue_product.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ url('/complaint') }}"><i class="ion ion-settings"></i> Complaint selection</a></li>
-        <li class="active">Complaint Service</li>
+        <li><a href="{{ route('complaint_report.index') }}"><i class="fa fa-bar-chart-o"></i> Complaint Report Selection</a></li>
+        <li class="active">Complaint Product Report</li>
     </ol>
-    <span class="text-danger" style="font-size: 2em; position: relative; top: 5px;">Complaint</span>
-    <a href="{{ route('complaint_product.index') }}" class="btn btn-sm btn-link">Product</a>
-    <a href="{{ route('complaint_service.index') }}" class="btn btn-sm btn-flat bg-aqua">Service</a>
+    <h3 class="text-red">Complaint Product Report</h3>
+    <a href="{{ route('complaint_product_report_all') }}" class="btn btn-success">
+        Show all report <i class="ion ion-arrow-graph-up-right"></i>
+    </a>
+    <div>
+        <small class="text-muted">Note *: Please select one of the product to view report</small>
+    </div>
 @endsection
 
 @section('main-content')
-    <div id="service_index">
+    <div id="product_index">
         {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
         <div class="row">
             <div class="col-lg-12">
@@ -29,7 +33,7 @@
                                     <i class="ion ion-search"></i>
                                 </button>
                             </span>
-                        </div><!-- /input-group -->
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
@@ -46,50 +50,47 @@
             </div>
         </div>
 
-        <div id="service_panel" class="col-lg-12">
-            @if(count($services) == 0)
-                <div class="well">
-                    <h4 class="text-center">Sorry you don't have any service yet</h4>
-                </div>
-            @endif
-            <div class="row visible-lg visible-md visible-sm">
-                <div v-show="errorMessage !== ''">
-                    <div class="well text-center">
-                        @{{ errorMessage }}
+        <transition name="fade" mode="out-in">
+            <div id="product_panel" class="col-lg-12">
+                <div class="row visible-lg visible-md visible-sm">
+                    <div v-show="errorMessage !== ''">
+                        <div class="well text-center">
+                            @{{ errorMessage }}
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="product in filteredProducts">
+                        <div class="imagebox">
+                            <a href="#!">
+                                <img v-show="product.img !== ''" v-bind:src="product.img"  class="category-banner img-responsive">
+                                <img v-show="product.img === ''" src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
+                                <span class="imagebox-desc">
+                                @{{ product.name }}
+                            </span>
+                            </a>
+                        </div>
+                        {{--<div v-for="tag in product.productTags">--}}
+                        {{--<div v-bind:item="searchTags" v-bind:key="tag.systemId" v-bind:title="tag.name">@{{ tag.name }}</div>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="service in filteredServices">
-                    <div class="imagebox">
-                        <a v-bind:href="service.show_complaint_url">
-                            <img v-show="service.img !== ''" v-bind:src="service.img"  class="category-banner img-responsive">
-                            <img v-show="service.img === ''" src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
-                            <span class="imagebox-desc">
-                            @{{ service.name }}
-                        </span>
-                        </a>
-                    </div>
-                    {{--<div v-for="tag in service.serviceTags">--}}
-                    {{--<div v-bind:key="tag.systemId" v-bind:title="tag.name">@{{ tag.name }}</div>--}}
-                    {{--</div>--}}
-                </div>
-            </div>
-        </div>
 
-        <div class="row visible-xs col-lg-12">
-            <div v-show="errorMessage !== ''">
-                <div class="well text-center">
-                    @{{ errorMessage }}
+                <div class="row visible-xs">
+                    <div v-show="errorMessage !== ''">
+                        <div class="well text-center">
+                            @{{ errorMessage }}
+                        </div>
+                    </div>
+                    <div class="list-group">
+                        <div v-for="product in filteredProducts">
+                            <a href="#!" class="list-group-item">
+                                <img v-bind:src="product.img" style="width: 40px; height: 30px;">
+                                @{{ product.name }}
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="list-group">
-                <div v-for="service in filteredServices">
-                    <a v-bind:href="service.show_complaint_url" class="list-group-item">
-                        <img v-bind:src="service.img" style="width: 40px; height: 30px;">
-                        @{{ service.name }}
-                    </a>
-                </div>
-            </div>
-        </div>
+        </transition>
 
         <div class="col-lg-12">
             <ul class="pager">

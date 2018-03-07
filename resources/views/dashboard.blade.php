@@ -164,27 +164,27 @@
 <div class="row" style="margin-top: -4%;">
     <section class="content-header">
         <div class="page-header">
-            <h3>Charts & Statistic</h3>
+            <h3>Report & Charts <small>All data information</small></h3>
         </div>
     </section>
     <div class="content">
         <div class="row">
             <div class="col-lg-3">
-                <a href="{{ route('complaint_product_report.index') }}">
+                <a href="{{ route('complaint_report.index') }}">
                     <img class="img-circle center-block" src="{{ asset('default-images/chart-icon.png') }}" alt="Generic placeholder image" width="140" height="140">
                 </a>
-                <a href="{{ route('complaint_product_report.index') }}">
-                    <h3 class="text-center">Complaint Product Chart</h3>
+                <a href="{{ route('complaint_report.index') }}">
+                    <h3 class="text-center">Complaint Report</h3>
                 </a>
                 <p align="center">Contains all complaint product charts and statistic</p>
             </div><!-- /.col-lg-4 -->
 
             <div class="col-lg-3">
-                <a href="{{ route('complaint_service_report.index') }}">
+                <a href="#!">
                     <img class="img-circle center-block" src="{{ asset('default-images/chart-icon2.png') }}" alt="Generic placeholder image" width="140" height="140">
                 </a>
-                <a href="{{ route('complaint_service_report.index') }}">
-                    <h3 class="text-center">Complaint Service Chart</h3>
+                <a href="#!">
+                    <h3 class="text-center">Suggestion Report</h3>
                 </a>
                 <p align="center">Contains all complaint service charts and statistic</p>
             </div><!-- /.col-lg-4 -->

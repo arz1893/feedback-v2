@@ -7,7 +7,6 @@
 @endsection
 
 @section('main-content')
-    <!-- Page Content -->
     <div class="container">
 
         <!-- Heading Row -->
@@ -18,7 +17,7 @@
             </div>
 
             <div class="col-md-5 col-sm-4">
-                <h4 class="text-danger">Welcome to Complaint Product Report</h4>
+                <h4 class="text-danger">Welcome to Complaint Report Section</h4>
                 <p align="justify">This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
             </div>
             <!-- /.col-md-4 -->
@@ -28,25 +27,25 @@
         <!-- Content Row -->
         <div class="row">
             <div class="col-md-4">
-                <h2 class="text-info">All Year <i class="fa fa-line-chart"></i></h2>
-                <p>Vie statistic of complaint from past to current year</p>
-                <a class="btn btn-danger" href="{{ route('product_report_all_year') }}">
+                <h2 class="text-info">All Report <i class="fa fa-line-chart"></i></h2>
+                <p>Contains all product and service report</p>
+                <a class="btn btn-danger" href="{{ route('complaint_report_all') }}">
                     Show <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
             <!-- /.col-md-4 -->
             <div class="col-md-4">
-                <h2 class="text-info">Yearly <i class="fa fa-line-chart"></i></h2>
-                <p>View statistic for complaint per month</p>
-                <a class="btn btn-warning" href="{{ route('product_report_yearly') }}">Show
+                <h2 class="text-info">Product <i class="fa fa-line-chart"></i></h2>
+                <p>View all complaint product report</p>
+                <a class="btn btn-warning" href="{{ route('complaint_product_report.index') }}">Show
                     <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
             <!-- /.col-md-4 -->
             <div class="col-md-4">
-                <h2 class="text-info">Monthly <i class="fa fa-line-chart"></i></h2>
-                <p>View statistic for complaint per week</p>
-                <a class="btn btn-success" href="{{ route('product_report_monthly') }}">
+                <h2 class="text-info">Service <i class="fa fa-line-chart"></i></h2>
+                <p>View all complaint service report</p>
+                <a class="btn btn-success" href="#!">
                     Show <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -55,5 +54,4 @@
         <!-- /.row -->
 
     </div>
-    <!-- /.container -->
 @endsection

@@ -63,7 +63,7 @@
 
         <transition name="fadeDown">
             <div id="category_navigator" v-if="show">
-                <h3>Categories</h3>
+                <h3>Categories <a href="#!" class="btn btn-primary"><i class="fa fa-plus"></i></a></h3>
                 @if(count($productCategories) == 0)
                     <span class="text-danger">Sorry you haven't add some category to this product, please add it first on master data</span>
                 @endif

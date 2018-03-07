@@ -137,13 +137,22 @@ if($('#service_index').length > 0) {
                 path: '',
             },
             searchString: '',
-            searchStatus: ''
+            searchStatus: '',
+            errorMessage: ''
         },
         computed: {
             filteredServices: function () {
-                return this.services.filter((service) => {
+                let vm = this;
+                let result = this.services.filter((service) => {
                     return service.name.toLowerCase().match(this.searchString.toLowerCase());
                 });
+
+                if(result.length === 0) {
+                    vm.errorMessage = 'no data found';
+                } else {
+                    vm.errorMessage = '';
+                    return result;
+                }
             }  
         },
         methods: {
@@ -153,8 +162,14 @@ if($('#service_index').length > 0) {
                     const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + id + '/get-service-list';
 
                     axios.get(url).then(response => {
-                        vm.services = response.data.data;
-                        vm.makePagination(response.data);
+                        if(response.data.data.length === 0) {
+                            vm.errorMessage = 'no data found';
+                            vm.services = response.data.data;
+                        } else {
+                            vm.services = response.data.data;
+                            vm.errorMessage = '';
+                            vm.makePagination(response.data);
+                        }
                     }).catch(error => {
                         console.log('something wrong within the process');
                     });
@@ -164,9 +179,14 @@ if($('#service_index').length > 0) {
                         tags: tags
                     })
                     .then(function (response) {
-                        console.log(response.data);
-                        vm.services = response.data.data;
-                        vm.makePagination(response.data);
+                        if(response.data.data.length === 0) {
+                            vm.services = response.data.data;
+                            vm.errorMessage = 'no data found';
+                        } else {
+                            vm.errorMessage = '';
+                            vm.services = response.data.data;
+                            vm.makePagination(response.data);
+                        }
                     })
                     .catch(error => {
                         console.log(Object.assign({}, error));
@@ -216,13 +236,21 @@ if($('#service_index').length > 0) {
                 axios.post(url, {
                     tags: tagIds
                 })
-                    .then(function (response) {
+                .then(function (response) {
+                    if(response.data.data.length === 0) {
+                        serviceIndex.errorMessage = 'no data found';
                         serviceIndex.services = response.data.data;
                         serviceIndex.searchStatus = '';
-                    })
-                    .catch(error => {
-                        console.log(Object.assign({}, error));
-                    });
+                    } else {
+                        serviceIndex.errorMessage = '';
+                        serviceIndex.searchStatus = '';
+                        serviceIndex.services = response.data.data;
+                        serviceIndex.makePagination(response.data);
+                    }
+                })
+                .catch(error => {
+                    console.log(Object.assign({}, error));
+                });
             }
             //debounce buat trigger function setelah 1 detik
             let debounceFunction = _.debounce(filterServices, 1000);
@@ -232,8 +260,14 @@ if($('#service_index').length > 0) {
             serviceIndex.searchStatus = 'Loading...';
             function getServices() {
                 axios.get(url).then(response => {
-                    serviceIndex.services = response.data.data;
-                    serviceIndex.searchStatus = '';
+                    if(response.data.data.length === 0) {
+                        serviceIndex.errorMessage = 'no data found';
+                        serviceIndex.searchStatus = '';
+                    } else {
+                        serviceIndex.errorMessage = '';
+                        serviceIndex.searchStatus = '';
+                        serviceIndex.services = response.data.data;
+                    }
                 }).catch(error => {
                     console.log(Object.assign({}, error));
                 });

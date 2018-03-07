@@ -18,6 +18,16 @@ class ProductController extends Controller
 {
     public function index() {
         $products = Product::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get();
+
+        foreach ($products as $product) {
+            if(count($product->product_categories) == 0) {
+                ProductCategory::create([
+                    'name' => 'General',
+                    'productId' => $product->systemId
+                ]);
+            }
+        }
+
         return view('master_data.product.product_index', compact('products'));
     }
 
@@ -43,6 +53,11 @@ class ProductController extends Controller
                 'tenantId' => $request->tenantId
             ]);
 
+            ProductCategory::create([
+                'name' => 'General',
+                'productId' => $product->systemId
+            ]);
+
             $product->tags()->sync($request->input('tags'));
 
             if(!file_exists(public_path('uploaded_images/' . $tenant->email))) {
@@ -59,6 +74,11 @@ class ProductController extends Controller
                 'metric' => $request->metric,
                 'price' => $request->price,
                 'tenantId' => $request->tenantId
+            ]);
+
+            ProductCategory::create([
+                'name' => 'General',
+                'productId' => $product->systemId
             ]);
 
             $product->tags()->sync($request->input('tags'));
@@ -129,7 +149,7 @@ class ProductController extends Controller
     }
 
     public function getProductList(Request $request, $tenant_id) {
-        $products = Product::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->paginate(12);
+        $products = Product::where('tenantId', $tenant_id)->orderBy('created_at', 'desc')->paginate(24);
         return new ProductCollection($products);
     }
 
@@ -138,7 +158,7 @@ class ProductController extends Controller
 
         $filteredProducts = Product::where('tenantId', $tenant_id)->whereHas('tags', function ($q) use ($tagIds){
             $q->whereIn('systemId', $tagIds);
-        })->orderBy('created_at', 'desc')->paginate(12);
+        })->orderBy('created_at', 'desc')->paginate(24);
         return new ProductCollection($filteredProducts);
     }
 }

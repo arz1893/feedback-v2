@@ -37,7 +37,7 @@ class Product extends Model
     }
 
     public function product_categories() {
-        return $this->hasMany(ProductCategory::class);
+        return $this->hasMany(ProductCategory::class, 'productId', 'systemId');
     }
 
     public function faq_products() {

@@ -57,6 +57,11 @@
 
         <div id="service_panel" class="col-lg-12">
             <div class="row visible-lg visible-md visible-sm">
+                <div v-show="errorMessage !== ''">
+                    <div class="well text-center">
+                        @{{ errorMessage }}
+                    </div>
+                </div>
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="service in filteredServices">
                     <div class="imagebox">
                         <a v-bind:href="service.show_faq_url">
@@ -75,6 +80,11 @@
 
             <div class="row visible-xs">
                 <div class="list-group">
+                    <div v-show="errorMessage !== ''">
+                        <div class="well text-center">
+                            @{{ errorMessage }}
+                        </div>
+                    </div>
                     <div v-for="service in filteredServices">
                         <a v-bind:href="service.show_faq_url" class="list-group-item">
                             <img v-bind:src="service.img" style="width: 40px; height: 30px;">

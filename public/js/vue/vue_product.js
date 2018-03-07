@@ -141,15 +141,23 @@ if($('#product_index').length > 0) {
             },
             searchString: '',
             searchStatus: '',
+            errorMessage: ''
         },
         watch: {
 
         },
         computed: {
             filteredProducts: function () {
-                return this.products.filter(product => {
+                let vm = this;
+                let result =  this.products.filter(product => {
                     return product.name.toLowerCase().match(this.searchString.toLowerCase());
                 });
+                if(result.length === 0) {
+                    vm.errorMessage = 'no data found';
+                } else {
+                    vm.errorMessage = '';
+                    return result;
+                }
             }
         },
         methods: {
@@ -158,8 +166,14 @@ if($('#product_index').length > 0) {
                 if(tags.length === 0) {
                     const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + id + '/get-product-list';
                     axios.get(url).then(response => {
-                        this.products = response.data.data;
-                        vm.makePagination(response.data);
+                        if(response.data.data.length === 0) {
+                            vm.products = response.data.data;
+                            vm.errorMessage = 'no data found';
+                        } else {
+                            vm.products = response.data.data;
+                            vm.errorMessage = '';
+                            vm.makePagination(response.data);
+                        }
                     }).catch(error => {
                         console.log('something wrong within the process');
                         console.log(Object.assign({}, error));
@@ -170,8 +184,14 @@ if($('#product_index').length > 0) {
                         tags: tags
                     })
                     .then(function (response) {
-                        vm.products = response.data.data;
-                        vm.makePagination(response.data);
+                        if(response.data.data.length === 0) {
+                            vm.products = response.data.data;
+                            vm.errorMessage = 'no data found';
+                        } else {
+                            vm.errorMessage = '';
+                            vm.products = response.data.data;
+                            vm.makePagination(response.data);
+                        }
                     })
                     .catch(error => {
                         console.log(Object.assign({}, error));
@@ -222,8 +242,16 @@ if($('#product_index').length > 0) {
                     tags: tagIds
                 })
                 .then(function (response) {
-                    productIndex.products = response.data.data;
-                    productIndex.searchStatus = '';
+                    if(response.data.data.length === 0) {
+                        productIndex.products = response.data.data;
+                        productIndex.errorMessage = 'no data found';
+                        productIndex.searchStatus = '';
+                    } else {
+                        productIndex.products = response.data.data;
+                        productIndex.makePagination(response.data);
+                        productIndex.errorMessage = '';
+                        productIndex.searchStatus = '';
+                    }
                 })
                 .catch(error => {
                     console.log(Object.assign({}, error));
@@ -237,8 +265,14 @@ if($('#product_index').length > 0) {
             productIndex.searchStatus = 'Loading...';
             function getProducts() {
                 axios.get(url).then(response => {
-                    productIndex.products = response.data.data;
-                    productIndex.searchStatus = '';
+                    if(response.data.data.length === 0) {
+                        productIndex.products = response.data.data;
+                        productIndex.errorMessage = 'no data found';
+                    } else {
+                        productIndex.products = response.data.data;
+                        productIndex.errorMessage = '';
+                        productIndex.searchStatus = '';
+                    }
                 }).catch(error => {
                     console.log(Object.assign({}, error));
                 });

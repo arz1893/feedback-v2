@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('landing_page');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -174,16 +174,12 @@ Route::get('register/accept/{token}', 'Auth\RegisterController@acceptInvitation'
 Route::post('register/via-invitation/{id}', 'Auth\RegisterController@registerViaEmail')->name('register_via_invitation');
 /* end of user management */
 
-/* Complaint Product Report Routes */
-Route::get('complaint_product_report/all-year', 'Report\ComplaintProductReportController@showAllYearGraph')->name('product_report_all_year');
-Route::get('complaint_product_report/yearly', 'Report\ComplaintProductReportController@showYearlyGraph')->name('product_report_yearly');
-Route::get('complaint_product_report/monthly', 'Report\ComplaintProductReportController@showMonthlyGraph')->name('product_report_monthly');
-Route::resource('complaint_product_report', 'Report\ComplaintProductReportController');
-/* end of complaint product routes */
+/* Complaint Report Routes */
+Route::get('complaint_report/all-report', 'Report\Complaint\ComplaintReportController@showAllComplaintReport')->name('complaint_report_all');
+Route::resource('complaint_report', 'Report\Complaint\ComplaintReportController');
+/* end of complaint report routes */
 
-/* Complaint Service Report Routes */
-Route::get('complaint_service_report/all-year', 'Report\ComplaintServiceReportController@showAllYearGraph')->name('service_report_all_year');
-Route::get('complaint_service_report/yearly', 'Report\ComplaintServiceReportController@showYearlyGraph')->name('service_report_yearly');
-Route::get('complaint_service_report/monthly', 'Report\ComplaintServiceReportController@showMonthlyGraph')->name('service_report_monthly');
-Route::resource('complaint_service_report', 'Report\ComplaintServiceReportController');
-/* end of complaint service routes */
+/* Complaint Product Report Controller */
+Route::get('complaint_product_report/all-report', 'Report\Complaint\Product\ComplaintProductReportController@showAllReport')->name('complaint_product_report_all');
+Route::resource('complaint_product_report', 'Report\Complaint\Product\ComplaintProductReportController');
+/* end of complaint product report controller */
