@@ -10,7 +10,12 @@
         <div class="row intro">
             <div class="col-md-6 col-sm-8 intro-left">
                 <div class="intro-left-content">
-                    <img src="{{ asset('default-images/49.svg') }}" alt="Template Logo" width="300">
+                    <img src="{{ asset('default-images/49.svg') }}" alt="Template Logo" width="300"> <br>
+                    @auth
+                        <a href="{{ url('/home') }}" class="btn btn-flat btn-primary">
+                            <i class="fa fa-arrow-circle-right"></i> back to home
+                        </a>
+                    @endauth
                     <h1 class="text-info">Under construction</h1>
                     <p class="lead">We are working hard to bring to you our great project soon.</p>
                     <p>Coming soon/Under construction, I hope you will enjoy working with it. This a paragraph where some more info about your project could go. </p>

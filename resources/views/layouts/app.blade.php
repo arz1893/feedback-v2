@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-    @guest
+    @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'landing_page')
         <div class="">
             <!-- Main Header -->
             <header class="main-header">
@@ -152,7 +152,11 @@
             @yield('content')
         </div>
     @else
-        <div class="wrapper">
+        @guest
+            <div class="">
+        @else
+            <div class="wrapper">
+        @endguest
             <!-- Main Header -->
             <header class="main-header">
 

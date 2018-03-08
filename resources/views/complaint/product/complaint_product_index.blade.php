@@ -32,15 +32,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
-                        {{ Form::select('tags[]', $selectTags, $defaultTags, ['id' => 'select_tags', 'class' => 'selectize', 'style' => '', 'multiple' => true]) }}
+                        {{ Form::select('tags[]', $selectTags, $defaultTags, ['id' => 'select_tags', 'class' => 'selectize', 'style' => 'width: 100%', 'multiple' => true]) }}
                         <span class="visible-md visible-sm visible-xs">
                             <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
                         </span>
                     </div>
                 </div>
-                <div class="col-lg-4 visible-lg">
+                <div class="col-lg-2 visible-lg">
                     <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
                 </div>
             </div>
