@@ -53,6 +53,7 @@ Route::post('product_category/update-category', 'MasterData\ProductCategoryContr
 Route::post('product_category/get-childs', 'MasterData\ProductCategoryController@getChilds');
 Route::post('product_category/get-trees', 'MasterData\ProductCategoryController@getTrees');
 Route::post('product_category/get-category', 'MasterData\ProductCategoryController@getCategory');
+Route::post('product_category/add-parent-node', 'MasterData\ProductCategoryController@addParentNode');
 Route::post('product_category/add-child-node', 'MasterData\ProductCategoryController@addChildNode');
 Route::post('product_category/rename-node', 'MasterData\ProductCategoryController@renameNode');
 Route::post('product_category/delete-node', 'MasterData\ProductCategoryController@removeNode');
@@ -72,6 +73,7 @@ Route::post('service_category/get-childs', 'MasterData\ServiceCategoryController
 Route::post('service_category/get-category', 'MasterData\ServiceCategoryController@getCategory');
 Route::post('service_category/rename-category', 'MasterData\ServiceCategoryController@renameServiceCategory');
 Route::post('service_category/delete-category', 'MasterData\ServiceCategoryController@deleteServiceCategory');
+Route::post('service_category/add-parent-node', 'MasterData\ServiceCategoryController@addParentNode');
 Route::post('service_category/add-child-node', 'MasterData\ServiceCategoryController@addChildNode');
 Route::post('service_category/rename-node', 'MasterData\ServiceCategoryController@renameNode');
 Route::post('service_category/delete-node', 'MasterData\ServiceCategoryController@deleteNode');

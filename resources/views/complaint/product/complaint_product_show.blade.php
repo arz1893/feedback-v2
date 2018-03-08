@@ -8,6 +8,7 @@
 @push('scripts')
     <script src="{{ asset('js/vue/vue_product.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/vue/vue_customer.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/tree-crud/tree-product-function.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')
@@ -53,6 +54,85 @@
         </div>
     @endif
 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_category">
+        <i class="fa fa-plus"></i> Add Category
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal_category" tabindex="-1" role="dialog" aria-labelledby="modal_category_label">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modal_category_label">Add Category</h4>
+                </div>
+                <div class="modal-body">
+                    {{ Form::hidden('product_id', $product->systemId, ['id' => 'product_id']) }}
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-pills" role="tablist">
+                        <li role="presentation" class="active"><a href="#add-root" aria-controls="home" role="tab" data-toggle="tab">Add Category</a></li>
+                        <li role="presentation"><a href="#add-sub" aria-controls="profile" role="tab" data-toggle="tab">Add Sub Category</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="add-root">
+                            <div class="">
+                                <div class="input-group">
+                                    <input name="category_name" id="category_name" type="text" class="form-control" placeholder="Enter category name...">
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-info"
+                                            type="button"
+                                            data-product_id="{{ $product->systemId }}"
+                                            data-type="root" onclick="setProductCategoryType(this)">
+                                        Add
+                                    </button>
+                                </span>
+                                </div>
+                                <p id="category_name_error" class="help-block text-red invisible">please enter category name</p>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="add-sub">
+                            <div class="input-group">
+                                <input name="sub_name" id="sub_name" type="text" class="form-control" placeholder="Enter sub category name...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning"
+                                            type="button"
+                                            data-product_id="{{ $product->systemId }}"
+                                            data-type="sub" onclick="setProductCategoryType(this)">
+                                        Add
+                                    </button>
+                                </span>
+                            </div>
+                            <p id="sub_category_error" class="help-block text-red invisible">please enter sub category name</p>
+                        </div>
+                    </div>
+
+                    <div id="product_tree"></div>
+
+                    <button type="button"
+                            class="btn btn-sm btn-warning"
+                            data-product-id="{{ $product->systemId }}"
+                            data-type="edit"
+                            onclick="setProductCategoryType(this)">
+                        <i class="ion ion-edit" aria-hidden="true"></i> Rename
+                    </button>
+                    <button type="button"
+                            class="btn btn-sm btn-danger"
+                            data-product-id="{{ $product->systemId }}"
+                            data-type="delete"
+                            onclick="setProductCategoryType(this)">
+                        <i class="ion ion-close-circled" aria-hidden="true"></i> Remove
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div id="vue_product_container">
 
         <transition name="fadeDown">
@@ -63,7 +143,9 @@
 
         <transition name="fadeDown">
             <div id="category_navigator" v-if="show">
-                <h3>Categories <a href="#!" class="btn btn-primary"><i class="fa fa-plus"></i></a></h3>
+
+                <h3> Categories </h3>
+
                 @if(count($productCategories) == 0)
                     <span class="text-danger">Sorry you haven't add some category to this product, please add it first on master data</span>
                 @endif
@@ -121,7 +203,6 @@
     </div>
 
     @include('customer.manage_customer')
-
 
     {{--<button class="btn btn-danger btn-flat" onclick="setComplaintTarget(this)">--}}
     {{--Add Complaint <i class="ion ion-plus-circled"></i>--}}

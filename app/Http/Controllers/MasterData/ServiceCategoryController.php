@@ -97,6 +97,18 @@ class ServiceCategoryController extends Controller
         return redirect()->back()->with('status', 'Category has been deleted');
     }
 
+    public function addParentNode(Request $request) {
+        if($request->json()) {
+            $parent = ServiceCategory::create([
+                'name' => $request->category_name,
+                'serviceId' => $request->service_id
+            ]);
+
+            return response()->json($parent, 200);
+        }
+        return redirect()->back();
+    }
+
     public function addChildNode(Request $request) {
         if($request->json()) {
             $parent = ServiceCategory::findOrFail($request->parent_id);
@@ -104,7 +116,7 @@ class ServiceCategoryController extends Controller
                 'name' => $request->name
             ]);
             $child->makeChildOf($parent);
-            return response()->json($child->id, 200);
+            return response()->json($child, 200);
         }
         return redirect()->back();
     }

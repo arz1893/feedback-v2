@@ -153,5 +153,10 @@ $(document).ready(function () {
         backdrop: 'static'
     });
 
+    $('#modal_category').modal({
+        show: false,
+        backdrop: 'static'
+    });
+
     $('#lightgallery').lightGallery();
 });

@@ -5,7 +5,7 @@
 
 @push('scripts')
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.2.3/jquery.contextMenu.min.js"></script>
-    <script src="{{ asset('js/tree-crud/tree-crud-product-function.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/tree-crud/tree-master-product-function.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')

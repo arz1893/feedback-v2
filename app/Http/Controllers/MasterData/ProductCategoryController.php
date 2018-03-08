@@ -109,6 +109,17 @@ class ProductCategoryController extends Controller
         return redirect()->back();
     }
 
+    public function addParentNode(Request $request) {
+        if($request->json()) {
+            $parent = ProductCategory::create([
+                'name' => $request->category_name,
+                'productId' => $request->product_id
+            ]);
+            return response()->json($parent, 200);
+        }
+        return redirect()->back();
+    }
+
     public function addChildNode(Request $request) {
         if($request->json()) {
             $parent = ProductCategory::findOrFail($request->parent_id);
@@ -116,7 +127,7 @@ class ProductCategoryController extends Controller
                 'name' => $request->name
             ]);
             $child->makeChildOf($parent);
-            return response()->json($child->id, 200);
+            return response()->json($child, 200);
         }
         return redirect()->back();
     }
