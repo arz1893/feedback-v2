@@ -148,8 +148,8 @@ if($('#product_index').length > 0) {
         },
         computed: {
             filteredProducts: function () {
-                let vm = this;
-                let result =  this.products.filter(product => {
+                var vm = this;
+                var result =  this.products.filter(product => {
                     return product.name.toLowerCase().match(this.searchString.toLowerCase());
                 });
                 if(result.length === 0) {
@@ -270,6 +270,7 @@ if($('#product_index').length > 0) {
                         productIndex.errorMessage = 'no data found';
                     } else {
                         productIndex.products = response.data.data;
+                        productIndex.makePagination(response.data);
                         productIndex.errorMessage = '';
                         productIndex.searchStatus = '';
                     }
