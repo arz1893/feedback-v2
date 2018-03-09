@@ -21,104 +21,126 @@
         </div>
     @endif
 
+    <div class="container-fluid">
+        <form class="form-inline pull-right">
+            <!-- Date range -->
+            <div class="form-group">
+                <label>Date range:</label>
+
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" id="date_range_filter">
+                </div>
+                <!-- /.input group -->
+            </div>
+            <!-- /.form group -->
+        </form>
+    </div>
+
+    <br>
+
     <div id="complaint_product_list_index">
-        <table class="table table-striped table-bordered table-responsive" id="table_complaint_product" style="width: 100%">
-            <thead>
-            <tr>
-                <th>No.</th>
-                <th>Created at</th>
-                <th>Customer Name</th>
-                <th>Product Name</th>
-                <th>Rating</th>
-                <th>Need Call?</th>
-                <th>Urgent?</th>
-                <th>Answered?</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            @php $counter = 1; @endphp
-            @foreach($complaintProducts as $complaintProduct)
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-responsive" id="table_complaint_product" style="width: 100%">
+                <thead>
                 <tr>
-                    <td>{{ $counter }}</td>
-                    <td>
-                        <a href="#!" data-complaint_id="{{ $complaintProduct->systemId }}" @click="showComplaintDetail($event)">
-                            {{ $complaintProduct->created_at->format('d-M-Y') }}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#!" data-complaint_id="{{ $complaintProduct->systemId }}" @click="showComplaintDetail($event)">
-                            @if($complaintProduct->customerId != null)
-                                {{ $complaintProduct->customer->name }}
-                            @else
-                                Anonymous
-                            @endif
-                        </a>
-                    </td>
-                    <td>{{ $complaintProduct->product->name }}</td>
-                    <td>
-                        @switch($complaintProduct->customer_rating)
-                            @case(1)
-                            <i class="text-center material-icons text-maroon" style="font-size: 2em;">
-                                sentiment_very_dissatisfied
-                            </i>
-                            @break
-                            @case(2)
-                            <i class="text-center material-icons text-red" style="font-size: 2em;">
-                                sentiment_dissatisfied
-                            </i>
-                            @break
-                            @case(3)
-                            <i class="smiley_rating material-icons text-yellow" style="font-size: 2em;">
-                                sentiment_neutral
-                            </i>
-                            @break
-                            @case(4)
-                            <i class="smiley_rating material-icons text-olive" style="font-size: 2em;">
-                                sentiment_satisfied
-                            </i>
-                            @break
-                            @case(5)
-                            <i class="smiley_rating material-icons text-green" style="font-size: 2em;">
-                                sentiment_very_satisfied
-                            </i>
-                            @break
-                        @endswitch
-                    </td>
-                    <td>{!! $complaintProduct->is_need_call == 1 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
-                    <td>{!! $complaintProduct->is_urgent == 1 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
-                    <td>{!! count($complaintProduct->complaint_product_replies) > 0 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
-                    <td>
-                        @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
-                            {{--<a href="{{ route('complaint_product_list.show', $complaintProduct->systemId) }}"--}}
-                               {{--class="btn btn-primary"--}}
-                               {{--data-toggle="tooltip"--}}
-                               {{--data-placement="bottom"--}}
-                               {{--title="Answer">--}}
-                                {{--<i class="fa fa-phone"></i>--}}
-                            {{--</a>--}}
-                            <a href="{{ route('complaint_product_list.edit', $complaintProduct->systemId) }}"
-                               class="btn btn-warning"
-                               data-toggle="tooltip"
-                               data-placement="bottom"
-                               title="Edit">
-                                <i class="ion ion-edit"></i>
-                            </a>
-                            <button class="btn btn-danger"
-                                    data-id="{{ $complaintProduct->systemId }}" onclick="deleteComplaintProduct(this)"
-                                    data-toggle="tooltip"
-                                    data-placement="bottom" title="Delete">
-                                <i class="ion ion-ios-trash"></i>
-                            </button>
-                        @else
-                            <span class="text-red">Not Authorized</span>
-                        @endif
-                    </td>
+                    <th>No.</th>
+                    <th>Created at</th>
+                    <th>Customer Name</th>
+                    <th>Product Name</th>
+                    <th>Rating</th>
+                    <th>Need Call?</th>
+                    <th>Urgent?</th>
+                    <th>Answered?</th>
+                    <th>Action</th>
                 </tr>
-                @php $counter++; @endphp
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @php $counter = 1; @endphp
+                @foreach($complaintProducts as $complaintProduct)
+                    <tr>
+                        <td>{{ $counter }}</td>
+                        <td>
+                            <a href="#!" data-complaint_id="{{ $complaintProduct->systemId }}" @click="showComplaintDetail($event)">
+                                {{ $complaintProduct->created_at->format('d-M-Y') }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#!" data-complaint_id="{{ $complaintProduct->systemId }}" @click="showComplaintDetail($event)">
+                                @if($complaintProduct->customerId != null)
+                                    {{ $complaintProduct->customer->name }}
+                                @else
+                                    Anonymous
+                                @endif
+                            </a>
+                        </td>
+                        <td>{{ $complaintProduct->product->name }}</td>
+                        <td>
+                            @switch($complaintProduct->customer_rating)
+                                @case(1)
+                                <i class="text-center material-icons text-maroon" style="font-size: 2em;">
+                                    sentiment_very_dissatisfied
+                                </i>
+                                @break
+                                @case(2)
+                                <i class="text-center material-icons text-red" style="font-size: 2em;">
+                                    sentiment_dissatisfied
+                                </i>
+                                @break
+                                @case(3)
+                                <i class="smiley_rating material-icons text-yellow" style="font-size: 2em;">
+                                    sentiment_neutral
+                                </i>
+                                @break
+                                @case(4)
+                                <i class="smiley_rating material-icons text-olive" style="font-size: 2em;">
+                                    sentiment_satisfied
+                                </i>
+                                @break
+                                @case(5)
+                                <i class="smiley_rating material-icons text-green" style="font-size: 2em;">
+                                    sentiment_very_satisfied
+                                </i>
+                                @break
+                            @endswitch
+                        </td>
+                        <td>{!! $complaintProduct->is_need_call == 1 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
+                        <td>{!! $complaintProduct->is_urgent == 1 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
+                        <td>{!! count($complaintProduct->complaint_product_replies) > 0 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
+                        <td>
+                            @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
+                                {{--<a href="{{ route('complaint_product_list.show', $complaintProduct->systemId) }}"--}}
+                                {{--class="btn btn-primary"--}}
+                                {{--data-toggle="tooltip"--}}
+                                {{--data-placement="bottom"--}}
+                                {{--title="Answer">--}}
+                                {{--<i class="fa fa-phone"></i>--}}
+                                {{--</a>--}}
+                                <a href="{{ route('complaint_product_list.edit', $complaintProduct->systemId) }}"
+                                   class="btn btn-warning"
+                                   data-toggle="tooltip"
+                                   data-placement="bottom"
+                                   title="Edit">
+                                    <i class="ion ion-edit"></i>
+                                </a>
+                                <button class="btn btn-danger"
+                                        data-id="{{ $complaintProduct->systemId }}" onclick="deleteComplaintProduct(this)"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom" title="Delete">
+                                    <i class="ion ion-ios-trash"></i>
+                                </button>
+                            @else
+                                <span class="text-red">Not Authorized</span>
+                            @endif
+                        </td>
+                    </tr>
+                    @php $counter++; @endphp
+                @endforeach
+                </tbody>
+            </table>
+        </div>
 
         @include('complaint.product.list.modal_complaint_product_list_show')
 

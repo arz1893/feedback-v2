@@ -39,7 +39,7 @@
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_category">
         <i class="fa fa-plus"></i> Add Category
-    </button>
+    </button> <br>
 
     @if(\Session::has('status'))
         <div class="alert alert-success alert-dismissible">

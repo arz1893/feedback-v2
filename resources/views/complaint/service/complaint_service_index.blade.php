@@ -25,7 +25,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search for..." v-model="searchString">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" type="button" onclick="filterByName()">
                                     <i class="ion ion-search"></i>
                                 </button>
                             </span>
@@ -35,13 +35,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
                         {{ Form::select('tags[]', $selectTags, $defaultTags, ['id' => 'select_tags', 'class' => 'selectize', 'style' => 'width: 100%', 'multiple' => true]) }}
-                        <span class="visible-md visible-sm visible-xs">
-                            <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
-                        </span>
                     </div>
-                </div>
-                <div class="col-lg-2 visible-lg">
-                    <span v-if="searchStatus.length > 0"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</span>
                 </div>
             </div>
         </div>
@@ -51,7 +45,8 @@
                 <div class="well text-center" v-show="errorMessage !== ''">
                     @{{ errorMessage }}
                 </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="service in filteredServices">
+                <div v-if="searchStatus.length > 0" class="text-center"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</div>
+                <div v-show="searchStatus === ''" class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="service in services">
                     <div class="imagebox">
                         <a v-bind:href="service.show_complaint_url">
                             <img v-show="service.img !== ''" v-bind:src="service.img"  class="category-banner img-responsive">
@@ -74,8 +69,9 @@
                     @{{ errorMessage }}
                 </div>
             </div>
+            <div v-if="searchStatus.length > 0" class="text-center"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</div>
             <div class="list-group">
-                <div v-for="service in filteredServices">
+                <div v-show="searchStatus === ''" v-for="service in services">
                     <a v-bind:href="service.show_complaint_url" class="list-group-item">
                         <img v-bind:src="service.img" style="width: 40px; height: 30px;">
                         @{{ service.name }}

@@ -131,11 +131,17 @@ class ServiceController extends Controller
         return new ServiceCollection($services);
     }
 
-    public function filterServiceList(Request $request, $tenant_id) {
-        $tagIds = $request->tags;
+    public function filterServiceList(Request $request, $tenant_id, $tags) {
+        $tagIds = explode(',', $tags);
+
         $filteredServices = Service::where('tenantId', $tenant_id)->whereHas('tags', function ($q) use($tagIds){
             $q->whereIn('systemId', $tagIds);
         })->orderBy('created_at', 'desc')->get();
+        return new ServiceCollection($filteredServices);
+    }
+
+    public function filterByName(Request $request, $tenant_id, $searchString) {
+        $filteredServices = Service::where('tenantId', $tenant_id)->where('name', 'LIKE', "%$searchString%")->orderBy('name', 'asc')->paginate(24);
         return new ServiceCollection($filteredServices);
     }
 }

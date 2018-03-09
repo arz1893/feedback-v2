@@ -35,7 +35,8 @@ Route::get('suggestion_product/{suggestion_product_id}/get-suggestion-product', 
 
 /* Service List API */
 Route::get('service/{tenant_id}/get-service-list', 'MasterData\ServiceController@getServiceList');
-Route::post('service/{tenant_id}/filter-service-list', 'MasterData\ServiceController@filterServiceList');
+Route::get('service/{tenant_id}/filter-service-list/{tags}', 'MasterData\ServiceController@filterServiceList');
+Route::get('service/{tenant_id}/filter-by-name/{searchString}', 'MasterData\ServiceController@filterByName');
 
 /* Complaint Service List API */
 Route::get('complaint_service/{complaint_id}/get-complaint-service', 'Complaint\ComplaintServiceController@getComplaintService');

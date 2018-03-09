@@ -46,7 +46,7 @@
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_category">
         <i class="fa fa-plus"></i> Add Category
-    </button>
+    </button> <br>
 
     @include('layouts.errors.error_list')
 

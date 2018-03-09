@@ -39,6 +39,8 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.2.3/jquery.contextMenu.min.css" />
     <!-- Light Gallery -->
     <link rel="stylesheet" href="{{ asset('/css/lightgallery/css/lightgallery.css') }}">
+    <!-- Bootsrap Daterange picker -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap/daterangepicker.css') }}">
 
     @stack('styles')
 
@@ -308,7 +310,10 @@
     <script src="{{ asset('/js/lightgallery/lightgallery.js') }}" type="text/javascript"></script>
     <!-- Chart JS -->
     <script src="{{ asset('/js/chartjs/Chart.min.js') }}" type="text/javascript"></script>
-
+    <!-- Moment -->
+    <script src="{{ asset('js/moment/moment.min.js') }}" type="text/javascript"></script>
+    <!-- Bootstrap Daterange Picker -->
+    <script src="{{ asset('js/bootstrap/daterangepicker.js') }}" type="text/javascript"></script>
 
     @stack('scripts')
 

@@ -174,10 +174,8 @@ if($('#service_index').length > 0) {
                         console.log('something wrong within the process');
                     });
                 } else {
-                    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/filter-service-list';
-                    axios.post(url, {
-                        tags: tags
-                    })
+                    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + id + '/filter-service-list/' + tags;
+                    axios.get(url)
                     .then(function (response) {
                         if(response.data.data.length === 0) {
                             vm.services = response.data.data;
@@ -226,16 +224,92 @@ if($('#service_index').length > 0) {
         }
     });
 
+    function filterByName() {
+        const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + serviceIndex.tenantId + '/filter-by-name/' + serviceIndex.searchString;
+        serviceIndex.searchStatus = 'Searching...';
+        serviceIndex.errorMessage = '';
+        if(serviceIndex.searchString !== '') {
+            function fireRequest() {
+                axios.get(url).then(response => {
+                    if(response.data.data.length === 0) {
+                        serviceIndex.errorMessage = 'no data found';
+                        serviceIndex.searchStatus = '';
+                        serviceIndex.services = response.data.data;
+                    } else {
+                        serviceIndex.services = response.data.data;
+                        serviceIndex.makePagination(response.data);
+                        serviceIndex.searchStatus = '';
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
+            }
+
+            var debounceFunction = _.debounce(fireRequest, 1000);
+            debounceFunction();
+        } else {
+            var tagIds = $('#select_tags').val();
+            var tenantId = $('#tenantId').val();
+            if (tagIds.length > 0) {
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/filter-service-list/' + tagIds;
+                serviceIndex.searchStatus = 'Searching...';
+                function filterServices() {
+
+                    axios.get(url)
+                        .then(function (response) {
+                            if(response.data.data.length === 0) {
+                                serviceIndex.services = response.data.data;
+                                serviceIndex.errorMessage = 'no data found';
+                                serviceIndex.searchStatus = '';
+                            } else {
+                                serviceIndex.services = response.data.data;
+                                serviceIndex.makePagination(response.data);
+                                serviceIndex.errorMessage = '';
+                                serviceIndex.searchStatus = '';
+                            }
+                        })
+                        .catch(error => {
+                            console.log(Object.assign({}, error));
+                        });
+                }
+                //debounce buat trigger function setelah 0.5 detik
+                var debounceFunction = _.debounce(filterServices, 1000);
+                debounceFunction();
+            } else {
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/get-service-list';
+                serviceIndex.searchStatus = 'Loading...';
+                function getServices() {
+                    axios.get(url).then(response => {
+                        if(response.data.data.length === 0) {
+                            serviceIndex.services = response.data.data;
+                            serviceIndex.errorMessage = 'no data found';
+                        } else {
+                            serviceIndex.services = response.data.data;
+                            serviceIndex.makePagination(response.data);
+                            serviceIndex.errorMessage = '';
+                            serviceIndex.searchStatus = '';
+                        }
+                    }).catch(error => {
+                        console.log(Object.assign({}, error));
+                    });
+                }
+                //debounce buat trigger function setelah 0.5 detik
+                var debounceFunction = _.debounce(getServices, 1000);
+                debounceFunction();
+            }
+        }
+    }
+
     $('#select_tags').on('change', function () {
         let tagIds = $(this).val();
         let tenantId = $('#tenantId').val();
         if(tagIds.length > 0) {
-            const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/filter-service-list';
+            const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/filter-service-list/' + tagIds;
             serviceIndex.searchStatus = 'Searching...';
+            serviceIndex.errorMessage = '';
+            serviceIndex.searchString = '';
             function filterServices() {
-                axios.post(url, {
-                    tags: tagIds
-                })
+                axios.get(url)
                 .then(function (response) {
                     if(response.data.data.length === 0) {
                         serviceIndex.errorMessage = 'no data found';
@@ -258,6 +332,8 @@ if($('#service_index').length > 0) {
         } else {
             const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/get-service-list';
             serviceIndex.searchStatus = 'Loading...';
+            serviceIndex.errorMessage = '';
+            serviceIndex.searchString = '';
             function getServices() {
                 axios.get(url).then(response => {
                     if(response.data.data.length === 0) {
