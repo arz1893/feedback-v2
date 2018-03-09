@@ -180,10 +180,8 @@ if($('#product_index').length > 0) {
                         console.log(Object.assign({}, error));
                     });
                 } else {
-                    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + id + '/filter-product-list';
-                    axios.post(url, {
-                        tags: tags
-                    })
+                    const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + id + '/filter-product-list/' + tags;
+                    axios.get(url)
                     .then(function (response) {
                         if(response.data.data.length === 0) {
                             vm.products = response.data.data;
