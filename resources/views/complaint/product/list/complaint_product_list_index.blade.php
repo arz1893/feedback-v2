@@ -21,23 +21,23 @@
         </div>
     @endif
 
-    <div class="container-fluid">
-        <form class="form-inline pull-right">
-            <!-- Date range -->
-            <div class="form-group">
-                <label>Date range:</label>
+    {{--<div class="container-fluid">--}}
+        {{--<form class="form-inline pull-right">--}}
+            {{--<!-- Date range -->--}}
+            {{--<div class="form-group">--}}
+                {{--<label>Date range:</label>--}}
 
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" class="form-control pull-right" id="date_range_filter">
-                </div>
-                <!-- /.input group -->
-            </div>
-            <!-- /.form group -->
-        </form>
-    </div>
+                {{--<div class="input-group">--}}
+                    {{--<div class="input-group-addon">--}}
+                        {{--<i class="fa fa-calendar"></i>--}}
+                    {{--</div>--}}
+                    {{--<input type="text" class="form-control pull-right" id="date_range_filter">--}}
+                {{--</div>--}}
+                {{--<!-- /.input group -->--}}
+            {{--</div>--}}
+            {{--<!-- /.form group -->--}}
+        {{--</form>--}}
+    {{--</div>--}}
 
     <br>
 
