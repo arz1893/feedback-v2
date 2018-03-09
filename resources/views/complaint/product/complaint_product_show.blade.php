@@ -44,6 +44,10 @@
 @section('main-content')
     {{ Form::hidden('product_id', $product->systemId, ['id' => 'product_id']) }}
 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_category">
+        <i class="fa fa-plus"></i> Add Category
+    </button>
+
     @include('layouts.errors.error_list')
 
     @if(\Session::has('status'))
@@ -53,10 +57,6 @@
             {{ \Session::get('status') }}
         </div>
     @endif
-
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_category">
-        <i class="fa fa-plus"></i> Add Category
-    </button>
 
     <!-- Modal -->
     <div class="modal fade" id="modal_category" tabindex="-1" role="dialog" aria-labelledby="modal_category_label">

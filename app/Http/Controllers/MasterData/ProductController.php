@@ -151,4 +151,9 @@ class ProductController extends Controller
         })->orderBy('created_at', 'desc')->paginate(24);
         return new ProductCollection($filteredProducts);
     }
+
+    public function filterByName(Request $request, $tenant_id, $searchString) {
+        $filteredProducts = Product::where('tenantId', $tenant_id)->where('name', 'LIKE', "%$searchString%")->orderBy('name', 'asc')->paginate(24);
+        return new ProductCollection($filteredProducts);
+    }
 }

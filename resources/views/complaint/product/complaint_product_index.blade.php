@@ -25,7 +25,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search for..." v-model="searchString">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" type="button" onclick="filterByName()">
                                     <i class="ion ion-search"></i>
                                 </button>
                             </span>
@@ -55,7 +55,7 @@
                             @{{ errorMessage }}
                         </div>
                     </div>
-                    <div v-show="searchStatus === ''" class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="product in filteredProducts">
+                    <div v-show="searchStatus === ''" class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="product in products">
                         <div class="imagebox">
                             <a v-bind:href="product.show_complaint_url">
                                 <img v-show="product.img !== ''" v-bind:src="product.img"  class="category-banner img-responsive">
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="list-group">
-                        <div v-show="searchStatus === ''" v-for="product in filteredProducts">
+                        <div v-show="searchStatus === ''" v-for="product in products">
                             <a v-bind:href="product.show_complaint_url" class="list-group-item">
                                 <img v-bind:src="product.img" style="width: 40px; height: 30px;">
                                 @{{ product.name }}

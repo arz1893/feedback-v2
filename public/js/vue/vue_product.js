@@ -149,9 +149,6 @@ if($('#product_index').length > 0) {
         computed: {
             filteredProducts: function () {
                 var vm = this;
-                if(vm.searchString !== '') {
-                    console.log('typed!');
-                }
                 var result =  this.products.filter(product => {
                     return product.name.toLowerCase().match(this.searchString.toLowerCase());
                 });
@@ -231,6 +228,82 @@ if($('#product_index').length > 0) {
             }
         }
     });
+
+    function filterByName() {
+        const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + productIndex.tenantId + '/filter-by-name/' + productIndex.searchString;
+        productIndex.searchStatus = 'Searching...';
+        productIndex.errorMessage = '';
+        if(productIndex.searchString !== '') {
+            function fireRequest() {
+                axios.get(url).then(response => {
+                    if(response.data.data.length === 0) {
+                        productIndex.errorMessage = 'no data found';
+                        productIndex.searchStatus = '';
+                        productIndex.products = response.data.data;
+                    } else {
+                        productIndex.products = response.data.data;
+                        productIndex.makePagination(response.data);
+                        productIndex.searchStatus = '';
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
+            }
+
+            var debounceFunction = _.debounce(fireRequest, 1000);
+            debounceFunction();
+        } else {
+            var tagIds = $('#select_tags').val();
+            var tenantId = $('#tenantId').val();
+            if (tagIds.length > 0) {
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + tenantId + '/filter-product-list/' + tagIds;
+                productIndex.searchStatus = 'Searching...';
+                function filterProducts() {
+
+                    axios.get(url)
+                        .then(function (response) {
+                            if(response.data.data.length === 0) {
+                                productIndex.products = response.data.data;
+                                productIndex.errorMessage = 'no data found';
+                                productIndex.searchStatus = '';
+                            } else {
+                                productIndex.products = response.data.data;
+                                productIndex.makePagination(response.data);
+                                productIndex.errorMessage = '';
+                                productIndex.searchStatus = '';
+                            }
+                        })
+                        .catch(error => {
+                            console.log(Object.assign({}, error));
+                        });
+                }
+                //debounce buat trigger function setelah 0.5 detik
+                var debounceFunction = _.debounce(filterProducts, 1000);
+                debounceFunction();
+            } else {
+                const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + tenantId + '/get-product-list';
+                productIndex.searchStatus = 'Loading...';
+                function getProducts() {
+                    axios.get(url).then(response => {
+                        if(response.data.data.length === 0) {
+                            productIndex.products = response.data.data;
+                            productIndex.errorMessage = 'no data found';
+                        } else {
+                            productIndex.products = response.data.data;
+                            productIndex.makePagination(response.data);
+                            productIndex.errorMessage = '';
+                            productIndex.searchStatus = '';
+                        }
+                    }).catch(error => {
+                        console.log(Object.assign({}, error));
+                    });
+                }
+                //debounce buat trigger function setelah 0.5 detik
+                var debounceFunction = _.debounce(getProducts, 1000);
+                debounceFunction();
+            }
+        }
+    }
     
     $('#select_tags').on('change', function () {
         var tagIds = $(this).val();
@@ -238,6 +311,7 @@ if($('#product_index').length > 0) {
         if(tagIds.length > 0) {
             const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + tenantId + '/filter-product-list/' + tagIds;
             productIndex.searchStatus = 'Searching...';
+            productIndex.searchString = '';
             function filterProducts() {
 
                 axios.get(url)
@@ -263,6 +337,7 @@ if($('#product_index').length > 0) {
         } else {
             const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + tenantId + '/get-product-list';
             productIndex.searchStatus = 'Loading...';
+            productIndex.searchString = '';
             function getProducts() {
                 axios.get(url).then(response => {
                     if(response.data.data.length === 0) {
