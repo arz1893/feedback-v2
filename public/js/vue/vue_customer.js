@@ -25,10 +25,9 @@ var modal_add_customer = new Vue({
                         .then(response => {
                         // console.log(response);
                         // console.log(response.data.systemId, response.data.name, response.data.phone);
-                        $('#customerId').append('<option value="'+response.data.systemId+'">'+response.data.name+ ' - ' + response.data.phone + '</option>' );
-                        // console.log($('#customerId'));
-                        $('.selectpicker').selectpicker('val', response.data.systemId);
-                        $('.selectpicker').selectpicker('refresh');
+                        var option = new Option(response.data.name + ' - ' + response.data.phone, response.data.systemId, false, false);
+                        $('#customerId').append(option ).trigger('change');
+
                         if(Root.is_anonymous != null) {
                             Root.is_anonymous = false;
                         }

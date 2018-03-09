@@ -149,6 +149,9 @@ if($('#product_index').length > 0) {
         computed: {
             filteredProducts: function () {
                 var vm = this;
+                if(vm.searchString !== '') {
+                    console.log('typed!');
+                }
                 var result =  this.products.filter(product => {
                     return product.name.toLowerCase().match(this.searchString.toLowerCase());
                 });
