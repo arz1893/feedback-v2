@@ -239,7 +239,6 @@ if($('#product_index').length > 0) {
 
                 axios.get(url)
                 .then(function (response) {
-                    console.log(response.data);
                     if(response.data.data.length === 0) {
                         productIndex.products = response.data.data;
                         productIndex.errorMessage = 'no data found';
