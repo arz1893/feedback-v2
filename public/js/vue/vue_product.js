@@ -233,13 +233,11 @@ if($('#product_index').length > 0) {
         var tagIds = $(this).val();
         var tenantId = $('#tenantId').val();
         if(tagIds.length > 0) {
-            const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + tenantId + '/filter-product-list';
+            const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + tenantId + '/filter-product-list/' + tagIds;
             productIndex.searchStatus = 'Searching...';
             function filterProducts() {
 
-                axios.post(url, {
-                    tags: tagIds
-                })
+                axios.get(url)
                 .then(function (response) {
                     console.log(response.data);
                     if(response.data.data.length === 0) {
