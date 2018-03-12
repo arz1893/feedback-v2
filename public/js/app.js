@@ -60,22 +60,6 @@ $(document).ready(function () {
         iDisplayLength: 20
     });
 
-    $('#table_complaint_product').DataTable({
-        responsive: true,
-        bLengthChange: false,
-        iDisplayLength: 20,
-        columnDefs: [
-            { "width": "5%", "targets": 0 },
-            {
-                "width": "10%",
-                "targets": 1
-            },
-            { "width": "8%", "targets": 5 },
-            { "width": "8%", "targets": 6 },
-            { "width": "9%", "targets": 7 }
-        ]
-    });
-
     $('#table_complaint_service').DataTable({
         responsive: true,
         bLengthChange: false,
@@ -163,5 +147,7 @@ $(document).ready(function () {
 
     $('#lightgallery').lightGallery();
 
-    $('#date_range_filter').daterangepicker();
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd'
+    });
 });

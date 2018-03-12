@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Complaint;
 use App\ComplaintProduct;
 use App\Customer;
 use App\Http\Requests\Complaint\ComplaintProductRequest;
+use App\Http\Resources\ComplaintProductCollection;
 use App\Product;
 use App\ProductCategory;
 use App\Tag;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -82,5 +84,15 @@ class ComplaintProductController extends Controller
     public function getComplaintProduct(Request $request, $complaintId) {
         $complaintProduct = ComplaintProduct::findOrFail($complaintId);
         return new ComplaintProductResource($complaintProduct);
+    }
+
+    public function getAllComplaintProduct(Request $request, $tenantId) {
+        $complaintProducts = ComplaintProduct::where('tenantId', $tenantId)->orderBy('created_at', 'desc')->paginate(20);
+        return new ComplaintProductCollection($complaintProducts);
+    }
+
+    public function filterByDate(Request $request, $tenantId, $from, $to) {
+        $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->whereBetween('created_at', [$from, $to])->orderBy('created_at', 'desc')->paginate(20);
+        return new ComplaintProductCollection($filteredComplaintProducts);
     }
 }

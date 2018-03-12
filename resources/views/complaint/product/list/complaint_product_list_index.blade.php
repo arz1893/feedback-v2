@@ -1,7 +1,8 @@
 @extends('home')
 
 @push('scripts')
-    <script src="{{ asset('js/vue/vue_product.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/product/complaint/vue_complaint_list_product.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/moment/moment.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')
@@ -21,32 +22,58 @@
         </div>
     @endif
 
-    {{--<div class="container-fluid">--}}
-        {{--<form class="form-inline pull-right">--}}
-            {{--<!-- Date range -->--}}
-            {{--<div class="form-group">--}}
-                {{--<label>Date range:</label>--}}
+    {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
 
-                {{--<div class="input-group">--}}
-                    {{--<div class="input-group-addon">--}}
-                        {{--<i class="fa fa-calendar"></i>--}}
-                    {{--</div>--}}
-                    {{--<input type="text" class="form-control pull-right" id="date_range_filter">--}}
-                {{--</div>--}}
-                {{--<!-- /.input group -->--}}
-            {{--</div>--}}
-            {{--<!-- /.form group -->--}}
-        {{--</form>--}}
-    {{--</div>--}}
+    <div class="container-fluid">
+        <form class="form-inline">
+            <!-- Date range -->
+            <div class="form-group">
+                <label>From: </label>
+
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right datepicker" id="date_start">
+                </div>
+                <!-- /.input group -->
+            </div>
+
+            <!-- Date range -->
+            <div class="form-group">
+                <label>To: </label>
+
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right datepicker" id="date_end">
+                </div>
+                <!-- /.input group -->
+            </div>
+
+            <button class="btn btn-default" type="button" id="btnSearchByDate" onclick="searchByDate(this)">
+                Search <i class="fa fa-search"></i>
+            </button>
+            <button class="btn btn-warning disabled" type="button" id="btnClearSearch">
+                Clear Search <i class="fa fa-close"></i>
+            </button>
+        </form>
+    </div>
 
     <br>
 
     <div id="complaint_product_list_index">
+        <div v-if="searchStatus.length > 0" class="text-center"><i class="fa fa-spinner fa-spin"></i> @{{ searchStatus }}</div>
+        <div v-show="errorMessage !== ''">
+            <div class="well text-center">
+                @{{ errorMessage }}
+            </div>
+        </div>
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-responsive" id="table_complaint_product" style="width: 100%">
+            <table v-show="searchStatus === '' & errorMessage === ''" class="table table-striped table-bordered table-responsive" id="table_complaint_product" style="width: 100%">
                 <thead>
                 <tr>
-                    <th>No.</th>
                     <th>Created at</th>
                     <th>Customer Name</th>
                     <th>Product Name</th>
@@ -58,77 +85,70 @@
                 </tr>
                 </thead>
                 <tbody>
-                @php $counter = 1; @endphp
-                @foreach($complaintProducts as $complaintProduct)
-                    <tr>
-                        <td>{{ $counter }}</td>
+                    <tr v-for="complaintProduct in complaintProducts">
                         <td>
-                            <a href="#!" data-complaint_id="{{ $complaintProduct->systemId }}" @click="showComplaintDetail($event)">
-                                {{ $complaintProduct->created_at->format('d-M-Y') }}
+                            <a role="button" v-bind:data-complaint_id="complaintProduct.systemId" @click="showComplaintDetail($event)">
+                                @{{ complaintProduct.created_at }}
                             </a>
                         </td>
                         <td>
-                            <a href="#!" data-complaint_id="{{ $complaintProduct->systemId }}" @click="showComplaintDetail($event)">
-                                @if($complaintProduct->customerId != null)
-                                    {{ $complaintProduct->customer->name }}
-                                @else
+                            <span v-if="complaintProduct.customer !== null">
+                                <a role="button" v-bind:data-complaint_id="complaintProduct.systemId" @click="showComplaintDetail($event)">
+                                    @{{ complaintProduct.customer.name }}
+                                </a>
+                            </span>
+                            <span v-else>
+                                <a role="button" v-bind:data-complaint_id="complaintProduct.systemId" @click="showComplaintDetail($event)">
                                     Anonymous
-                                @endif
-                            </a>
+                                </a>
+                            </span>
                         </td>
-                        <td>{{ $complaintProduct->product->name }}</td>
+                        <td>@{{ complaintProduct.product.name }}</td>
                         <td>
-                            @switch($complaintProduct->customer_rating)
-                                @case(1)
+                            <span v-if="complaintProduct.customer_rating === 1">
                                 <i class="text-center material-icons text-maroon" style="font-size: 2em;">
                                     sentiment_very_dissatisfied
                                 </i>
-                                @break
-                                @case(2)
+                            </span>
+                            <span v-else-if="complaintProduct.customer_rating === 2">
                                 <i class="text-center material-icons text-red" style="font-size: 2em;">
                                     sentiment_dissatisfied
                                 </i>
-                                @break
-                                @case(3)
-                                <i class="smiley_rating material-icons text-yellow" style="font-size: 2em;">
+                            </span>
+                            <span v-else-if="complaintProduct.customer_rating === 3">
+                                <i class="text-center material-icons text-yellow" style="font-size: 2em;">
                                     sentiment_neutral
                                 </i>
-                                @break
-                                @case(4)
-                                <i class="smiley_rating material-icons text-olive" style="font-size: 2em;">
+                            </span>
+                            <span v-else-if="complaintProduct.customer_rating === 4">
+                                <i class="text-center material-icons text-olive" style="font-size: 2em;">
                                     sentiment_satisfied
                                 </i>
-                                @break
-                                @case(5)
-                                <i class="smiley_rating material-icons text-green" style="font-size: 2em;">
+                            </span>
+                            <span v-else-if="complaintProduct.customer_rating === 5">
+                                <i class="text-center material-icons text-green" style="font-size: 2em;">
                                     sentiment_very_satisfied
                                 </i>
-                                @break
-                            @endswitch
+                            </span>
                         </td>
-                        <td>{!! $complaintProduct->is_need_call == 1 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
-                        <td>{!! $complaintProduct->is_urgent == 1 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
-                        <td>{!! count($complaintProduct->complaint_product_replies) > 0 ? '<span class="text-green">yes</span>':'<span class="text-red">no</span>' !!}</td>
+                        <td>
+                            <span v-if="complaintProduct.is_need_call === 1">Yes</span>
+                            <span v-else>No</span>
+                        </td>
+                        <td>
+                            <span v-if="complaintProduct.is_urgent === 1">Yes</span>
+                            <span v-else>No</span>
+                        </td>
+                        <td>
+                            <span v-if="complaintProduct.is_answered === 1">Yes</span>
+                            <span v-else>No</span>
+                        </td>
                         <td>
                             @if(Auth::user()->user_group->name == 'Administrator' || Auth::user()->user_group->name == 'Management')
-                                {{--<a href="{{ route('complaint_product_list.show', $complaintProduct->systemId) }}"--}}
-                                {{--class="btn btn-primary"--}}
-                                {{--data-toggle="tooltip"--}}
-                                {{--data-placement="bottom"--}}
-                                {{--title="Answer">--}}
-                                {{--<i class="fa fa-phone"></i>--}}
-                                {{--</a>--}}
-                                <a href="{{ route('complaint_product_list.edit', $complaintProduct->systemId) }}"
-                                   class="btn btn-warning"
-                                   data-toggle="tooltip"
-                                   data-placement="bottom"
-                                   title="Edit">
+                                <a v-bind:href="complaintProduct.edit_url" class="btn btn-warning">
                                     <i class="ion ion-edit"></i>
                                 </a>
-                                <button class="btn btn-danger"
-                                        data-id="{{ $complaintProduct->systemId }}" onclick="deleteComplaintProduct(this)"
-                                        data-toggle="tooltip"
-                                        data-placement="bottom" title="Delete">
+                                <button class="btn btn-danger" :data-id="complaintProduct.systemId">
                                     <i class="ion ion-ios-trash"></i>
                                 </button>
                             @else
@@ -136,10 +156,26 @@
                             @endif
                         </td>
                     </tr>
-                    @php $counter++; @endphp
-                @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <div class="text-center">
+            <ul class="pagination">
+                <li v-bind:class="{disabled:paging.prevPage === null}">
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li v-for="n in paging.endPage" v-bind:class="{ active:n===paging.currentPage }">
+                    <a href="#">@{{ n }}</a>
+                </li>
+                <li v-bind:class="{disabled:paging.nextPage === null}">
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
         </div>
 
         @include('complaint.product.list.modal_complaint_product_list_show')
