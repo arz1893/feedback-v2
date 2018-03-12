@@ -148,7 +148,7 @@
                                 <a v-bind:href="complaintProduct.edit_url" class="btn btn-warning">
                                     <i class="ion ion-edit"></i>
                                 </a>
-                                <button class="btn btn-danger" :data-id="complaintProduct.systemId">
+                                <button class="btn btn-danger" :data-id="complaintProduct.systemId" @click="deleteComplaintProduct($event)">
                                     <i class="ion ion-ios-trash"></i>
                                 </button>
                             @else

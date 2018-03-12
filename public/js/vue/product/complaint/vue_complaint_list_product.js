@@ -48,7 +48,6 @@ if($('#complaint_product_list_index').length > 0) {
                 var vm = this;
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + tenantId + '/get-all-complaint-product';
                 axios.get(url).then(response => {
-                    console.log(response.data);
                     vm.complaintProducts = response.data.data;
                     vm.makePagination(response.data);
                 }).catch(error => {
@@ -164,6 +163,15 @@ if($('#complaint_product_list_index').length > 0) {
                         console.log(error);
                     });
             },
+            
+            deleteComplaintProduct: function (event) {
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'complaint_id',
+                    value: $(event.currentTarget).data('id')
+                }).appendTo('#form_delete_complaint_product');
+                $('#modal_remove_complaint_product').modal('show');
+            },
 
             deleteReply: function (event) {
                 var vm = this;
@@ -207,7 +215,6 @@ if($('#complaint_product_list_index').length > 0) {
 
         function filterComplaint() {
             axios.get(url).then(response => {
-                console.log(response.data);
                 if(response.data.data.length !== 0) {
                     complaintProductListIndex.complaintProducts = response.data.data;
                     // complaintProductListIndex.paging.currentPage = response.data.meta.current_page;
