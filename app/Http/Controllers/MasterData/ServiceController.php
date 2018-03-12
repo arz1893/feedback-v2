@@ -41,6 +41,11 @@ class ServiceController extends Controller
                 'tenantId' => Auth::user()->tenantId
             ]);
 
+            ServiceCategory::create([
+                'name' => 'General',
+                'serviceId' => $service->systemId
+            ]);
+
             $service->tags()->sync($request->input('tags'));
 
             if(!file_exists(public_path('uploaded_images/' . $tenant->email))) {
@@ -57,6 +62,11 @@ class ServiceController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'tenantId' => Auth::user()->tenantId
+            ]);
+
+            ServiceCategory::create([
+                'name' => 'General',
+                'serviceId' => $service->systemId
             ]);
 
             $service->tags()->sync($request->input('tags'));
