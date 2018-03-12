@@ -34,6 +34,8 @@ Route::post('complaint_product_reply/delete-reply', 'Complaint\ComplaintProductR
 
 /* Suggestion Product List API */
 Route::get('suggestion_product/{suggestion_product_id}/get-suggestion-product', 'Suggestion\SuggestionProductController@getSuggestionProduct');
+Route::get('suggestion_product/{tenant_id}/get-all-suggestion-product', 'Suggestion\SuggestionProductController@getAllSuggestionProduct');
+Route::get('suggestion_product/{tenant_id}/filter-by-date/{from}/{to}', 'Suggestion\SuggestionProductController@filterByDate');
 
 /* Service List API */
 Route::get('service/{tenant_id}/get-service-list', 'MasterData\ServiceController@getServiceList');

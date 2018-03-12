@@ -23,7 +23,8 @@ class SuggestionProduct extends Resource
             'tenantId' => $this->tenantId,
             'attachment' => ($this->attachment == null ? null:asset($this->attachment)),
             'created_by' => $this->created_by->name,
-            'created_at' => $this->created_at->format('d F Y, H:iA')
+            'created_at' => $this->created_at->format('d F Y, H:iA'),
+            'edit_url' => route('suggestion_product_list.edit', $this->systemId)
         ];
     }
 }

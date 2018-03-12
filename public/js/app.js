@@ -76,15 +76,6 @@ $(document).ready(function () {
         ]
     });
 
-    $('#table_suggestion_product').DataTable({
-        responsive: true,
-        bLengthChange: false,
-        iDisplayLength: 20,
-        columnDefs: [
-            { "width": "10%", "targets": 1 }
-        ]
-    });
-
     $('#table_suggestion_service').DataTable({
         responsive: true,
         bLengthChange: false,

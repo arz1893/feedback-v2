@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Suggestion;
 
 use App\Customer;
 use App\Http\Requests\Suggestion\SuggestionProductRequest;
+use App\Http\Resources\SuggestionProductCollection;
 use App\Product;
 use App\ProductCategory;
 use App\SuggestionProduct;
@@ -78,5 +79,20 @@ class SuggestionProductController extends Controller
     public function getSuggestionProduct(Request $request, $suggestion_product_id) {
         $suggestionProduct = SuggestionProduct::findOrFail($suggestion_product_id);
         return new SuggestionProductResource($suggestionProduct);
+    }
+
+    public function getAllSuggestionProduct(Request $request, $tenantId) {
+        $suggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->orderBy('created_at', 'desc')->paginate(20);
+        return new SuggestionProductCollection($suggestionProducts);
+    }
+
+    public function filterByDate(Request $request, $tenantId, $from, $to) {
+        if($from == $to) {
+            $filteredSuggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->whereDate('created_at', '=', $from)->orderBy('created_at', 'desc')->paginate(20);
+            return new SuggestionProductCollection($filteredSuggestionProducts);
+        } else {
+            $filteredSuggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->whereBetween('created_at', [$from, $to])->orderBy('created_at', 'desc')->paginate(20);
+            return new SuggestionProductCollection($filteredSuggestionProducts);
+        }
     }
 }

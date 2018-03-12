@@ -59,8 +59,8 @@ if($('#complaint_product_list_index').length > 0) {
                 var vm = this;
                 vm.paging.currentPage = data.meta.current_page;
                 vm.paging.endPage = data.meta.last_page;
-                vm.paging.prevPage = (data.link.prev === null ? null:data.link.prev);
-                vm.paging.nextPage = (data.link.next === null ? null:data.link.next);
+                vm.paging.prevPage = (data.links.prev === null ? null:data.links.prev);
+                vm.paging.nextPage = (data.links.next === null ? null:data.links.next);
             },
 
             showComplaintDetail: function (event) {
@@ -211,6 +211,7 @@ if($('#complaint_product_list_index').length > 0) {
         var date_start = $('#date_start').datepicker('getFormattedDate');
         var date_end = $('#date_end').datepicker('getFormattedDate');
         var tenantId = $('#tenantId').val();
+        console.log(date_start, date_end, tenantId);
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + tenantId + '/filter-by-date/' + date_start + '/' + date_end;
 
         function filterComplaint() {
