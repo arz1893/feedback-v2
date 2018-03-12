@@ -29,7 +29,7 @@
             <div class="media-left">
                 <a href="#">
                     @if($product->img != null)
-                        <img class="media-object" src="{{ asset($product->img) }}" alt="{{ $product->name }}" width="120">
+                        <img class="media-object" src="{{ asset($product->img) }}" alt="{{ $product->name }}" width="120" height="80">
                     @else
                         <img class="media-object" src="{{ asset('default-images/no-image.jpg') }}" alt="{{ $product->name }}" width="120">
                     @endif
@@ -45,7 +45,7 @@
                         @endforeach
                     @endif
                 </div>
-                <button class="btn btn-default"
+                <button class="btn btn-xs btn-default"
                         type="button"
                         data-toggle="collapse"
                         data-target="#product_description"
@@ -55,8 +55,8 @@
                 </button>
             </div>
         </div>
-
-        <div class="collapse" id="product_description" style="margin-top: 2%">
+        <br>
+        <div class="collapse" id="product_description">
             <div class="well text-justify">
                 @if($product->description != null)
                     {{ $product->description }}

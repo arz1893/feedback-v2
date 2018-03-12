@@ -30,9 +30,9 @@
             <div class="media-left">
                 <a href="#!">
                     @if($service->img != null)
-                        <img class="media-object" src="{{ asset($service->img) }}" alt="{{ $service->name }}" width="120">
+                        <img class="media-object" src="{{ asset($service->img) }}" alt="{{ $service->name }}" width="120" height="80">
                     @else
-                        <img class="media-object" src="{{ asset('default-images/no-image.jpg') }}" alt="{{ $service->name }}" width="120">
+                        <img class="media-object" src="{{ asset('default-images/no-image.jpg') }}" alt="{{ $service->name }}" width="120" height="80">
                     @endif
                 </a>
             </div>
@@ -46,7 +46,7 @@
                         @endforeach
                     @endif
                 </div>
-                <button class="btn btn-default"
+                <button class="btn btn-xs btn-default"
                         type="button"
                         data-toggle="collapse"
                         data-target="#service_description"
@@ -56,10 +56,14 @@
                 </button>
             </div>
         </div>
-
-        <div class="collapse" id="service_description" style="margin-top: 2%">
+        <br>
+        <div class="collapse" id="service_description">
             <div class="well text-justify">
-                {{ $service->description }}
+                @if($service->description != null)
+                    {{ $service->description }}
+                @else
+                    This service doesn't have any description yet
+                @endif
             </div>
         </div>
 
