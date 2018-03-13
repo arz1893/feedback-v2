@@ -123,11 +123,10 @@ if($('#suggestion_service_list_container').length > 0) {
         $('#date_start').val('');
         $('#date_end').val('');
         var tenantId = $('#tenantId').val();
-        const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service/' + tenantId + '/get-all-complaint-service';
+        const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_service/' + tenantId + '/get-all-suggestion-service';
         function fireRequest() {
             axios.get(url).then(response => {
-                suggestionServiceList.complaintServices = response.data.data;
-                // complaintProductListIndex.makePagination(response.data);
+                suggestionServiceList.suggestionServices = response.data.data;
                 suggestionServiceList.searchStatus = '';
             }).catch(error => {
                 console.log(error);

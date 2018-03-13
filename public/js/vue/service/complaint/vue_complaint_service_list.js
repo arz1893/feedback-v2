@@ -197,10 +197,10 @@ if($('#complaint_service_list_index').length > 0) {
             axios.get(url).then(response => {
                 if(response.data.data.length !== 0) {
                     complaintServiceListIndex.complaintServices = response.data.data;
-                    complaintProductListIndex.paging.currentPage = response.data.meta.current_page;
-                    complaintProductListIndex.paging.endPage = response.data.meta.last_page;
-                    complaintProductListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                    complaintProductListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    complaintServiceListIndex.paging.currentPage = response.data.meta.current_page;
+                    complaintServiceListIndex.paging.endPage = response.data.meta.last_page;
+                    complaintServiceListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
+                    complaintServiceListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
                     complaintServiceListIndex.searchStatus = '';
                 } else {
                     complaintServiceListIndex.errorMessage = 'no data found';
@@ -227,7 +227,6 @@ if($('#complaint_service_list_index').length > 0) {
         function fireRequest() {
             axios.get(url).then(response => {
                 complaintServiceListIndex.complaintServices = response.data.data;
-                // complaintProductListIndex.makePagination(response.data);
                 complaintServiceListIndex.searchStatus = '';
             }).catch(error => {
                 console.log(error);
