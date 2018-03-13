@@ -25,7 +25,7 @@
     @endif
 
     <div class="container-fluid">
-        <form class="form-inline">
+        <form class="form-inline visible-lg visible-md visible-xs">
             <!-- Date range -->
             <div class="form-group">
                 <label>From: </label>
@@ -59,6 +59,44 @@
                 Clear Search <i class="fa fa-close"></i>
             </button>
         </form>
+
+        <form class="visible-sm" id="form_search_list">
+            <!-- Date range -->
+            <div class="form-group col-sm-6">
+                <label>From: </label>
+
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right datepicker" id="date_start" name="date_start">
+                </div>
+                <!-- /.input group -->
+            </div>
+
+            <!-- Date range -->
+            <div class="form-group col-sm-6">
+                <label>To: </label>
+
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right datepicker" id="date_end" name="date_end">
+                </div>
+                <!-- /.input group -->
+            </div> <br> <br>
+
+            <div class="form-group col-sm-12">
+                <button class="btn btn-default disabled" type="button" id="btnSearchByDate">
+                    Search <i class="fa fa-search"></i>
+                </button>
+                <button class="btn btn-warning disabled" type="button" id="btnClearSearch">
+                    Clear Search <i class="fa fa-close"></i>
+                </button>
+            </div>
+        </form>
+
     </div> <br>
 
     <div id="complaint_service_list_index">
