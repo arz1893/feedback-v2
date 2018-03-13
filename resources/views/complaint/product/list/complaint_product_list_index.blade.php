@@ -1,8 +1,7 @@
 @extends('home')
 
 @push('scripts')
-    <script src="{{ asset('js/vue/product/complaint/vue_complaint_list_product.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/moment/moment.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/product/complaint/vue_complaint_product_list.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')

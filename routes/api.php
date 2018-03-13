@@ -44,6 +44,8 @@ Route::get('service/{tenant_id}/filter-by-name/{searchString}', 'MasterData\Serv
 
 /* Complaint Service List API */
 Route::get('complaint_service/{complaint_id}/get-complaint-service', 'Complaint\ComplaintServiceController@getComplaintService');
+Route::get('complaint_service/{tenant_id}/get-all-complaint-service', 'Complaint\ComplaintServiceController@getAllComplaintService');
+Route::get('complaint_service/{tenant_id}/filter-by-date/{from}/{to}', 'Complaint\ComplaintServiceController@filterByDate');
 
 /* Complaint Service Replies API */
 Route::get('complaint_service_reply/{complaint_service_id}/get-complaint-service-replies', 'Complaint\ComplaintServiceReplyController@getComplaintServiceReplies');
@@ -51,6 +53,8 @@ Route::post('complaint_service_reply/{complaint_service_id}/post-reply', 'Compla
 Route::post('complaint_service_reply/delete-reply', 'Complaint\ComplaintServiceReplyController@deleteReply');
 
 /* Suggestion Service List API */
+Route::get('suggestion_service/{tenant_id}/get-all-suggestion-service', 'Suggestion\SuggestionServiceController@getAllSuggestionService');
+Route::get('suggestion_service/{tenant_id}/filter-by-date/{from}/{to}', 'Suggestion\SuggestionServiceController@filterByDate');
 Route::get('suggestion_service/{suggestion_service_id}/get-suggestion-service', 'Suggestion\SuggestionServiceController@getSuggestionService');
 
 /* Tag List API */

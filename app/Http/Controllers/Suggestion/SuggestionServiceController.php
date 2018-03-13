@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Suggestion;
 
 use App\Customer;
 use App\Http\Requests\Suggestion\SuggestionServiceRequest;
+use App\Http\Resources\SuggestionServiceCollection;
 use App\Service;
 use App\ServiceCategory;
 use App\SuggestionService;
@@ -71,11 +72,26 @@ class SuggestionServiceController extends Controller
             ]);
         }
 
-        return redirect('suggestion_service_list')->with('status', 'A new suggestion has been added');
+        return redirect()->back()->with('status', 'A new suggestion has been added, please check you list');
+    }
+
+    public function getAllSuggestionService(Request $request, $tenantId) {
+        $suggestionServices = SuggestionService::where('tenantId', $tenantId)->orderBy('created_at', 'desc')->paginate(20);
+        return new SuggestionServiceCollection($suggestionServices);
     }
 
     public function getSuggestionService(Request $request, $suggestion_service_id) {
         $suggestionService = SuggestionService::findOrFail($suggestion_service_id);
         return new SuggestionServiceResource($suggestionService);
+    }
+
+    public function filterByDate(Request $request, $tenantId, $from, $to) {
+        if($from == $to) {
+            $filteredSuggestionServices = SuggestionService::where('tenantId', $tenantId)->whereDate('created_at', '=', $from)->orderBy('created_at', 'desc')->paginate(20);
+            return new SuggestionServiceCollection($filteredSuggestionServices);
+        } else {
+            $filteredSuggestionServices = SuggestionService::where('tenantId', $tenantId)->whereBetween('created_at', [$from, $to])->orderBy('created_at', 'desc')->paginate(20);
+            return new SuggestionServiceCollection($filteredSuggestionServices);
+        }
     }
 }

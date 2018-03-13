@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Complaint;
 use App\ComplaintService;
 use App\Customer;
 use App\Http\Requests\Complaint\ComplaintServiceRequest;
+use App\Http\Resources\ComplaintServiceCollection;
 use App\Http\Resources\ServiceCollection;
 use App\Service;
 use App\ServiceCategory;
@@ -83,5 +84,20 @@ class ComplaintServiceController extends Controller
     public function getComplaintService(Request $request, $complaint_id) {
         $complaintService = ComplaintService::findOrFail($complaint_id);
         return new ComplaintServiceResource($complaintService);
+    }
+
+    public function getAllComplaintService(Request $request, $tenantId) {
+        $complaintServices = ComplaintService::where('tenantId', $tenantId)->orderBy('created_at', 'desc')->paginate(20);
+        return new ComplaintServiceCollection($complaintServices);
+    }
+
+    public function filterByDate(Request $request, $tenantId, $from, $to) {
+        if($from == $to) {
+            $filteredComplaintServices = ComplaintService::where('tenantId', $tenantId)->whereDate('created_at', '=', $from)->orderBy('created_at', 'desc')->paginate(20);
+            return new ComplaintServiceCollection($filteredComplaintServices);
+        } else {
+            $filteredComplaintServices = ComplaintService::where('tenantId', $tenantId)->whereBetween('created_at', [$from, $to])->orderBy('created_at', 'desc')->paginate(20);
+            return new ComplaintServiceCollection($filteredComplaintServices);
+        }
     }
 }

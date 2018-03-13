@@ -48,10 +48,12 @@
         <i class="fa fa-plus"></i> Add Category
     </button> <br>
 
-    @include('layouts.errors.error_list')
+    <div style="margin-top: 1%">
+        @include('layouts.errors.error_list')
+    </div>
 
     @if(\Session::has('status'))
-        <div class="alert alert-success alert-dismissible">
+        <div class="alert alert-success alert-dismissible" style="margin-top: 1%;">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <h4><i class="icon fa fa-check"></i> Success!</h4>
             {{ \Session::get('status') }}
