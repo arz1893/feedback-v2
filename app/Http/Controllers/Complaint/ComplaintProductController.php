@@ -95,6 +95,9 @@ class ComplaintProductController extends Controller
         if($from == $to) {
             $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->whereDate('created_at', '=', $from)->orderBy('created_at', 'desc')->paginate(20);
             return new ComplaintProductCollection($filteredComplaintProducts);
+        } else if($from > $to) {
+            $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->whereBetween('created_at', [$to, $from])->orderBy('created_at', 'desc')->paginate(20);
+            return new ComplaintProductCollection($filteredComplaintProducts);
         } else {
             $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->whereBetween('created_at', [$from, $to])->orderBy('created_at', 'desc')->paginate(20);
             return new ComplaintProductCollection($filteredComplaintProducts);

@@ -90,6 +90,9 @@ class SuggestionProductController extends Controller
         if($from == $to) {
             $filteredSuggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->whereDate('created_at', '=', $from)->orderBy('created_at', 'desc')->paginate(20);
             return new SuggestionProductCollection($filteredSuggestionProducts);
+        } else if($from > $to) {
+            $filteredSuggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->whereBetween('created_at', [$to, $from])->orderBy('created_at', 'desc')->paginate(20);
+            return new SuggestionProductCollection($filteredSuggestionProducts);
         } else {
             $filteredSuggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->whereBetween('created_at', [$from, $to])->orderBy('created_at', 'desc')->paginate(20);
             return new SuggestionProductCollection($filteredSuggestionProducts);
