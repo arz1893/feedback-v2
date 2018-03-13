@@ -41,9 +41,6 @@ if($('#complaint_product_list_index').length > 0) {
             this.getComplaintProducts(tenantId);
         },
 
-        computed: {
-
-        },
         methods: {
             getComplaintProducts: function (tenantId) {
                 var vm = this;
@@ -281,6 +278,7 @@ if($('#complaint_product_list_index').length > 0) {
                     complaintProductListIndex.paging.endPage = response.data.meta.last_page;
                     complaintProductListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
                     complaintProductListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    complaintProductListIndex.sear
                 } else {
                     complaintProductListIndex.errorMessage = 'no data found';
                 }

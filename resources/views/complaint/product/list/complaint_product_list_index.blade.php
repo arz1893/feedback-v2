@@ -23,8 +23,20 @@
 
     {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
 
-    <div class="container-fluid">
-        <form class="form-inline visible-lg visible-md visible-xs" id="form_search_list">
+    <div class="container-fluid visible-lg visible-md visible-xs">
+
+        <form class="form-inline pull-left visible-lg">
+            <div class="form-group">
+                <label>Customer name : </label>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-default">Search</button>
+            </div>
+        </form>
+
+        <form class="form-inline pull-right" id="form_search_list">
             <!-- Date range -->
             <div class="form-group">
                 <label>From: </label>
@@ -58,8 +70,10 @@
                 Clear Search <i class="fa fa-close"></i>
             </button>
         </form>
+    </div>
 
-        <form class="visible-sm" id="form_search_list">
+    <div class="container-fluid visible-sm">
+        <form id="form_search_list">
             <!-- Date range -->
             <div class="form-group col-sm-6">
                 <label>From: </label>
