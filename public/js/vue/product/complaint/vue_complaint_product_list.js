@@ -290,4 +290,17 @@ if($('#complaint_product_list_index').length > 0) {
         var debounceFunction = _.debounce(fireRequest, 1000);
         debounceFunction();
     }
+
+    function searchByName() {
+        var tenantId = $('#tenantId').val();
+        var customer_name = $('#customer_name').val().toLowerCase();
+
+        const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + tenantId + '/filter-by-name/' + customer_name;
+
+        axios.get(url).then(response => {
+            console.log(response.data);
+        }).catch(error => {
+            console.log(error);
+        });
+    }
 }

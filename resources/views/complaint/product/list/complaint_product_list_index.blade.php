@@ -28,11 +28,11 @@
         <form class="form-inline pull-left visible-lg">
             <div class="form-group">
                 <label>Customer name : </label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="customer_name" id="customer_name">
             </div>
 
             <div class="form-group">
-                <button type="button" class="btn btn-default">Search</button>
+                <button type="button" class="btn btn-default" onclick="searchByName()">Search</button>
             </div>
         </form>
 

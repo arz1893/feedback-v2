@@ -103,4 +103,15 @@ class ComplaintProductController extends Controller
             return new ComplaintProductCollection($filteredComplaintProducts);
         }
     }
+
+    public function filterByCustomerName(Request $request, $tenantId, $customerName) {
+
+        if($customerName == 'anonymous') {
+            $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->where('customerId', null)->orderBy('created_at', 'desc')->paginate(20);
+            return new ComplaintProductCollection($filteredComplaintProducts);
+        } else {
+            $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->whereIn('customerId', Customer::where('name', 'LIKE', "%$customerName%")->get())->get();
+            return new ComplaintProductCollection($filteredComplaintProducts);
+        }
+    }
 }
