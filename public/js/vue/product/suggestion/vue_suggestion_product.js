@@ -80,7 +80,7 @@ if($('#suggestion_product_list_container').length > 0) {
             deleteSuggestionProduct: function (event) {
                 $('<input>').attr({
                     type: 'hidden',
-                    name: 'complaint_id',
+                    name: 'suggestion_id',
                     value: $(event.currentTarget).data('id')
                 }).appendTo('#form_delete_suggestion_product');
                 $('#modal_remove_suggestion_product').modal('show');

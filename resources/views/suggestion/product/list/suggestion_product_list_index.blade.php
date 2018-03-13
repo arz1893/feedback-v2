@@ -139,7 +139,7 @@
                     {{ Form::open(['action' => 'Suggestion\SuggestionProductListController@deleteSuggestionProduct', 'id' => 'form_delete_suggestion_product']) }}
 
                     <div class="modal-body">
-                        Are you sure want to delete this complaint ?
+                        Are you sure want to delete this suggestion ?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -137,7 +137,7 @@
                     {{ Form::open(['action' => 'Suggestion\SuggestionServiceListController@deleteSuggestionService', 'id' => 'form_delete_suggestion_service']) }}
 
                     <div class="modal-body">
-                        Are you sure want to delete this complaint ?
+                        Are you sure want to delete this suggestion ?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
