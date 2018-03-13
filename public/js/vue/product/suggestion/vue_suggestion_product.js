@@ -88,6 +88,26 @@ if($('#suggestion_product_list_container').length > 0) {
         }
     });
 
+    $('#date_start').change(function () {
+        if($('#date_start').val() !== '' && $('#date_end').val() !== '') {
+            $('#btnSearchByDate').removeClass('disabled');
+            $('#btnSearchByDate').attr('onclick', 'searchByDate(this)');
+        } else {
+            $('#btnSearchByDate').addClass('disabled');
+            $('#btnSearchByDate').attr('onclick', '');
+        }
+    });
+
+    $('#date_end').change(function () {
+        if($('#date_end').val() !== '' && $('#date_start').val() !== '') {
+            $('#btnSearchByDate').removeClass('disabled');
+            $('#btnSearchByDate').attr('onclick', 'searchByDate(this)');
+        } else {
+            $('#btnSearchByDate').addClass('disabled');
+            $('#btnSearchByDate').attr('onclick', '');
+        }
+    });
+
     function searchByDate(selected) {
         $('#btnClearSearch').removeClass('disabled');
         $('#btnClearSearch').attr('onclick', 'clearSearch()');
@@ -130,6 +150,8 @@ if($('#suggestion_product_list_container').length > 0) {
     function clearSearch() {
         $('#btnClearSearch').addClass('disabled');
         $('#btnClearSearch').attr('onclick', '');
+        $('#btnSearchByDate').addClass('disabled');
+        $('#btnSearchByDate').attr('onclick', '');
         suggestionProductList.searchStatus = 'Searching...';
         suggestionProductList.errorMessage = '';
         $('#date_start').val('');
@@ -138,8 +160,16 @@ if($('#suggestion_product_list_container').length > 0) {
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_product/' + tenantId + '/get-all-suggestion-product';
         function fireRequest() {
             axios.get(url).then(response => {
-                suggestionProductList.suggestionProducts = response.data.data;
                 suggestionProductList.searchStatus = '';
+                if(response.data.data.length > 0) {
+                    suggestionProductList.suggestionProducts = response.data.data;
+                    suggestionProductList.paging.currentPage = response.data.meta.current_page;
+                    suggestionProductList.paging.endPage = response.data.meta.last_page;
+                    suggestionProductList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
+                    suggestionProductList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                } else  {
+                    suggestionProductList.errorMessage = 'no data found';
+                }
             }).catch(error => {
                 console.log(error);
             });

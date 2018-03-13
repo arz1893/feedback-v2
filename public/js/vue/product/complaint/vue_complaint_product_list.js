@@ -33,6 +33,7 @@ if($('#complaint_product_list_index').length > 0) {
                 nextPage: null
             },
             errorMessage: '',
+            errorInputMessage: '',
             is_searched: false
         },
         created() {
@@ -207,6 +208,26 @@ if($('#complaint_product_list_index').length > 0) {
         $('#collapseAllReplies').collapse('hide');
     });
 
+    $('#date_start').change(function () {
+        if($('#date_start').val() !== '' && $('#date_end').val() !== '') {
+            $('#btnSearchByDate').removeClass('disabled');
+            $('#btnSearchByDate').attr('onclick', 'searchByDate(this)');
+        } else {
+            $('#btnSearchByDate').addClass('disabled');
+            $('#btnSearchByDate').attr('onclick', '');
+        }
+    });
+
+    $('#date_end').change(function () {
+        if($('#date_end').val() !== '' && $('#date_start').val() !== '') {
+            $('#btnSearchByDate').removeClass('disabled');
+            $('#btnSearchByDate').attr('onclick', 'searchByDate(this)');
+        } else {
+            $('#btnSearchByDate').addClass('disabled');
+            $('#btnSearchByDate').attr('onclick', '');
+        }
+    });
+
     function searchByDate(selected) {
         $('#btnClearSearch').removeClass('disabled');
         $('#btnClearSearch').attr('onclick', 'clearSearch()');
@@ -222,10 +243,10 @@ if($('#complaint_product_list_index').length > 0) {
             axios.get(url).then(response => {
                 if(response.data.data.length !== 0) {
                     complaintProductListIndex.complaintProducts = response.data.data;
-                    // complaintProductListIndex.paging.currentPage = response.data.meta.current_page;
-                    // complaintProductListIndex.paging.endPage = response.data.meta.last_page;
-                    // complaintProductListIndex.paging.prev = (response.data.link.prev === null ? null:response.data.link.prev);
-                    // complaintProductListIndex.paging.next = (response.data.link.next === null ? null:response.data.link.next);
+                    complaintProductListIndex.paging.currentPage = response.data.meta.current_page;
+                    complaintProductListIndex.paging.endPage = response.data.meta.last_page;
+                    complaintProductListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
+                    complaintProductListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
                     complaintProductListIndex.searchStatus = '';
                 } else {
                     complaintProductListIndex.errorMessage = 'no data found';
@@ -243,6 +264,8 @@ if($('#complaint_product_list_index').length > 0) {
     function clearSearch() {
         $('#btnClearSearch').addClass('disabled');
         $('#btnClearSearch').attr('onclick', '');
+        $('#btnSearchByDate').addClass('disabled');
+        $('#btnSearchByDate').attr('onclick', '');
         complaintProductListIndex.searchStatus = 'Searching...';
         complaintProductListIndex.errorMessage = '';
         $('#date_start').val('');
@@ -251,9 +274,16 @@ if($('#complaint_product_list_index').length > 0) {
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + tenantId + '/get-all-complaint-product';
         function fireRequest() {
             axios.get(url).then(response => {
-                complaintProductListIndex.complaintProducts = response.data.data;
-                // complaintProductListIndex.makePagination(response.data);
                 complaintProductListIndex.searchStatus = '';
+                if(response.data.data.length > 0) {
+                    complaintProductListIndex.complaintProducts = response.data.data;
+                    complaintProductListIndex.paging.currentPage = response.data.meta.current_page;
+                    complaintProductListIndex.paging.endPage = response.data.meta.last_page;
+                    complaintProductListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
+                    complaintProductListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                } else {
+                    complaintProductListIndex.errorMessage = 'no data found';
+                }
             }).catch(error => {
                 console.log(error);
             });

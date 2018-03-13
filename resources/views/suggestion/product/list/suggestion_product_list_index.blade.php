@@ -51,7 +51,7 @@
                 <!-- /.input group -->
             </div>
 
-            <button class="btn btn-default" type="button" id="btnSearchByDate" onclick="searchByDate(this)">
+            <button class="btn btn-default disabled" type="button" id="btnSearchByDate">
                 Search <i class="fa fa-search"></i>
             </button>
             <button class="btn btn-warning disabled" type="button" id="btnClearSearch">

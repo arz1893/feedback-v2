@@ -24,7 +24,7 @@
     {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
 
     <div class="container-fluid">
-        <form class="form-inline">
+        <form class="form-inline" id="form_search_list">
             <!-- Date range -->
             <div class="form-group">
                 <label>From: </label>
@@ -33,7 +33,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right datepicker" id="date_start">
+                    <input type="text" class="form-control pull-right datepicker" id="date_start" name="date_start">
                 </div>
                 <!-- /.input group -->
             </div>
@@ -46,12 +46,12 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right datepicker" id="date_end">
+                    <input type="text" class="form-control pull-right datepicker" id="date_end" name="date_end">
                 </div>
                 <!-- /.input group -->
             </div>
 
-            <button class="btn btn-default" type="button" id="btnSearchByDate" onclick="searchByDate(this)">
+            <button class="btn btn-default disabled" type="button" id="btnSearchByDate">
                 Search <i class="fa fa-search"></i>
             </button>
             <button class="btn btn-warning disabled" type="button" id="btnClearSearch">

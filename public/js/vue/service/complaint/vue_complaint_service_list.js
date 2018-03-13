@@ -187,6 +187,26 @@ if($('#complaint_service_list_index').length > 0) {
         }
     });
 
+    $('#date_start').change(function () {
+        if($('#date_start').val() !== '' && $('#date_end').val() !== '') {
+            $('#btnSearchByDate').removeClass('disabled');
+            $('#btnSearchByDate').attr('onclick', 'searchByDate(this)');
+        } else {
+            $('#btnSearchByDate').addClass('disabled');
+            $('#btnSearchByDate').attr('onclick', '');
+        }
+    });
+
+    $('#date_end').change(function () {
+        if($('#date_end').val() !== '' && $('#date_start').val() !== '') {
+            $('#btnSearchByDate').removeClass('disabled');
+            $('#btnSearchByDate').attr('onclick', 'searchByDate(this)');
+        } else {
+            $('#btnSearchByDate').addClass('disabled');
+            $('#btnSearchByDate').attr('onclick', '');
+        }
+    });
+
     function searchByDate(selected) {
         $('#btnClearSearch').removeClass('disabled');
         $('#btnClearSearch').attr('onclick', 'clearSearch()');
@@ -199,7 +219,7 @@ if($('#complaint_service_list_index').length > 0) {
 
         function filterComplaint() {
             axios.get(url).then(response => {
-                if(response.data.data.length !== 0) {
+                if(response.data.data.length > 0) {
                     complaintServiceListIndex.complaintServices = response.data.data;
                     complaintServiceListIndex.paging.currentPage = response.data.meta.current_page;
                     complaintServiceListIndex.paging.endPage = response.data.meta.last_page;
@@ -222,6 +242,8 @@ if($('#complaint_service_list_index').length > 0) {
     function clearSearch() {
         $('#btnClearSearch').addClass('disabled');
         $('#btnClearSearch').attr('onclick', '');
+        $('#btnSearchByDate').addClass('disabled');
+        $('#btnSearchByDate').attr('onclick', '');
         complaintServiceListIndex.searchStatus = 'Searching...';
         complaintServiceListIndex.errorMessage = '';
         $('#date_start').val('');
@@ -231,6 +253,10 @@ if($('#complaint_service_list_index').length > 0) {
         function fireRequest() {
             axios.get(url).then(response => {
                 complaintServiceListIndex.complaintServices = response.data.data;
+                complaintServiceListIndex.paging.currentPage = response.data.meta.current_page;
+                complaintServiceListIndex.paging.endPage = response.data.meta.last_page;
+                complaintServiceListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
+                complaintServiceListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
                 complaintServiceListIndex.searchStatus = '';
             }).catch(error => {
                 console.log(error);
