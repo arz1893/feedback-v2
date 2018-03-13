@@ -48,8 +48,12 @@ if($('#complaint_product_list_index').length > 0) {
                 var vm = this;
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + tenantId + '/get-all-complaint-product';
                 axios.get(url).then(response => {
-                    vm.complaintProducts = response.data.data;
-                    vm.makePagination(response.data);
+                    if(response.data.data.length > 0) {
+                        vm.complaintProducts = response.data.data;
+                        vm.makePagination(response.data);
+                    } else {
+                        vm.errorMessage = 'no data found';
+                    }
                 }).catch(error => {
                     console.log(error);
                 });

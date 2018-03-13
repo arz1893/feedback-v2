@@ -33,9 +33,12 @@ if($('#suggestion_product_list_container').length > 0) {
                 var vm = this;
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_product/' + tenantId + '/get-all-suggestion-product';
                 axios.get(url).then(response => {
-                    console.log(response.data);
-                    vm.suggestionProducts = response.data.data;
-                    vm.makePagination(response.data);
+                    if(response.data.data.length > 0) {
+                        vm.suggestionProducts = response.data.data;
+                        vm.makePagination(response.data);
+                    } else {
+                        vm.errorMessage = 'no data found';
+                    }
                 }).catch(error => {
                     console.log(error);
                 });

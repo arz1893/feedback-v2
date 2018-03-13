@@ -41,8 +41,12 @@ if($('#complaint_service_list_index').length > 0) {
                 const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service/' + tenantId + '/get-all-complaint-service';
                 var vm = this;
                 axios.get(url).then(response => {
-                    vm.complaintServices = response.data.data;
-                    vm.makePagination(response.data);
+                    if(response.data.data.length > 0) {
+                        vm.complaintServices = response.data.data;
+                        vm.makePagination(response.data);
+                    } else {
+                        vm.errorMessage = 'no data found';
+                    }
                 }).catch(error => {
                     console.log(error);
                 });

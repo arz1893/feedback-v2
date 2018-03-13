@@ -33,8 +33,12 @@ if($('#suggestion_service_list_container').length > 0) {
                 var vm = this;
                 
                 axios.get(url).then(function (response) {
-                    vm.suggestionServices = response.data.data;
-                    vm.makePagination(response.data);
+                    if(response.data.data.length > 0) {
+                        vm.suggestionServices = response.data.data;
+                        vm.makePagination(response.data);
+                    } else {
+                        vm.errorMessage = 'no data found';
+                    }
                 }).catch(error => {
                     console.log(error);
                 })
