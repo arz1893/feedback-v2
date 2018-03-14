@@ -10,6 +10,9 @@
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Complaint Product List</li>
     </ol>
+    <button class="btn btn-success" style="margin-top: 1%;" id="btnClearSearch" onclick="clearSearch()">
+        Refresh List <i class="fa fa-refresh"></i>
+    </button>
 @endsection
 
 @section('main-content')
@@ -23,53 +26,61 @@
 
     {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
 
-    <div class="container-fluid visible-lg visible-md visible-xs">
+    <div class="row visible-lg visible-md visible-xs">
 
-        <form class="form-inline pull-left visible-lg">
-            <div class="form-group">
-                <label>Customer name : </label>
-                <input type="text" class="form-control" name="customer_name" id="customer_name">
-            </div>
-
-            <div class="form-group">
-                <button type="button" class="btn btn-default" onclick="searchByName()">Search</button>
-            </div>
-        </form>
-
-        <form class="form-inline pull-right" id="form_search_list">
-            <!-- Date range -->
-            <div class="form-group">
-                <label>From: </label>
-
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
+        <div class="col-lg-4">
+            <form class="form-inline visible-lg">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="input-group col-lg-12">
+                            <select name="customer_name" id="customer_name" class="select2-customer" style="width: 100%">
+                                <option></option>
+                                <option value="-1">Anonymous</option>
+                                @foreach($selectCustomers as $selectCustomer)
+                                    <option value="{{ $selectCustomer->systemId }}">{{ $selectCustomer->name }} - {{ $selectCustomer->phone }}</option>
+                                @endforeach
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default disabled" id="btnSearchCustomer" type="button" data-toggle="tooltip" data-placement="bottom" title="Search by customer">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
                     </div>
-                    <input type="text" class="form-control pull-right datepicker" id="date_start" name="date_start">
                 </div>
-                <!-- /.input group -->
-            </div>
+            </form>
+        </div>
 
-            <!-- Date range -->
-            <div class="form-group">
-                <label>To: </label>
-
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
+        <div class="col-lg-8">
+            <form class="form-inline pull-right" id="form_search_list">
+                <!-- Date range -->
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right datepicker" id="date_start" name="date_start" placeholder="From">
                     </div>
-                    <input type="text" class="form-control pull-right datepicker" id="date_end" name="date_end">
+                    <!-- /.input group -->
                 </div>
-                <!-- /.input group -->
-            </div>
 
-            <button class="btn btn-default disabled" type="button" id="btnSearchByDate">
-                Search <i class="fa fa-search"></i>
-            </button>
-            <button class="btn btn-warning disabled" type="button" id="btnClearSearch">
-                Clear Search <i class="fa fa-close"></i>
-            </button>
-        </form>
+                <!-- Date range -->
+                <div class="form-group">
+
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right datepicker" id="date_end" name="date_end" placeholder="To">
+                    </div>
+                    <!-- /.input group -->
+                </div>
+
+                <button class="btn btn-default disabled" type="button" id="btnSearchByDate" data-toggle="tooltip" data-placement="bottom" title="Search by date">
+                    Search <i class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
     </div>
 
     <div class="container-fluid visible-sm">

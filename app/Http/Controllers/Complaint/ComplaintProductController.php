@@ -104,13 +104,12 @@ class ComplaintProductController extends Controller
         }
     }
 
-    public function filterByCustomerName(Request $request, $tenantId, $customerName) {
-
-        if($customerName == 'anonymous') {
-            $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->where('customerId', null)->orderBy('created_at', 'desc')->paginate(20);
+    public function filterByCustomer(Request $request, $tenantId, $customerId) {
+        if($customerId == -1) {
+            $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->where('customerId', null)->paginate(10);
             return new ComplaintProductCollection($filteredComplaintProducts);
         } else {
-            $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->whereIn('customerId', Customer::where('name', 'LIKE', "%$customerName%")->get())->get();
+            $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->where('customerId', $customerId)->paginate(10);
             return new ComplaintProductCollection($filteredComplaintProducts);
         }
     }

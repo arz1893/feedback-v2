@@ -86,6 +86,7 @@ $(document).ready(function () {
     });
 
     $('.select2-customer').select2({
+        placeholder: 'Choose customer...',
         theme: 'bootstrap'
     });
 

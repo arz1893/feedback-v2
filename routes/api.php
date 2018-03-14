@@ -26,7 +26,7 @@ Route::get('product/{tenant_id}/filter-by-name/{searchString}', 'MasterData\Prod
 Route::get('complaint_product/{complaint_id}/get-complaint-product', 'Complaint\ComplaintProductController@getComplaintProduct');
 Route::get('complaint_product/{tenant_id}/get-all-complaint-product', 'Complaint\ComplaintProductController@getAllComplaintProduct');
 Route::get('complaint_product/{tenant_id}/filter-by-date/{from}/{to}', 'Complaint\ComplaintProductController@filterByDate');
-Route::get('complaint_product/{tenant_id}/filter-by-name/{customer_name}', 'Complaint\ComplaintProductController@filterByCustomerName');
+Route::get('complaint_product/{tenant_id}/filter-by-customer/{customer_id}', 'Complaint\ComplaintProductController@filterByCustomer');
 
 /* Complaint Product Replies API */
 Route::get('complaint_product_reply/{complaint_product_id}/get-complaint-product-replies', 'Complaint\ComplaintProductReplyController@getComplaintProductReplies');
