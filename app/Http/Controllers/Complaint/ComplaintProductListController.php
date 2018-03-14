@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class ComplaintProductListController extends Controller
 {
     public function index() {
-        $selectCustomers =  Customer::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get();
+        $selectCustomers =  Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
         return view('complaint.product.list.complaint_product_list_index', compact('selectCustomers'));
     }
 

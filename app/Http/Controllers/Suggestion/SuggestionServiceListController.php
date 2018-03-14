@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class SuggestionServiceListController extends Controller
 {
     public function index() {
-        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->get();
+        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
         return view('suggestion.service.list.suggestion_service_list_index', compact('selectCustomers'));
     }
 

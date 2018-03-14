@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 class ComplaintServiceListController extends Controller
 {
     public function index() {
-        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->get();
+        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
         return view('complaint.service.list.complaint_service_list_index', compact('selectCustomers'));
     }
 
