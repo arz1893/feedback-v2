@@ -37,6 +37,7 @@ Route::post('complaint_product_reply/delete-reply', 'Complaint\ComplaintProductR
 Route::get('suggestion_product/{suggestion_product_id}/get-suggestion-product', 'Suggestion\SuggestionProductController@getSuggestionProduct');
 Route::get('suggestion_product/{tenant_id}/get-all-suggestion-product', 'Suggestion\SuggestionProductController@getAllSuggestionProduct');
 Route::get('suggestion_product/{tenant_id}/filter-by-date/{from}/{to}', 'Suggestion\SuggestionProductController@filterByDate');
+Route::get('suggestion_product/{tenant_id}/filter-by-customer/{customer_id}', 'Suggestion\SuggestionProductController@filterByCustomer');
 
 /* Service List API */
 Route::get('service/{tenant_id}/get-service-list', 'MasterData\ServiceController@getServiceList');
@@ -47,6 +48,7 @@ Route::get('service/{tenant_id}/filter-by-name/{searchString}', 'MasterData\Serv
 Route::get('complaint_service/{complaint_id}/get-complaint-service', 'Complaint\ComplaintServiceController@getComplaintService');
 Route::get('complaint_service/{tenant_id}/get-all-complaint-service', 'Complaint\ComplaintServiceController@getAllComplaintService');
 Route::get('complaint_service/{tenant_id}/filter-by-date/{from}/{to}', 'Complaint\ComplaintServiceController@filterByDate');
+Route::get('complaint_service/{tenant_id}/filter-by-customer/{customer_id}', 'Complaint\ComplaintServiceController@filterByCustomer');
 
 /* Complaint Service Replies API */
 Route::get('complaint_service_reply/{complaint_service_id}/get-complaint-service-replies', 'Complaint\ComplaintServiceReplyController@getComplaintServiceReplies');
@@ -57,6 +59,7 @@ Route::post('complaint_service_reply/delete-reply', 'Complaint\ComplaintServiceR
 Route::get('suggestion_service/{tenant_id}/get-all-suggestion-service', 'Suggestion\SuggestionServiceController@getAllSuggestionService');
 Route::get('suggestion_service/{tenant_id}/filter-by-date/{from}/{to}', 'Suggestion\SuggestionServiceController@filterByDate');
 Route::get('suggestion_service/{suggestion_service_id}/get-suggestion-service', 'Suggestion\SuggestionServiceController@getSuggestionService');
+Route::get('suggestion_service/{tenant_id}/filter-by-customer/{customer_id}', 'Suggestion\SuggestionServiceController@filterByCustomer');
 
 /* Tag List API */
 Route::get('tag/{tenant_id}/get-tag-list', 'MasterData\TagController@getTagList');

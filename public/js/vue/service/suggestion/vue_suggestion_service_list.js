@@ -107,9 +107,12 @@ if($('#suggestion_service_list_container').length > 0) {
         }
     });
 
+    $('#customer_name').change(function () {
+        $('#btnSearchCustomer').removeClass('disabled');
+        $('#btnSearchCustomer').attr('onclick', 'searchByCustomer()');
+    });
+
     function searchByDate(selected) {
-        $('#btnClearSearch').removeClass('disabled');
-        $('#btnClearSearch').attr('onclick', 'clearSearch()');
         suggestionServiceList.searchStatus = 'Searching...';
         suggestionServiceList.errorMessage = '';
         var date_start = $('#date_start').datepicker('getFormattedDate');
@@ -140,14 +143,15 @@ if($('#suggestion_service_list_container').length > 0) {
     }
 
     function clearSearch() {
-        $('#btnClearSearch').addClass('disabled');
-        $('#btnClearSearch').attr('onclick', '');
         $('#btnSearchByDate').addClass('disabled');
         $('#btnSearchByDate').attr('onclick', '');
+        $('#btnSearchCustomer').addClass('disabled');
+        $('#btnSearchCustomer').attr('onclick', '');
         suggestionServiceList.searchStatus = 'Searching...';
         suggestionServiceList.errorMessage = '';
         $('#date_start').val('');
         $('#date_end').val('');
+        $('#customer_name').val('').trigger('change.select2');
         var tenantId = $('#tenantId').val();
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_service/' + tenantId + '/get-all-suggestion-service';
         function fireRequest() {
@@ -161,6 +165,35 @@ if($('#suggestion_service_list_container').length > 0) {
                     suggestionServiceList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
                 } else {
                     suggestionServiceList.errorMessage = 'no data found';
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+
+        var debounceFunction = _.debounce(fireRequest, 1000);
+        debounceFunction();
+    }
+
+    function searchByCustomer() {
+        var customerId = $('#customer_name').select2('data')[0].id;
+        var tenantId = $('#tenantId').val();
+        const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_service/' + tenantId + '/filter-by-customer/' + customerId;
+        suggestionServiceList.searchStatus = 'Searching...';
+        suggestionServiceList.errorMessage = '';
+
+        function fireRequest() {
+            axios.get(url).then(response => {
+                if(response.data.data.length > 0) {
+                    suggestionServiceList.suggestionServices = response.data.data;
+                    suggestionServiceList.paging.currentPage = response.data.meta.current_page;
+                    suggestionServiceList.paging.endPage = response.data.meta.last_page;
+                    suggestionServiceList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
+                    suggestionServiceList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionServiceList.searchStatus = '';
+                } else {
+                    suggestionServiceList.errorMessage = 'no data found';
+                    suggestionServiceList.searchStatus = '';
                 }
             }).catch(error => {
                 console.log(error);

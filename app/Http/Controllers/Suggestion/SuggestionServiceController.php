@@ -97,4 +97,14 @@ class SuggestionServiceController extends Controller
             return new SuggestionServiceCollection($filteredSuggestionServices);
         }
     }
+
+    public function filterByCustomer(Request $request, $tenantId, $customerId) {
+        if($customerId == -1) {
+            $filteredSuggestionServices = SuggestionService::where('tenantId', $tenantId)->where('customerId', null)->paginate(10);
+            return new SuggestionServiceCollection($filteredSuggestionServices);
+        } else {
+            $filteredSuggestionServices = SuggestionService::where('tenantId', $tenantId)->where('customerId', $customerId)->paginate(10);
+            return new SuggestionServiceCollection($filteredSuggestionServices);
+        }
+    }
 }

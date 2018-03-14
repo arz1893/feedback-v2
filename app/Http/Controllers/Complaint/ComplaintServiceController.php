@@ -103,4 +103,14 @@ class ComplaintServiceController extends Controller
             return new ComplaintServiceCollection($filteredComplaintServices);
         }
     }
+
+    public function filterByCustomer(Request $request, $tenantId, $customerId) {
+        if($customerId == -1) {
+            $filteredComplaintServices = ComplaintService::where('tenantId', $tenantId)->where('customerId', null)->paginate(10);
+            return new ComplaintServiceCollection($filteredComplaintServices);
+        } else {
+            $filteredComplaintServices = ComplaintService::where('tenantId', $tenantId)->where('customerId', $customerId)->paginate(10);
+            return new ComplaintServiceCollection($filteredComplaintServices);
+        }
+    }
 }

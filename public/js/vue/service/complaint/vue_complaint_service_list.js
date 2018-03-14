@@ -207,6 +207,11 @@ if($('#complaint_service_list_index').length > 0) {
         }
     });
 
+    $('#customer_name').change(function () {
+        $('#btnSearchCustomer').removeClass('disabled');
+        $('#btnSearchCustomer').attr('onclick', 'searchByCustomer()');
+    });
+
     function searchByDate(selected) {
         $('#btnClearSearch').removeClass('disabled');
         $('#btnClearSearch').attr('onclick', 'clearSearch()');
@@ -240,14 +245,15 @@ if($('#complaint_service_list_index').length > 0) {
     }
 
     function clearSearch() {
-        $('#btnClearSearch').addClass('disabled');
-        $('#btnClearSearch').attr('onclick', '');
         $('#btnSearchByDate').addClass('disabled');
         $('#btnSearchByDate').attr('onclick', '');
+        $('#btnSearchCustomer').addClass('disabled');
+        $('#btnSearchCustomer').attr('onclick', '');
         complaintServiceListIndex.searchStatus = 'Searching...';
         complaintServiceListIndex.errorMessage = '';
         $('#date_start').val('');
         $('#date_end').val('');
+        $('#customer_name').val('').trigger('change.select2');
         var tenantId = $('#tenantId').val();
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service/' + tenantId + '/get-all-complaint-service';
         function fireRequest() {
@@ -258,6 +264,35 @@ if($('#complaint_service_list_index').length > 0) {
                 complaintServiceListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
                 complaintServiceListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
                 complaintServiceListIndex.searchStatus = '';
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+
+        var debounceFunction = _.debounce(fireRequest, 1000);
+        debounceFunction();
+    }
+
+    function searchByCustomer() {
+        var customerId = $('#customer_name').select2('data')[0].id;
+        var tenantId = $('#tenantId').val();
+        const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service/' + tenantId + '/filter-by-customer/' + customerId;
+        complaintServiceListIndex.searchStatus = 'Searching...';
+        complaintServiceListIndex.errorMessage = '';
+
+        function fireRequest() {
+            axios.get(url).then(response => {
+                if(response.data.data.length > 0) {
+                    complaintServiceListIndex.complaintServices = response.data.data;
+                    complaintServiceListIndex.paging.currentPage = response.data.meta.current_page;
+                    complaintServiceListIndex.paging.endPage = response.data.meta.last_page;
+                    complaintServiceListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
+                    complaintServiceListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    complaintServiceListIndex.searchStatus = '';
+                } else {
+                    complaintServiceListIndex.errorMessage = 'no data found';
+                    complaintServiceListIndex.searchStatus = '';
+                }
             }).catch(error => {
                 console.log(error);
             });
