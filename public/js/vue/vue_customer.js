@@ -14,18 +14,23 @@ var modal_add_customer = new Vue({
             city: '',
             memo: ''
         },
-        CSRF_TOKEN: $('meta[name="csrf-token"]').attr('content')
+        CSRF_TOKEN: $('meta[name="csrf-token"]').attr('content'),
+        tenantId: $('#tenantId').val()
     },
     methods: {
 
         submitCustomer: function () {
             var vm = this;
+            const url = window.location.protocol + "//" + window.location.host + '/api/customer/add-customer';
             this.$validator.validateAll().then((result) => {
                 if (result) {
-                    axios.post(window.location.protocol + "//" + window.location.host + "/" + 'customer',this.customer)
-                            .then(response => {
-                            // console.log(response);
-                            // console.log(response.data.systemId, response.data.name, response.data.phone);
+                    axios.post(url, {
+                        tenantId: this.tenantId,
+                        customer: this.customer
+                    }).then(response => {
+                        $('#customer_exist').css('display', 'none');
+                        if(response.data.error === undefined) {
+                            console.log(response.data.data);
                             var option = new Option(response.data.name + ' - ' + response.data.phone, response.data.systemId, false, false);
                             $('#customerId').append(option).trigger('change');
                             $('#customerId').val(response.data.systemId).trigger('change');
@@ -48,10 +53,13 @@ var modal_add_customer = new Vue({
                             }
                             $('#modal_add_customer').modal('hide');
                             this.errors.clear();
-                            })
-                        .catch(error => {
-                            console.log(error);
-                        });
+                        } else {
+                            console.log(response.data.error);
+                            $('#customer_exist').removeAttr('style');
+                        }
+                    }) .catch(error => {
+                        console.log(error);
+                    });
 
                 }
             });

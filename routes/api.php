@@ -67,3 +67,6 @@ Route::get('tag/{tenant_id}/get-tag-list', 'MasterData\TagController@getTagList'
 /* Complaint Report API */
 Route::get('complaint_report/{tenantId}/get-all-complaint/yearly', 'Report\Complaint\ComplaintReportController@getAllComplaintYearly');
 
+/* Customer API */
+Route::post('customer/add-customer', 'Customer\CustomerController@addCustomer');
+
