@@ -28,31 +28,8 @@
 
     <div class="row visible-lg visible-md visible-xs">
 
-        <div class="col-lg-4">
-            <form class="form-inline visible-lg">
-                <div class="row">
-                    <div class="col-lg-10">
-                        <div class="input-group col-lg-12">
-                            <select name="customer_name" id="customer_name" class="select2-customer" style="width: 100%">
-                                <option></option>
-                                <option value="-1">Anonymous</option>
-                                @foreach($selectCustomers as $selectCustomer)
-                                    <option value="{{ $selectCustomer->systemId }}">{{ $selectCustomer->name }} - {{ $selectCustomer->phone }}</option>
-                                @endforeach
-                            </select>
-                            <span class="input-group-btn">
-                                <button class="btn btn-default disabled" id="btnSearchCustomer" type="button" data-toggle="tooltip" data-placement="bottom" title="Search by customer">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-
         <div class="col-lg-8">
-            <form class="form-inline pull-right" id="form_search_list">
+            <form class="form-inline pull-left" id="form_search_list">
                 <!-- Date range -->
                 <div class="form-group">
                     <div class="input-group">
@@ -81,6 +58,22 @@
                 </button>
             </form>
         </div>
+
+        <div class="col-lg-4">
+            <form class="form-inline visible-lg">
+                <div class="row">
+                    <div class="input-group col-lg-12">
+                        {{ Form::select('service_name', $selectServices, null, ['style' => 'width: 100%', 'class' => 'select2-service', 'id' => 'service_name', 'placeholder' => 'Choose Service...']) }}
+                        <span class="input-group-btn">
+                            <button class="btn btn-default disabled" id="btnSearchService" type="button" data-toggle="tooltip" data-placement="bottom" title="Search by service">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </div>
 
     <div class="container-fluid visible-sm">

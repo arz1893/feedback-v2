@@ -85,12 +85,22 @@ $(document).ready(function () {
         theme: 'bootstrap'
     });
 
-    $('.select2-customer').select2({
-        placeholder: 'Choose customer...',
+    // $('.select2-customer').select2({
+    //     placeholder: 'Choose customer...',
+    //     theme: 'bootstrap'
+    // });
+
+    $('.select2-on-edit-customer').select2({
         theme: 'bootstrap'
     });
 
-    $('.select2-on-edit-customer').select2({
+    $('.select2-product').select2({
+        placeholder: 'Choose product...',
+        theme: 'bootstrap'
+    });
+
+    $('.select2-service').select2({
+        placeholder: 'Choose service...',
         theme: 'bootstrap'
     });
 

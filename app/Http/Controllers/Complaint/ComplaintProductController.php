@@ -104,13 +104,18 @@ class ComplaintProductController extends Controller
         }
     }
 
-    public function filterByCustomer(Request $request, $tenantId, $customerId) {
-        if($customerId == -1) {
-            $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->where('customerId', null)->paginate(10);
-            return new ComplaintProductCollection($filteredComplaintProducts);
-        } else {
-            $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->where('customerId', $customerId)->paginate(10);
-            return new ComplaintProductCollection($filteredComplaintProducts);
-        }
+    public function filterByProduct(Request $request, $tenantId, $productId) {
+        $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->where('productId', $productId)->orderBy('created_at', 'desc')->paginate(10);
+        return new ComplaintProductCollection($filteredComplaintProducts);
     }
+
+//    public function filterByCustomer(Request $request, $tenantId, $customerId) {
+//        if($customerId == -1) {
+//            $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->where('customerId', null)->paginate(10);
+//            return new ComplaintProductCollection($filteredComplaintProducts);
+//        } else {
+//            $filteredComplaintProducts = ComplaintProduct::where('tenantId', $tenantId)->where('customerId', $customerId)->paginate(10);
+//            return new ComplaintProductCollection($filteredComplaintProducts);
+//        }
+//    }
 }

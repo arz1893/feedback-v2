@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Suggestion;
 
 use App\Customer;
 use App\Http\Requests\Suggestion\SuggestionServiceRequest;
+use App\Service;
 use App\SuggestionService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,8 +14,9 @@ use Illuminate\Support\Facades\Validator;
 class SuggestionServiceListController extends Controller
 {
     public function index() {
-        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
-        return view('suggestion.service.list.suggestion_service_list_index', compact('selectCustomers'));
+//        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
+        $selectServices = Service::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->pluck('name', 'systemId');
+        return view('suggestion.service.list.suggestion_service_list_index', compact('selectServices'));
     }
 
     public function edit($id) {

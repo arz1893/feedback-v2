@@ -98,13 +98,18 @@ class SuggestionServiceController extends Controller
         }
     }
 
-    public function filterByCustomer(Request $request, $tenantId, $customerId) {
-        if($customerId == -1) {
-            $filteredSuggestionServices = SuggestionService::where('tenantId', $tenantId)->where('customerId', null)->paginate(10);
-            return new SuggestionServiceCollection($filteredSuggestionServices);
-        } else {
-            $filteredSuggestionServices = SuggestionService::where('tenantId', $tenantId)->where('customerId', $customerId)->paginate(10);
-            return new SuggestionServiceCollection($filteredSuggestionServices);
-        }
+    public function filterByService(Request $request, $tenantId, $serviceId) {
+        $filteredSuggestionService = SuggestionService::where('tenantId', $tenantId)->where('serviceId', $serviceId)->orderBy('created_at', 'desc')->paginate(10);
+        return new SuggestionServiceCollection($filteredSuggestionService);
     }
+
+//    public function filterByCustomer(Request $request, $tenantId, $customerId) {
+//        if($customerId == -1) {
+//            $filteredSuggestionServices = SuggestionService::where('tenantId', $tenantId)->where('customerId', null)->paginate(10);
+//            return new SuggestionServiceCollection($filteredSuggestionServices);
+//        } else {
+//            $filteredSuggestionServices = SuggestionService::where('tenantId', $tenantId)->where('customerId', $customerId)->paginate(10);
+//            return new SuggestionServiceCollection($filteredSuggestionServices);
+//        }
+//    }
 }

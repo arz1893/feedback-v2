@@ -225,9 +225,9 @@ if($('#complaint_product_list_index').length > 0) {
         }
     });
 
-    $('#customer_name').change(function () {
-        $('#btnSearchCustomer').removeClass('disabled');
-        $('#btnSearchCustomer').attr('onclick', 'searchByCustomer()');
+    $('#product_name').change(function () {
+        $('#btnSearchProduct').removeClass('disabled');
+        $('#btnSearchProduct').attr('onclick', 'searchByProduct()');
     });
 
     function searchByDate(selected) {
@@ -264,13 +264,13 @@ if($('#complaint_product_list_index').length > 0) {
     function clearSearch() {
         $('#btnSearchByDate').addClass('disabled');
         $('#btnSearchByDate').attr('onclick', '');
-        $('#btnSearchCustomer').addClass('disabled');
-        $('#btnSearchCustomer').attr('onclick', '');
-        complaintProductListIndex.searchStatus = 'Searching...';
+        $('#btnSearchProduct').addClass('disabled');
+        $('#btnSearchProduct').attr('onclick', '');
+        complaintProductListIndex.searchStatus = 'Loading...';
         complaintProductListIndex.errorMessage = '';
         $('#date_start').val('');
         $('#date_end').val('');
-        $('#customer_name').val('').trigger('change.select2');
+        $('#product_name').val('').trigger('change.select2');
         var tenantId = $('#tenantId').val();
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + tenantId + '/get-all-complaint-product';
         function fireRequest() {
@@ -282,7 +282,7 @@ if($('#complaint_product_list_index').length > 0) {
                     complaintProductListIndex.paging.endPage = response.data.meta.last_page;
                     complaintProductListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
                     complaintProductListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
-                    complaintProductListIndex.sear
+                    complaintProductListIndex.searchStatus = '';
                 } else {
                     complaintProductListIndex.errorMessage = 'no data found';
                 }
@@ -299,6 +299,35 @@ if($('#complaint_product_list_index').length > 0) {
         var customerId = $('#customer_name').select2('data')[0].id;
         var tenantId = $('#tenantId').val();
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + tenantId + '/filter-by-customer/' + customerId;
+        complaintProductListIndex.searchStatus = 'Searching...';
+        complaintProductListIndex.errorMessage = '';
+
+        function fireRequest() {
+            axios.get(url).then(response => {
+                if(response.data.data.length > 0) {
+                    complaintProductListIndex.complaintProducts = response.data.data;
+                    complaintProductListIndex.paging.currentPage = response.data.meta.current_page;
+                    complaintProductListIndex.paging.endPage = response.data.meta.last_page;
+                    complaintProductListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
+                    complaintProductListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    complaintProductListIndex.searchStatus = '';
+                } else {
+                    complaintProductListIndex.errorMessage = 'no data found';
+                    complaintProductListIndex.searchStatus = '';
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+
+        var debounceFunction = _.debounce(fireRequest, 1000);
+        debounceFunction();
+    }
+
+    function searchByProduct() {
+        var productId = $('#product_name').select2('data')[0].id;
+        var tenantId = $('#tenantId').val();
+        const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + tenantId + '/filter-by-product/' + productId;
         complaintProductListIndex.searchStatus = 'Searching...';
         complaintProductListIndex.errorMessage = '';
 

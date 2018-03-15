@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Complaint;
 use App\ComplaintProduct;
 use App\Customer;
 use App\Http\Requests\Complaint\ComplaintProductRequest;
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,9 @@ use Illuminate\Support\Facades\Validator;
 class ComplaintProductListController extends Controller
 {
     public function index() {
-        $selectCustomers =  Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
-        return view('complaint.product.list.complaint_product_list_index', compact('selectCustomers'));
+//        $selectCustomers =  Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
+        $selectProducts = Product::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
+        return view('complaint.product.list.complaint_product_list_index', compact('selectProducts'));
     }
 
     public function edit($id) {

@@ -99,13 +99,18 @@ class SuggestionProductController extends Controller
         }
     }
 
-    public function filterByCustomer(Request $request, $tenantId, $customerId) {
-        if($customerId == -1) {
-            $filteredSuggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->where('customerId', null)->paginate(10);
-            return new SuggestionProductCollection($filteredSuggestionProducts);
-        } else {
-            $filteredSuggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->where('customerId', $customerId)->paginate(10);
-            return new SuggestionProductCollection($filteredSuggestionProducts);
-        }
+    public function filterByProduct(Request $request, $tenantId, $productId) {
+        $filteredSuggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->where('productId', $productId)->orderBy('created_at', 'desc')->paginate(10);
+        return new SuggestionProductCollection($filteredSuggestionProducts);
     }
+
+//    public function filterByCustomer(Request $request, $tenantId, $customerId) {
+//        if($customerId == -1) {
+//            $filteredSuggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->where('customerId', null)->paginate(10);
+//            return new SuggestionProductCollection($filteredSuggestionProducts);
+//        } else {
+//            $filteredSuggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->where('customerId', $customerId)->paginate(10);
+//            return new SuggestionProductCollection($filteredSuggestionProducts);
+//        }
+//    }
 }

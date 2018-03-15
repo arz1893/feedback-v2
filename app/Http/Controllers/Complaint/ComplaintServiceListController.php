@@ -6,6 +6,7 @@ use App\ComplaintService;
 use App\Customer;
 use App\Http\Requests\Complaint\ComplaintServiceRequest;
 use App\Question;
+use App\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,9 @@ use Illuminate\Support\Facades\Validator;
 class ComplaintServiceListController extends Controller
 {
     public function index() {
-        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
-        return view('complaint.service.list.complaint_service_list_index', compact('selectCustomers'));
+//        $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get();
+        $selectServices = Service::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->pluck('name', 'systemId');
+        return view('complaint.service.list.complaint_service_list_index', compact('selectServices'));
     }
 
     public function edit($id) {
