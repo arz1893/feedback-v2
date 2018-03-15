@@ -146,6 +146,7 @@ if($('#suggestion_service_list_container').length > 0) {
                     suggestionServiceList.paging.endPage = response.data.meta.last_page;
                     suggestionServiceList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
                     suggestionServiceList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionServiceList.paging.path = response.data.meta.path;
                     suggestionServiceList.searchStatus = '';
                 } else {
                     suggestionServiceList.errorMessage = 'no data found';
@@ -181,6 +182,7 @@ if($('#suggestion_service_list_container').length > 0) {
                     suggestionServiceList.paging.endPage = response.data.meta.last_page;
                     suggestionServiceList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
                     suggestionServiceList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionServiceList.paging.path = response.data.meta.path;
                 } else {
                     suggestionServiceList.errorMessage = 'no data found';
                 }
@@ -237,6 +239,7 @@ if($('#suggestion_service_list_container').length > 0) {
                     suggestionServiceList.paging.endPage = response.data.meta.last_page;
                     suggestionServiceList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
                     suggestionServiceList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionServiceList.paging.path = response.data.meta.path;
                     suggestionServiceList.searchStatus = '';
                 } else {
                     suggestionServiceList.errorMessage = 'no data found';

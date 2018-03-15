@@ -150,6 +150,7 @@ if($('#suggestion_product_list_container').length > 0) {
                         suggestionProductList.paging.endPage = response.data.meta.last_page;
                         suggestionProductList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
                         suggestionProductList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                        suggestionProductList.paging.path = response.data.meta.path;
                         suggestionProductList.searchStatus = '';
                     } else {
                         suggestionProductList.errorMessage = 'no data found';
@@ -190,6 +191,7 @@ if($('#suggestion_product_list_container').length > 0) {
                     suggestionProductList.paging.endPage = response.data.meta.last_page;
                     suggestionProductList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
                     suggestionProductList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionProductList.paging.path = response.data.meta.path;
                 } else  {
                     suggestionProductList.errorMessage = 'no data found';
                 }
@@ -246,6 +248,7 @@ if($('#suggestion_product_list_container').length > 0) {
                     suggestionProductList.paging.endPage = response.data.meta.last_page;
                     suggestionProductList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
                     suggestionProductList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionProductList.paging.path = response.data.meta.path;
                     suggestionProductList.searchStatus = '';
                 } else {
                     suggestionProductList.errorMessage = 'no data found';
