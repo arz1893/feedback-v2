@@ -63,13 +63,6 @@
             <form class="form-inline visible-lg">
                 <div class="row">
                     <div class="input-group col-lg-12">
-                        {{--<select name="customer_name" id="customer_name" class="select2-customer" style="width: 100%">--}}
-                        {{--<option></option>--}}
-                        {{--<option value="-1">Anonymous</option>--}}
-                        {{--@foreach($selectCustomers as $selectCustomer)--}}
-                        {{--<option value="{{ $selectCustomer->systemId }}">{{ $selectCustomer->name }} - {{ $selectCustomer->phone }}</option>--}}
-                        {{--@endforeach--}}
-                        {{--</select>--}}
                         {{ Form::select('product_name', $selectProducts, null, ['style' => 'width: 100%', 'class' => 'select2-product', 'id' => 'product_name', 'placeholder' => 'Choose Product...']) }}
                         <span class="input-group-btn">
                             <button class="btn btn-default disabled" id="btnSearchProduct" type="button" data-toggle="tooltip" data-placement="bottom" title="Search by product">

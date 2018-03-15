@@ -135,8 +135,8 @@ if($('#suggestion_product_list_container').length > 0) {
     function searchByDate(selected) {
         suggestionProductList.searchStatus = 'Searching...';
         suggestionProductList.errorMessage = '';
-        var date_start = $('#date_start').datepicker('getFormattedDate');
-        var date_end = $('#date_end').datepicker('getFormattedDate');
+        var date_start = $('#date_start').val();
+        var date_end = $('#date_end').val();
         var tenantId = $('#tenantId').val();
         console.log(date_start, date_end, tenantId);
         if(date_start !== '' && date_end !== '') {

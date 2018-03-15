@@ -133,8 +133,8 @@ if($('#suggestion_service_list_container').length > 0) {
     function searchByDate(selected) {
         suggestionServiceList.searchStatus = 'Searching...';
         suggestionServiceList.errorMessage = '';
-        var date_start = $('#date_start').datepicker('getFormattedDate');
-        var date_end = $('#date_end').datepicker('getFormattedDate');
+        var date_start = $('#date_start').val();
+        var date_end = $('#date_end').val();
         var tenantId = $('#tenantId').val();
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_service/' + tenantId + '/filter-by-date/' + date_start + '/' + date_end;
 

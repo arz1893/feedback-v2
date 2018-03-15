@@ -236,9 +236,10 @@ if($('#complaint_service_list_index').length > 0) {
         $('#btnClearSearch').attr('onclick', 'clearSearch()');
         complaintServiceListIndex.searchStatus = 'Searching...';
         complaintServiceListIndex.errorMessage = '';
-        var date_start = $('#date_start').datepicker('getFormattedDate');
-        var date_end = $('#date_end').datepicker('getFormattedDate');
+        var date_start = $('#date_start').val();
+        var date_end = $('#date_end').val();
         var tenantId = $('#tenantId').val();
+        console.log(date_start, date_end);
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service/' + tenantId + '/filter-by-date/' + date_start + '/' + date_end;
 
         function filterComplaint() {

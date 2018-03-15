@@ -253,8 +253,8 @@ if($('#complaint_product_list_index').length > 0) {
     function searchByDate(selected) {
         complaintProductListIndex.searchStatus = 'Searching...';
         complaintProductListIndex.errorMessage = '';
-        var date_start = $('#date_start').datepicker('getFormattedDate');
-        var date_end = $('#date_end').datepicker('getFormattedDate');
+        var date_start = $('#date_start').val();
+        var date_end = $('#date_end').val();
         var tenantId = $('#tenantId').val();
         console.log(date_start, date_end, tenantId);
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + tenantId + '/filter-by-date/' + date_start + '/' + date_end;

@@ -125,6 +125,13 @@ $(document).ready(function () {
     $('#lightgallery').lightGallery();
 
     $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd'
+        format: {
+            toDisplay: function (date, format, language) {
+                return moment(date).format('DD-MM-YYYY');
+            },
+            toValue: function (date, format, language) {
+                return moment(date).format('YYYY-MM-DD');
+            }
+        }
     });
 });

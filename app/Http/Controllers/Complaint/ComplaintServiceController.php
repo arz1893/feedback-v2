@@ -92,6 +92,8 @@ class ComplaintServiceController extends Controller
     }
 
     public function filterByDate(Request $request, $tenantId, $from, $to) {
+        $from = date('Y-m-d', strtotime($from));
+        $to = date('Y-m-d', strtotime($to));
         if($from == $to) {
             $filteredComplaintServices = ComplaintService::where('tenantId', $tenantId)->whereDate('created_at', '=', $from)->orderBy('created_at', 'desc')->paginate(20);
             return new ComplaintServiceCollection($filteredComplaintServices);
