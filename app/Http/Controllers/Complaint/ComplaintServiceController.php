@@ -95,13 +95,13 @@ class ComplaintServiceController extends Controller
         $from = date('Y-m-d', strtotime($from));
         $to = date('Y-m-d', strtotime($to));
         if($from == $to) {
-            $filteredComplaintServices = ComplaintService::where('tenantId', $tenantId)->whereDate('created_at', '=', $from)->orderBy('created_at', 'desc')->paginate(20);
+            $filteredComplaintServices = ComplaintService::where('tenantId', $tenantId)->whereDate('created_at', '=', $from)->orderBy('created_at', 'desc')->paginate(10);
             return new ComplaintServiceCollection($filteredComplaintServices);
         } else if($from > $to) {
-            $filteredComplaintServices = ComplaintService::where('tenantId', $tenantId)->whereBetween('created_at', [$to, $from])->orderBy('created_at', 'desc')->paginate(20);
+            $filteredComplaintServices = ComplaintService::where('tenantId', $tenantId)->whereBetween('created_at', [$to, $from])->orderBy('created_at', 'desc')->paginate(10);
             return new ComplaintServiceCollection($filteredComplaintServices);
         } else {
-            $filteredComplaintServices = ComplaintService::where('tenantId', $tenantId)->whereBetween('created_at', [$from, $to])->orderBy('created_at', 'desc')->paginate(20);
+            $filteredComplaintServices = ComplaintService::where('tenantId', $tenantId)->whereBetween('created_at', [$from, $to])->orderBy('created_at', 'desc')->paginate(10);
             return new ComplaintServiceCollection($filteredComplaintServices);
         }
     }
