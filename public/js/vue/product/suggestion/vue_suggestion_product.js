@@ -18,7 +18,8 @@ if($('#suggestion_product_list_container').length > 0) {
                 currentPage: '',
                 endPage: '',
                 prevPage: null,
-                nextPage: null
+                nextPage: null,
+                path: ''
             },
             searchStatus: '',
             errorMessage: ''
@@ -85,6 +86,24 @@ if($('#suggestion_product_list_container').length > 0) {
                 }).appendTo('#form_delete_suggestion_product');
                 $('#modal_remove_suggestion_product').modal('show');
             },
+
+            changePage: function (url) {
+                var vm = this;
+                vm.searchStatus = 'Loading...';
+                function fireRequest(vm) {
+                    axios.get(url).then(response => {
+                        vm.products = response.data.data;
+                        vm.makePagination(response.data);
+                        vm.searchStatus = '';
+                    }).catch(error => {
+                        console.log('something wrong within the process');
+                        console.log(Object.assign({}, error));
+                    });
+                }
+
+                var debounceFunction = _.debounce(fireRequest, 1000);
+                debounceFunction(vm);
+            }
         }
     });
 

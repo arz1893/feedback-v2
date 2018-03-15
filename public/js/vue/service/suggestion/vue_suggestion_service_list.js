@@ -84,6 +84,24 @@ if($('#suggestion_service_list_container').length > 0) {
                 }).appendTo('#form_delete_suggestion_service');
                 $('#modal_remove_suggestion_service').modal('show');
             },
+
+            changePage: function (url) {
+                var vm = this;
+                vm.searchStatus = 'Loading...';
+                function fireRequest(vm) {
+                    axios.get(url).then(response => {
+                        vm.products = response.data.data;
+                        vm.makePagination(response.data);
+                        vm.searchStatus = '';
+                    }).catch(error => {
+                        console.log('something wrong within the process');
+                        console.log(Object.assign({}, error));
+                    });
+                }
+
+                var debounceFunction = _.debounce(fireRequest, 1000);
+                debounceFunction(vm);
+            }
         }
     });
 

@@ -227,17 +227,24 @@
         </div>
 
         <div class="text-center">
-            <ul class="pagination">
+            <ul v-show="paging.currentPage !== ''" class="pagination">
                 <li v-bind:class="{disabled:paging.prevPage === null}">
-                    <a href="#" aria-label="Previous">
+                    <a v-if="paging.prevPage !== null" role="button" @click="changePage(paging.prevPage)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    <a v-else role="button" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <li v-for="n in paging.endPage" v-bind:class="{ active:n===paging.currentPage }">
-                    <a href="#">@{{ n }}</a>
+                    <a v-if="n !== paging.currentPage" role="button" @click="changePage(paging.path + '?page=' + n)">@{{ n }}</a>
+                    <a v-else role="button">@{{ n }}</a>
                 </li>
                 <li v-bind:class="{disabled:paging.nextPage === null}">
-                    <a href="#" aria-label="Next">
+                    <a v-if="paging.nextPage !== null" @click="changePage(paging.nextPage)" role="button" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    <a v-else role="button">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

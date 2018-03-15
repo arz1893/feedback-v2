@@ -30,7 +30,8 @@ if($('#complaint_product_list_index').length > 0) {
                 currentPage: '',
                 endPage: '',
                 prevPage: null,
-                nextPage: null
+                nextPage: null,
+                path: ''
             },
             errorMessage: '',
             errorInputMessage: '',
@@ -61,6 +62,7 @@ if($('#complaint_product_list_index').length > 0) {
                 var vm = this;
                 vm.paging.currentPage = data.meta.current_page;
                 vm.paging.endPage = data.meta.last_page;
+                vm.paging.path = data.meta.path;
                 vm.paging.prevPage = (data.links.prev === null ? null:data.links.prev);
                 vm.paging.nextPage = (data.links.next === null ? null:data.links.next);
             },
@@ -193,6 +195,24 @@ if($('#complaint_product_list_index').length > 0) {
                         alert('whoops! there is something wrong within the process');
                         console.log(error)
                     });
+            },
+
+            changePage: function (url) {
+                var vm = this;
+                vm.searchStatus = 'Loading...';
+                function fireRequest(vm) {
+                    axios.get(url).then(response => {
+                        vm.products = response.data.data;
+                        vm.makePagination(response.data);
+                        vm.searchStatus = '';
+                    }).catch(error => {
+                        console.log('something wrong within the process');
+                        console.log(Object.assign({}, error));
+                    });
+                }
+
+                var debounceFunction = _.debounce(fireRequest, 1000);
+                debounceFunction(vm);
             }
         }
     });
