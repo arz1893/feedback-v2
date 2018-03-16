@@ -202,7 +202,7 @@ if($('#complaint_product_list_index').length > 0) {
                 vm.searchStatus = 'Loading...';
                 function fireRequest(vm) {
                     axios.get(url).then(response => {
-                        vm.products = response.data.data;
+                        vm.complaintProducts = response.data.data;
                         vm.makePagination(response.data);
                         vm.searchStatus = '';
                     }).catch(error => {
@@ -272,6 +272,7 @@ if($('#complaint_product_list_index').length > 0) {
                 } else {
                     complaintProductListIndex.errorMessage = 'no data found';
                     complaintProductListIndex.searchStatus = '';
+
                 }
             }).catch(error => {
                 console.log(error);

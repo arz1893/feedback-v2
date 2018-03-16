@@ -191,7 +191,7 @@ if($('#complaint_service_list_index').length > 0) {
                 vm.searchStatus = 'Loading...';
                 function fireRequest(vm) {
                     axios.get(url).then(response => {
-                        vm.products = response.data.data;
+                        vm.complaintServices = response.data.data;
                         vm.makePagination(response.data);
                         vm.searchStatus = '';
                     }).catch(error => {

@@ -92,7 +92,7 @@ if($('#suggestion_product_list_container').length > 0) {
                 vm.searchStatus = 'Loading...';
                 function fireRequest(vm) {
                     axios.get(url).then(response => {
-                        vm.products = response.data.data;
+                        vm.suggestionProducts = response.data.data;
                         vm.makePagination(response.data);
                         vm.searchStatus = '';
                     }).catch(error => {
