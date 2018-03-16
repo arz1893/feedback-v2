@@ -150,6 +150,7 @@
                         <li><a href="{{ route('product.index') }}"> <i class="ion ion-filing"></i> Master Product </a></li>
                         <li><a href="{{ route('service.index') }}"> <i class="ion ion-bowtie"></i> Master Service </a></li>
                         <li><a href="{{ route('tag.index') }}"> <i class="ion ion-pricetag"></i> Master Tag </a></li>
+                        <li><a href="{{ route('customer.index') }}"> <i class="ion ion-ios-people"></i> Customer List </a></li>
                     </ul>
                 </li>
                 <li class="treeview">

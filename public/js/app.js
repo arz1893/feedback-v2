@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#table_product').DataTable({
         responsive: true,
         bLengthChange: false,
-        iDisplayLength: 20,
+        iDisplayLength: 10,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: 2 },
@@ -18,7 +18,7 @@ $(document).ready(function () {
     $('#table_service').DataTable({
         responsive: true,
         bLengthChange: false,
-        iDisplayLength: 20,
+        iDisplayLength: 10,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: 2 },
@@ -36,13 +36,13 @@ $(document).ready(function () {
     $('#table_tags').DataTable({
         responsive: true,
         bLengthChange: false,
-        iDisplayLength: 20
+        iDisplayLength: 10
     });
 
     $('#table_question').DataTable({
         responsive:true,
         bLengthChange: false,
-        iDisplayLength: 20,
+        iDisplayLength: 10,
         columnDefs: [ {
             targets: [1],
             render: function ( data, type, row ) {
@@ -57,7 +57,13 @@ $(document).ready(function () {
         responsive: true,
         scrollX: true,
         bLengthChange: false,
-        iDisplayLength: 20
+        iDisplayLength: 10
+    });
+
+    $('#table_customer').DataTable({
+        scrollX: true,
+        bLengthChange: false,
+        iDisplayLength: 10
     });
 
     $('#product_picture').on('change', function (e) {

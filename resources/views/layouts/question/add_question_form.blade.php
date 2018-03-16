@@ -1,7 +1,7 @@
 <div class="form-group">
     {{ Form::label('customerId', 'Customer') }}
     <div class="input-group">
-        {{ Form::select('customerId', $selectCustomers, null, ['class' => 'form-control select2',
+        {{ Form::select('customerId', $selectCustomers, null, ['class' => 'form-control select2-customer',
                                                                'placeholder' => 'Anonymous',
                                                                'v-on:change' => 'onChangeCustomer($event)', 'style' => 'width:100%']) }}
         <span class="input-group-btn">

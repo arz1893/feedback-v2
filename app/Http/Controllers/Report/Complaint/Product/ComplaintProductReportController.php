@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Report\Complaint\Product;
 
+use App\ComplaintProduct;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

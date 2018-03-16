@@ -11,6 +11,15 @@ use Webpatser\Uuid\Uuid;
 
 class CustomerController extends Controller
 {
+    public function index() {
+        $customers = Customer::where('tenantId', Auth::user()->tenantId)->get();
+        return view('customer.customer_index', compact('customers'));
+    }
+
+    public function edit(Customer $customer) {
+
+    }
+
     public function addCustomer(Request $request) {
 
         $isExist = Customer::where('tenantId', $request->tenantId)->where('phone', $request->customer['phone'])->first();
