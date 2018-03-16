@@ -22,7 +22,8 @@ if($('#suggestion_service_list_container').length > 0) {
                 currentPage: '',
                 endPage: '',
                 prevPage: null,
-                nextPage: null
+                nextPage: null,
+                path: ''
             },
             searchStatus: '',
             errorMessage: ''
@@ -50,6 +51,7 @@ if($('#suggestion_service_list_container').length > 0) {
                 vm.paging.endPage = data.meta.last_page;
                 vm.paging.prevPage = (data.links.prev === null ? null:data.links.prev);
                 vm.paging.nextPage = (data.links.next === null ? null:data.links.next);
+                vm.paging.path = data.meta.path;
             },
 
             showSuggestionDetail: function (event) {
@@ -144,13 +146,18 @@ if($('#suggestion_service_list_container').length > 0) {
                     suggestionServiceList.suggestionServices = response.data.data;
                     suggestionServiceList.paging.currentPage = response.data.meta.current_page;
                     suggestionServiceList.paging.endPage = response.data.meta.last_page;
-                    suggestionServiceList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                    suggestionServiceList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionServiceList.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                    suggestionServiceList.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                     suggestionServiceList.paging.path = response.data.meta.path;
                     suggestionServiceList.searchStatus = '';
                 } else {
                     suggestionServiceList.errorMessage = 'no data found';
                     suggestionServiceList.searchStatus = '';
+                    suggestionServiceList.paging.currentPage = '';
+                    suggestionServiceList.paging.endPage = '';
+                    suggestionServiceList.paging.prevPage = '';
+                    suggestionServiceList.paging.nextPage = '';
+                    suggestionServiceList.paging.path = '';
                 }
             }).catch(error => {
                 console.log(error);
@@ -180,8 +187,8 @@ if($('#suggestion_service_list_container').length > 0) {
                     suggestionServiceList.suggestionServices = response.data.data;
                     suggestionServiceList.paging.currentPage = response.data.meta.current_page;
                     suggestionServiceList.paging.endPage = response.data.meta.last_page;
-                    suggestionServiceList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                    suggestionServiceList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionServiceList.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                    suggestionServiceList.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                     suggestionServiceList.paging.path = response.data.meta.path;
                 } else {
                     suggestionServiceList.errorMessage = 'no data found';
@@ -208,8 +215,8 @@ if($('#suggestion_service_list_container').length > 0) {
                     suggestionServiceList.suggestionServices = response.data.data;
                     suggestionServiceList.paging.currentPage = response.data.meta.current_page;
                     suggestionServiceList.paging.endPage = response.data.meta.last_page;
-                    suggestionServiceList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                    suggestionServiceList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionServiceList.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                    suggestionServiceList.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                     suggestionServiceList.searchStatus = '';
                 } else {
                     suggestionServiceList.errorMessage = 'no data found';
@@ -237,13 +244,18 @@ if($('#suggestion_service_list_container').length > 0) {
                     suggestionServiceList.suggestionServices = response.data.data;
                     suggestionServiceList.paging.currentPage = response.data.meta.current_page;
                     suggestionServiceList.paging.endPage = response.data.meta.last_page;
-                    suggestionServiceList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                    suggestionServiceList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionServiceList.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                    suggestionServiceList.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                     suggestionServiceList.paging.path = response.data.meta.path;
                     suggestionServiceList.searchStatus = '';
                 } else {
                     suggestionServiceList.errorMessage = 'no data found';
                     suggestionServiceList.searchStatus = '';
+                    suggestionServiceList.paging.currentPage = '';
+                    suggestionServiceList.paging.endPage = '';
+                    suggestionServiceList.paging.prevPage = '';
+                    suggestionServiceList.paging.nextPage = '';
+                    suggestionServiceList.paging.path = '';
                 }
             }).catch(error => {
                 console.log(error);

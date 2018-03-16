@@ -59,6 +59,7 @@ if($('#complaint_service_list_index').length > 0) {
                 vm.paging.endPage = data.meta.last_page;
                 vm.paging.prevPage = (data.links.prev === null ? null:data.links.prev);
                 vm.paging.nextPage = (data.links.next === null ? null:data.links.next);
+                vm.paging.path = data.meta.path;
             },
             
             showComplaintDetail: function (event) {
@@ -248,13 +249,18 @@ if($('#complaint_service_list_index').length > 0) {
                     complaintServiceListIndex.complaintServices = response.data.data;
                     complaintServiceListIndex.paging.currentPage = response.data.meta.current_page;
                     complaintServiceListIndex.paging.endPage = response.data.meta.last_page;
-                    complaintServiceListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                    complaintServiceListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    complaintServiceListIndex.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                    complaintServiceListIndex.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                     complaintServiceListIndex.paging.path = response.data.meta.path;
                     complaintServiceListIndex.searchStatus = '';
                 } else {
                     complaintServiceListIndex.errorMessage = 'no data found';
                     complaintServiceListIndex.searchStatus = '';
+                    complaintServiceListIndex.paging.currentPage = '';
+                    complaintServiceListIndex.paging.endPage = '';
+                    complaintServiceListIndex.paging.prevPage = '';
+                    complaintServiceListIndex.paging.nextPage = '';
+                    complaintServiceListIndex.paging.path = '';
                 }
             }).catch(error => {
                 console.log(error);
@@ -282,8 +288,8 @@ if($('#complaint_service_list_index').length > 0) {
                 complaintServiceListIndex.complaintServices = response.data.data;
                 complaintServiceListIndex.paging.currentPage = response.data.meta.current_page;
                 complaintServiceListIndex.paging.endPage = response.data.meta.last_page;
-                complaintServiceListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                complaintServiceListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                complaintServiceListIndex.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                complaintServiceListIndex.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                 complaintServiceListIndex.paging.path = response.data.meta.path;
                 complaintServiceListIndex.searchStatus = '';
             }).catch(error => {
@@ -308,8 +314,8 @@ if($('#complaint_service_list_index').length > 0) {
                     complaintServiceListIndex.complaintServices = response.data.data;
                     complaintServiceListIndex.paging.currentPage = response.data.meta.current_page;
                     complaintServiceListIndex.paging.endPage = response.data.meta.last_page;
-                    complaintServiceListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                    complaintServiceListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    complaintServiceListIndex.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                    complaintServiceListIndex.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                     complaintServiceListIndex.searchStatus = '';
                 } else {
                     complaintServiceListIndex.errorMessage = 'no data found';
@@ -338,13 +344,18 @@ if($('#complaint_service_list_index').length > 0) {
                     complaintServiceListIndex.complaintServices = response.data.data;
                     complaintServiceListIndex.paging.currentPage = response.data.meta.current_page;
                     complaintServiceListIndex.paging.endPage = response.data.meta.last_page;
-                    complaintServiceListIndex.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                    complaintServiceListIndex.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    complaintServiceListIndex.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                    complaintServiceListIndex.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                     complaintServiceListIndex.paging.path = response.data.meta.path;
                     complaintServiceListIndex.searchStatus = '';
                 } else {
                     complaintServiceListIndex.errorMessage = 'no data found';
                     complaintServiceListIndex.searchStatus = '';
+                    complaintServiceListIndex.paging.currentPage = '';
+                    complaintServiceListIndex.paging.endPage = '';
+                    complaintServiceListIndex.paging.prevPage = '';
+                    complaintServiceListIndex.paging.nextPage = '';
+                    complaintServiceListIndex.paging.path = '';
                 }
             }).catch(error => {
                 console.log(error);

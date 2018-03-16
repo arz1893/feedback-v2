@@ -52,6 +52,7 @@ if($('#suggestion_product_list_container').length > 0) {
                 vm.paging.endPage = data.meta.last_page;
                 vm.paging.prevPage = (data.links.prev === null ? null:data.links.prev);
                 vm.paging.nextPage = (data.links.next === null ? null:data.links.next);
+                vm.paging.path = data.meta.path;
             },
 
             showSuggestionDetail: function (event) {
@@ -148,13 +149,18 @@ if($('#suggestion_product_list_container').length > 0) {
                         suggestionProductList.suggestionProducts = response.data.data;
                         suggestionProductList.paging.currentPage = response.data.meta.current_page;
                         suggestionProductList.paging.endPage = response.data.meta.last_page;
-                        suggestionProductList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                        suggestionProductList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                        suggestionProductList.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                        suggestionProductList.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                         suggestionProductList.paging.path = response.data.meta.path;
                         suggestionProductList.searchStatus = '';
                     } else {
                         suggestionProductList.errorMessage = 'no data found';
                         suggestionProductList.searchStatus = '';
+                        suggestionProductList.paging.currentPage = '';
+                        suggestionProductList.paging.endPage = '';
+                        suggestionProductList.paging.prevPage = '';
+                        suggestionProductList.paging.nextPage = '';
+                        suggestionProductList.paging.path = '';
                     }
                 }).catch(error => {
                     console.log(error);
@@ -189,8 +195,8 @@ if($('#suggestion_product_list_container').length > 0) {
                     suggestionProductList.suggestionProducts = response.data.data;
                     suggestionProductList.paging.currentPage = response.data.meta.current_page;
                     suggestionProductList.paging.endPage = response.data.meta.last_page;
-                    suggestionProductList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                    suggestionProductList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionProductList.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                    suggestionProductList.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                     suggestionProductList.paging.path = response.data.meta.path;
                 } else  {
                     suggestionProductList.errorMessage = 'no data found';
@@ -217,8 +223,8 @@ if($('#suggestion_product_list_container').length > 0) {
                     suggestionProductList.suggestionProducts = response.data.data;
                     suggestionProductList.paging.currentPage = response.data.meta.current_page;
                     suggestionProductList.paging.endPage = response.data.meta.last_page;
-                    suggestionProductList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                    suggestionProductList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionProductList.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                    suggestionProductList.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                     suggestionProductList.searchStatus = '';
                 } else {
                     suggestionProductList.errorMessage = 'no data found';
@@ -246,13 +252,18 @@ if($('#suggestion_product_list_container').length > 0) {
                     suggestionProductList.suggestionProducts = response.data.data;
                     suggestionProductList.paging.currentPage = response.data.meta.current_page;
                     suggestionProductList.paging.endPage = response.data.meta.last_page;
-                    suggestionProductList.paging.prev = (response.data.links.prev === null ? null:response.data.links.prev);
-                    suggestionProductList.paging.next = (response.data.links.next === null ? null:response.data.links.next);
+                    suggestionProductList.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                    suggestionProductList.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
                     suggestionProductList.paging.path = response.data.meta.path;
                     suggestionProductList.searchStatus = '';
                 } else {
                     suggestionProductList.errorMessage = 'no data found';
                     suggestionProductList.searchStatus = '';
+                    suggestionProductList.paging.currentPage = '';
+                    suggestionProductList.paging.endPage = '';
+                    suggestionProductList.paging.prevPage = '';
+                    suggestionProductList.paging.nextPage = '';
+                    suggestionProductList.paging.path = '';
                 }
             }).catch(error => {
                 console.log(error);
