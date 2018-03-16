@@ -104,6 +104,10 @@ $(document).ready(function () {
         theme: 'bootstrap'
     });
 
+    $('.select2-customer').select2({
+        theme: 'bootstrap'
+    });
+
     $('#select_tags').selectize({
         plugins: ['remove_button'],
         delimiter: ',',

@@ -30,13 +30,13 @@ class ComplaintProductController extends Controller
         if($currentNodeId == 0) {
             $product = Product::findOrFail($id);
             $productCategories = ProductCategory::where('productId', $product->systemId)->where('parent_id', null)->get();
-            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get()->pluck('full_information', 'systemId');
+            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get()->pluck('full_information', 'systemId');
             return view('complaint.product.complaint_product_show', compact('product', 'productCategories', 'selectCustomers'));
         } else {
             $product = Product::findOrFail($id);
             $productCategories = ProductCategory::where('parent_id', $currentNodeId)->get();
             $currentParentNode = ProductCategory::findOrFail($currentNodeId);
-            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get()->pluck('full_information', 'systemId');
+            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get()->pluck('full_information', 'systemId');
             return view('complaint.product.complaint_product_show', compact('product', 'productCategories', 'currentParentNode', 'selectCustomers'));
         }
     }

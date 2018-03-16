@@ -29,13 +29,13 @@ class SuggestionServiceController extends Controller
         if($currentNodeId == 0) {
             $service = Service::findOrFail($id);
             $serviceCategories = ServiceCategory::where('serviceID', $service->systemId)->where('parent_id', null)->get();
-            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get()->pluck('full_information', 'systemId');
+            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get()->pluck('full_information', 'systemId');
             return view('suggestion.service.suggestion_service_show', compact('service', 'serviceCategories', 'selectCustomers'));
         } else {
             $service = Service::findOrFail($id);
             $serviceCategories = ServiceCategory::where('parent_id', $currentNodeId)->get();
             $currentParentNode = ServiceCategory::findOrFail($currentNodeId);
-            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('created_at', 'desc')->get()->pluck('full_information', 'systemId');
+            $selectCustomers = Customer::where('tenantId', Auth::user()->tenantId)->orderBy('name', 'asc')->get()->pluck('full_information', 'systemId');
             return view('suggestion.service.suggestion_service_show', compact('service', 'serviceCategories', 'currentParentNode', 'selectCustomers'));
         }
     }
