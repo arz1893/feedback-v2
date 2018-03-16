@@ -139,7 +139,6 @@ if($('#suggestion_product_list_container').length > 0) {
         var date_start = $('#date_start').val();
         var date_end = $('#date_end').val();
         var tenantId = $('#tenantId').val();
-        console.log(date_start, date_end, tenantId);
         if(date_start !== '' && date_end !== '') {
             const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_product/' + tenantId + '/filter-by-date/' + date_start + '/' + date_end;
 
@@ -157,9 +156,9 @@ if($('#suggestion_product_list_container').length > 0) {
                         suggestionProductList.errorMessage = 'no data found';
                         suggestionProductList.searchStatus = '';
                         suggestionProductList.paging.currentPage = '';
-                        suggestionProductList.paging.endPage = '';
-                        suggestionProductList.paging.prevPage = '';
-                        suggestionProductList.paging.nextPage = '';
+                        suggestionProductList.paging.endPage = null;
+                        suggestionProductList.paging.prevPage = null;
+                        suggestionProductList.paging.nextPage = null;
                         suggestionProductList.paging.path = '';
                     }
                 }).catch(error => {
@@ -177,8 +176,6 @@ if($('#suggestion_product_list_container').length > 0) {
     }
 
     function clearSearch() {
-        $('#btnSearchByDate').addClass('disabled');
-        $('#btnSearchByDate').attr('onclick', '');
         $('#btnSearchProduct').addClass('disabled');
         $('#btnSearchProduct').attr('onclick', '');
         suggestionProductList.searchStatus = 'Searching...';
@@ -186,6 +183,7 @@ if($('#suggestion_product_list_container').length > 0) {
         $('#date_start').val('');
         $('#date_end').val('');
         $('#product_name').val('').trigger('change.select2');
+        $('.datepicker').datepicker('update', moment(new Date()).format('dd-M-yyyy'));
         var tenantId = $('#tenantId').val();
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_product/' + tenantId + '/get-all-suggestion-product';
         function fireRequest() {
@@ -200,6 +198,12 @@ if($('#suggestion_product_list_container').length > 0) {
                     suggestionProductList.paging.path = response.data.meta.path;
                 } else  {
                     suggestionProductList.errorMessage = 'no data found';
+                    suggestionProductList.searchStatus = '';
+                    suggestionProductList.paging.currentPage = '';
+                    suggestionProductList.paging.endPage = null;
+                    suggestionProductList.paging.prevPage = null;
+                    suggestionProductList.paging.nextPage = null;
+                    suggestionProductList.paging.path = '';
                 }
             }).catch(error => {
                 console.log(error);
@@ -260,9 +264,9 @@ if($('#suggestion_product_list_container').length > 0) {
                     suggestionProductList.errorMessage = 'no data found';
                     suggestionProductList.searchStatus = '';
                     suggestionProductList.paging.currentPage = '';
-                    suggestionProductList.paging.endPage = '';
-                    suggestionProductList.paging.prevPage = '';
-                    suggestionProductList.paging.nextPage = '';
+                    suggestionProductList.paging.endPage = null;
+                    suggestionProductList.paging.prevPage = null;
+                    suggestionProductList.paging.nextPage = null;
                     suggestionProductList.paging.path = '';
                 }
             }).catch(error => {

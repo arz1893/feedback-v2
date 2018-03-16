@@ -284,7 +284,7 @@
     <!-- Vue Paginator -->
     <script src="https://cdn.jsdelivr.net/vuejs-paginator/2.0.0/vuejs-paginator.min.js"></script>
     <!-- Axios JS -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript"></script>
+    <script src="{{ asset('js/axios/axios.js') }}" type="text/javascript"></script>
     <!-- Data Table -->
     <script src="{{ asset('/js/datatables/datatables.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/datatables/dataTables.bootstrap.js') }}" type="text/javascript"></script>

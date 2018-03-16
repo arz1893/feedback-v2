@@ -262,7 +262,6 @@ if($('#complaint_product_list_index').length > 0) {
         function filterComplaint() {
             axios.get(url).then(response => {
                 if(response.data.data.length !== 0) {
-                    console.log(response.data);
                     complaintProductListIndex.complaintProducts = response.data.data;
                     complaintProductListIndex.paging.currentPage = response.data.meta.current_page;
                     complaintProductListIndex.paging.endPage = response.data.meta.last_page;
@@ -290,15 +289,12 @@ if($('#complaint_product_list_index').length > 0) {
     }
 
     function clearSearch() {
-        $('#btnSearchByDate').addClass('disabled');
-        $('#btnSearchByDate').attr('onclick', '');
         $('#btnSearchProduct').addClass('disabled');
         $('#btnSearchProduct').attr('onclick', '');
         complaintProductListIndex.searchStatus = 'Loading...';
         complaintProductListIndex.errorMessage = '';
-        $('#date_start').val('');
-        $('#date_end').val('');
         $('#product_name').val('').trigger('change.select2');
+        $('.datepicker').datepicker('update', moment(new Date()).format('dd-M-yyyy'));
         var tenantId = $('#tenantId').val();
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_product/' + tenantId + '/get-all-complaint-product';
         function fireRequest() {
@@ -314,6 +310,12 @@ if($('#complaint_product_list_index').length > 0) {
                     complaintProductListIndex.searchStatus = '';
                 } else {
                     complaintProductListIndex.errorMessage = 'no data found';
+                    complaintProductListIndex.searchStatus = '';
+                    complaintProductListIndex.paging.currentPage = '';
+                    complaintProductListIndex.paging.endPage = null;
+                    complaintProductListIndex.paging.prevPage = null;
+                    complaintProductListIndex.paging.nextPage = null;
+                    complaintProductListIndex.paging.path = '';
                 }
             }).catch(error => {
                 console.log(error);
@@ -374,9 +376,9 @@ if($('#complaint_product_list_index').length > 0) {
                     complaintProductListIndex.errorMessage = 'no data found';
                     complaintProductListIndex.searchStatus = '';
                     complaintProductListIndex.paging.currentPage = '';
-                    complaintProductListIndex.paging.endPage = '';
-                    complaintProductListIndex.paging.prevPage = '';
-                    complaintProductListIndex.paging.nextPage = '';
+                    complaintProductListIndex.paging.endPage = null;
+                    complaintProductListIndex.paging.prevPage = null;
+                    complaintProductListIndex.paging.nextPage = null;
                     complaintProductListIndex.paging.path = '';
                 }
             }).catch(error => {

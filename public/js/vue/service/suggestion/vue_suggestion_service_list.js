@@ -142,7 +142,7 @@ if($('#suggestion_service_list_container').length > 0) {
 
         function filterComplaint() {
             axios.get(url).then(response => {
-                if(response.data.data.length !== 0) {
+                if(response.data.data.length > 0) {
                     suggestionServiceList.suggestionServices = response.data.data;
                     suggestionServiceList.paging.currentPage = response.data.meta.current_page;
                     suggestionServiceList.paging.endPage = response.data.meta.last_page;
@@ -154,9 +154,9 @@ if($('#suggestion_service_list_container').length > 0) {
                     suggestionServiceList.errorMessage = 'no data found';
                     suggestionServiceList.searchStatus = '';
                     suggestionServiceList.paging.currentPage = '';
-                    suggestionServiceList.paging.endPage = '';
-                    suggestionServiceList.paging.prevPage = '';
-                    suggestionServiceList.paging.nextPage = '';
+                    suggestionServiceList.paging.endPage = null;
+                    suggestionServiceList.paging.prevPage = null;
+                    suggestionServiceList.paging.nextPage = null;
                     suggestionServiceList.paging.path = '';
                 }
             }).catch(error => {
@@ -169,8 +169,6 @@ if($('#suggestion_service_list_container').length > 0) {
     }
 
     function clearSearch() {
-        $('#btnSearchByDate').addClass('disabled');
-        $('#btnSearchByDate').attr('onclick', '');
         $('#btnSearchService').addClass('disabled');
         $('#btnSearchService').attr('onclick', '');
         suggestionServiceList.searchStatus = 'Searching...';
@@ -178,6 +176,7 @@ if($('#suggestion_service_list_container').length > 0) {
         $('#date_start').val('');
         $('#date_end').val('');
         $('#service_name').val('').trigger('change.select2');
+        $('.datepicker').datepicker('update', moment(new Date()).format('dd-M-yyyy'));
         var tenantId = $('#tenantId').val();
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/suggestion_service/' + tenantId + '/get-all-suggestion-service';
         function fireRequest() {
@@ -192,6 +191,12 @@ if($('#suggestion_service_list_container').length > 0) {
                     suggestionServiceList.paging.path = response.data.meta.path;
                 } else {
                     suggestionServiceList.errorMessage = 'no data found';
+                    suggestionServiceList.searchStatus = '';
+                    suggestionServiceList.paging.currentPage = '';
+                    suggestionServiceList.paging.endPage = null;
+                    suggestionServiceList.paging.prevPage = null;
+                    suggestionServiceList.paging.nextPage = null;
+                    suggestionServiceList.paging.path = '';
                 }
             }).catch(error => {
                 console.log(error);
@@ -252,9 +257,9 @@ if($('#suggestion_service_list_container').length > 0) {
                     suggestionServiceList.errorMessage = 'no data found';
                     suggestionServiceList.searchStatus = '';
                     suggestionServiceList.paging.currentPage = '';
-                    suggestionServiceList.paging.endPage = '';
-                    suggestionServiceList.paging.prevPage = '';
-                    suggestionServiceList.paging.nextPage = '';
+                    suggestionServiceList.paging.endPage = null;
+                    suggestionServiceList.paging.prevPage = null;
+                    suggestionServiceList.paging.nextPage = null;
                     suggestionServiceList.paging.path = '';
                 }
             }).catch(error => {

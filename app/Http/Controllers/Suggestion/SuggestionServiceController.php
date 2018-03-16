@@ -76,7 +76,7 @@ class SuggestionServiceController extends Controller
     }
 
     public function getAllSuggestionService(Request $request, $tenantId) {
-        $suggestionServices = SuggestionService::where('tenantId', $tenantId)->orderBy('created_at', 'desc')->paginate(20);
+        $suggestionServices = SuggestionService::where('tenantId', $tenantId)->where('created_at', 'Y-m-d')->orderBy('created_at', 'desc')->paginate(20);
         return new SuggestionServiceCollection($suggestionServices);
     }
 

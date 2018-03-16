@@ -82,7 +82,7 @@ class SuggestionProductController extends Controller
     }
 
     public function getAllSuggestionProduct(Request $request, $tenantId) {
-        $suggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->orderBy('created_at', 'desc')->paginate(10);
+        $suggestionProducts = SuggestionProduct::where('tenantId', $tenantId)->where('created_at', date('Y-m-d'))->orderBy('created_at', 'desc')->paginate(10);
         return new SuggestionProductCollection($suggestionProducts);
     }
 

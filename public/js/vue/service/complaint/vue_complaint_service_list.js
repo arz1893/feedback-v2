@@ -235,12 +235,11 @@ if($('#complaint_service_list_index').length > 0) {
     function searchByDate(selected) {
         $('#btnClearSearch').removeClass('disabled');
         $('#btnClearSearch').attr('onclick', 'clearSearch()');
-        complaintServiceListIndex.searchStatus = 'Searching...';
-        complaintServiceListIndex.errorMessage = '';
         var date_start = $('#date_start').val();
         var date_end = $('#date_end').val();
+        complaintServiceListIndex.searchStatus = 'Searching...';
+        complaintServiceListIndex.errorMessage = '';
         var tenantId = $('#tenantId').val();
-        console.log(date_start, date_end);
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service/' + tenantId + '/filter-by-date/' + date_start + '/' + date_end;
 
         function filterComplaint() {
@@ -257,9 +256,9 @@ if($('#complaint_service_list_index').length > 0) {
                     complaintServiceListIndex.errorMessage = 'no data found';
                     complaintServiceListIndex.searchStatus = '';
                     complaintServiceListIndex.paging.currentPage = '';
-                    complaintServiceListIndex.paging.endPage = '';
-                    complaintServiceListIndex.paging.prevPage = '';
-                    complaintServiceListIndex.paging.nextPage = '';
+                    complaintServiceListIndex.paging.endPage = null;
+                    complaintServiceListIndex.paging.prevPage = null;
+                    complaintServiceListIndex.paging.nextPage = null;
                     complaintServiceListIndex.paging.path = '';
                 }
             }).catch(error => {
@@ -272,26 +271,33 @@ if($('#complaint_service_list_index').length > 0) {
     }
 
     function clearSearch() {
-        $('#btnSearchByDate').addClass('disabled');
-        $('#btnSearchByDate').attr('onclick', '');
         $('#btnSearchService').addClass('disabled');
         $('#btnSearchService').attr('onclick', '');
         complaintServiceListIndex.searchStatus = 'Searching...';
         complaintServiceListIndex.errorMessage = '';
-        $('#date_start').val('');
-        $('#date_end').val('');
+        $('.datepicker').datepicker('update', moment(new Date()).format('dd-M-yyyy'));
         $('#service_name').val('').trigger('change.select2');
         var tenantId = $('#tenantId').val();
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service/' + tenantId + '/get-all-complaint-service';
         function fireRequest() {
             axios.get(url).then(response => {
-                complaintServiceListIndex.complaintServices = response.data.data;
-                complaintServiceListIndex.paging.currentPage = response.data.meta.current_page;
-                complaintServiceListIndex.paging.endPage = response.data.meta.last_page;
-                complaintServiceListIndex.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
-                complaintServiceListIndex.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
-                complaintServiceListIndex.paging.path = response.data.meta.path;
-                complaintServiceListIndex.searchStatus = '';
+                if(response.data.data.length > 0) {
+                    complaintServiceListIndex.complaintServices = response.data.data;
+                    complaintServiceListIndex.paging.currentPage = response.data.meta.current_page;
+                    complaintServiceListIndex.paging.endPage = response.data.meta.last_page;
+                    complaintServiceListIndex.paging.prevPage = (response.data.links.prev === null ? null:response.data.links.prev);
+                    complaintServiceListIndex.paging.nextPage = (response.data.links.next === null ? null:response.data.links.next);
+                    complaintServiceListIndex.paging.path = response.data.meta.path;
+                    complaintServiceListIndex.searchStatus = '';
+                } else {
+                    complaintServiceListIndex.errorMessage = 'no data found';
+                    complaintServiceListIndex.searchStatus = '';
+                    complaintServiceListIndex.paging.currentPage = '';
+                    complaintServiceListIndex.paging.endPage = null;
+                    complaintServiceListIndex.paging.prevPage = null;
+                    complaintServiceListIndex.paging.nextPage = null;
+                    complaintServiceListIndex.paging.path = '';
+                }
             }).catch(error => {
                 console.log(error);
             });
@@ -334,7 +340,6 @@ if($('#complaint_service_list_index').length > 0) {
         var serviceId = $('#service_name').select2('data')[0].id;
         var tenantId = $('#tenantId').val();
         const url = window.location.protocol + "//" + window.location.host + "/" + 'api/complaint_service/' + tenantId + '/filter-by-service/' + serviceId;
-        console.log(serviceId, tenantId);
         complaintServiceListIndex.searchStatus = 'Searching...';
         complaintServiceListIndex.errorMessage = '';
 
@@ -352,9 +357,9 @@ if($('#complaint_service_list_index').length > 0) {
                     complaintServiceListIndex.errorMessage = 'no data found';
                     complaintServiceListIndex.searchStatus = '';
                     complaintServiceListIndex.paging.currentPage = '';
-                    complaintServiceListIndex.paging.endPage = '';
-                    complaintServiceListIndex.paging.prevPage = '';
-                    complaintServiceListIndex.paging.nextPage = '';
+                    complaintServiceListIndex.paging.endPage = null;
+                    complaintServiceListIndex.paging.prevPage = null;
+                    complaintServiceListIndex.paging.nextPage = null;
                     complaintServiceListIndex.paging.path = '';
                 }
             }).catch(error => {

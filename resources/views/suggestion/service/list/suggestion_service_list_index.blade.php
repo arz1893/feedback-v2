@@ -36,7 +36,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control pull-right datepicker" id="date_start" name="date_start" placeholder="From">
+                        <input type="text" class="form-control pull-right datepicker" id="date_start" name="date_start" value="{{ date('d-M-Y') }}">
                     </div>
                     <!-- /.input group -->
                 </div>
@@ -48,12 +48,12 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control pull-right datepicker" id="date_end" name="date_end" placeholder="To">
+                        <input type="text" class="form-control pull-right datepicker" id="date_end" name="date_end" value="{{ date('d-M-Y') }}">
                     </div>
                     <!-- /.input group -->
                 </div>
 
-                <button class="btn btn-default disabled" type="button" id="btnSearchByDate" data-toggle="tooltip" data-placement="bottom" title="Search by date">
+                <button class="btn btn-default" type="button" id="btnSearchByDate" data-toggle="tooltip" data-placement="bottom" title="Search by date" onclick="searchByDate()">
                     Search <i class="fa fa-search"></i>
                 </button>
             </form>
@@ -86,7 +86,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right datepicker" id="date_start" name="date_start">
+                    <input type="text" class="form-control pull-right datepicker" id="date_start" name="date_start" value="{{ date('d-M-Y') }}">
                 </div>
                 <!-- /.input group -->
             </div>
@@ -99,7 +99,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right datepicker" id="date_end" name="date_end">
+                    <input type="text" class="form-control pull-right datepicker" id="date_end" name="date_end" value="{{ date('d-M-Y') }}">
                 </div>
                 <!-- /.input group -->
             </div> <br> <br>
