@@ -1,7 +1,7 @@
 @extends('home')
 
 @push('scripts')
-    <script src="{{ asset('js/vue/vue_product.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/product/vue_product.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')
