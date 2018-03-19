@@ -52,8 +52,7 @@
                        id="phone"
                        type="text"
                        class="form-control"
-                       data-inputmask="'mask': ['9999-9999-9999', '+62 999 9999 9999']"
-                       data-mask placeholder="Enter your phone address"
+                       placeholder="Enter your phone address"
                        v-model="customer.phone"
                        v-validate="'required|numeric|min:10'">
                 <span class="help-block text-red" v-show="errors.has('phone')">

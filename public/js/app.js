@@ -61,6 +61,7 @@ $(document).ready(function () {
     });
 
     $('#table_customer').DataTable({
+        responsive: true,
         scrollX: true,
         bLengthChange: false,
         iDisplayLength: 10
@@ -123,6 +124,11 @@ $(document).ready(function () {
     });
 
     $('#modal_add_customer').modal({
+        show: false,
+        backdrop: 'static'
+    });
+
+    $('#modal_edit_customer').modal({
         show: false,
         backdrop: 'static'
     });

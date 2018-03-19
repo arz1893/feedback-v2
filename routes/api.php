@@ -69,4 +69,5 @@ Route::get('complaint_report/{tenantId}/get-all-complaint/yearly', 'Report\Compl
 
 /* Customer API */
 Route::post('customer/add-customer', 'Customer\CustomerController@addCustomer');
-
+Route::post('customer/get-customer', 'Customer\CustomerController@getCustomer');
+Route::post('customer/update-customer', 'Customer\CustomerController@updateCustomer');

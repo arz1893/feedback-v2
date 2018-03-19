@@ -1,5 +1,9 @@
 @extends('home')
 
+@push('scripts')
+    <script src="{{ asset('js/vue/vue_customer.js') }}" type="text/javascript"></script>
+@endpush
+
 @section('content-header')
     <h3> Customer List </h3>
     <ol class="breadcrumb">
@@ -9,7 +13,13 @@
 @endsection
 
 @section('main-content')
-    <table class="table table-striped table-bordered" id="table_customer" style="width: 100%;">
+    {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
+
+    <div class="alert alert-success" role="alert" id="alert_customer_success" style="display: none;">
+        <strong>Success!</strong> Customer has been updated
+    </div>
+
+    <table class="table table-striped table-hover table-bordered" id="table_customer" style="width: 100%;">
         <thead>
             <tr>
                 <th>No.</th>
@@ -26,7 +36,11 @@
             @foreach($customers as $customer)
                 <tr>
                     <td>{{ $counter }}</td>
-                    <td>{{ $customer->name }}</td>
+                    <td>
+                        <a role="button" data-toggle="modal" data-target="#modal_edit_customer" data-id="{{ $customer->systemId }}" onclick="showCustomer(this)">
+                            {{ $customer->name }}
+                        </a>
+                    </td>
                     <td>{{ $customer->phone }}</td>
                     <td>
                         @if($customer->email !== null)
@@ -50,9 +64,6 @@
                         @endif
                     </td>
                     <td>
-                        <a role="button" class="btn btn-warning">
-                            <i class="fa fa-edit"></i>
-                        </a>
                         <button class="btn btn-danger">
                             <i class="fa fa-trash-o"></i>
                         </button>
