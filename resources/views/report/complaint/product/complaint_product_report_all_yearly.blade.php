@@ -35,5 +35,11 @@
         <a role="button" class="btn btn-xs btn-default active">Yearly</a>
     </div>
 
+    <div id="not_found" class="well" style="margin-top: 3%; display: none;">
+        <div class="text-center">
+            There is no report found at current year
+        </div>
+    </div>
+
     <canvas id="complaint_product_chart_all" style="position: relative; height:55vh; width:80vw"></canvas>
 @endsection

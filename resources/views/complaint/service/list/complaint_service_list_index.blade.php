@@ -28,12 +28,12 @@
         </div>
     @endif
 
-    <div class="row visible-lg visible-md visible-xs">
-
-        <div class="col-lg-8">
+    <div class="row">
+        <div class="col-lg-8 col-md-4 col-sm-5">
             <form class="form-inline pull-left" id="form_search_list">
                 <!-- Date range -->
                 <div class="form-group">
+                    <label for="date_start">From :</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
@@ -45,7 +45,7 @@
 
                 <!-- Date range -->
                 <div class="form-group">
-
+                    <label for="date_end">To :</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
@@ -61,10 +61,10 @@
             </form>
         </div>
 
-        <div class="col-lg-4">
-            <form class="form-inline visible-lg">
+        <div class="col-lg-4 col-md-5 col-sm-5 col-xs-6 pull-right">
+            <form class="form-inline">
                 <div class="row">
-                    <div class="input-group col-lg-12">
+                    <div class="input-group col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         {{ Form::select('service_name', $selectServices, null, ['style' => 'width: 100%', 'class' => 'select2-service', 'id' => 'service_name', 'placeholder' => 'Choose Service...']) }}
                         <span class="input-group-btn">
                             <button class="btn btn-default disabled" id="btnSearchService" type="button" data-toggle="tooltip" data-placement="bottom" title="Search by service">
@@ -75,46 +75,6 @@
                 </div>
             </form>
         </div>
-
-    </div>
-
-    <div class="container-fluid visible-sm">
-        <form id="form_search_list">
-            <!-- Date range -->
-            <div class="form-group col-sm-6">
-                <label>From: </label>
-
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" class="form-control pull-right datepicker" id="date_start" name="date_start">
-                </div>
-                <!-- /.input group -->
-            </div>
-
-            <!-- Date range -->
-            <div class="form-group col-sm-6">
-                <label>To: </label>
-
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" class="form-control pull-right datepicker" id="date_end" name="date_end">
-                </div>
-                <!-- /.input group -->
-            </div> <br> <br>
-
-            <div class="form-group col-sm-12">
-                <button class="btn btn-default disabled" type="button" id="btnSearchByDate">
-                    Search <i class="fa fa-search"></i>
-                </button>
-                <button class="btn btn-warning disabled" type="button" id="btnClearSearch">
-                    Clear Search <i class="fa fa-close"></i>
-                </button>
-            </div>
-        </form>
     </div>
 
     <br>
@@ -126,20 +86,22 @@
                 @{{ errorMessage }}
             </div>
         </div>
-        <table v-show="searchStatus === '' & errorMessage === ''" class="table table-striped table-bordered table-responsive" id="table_complaint_service" style="width: 100%">
-            <thead>
-            <tr>
-                <th>Created At</th>
-                <th>Customer Name</th>
-                <th>Service Name</th>
-                <th>Rating</th>
-                <th>Need Call ?</th>
-                <th>Is Urgent ?</th>
-                <th>Is Answered ?</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
+
+        <div class="table-responsive">
+            <table v-show="searchStatus === '' & errorMessage === ''" class="table table-striped table-bordered" id="table_complaint_service" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Created At</th>
+                    <th>Customer Name</th>
+                    <th>Service Name</th>
+                    <th>Rating</th>
+                    <th>Need Call ?</th>
+                    <th>Is Urgent ?</th>
+                    <th>Is Answered ?</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
                 <tr v-for="complaintService in complaintServices">
                     <td>
                         <a role="button" v-bind:data-complaint_id="complaintService.systemId" @click="showComplaintDetail($event)">
@@ -207,8 +169,9 @@
                         @endif
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
 
         <div class="text-center">
             <ul v-show="paging.currentPage !== ''" class="pagination">

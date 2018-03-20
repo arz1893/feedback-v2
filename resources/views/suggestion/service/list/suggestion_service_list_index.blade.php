@@ -26,12 +26,13 @@
 
     {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
 
-    <div class="row visible-lg visible-md visible-xs">
+    <div class="row">
 
-        <div class="col-lg-8">
+        <div class="col-lg-8 col-md-4 col-sm-5">
             <form class="form-inline pull-left" id="form_search_list">
                 <!-- Date range -->
                 <div class="form-group">
+                    <label for="date_start">From :</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
@@ -43,7 +44,7 @@
 
                 <!-- Date range -->
                 <div class="form-group">
-
+                    <label for="date_end">To :</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
@@ -59,10 +60,10 @@
             </form>
         </div>
 
-        <div class="col-lg-4">
-            <form class="form-inline visible-lg">
+        <div class="col-lg-4 col-md-5 col-sm-5 col-xs-6 pull-right">
+            <form class="form-inline">
                 <div class="row">
-                    <div class="input-group col-lg-12">
+                    <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         {{ Form::select('service_name', $selectServices, null, ['style' => 'width: 100%', 'class' => 'select2-service', 'id' => 'service_name', 'placeholder' => 'Choose Service...']) }}
                         <span class="input-group-btn">
                             <button class="btn btn-default disabled" id="btnSearchService" type="button" data-toggle="tooltip" data-placement="bottom" title="Search by service">
@@ -74,45 +75,6 @@
             </form>
         </div>
 
-    </div>
-
-    <div class="container-fluid visible-sm">
-        <form id="form_search_list">
-            <!-- Date range -->
-            <div class="form-group col-sm-6">
-                <label>From: </label>
-
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" class="form-control pull-right datepicker" id="date_start" name="date_start" value="{{ date('d-M-Y') }}">
-                </div>
-                <!-- /.input group -->
-            </div>
-
-            <!-- Date range -->
-            <div class="form-group col-sm-6">
-                <label>To: </label>
-
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" class="form-control pull-right datepicker" id="date_end" name="date_end" value="{{ date('d-M-Y') }}">
-                </div>
-                <!-- /.input group -->
-            </div> <br> <br>
-
-            <div class="form-group col-sm-12">
-                <button class="btn btn-default disabled" type="button" id="btnSearchByDate">
-                    Search <i class="fa fa-search"></i>
-                </button>
-                <button class="btn btn-warning disabled" type="button" id="btnClearSearch">
-                    Clear Search <i class="fa fa-close"></i>
-                </button>
-            </div>
-        </form>
     </div>
 
     <br>

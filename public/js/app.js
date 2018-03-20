@@ -106,6 +106,11 @@ $(document).ready(function () {
         theme: 'bootstrap'
     });
 
+    $('.select2-product-md').select2({
+        placeholder: 'Choose product...',
+        theme: 'bootstrap'
+    });
+
     $('.select2-service').select2({
         placeholder: 'Choose service...',
         theme: 'bootstrap'
