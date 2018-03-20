@@ -17,12 +17,23 @@
 @section('main-content')
     <h3 class="text-center text-info">All Complaint in {{ date('Y') }}</h3>
 
+    <div class="col-lg-2 pull-right">
+        <form class="form-inline">
+            <div class="form-group">
+                {{ Form::label('select_year', 'Select Year') }}
+                {{ Form::selectYear('select_year', 1990, intval(date('Y')), intval(date('Y')), ['class' => 'form-control']) }}
+            </div>
+        </form>
+    </div>
+
+    {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
+
     <div class="btn-group" role="group" aria-label="...">
         <a role="button" class="btn btn-xs btn-default">Daily</a>
         <a role="button" class="btn btn-xs btn-default">Weekly</a>
         <a role="button" class="btn btn-xs btn-default">Monthly</a>
-        <a role="button" class="btn btn-xs btn-default">Yearly</a>
+        <a role="button" class="btn btn-xs btn-default active">Yearly</a>
     </div>
 
-    <canvas id="complaint_product_chart_all" style="position: relative; height:60vh; width:80vw"></canvas>
+    <canvas id="complaint_product_chart_all" style="position: relative; height:55vh; width:80vw"></canvas>
 @endsection

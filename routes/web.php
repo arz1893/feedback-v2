@@ -182,6 +182,6 @@ Route::resource('complaint_report', 'Report\Complaint\ComplaintReportController'
 /* end of complaint report routes */
 
 /* Complaint Product Report Controller */
-Route::get('complaint_product_report/all-report', 'Report\Complaint\Product\ComplaintProductReportController@showAllReport')->name('complaint_product_report_all');
+Route::get('complaint_product_report/all-report/yearly', 'Report\Complaint\Product\ComplaintProductReportController@showAllReportYearly')->name('complaint_product_report_all_yearly');
 Route::resource('complaint_product_report', 'Report\Complaint\Product\ComplaintProductReportController');
 /* end of complaint product report controller */

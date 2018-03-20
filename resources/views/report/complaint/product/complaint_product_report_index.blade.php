@@ -1,7 +1,7 @@
 @extends('home')
 
 @push('scripts')
-    <script src="{{ asset('js/vue/vue_product.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/product/vue_product.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')
@@ -11,7 +11,7 @@
         <li class="active">Complaint Product Report</li>
     </ol>
     <h3 class="text-red">Complaint Product Report</h3>
-    <a href="{{ route('complaint_product_report_all') }}" class="btn btn-success">
+    <a href="{{ route('complaint_product_report_all_yearly') }}" class="btn btn-success">
         Show all report <i class="ion ion-arrow-graph-up-right"></i>
     </a>
     <div>

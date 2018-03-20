@@ -166,7 +166,6 @@ if($('#product_index').length > 0) {
                 if(tags.length === 0) {
                     const url = window.location.protocol + "//" + window.location.host + "/" + 'api/product/' + id + '/get-product-list';
                     axios.get(url).then(response => {
-                        console.log(response.data);
                         if(response.data.data.length === 0) {
                             vm.products = response.data.data;
                             vm.errorMessage = 'no data found';
