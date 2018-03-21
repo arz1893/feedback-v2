@@ -1,26 +1,26 @@
 @extends('home')
 
 @push('scripts')
-    <script src="{{ asset('js/vue/product/vue_product.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vue/service/vue_service.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('content-header')
     <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="{{ route('complaint_report.index') }}"><i class="fa fa-bar-chart-o"></i> Complaint Report Selection</a></li>
-        <li class="active">Complaint Product Report</li>
+        <li class="active">Complaint Service Report</li>
     </ol>
-    <h3 class="text-red">Complaint Product Report</h3>
-    <a href="{{ route('complaint_product_report_all_yearly') }}" class="btn btn-success">
+    <h3 class="text-red">Complaint Service Report</h3>
+    <a href="{{ route('complaint_service_report_all_yearly') }}" class="btn btn-success">
         Show all report <i class="ion ion-arrow-graph-up-right"></i>
     </a>
     <div>
-        <small class="text-muted">Note *: Please select one of the product to view report</small>
+        <small class="text-muted">Note *: Please select one of the service to view report</small>
     </div>
 @endsection
 
 @section('main-content')
-    <div id="product_index">
+    <div id="service_index">
         {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
         <div class="row">
             <div class="col-lg-12">
@@ -51,26 +51,23 @@
         </div>
 
         <transition name="fade" mode="out-in">
-            <div id="product_panel" class="col-lg-12">
+            <div id="service_panel" class="col-lg-12">
                 <div class="row visible-lg visible-md visible-sm">
                     <div v-show="errorMessage !== ''">
                         <div class="well text-center">
                             @{{ errorMessage }}
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="product in products">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4" v-for="service in services">
                         <div class="imagebox">
                             <a href="#!">
-                                <img v-show="product.img !== ''" v-bind:src="product.img"  class="category-banner img-responsive">
-                                <img v-show="product.img === ''" src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
+                                <img v-show="service.img !== ''" v-bind:src="service.img"  class="category-banner img-responsive">
+                                <img v-show="service.img === ''" src="{{ asset('default-images/no-image.jpg') }}"  class="category-banner img-responsive">
                                 <span class="imagebox-desc">
-                                @{{ product.name }}
+                                @{{ service.name }}
                             </span>
                             </a>
                         </div>
-                        {{--<div v-for="tag in product.productTags">--}}
-                        {{--<div v-bind:item="searchTags" v-bind:key="tag.systemId" v-bind:title="tag.name">@{{ tag.name }}</div>--}}
-                        {{--</div>--}}
                     </div>
                 </div>
 
@@ -81,10 +78,10 @@
                         </div>
                     </div>
                     <div class="list-group">
-                        <div v-for="product in products">
+                        <div v-for="service in services">
                             <a href="#!" class="list-group-item">
-                                <img v-bind:src="product.img" style="width: 40px; height: 30px;">
-                                @{{ product.name }}
+                                <img v-bind:src="service.img" style="width: 40px; height: 30px;">
+                                @{{ service.name }}
                             </a>
                         </div>
                     </div>

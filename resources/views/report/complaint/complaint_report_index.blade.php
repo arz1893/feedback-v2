@@ -45,7 +45,7 @@
             <div class="col-md-4">
                 <h2 class="text-info">Service <i class="fa fa-line-chart"></i></h2>
                 <p>View all complaint service report</p>
-                <a class="btn btn-success" href="#!">
+                <a class="btn btn-success" href="{{ route('complaint_service_report.index') }}">
                     Show <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
