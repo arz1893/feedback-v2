@@ -18,16 +18,18 @@
     <h3 class="text-center text-info">All Complaint in <span id="current_month"></span> <span id="current_year"></span></h3>
 
     <div class="col-lg-4 pull-right">
-        <form class="form-inline">
-            <div class="form-group">
-                {{ Form::label('select_year', 'Select Year') }}
-                {{ Form::selectYear('select_year', 1990, intval(date('Y')), intval(date('Y')), ['class' => 'form-control']) }}
-            </div>
-            <div class="form-group">
-                {{ Form::label('select_month', 'Select Month') }}
-                {{ Form::selectMonth('select_month', date('m'), ['class' => 'form-control']) }}
-            </div>
-        </form>
+        <div class="pull-right">
+            <form class="form-inline">
+                <div class="form-group">
+                    {{ Form::label('select_year', 'Year') }}
+                    {{ Form::selectYear('select_year', 1990, intval(date('Y')), intval(date('Y')), ['class' => 'form-control']) }}
+                </div>
+                <div class="form-group">
+                    {{ Form::label('select_month', 'Month') }}
+                    {{ Form::selectMonth('select_month', date('m'), ['class' => 'form-control']) }}
+                </div>
+            </form>
+        </div>
     </div>
 
     {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}

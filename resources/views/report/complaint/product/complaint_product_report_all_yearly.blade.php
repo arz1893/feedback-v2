@@ -17,15 +17,6 @@
 @section('main-content')
     <h3 class="text-center text-info">All Complaint in <span id="current_year"></span></h3>
 
-    <div class="col-lg-2 pull-right">
-        <form class="form-inline">
-            <div class="form-group">
-                {{ Form::label('select_year', 'Select Year') }}
-                {{ Form::selectYear('select_year', 1990, intval(date('Y')), intval(date('Y')), ['class' => 'form-control']) }}
-            </div>
-        </form>
-    </div>
-
     {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
 
     <div class="btn-group" role="group" aria-label="...">
@@ -33,6 +24,30 @@
         <a role="button" class="btn btn-xs btn-default">Weekly</a>
         <a href="{{ route('complaint_product_report_all_monthly') }}" role="button" class="btn btn-xs btn-default">Monthly</a>
         <a role="button" class="btn btn-xs btn-default active">Yearly</a>
+    </div> <br> <br>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="form-inline">
+                    <div class="form-group">
+                        {{ Form::label('show_data', 'Show') }}
+                        {{ Form::select('show_data', ['10' => '10', '50' => '50', '100' => '100'], 10, ['class' => 'form-control']) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2 pull-right">
+                <div class="pull-right">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            {{ Form::label('select_year', 'Select Year') }}
+                            {{ Form::selectYear('select_year', 1990, intval(date('Y')), intval(date('Y')), ['class' => 'form-control']) }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="not_found" class="well" style="margin-top: 3%; display: none;">
