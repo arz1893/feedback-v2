@@ -16,8 +16,7 @@ if($('#complaint_product_chart_all_yearly').length > 0) {
                 datasets: [{
                     label: 'Complaint',
                     data: response.data.data,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255,99,132,1)',
+                    backgroundColor: 'rgba(109, 167, 247, 0.7)',
                     borderWidth: 1,
                 }]
             },
@@ -72,8 +71,7 @@ if($('#complaint_product_chart_all_yearly').length > 0) {
                         datasets: [{
                             label: 'Complaint',
                             data: response.data.data,
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255,99,132,1)',
+                            backgroundColor: 'rgba(109, 167, 247, 0.2)',
                             borderWidth: 1,
                         }]
                     },
@@ -122,8 +120,7 @@ if($('#complaint_product_chart_all_yearly').length > 0) {
                 datasets: [{
                     label: 'Complaint',
                     data: response.data.data,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255,99,132,1)',
+                    backgroundColor: 'rgba(109, 167, 247, 0.7)',
                     borderWidth: 1,
                 }]
             },
@@ -190,8 +187,7 @@ if($('#complaint_product_chart_all_yearly').length > 0) {
                         datasets: [{
                             label: 'Complaint',
                             data: response.data.data,
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255,99,132,1)',
+                            backgroundColor: 'rgba(109, 167, 247, 0.7)',
                             borderWidth: 1,
                         }]
                     },

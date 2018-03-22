@@ -180,10 +180,10 @@
             </div><!-- /.col-lg-4 -->
 
             <div class="col-lg-3">
-                <a href="#!">
+                <a href="{{ route('suggestion_report.index') }}">
                     <img class="img-circle center-block" src="{{ asset('default-images/chart-icon2.png') }}" alt="Generic placeholder image" width="140" height="140">
                 </a>
-                <a href="#!">
+                <a href="{{ route('suggestion_report.index') }}">
                     <h3 class="text-center">Suggestion Report</h3>
                 </a>
                 <p align="center">Contains all complaint service charts and statistic</p>

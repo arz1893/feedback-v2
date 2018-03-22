@@ -176,7 +176,7 @@
                         </li>
 
                         <li>
-                            <a href="#!">
+                            <a href="{{ route('suggestion_report.index') }}">
                                 <i class="fa fa-bar-chart"></i>Suggestion
                             </a>
                             {{--<ul class="treeview-menu">--}}
