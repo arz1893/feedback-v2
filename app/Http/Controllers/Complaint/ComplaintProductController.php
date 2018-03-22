@@ -86,7 +86,7 @@ class ComplaintProductController extends Controller
     }
 
     public function getAllComplaintProduct(Request $request, $tenantId) {
-        $complaintProducts = ComplaintProduct::where('tenantId', $tenantId)->where('created_at', date('Y-m-d'))->orderBy('created_at', 'desc')->paginate(10);
+        $complaintProducts = ComplaintProduct::where('tenantId', $tenantId)->whereDate('created_at', '=' ,date('Y-m-d'))->orderBy('created_at', 'desc')->paginate(10);
         return new ComplaintProductCollection($complaintProducts);
     }
 
