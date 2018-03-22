@@ -116,11 +116,11 @@ if($('#vue_service_container').length > 0) {
 }
 
 if($('#service_index').length > 0) {
-    let serviceIndex = new Vue({
+    var serviceIndex = new Vue({
         el: '#service_index',
         created() {
-            let tenantId = $('#tenantId').val();
-            let tags = $('#select_tags').val();
+            var tenantId = $('#tenantId').val();
+            var tags = $('#select_tags').val();
             this.getServices(tenantId, tags);
         },
         data: {
@@ -142,8 +142,8 @@ if($('#service_index').length > 0) {
         },
         computed: {
             filteredServices: function () {
-                let vm = this;
-                let result = this.services.filter((service) => {
+                var vm = this;
+                var result = this.services.filter((service) => {
                     return service.name.toLowerCase().match(this.searchString.toLowerCase());
                 });
 
@@ -157,7 +157,7 @@ if($('#service_index').length > 0) {
         },
         methods: {
             getServices: function (id, tags) {
-                let vm = this;
+                var vm = this;
                 if(tags.length === 0) {
                     const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + id + '/get-service-list';
 
@@ -194,7 +194,7 @@ if($('#service_index').length > 0) {
             },
 
             makePagination: function (data) {
-                let vm = this;
+                var vm = this;
                 vm.pagination.current_page = data.meta.current_page;
                 vm.pagination.first_page_link = data.links.first;
                 vm.pagination.last_page_link = data.links.last;
@@ -205,7 +205,7 @@ if($('#service_index').length > 0) {
             },
 
             nextPage: function (url) {
-                let vm = this;
+                var vm = this;
                 vm.searchStatus = 'Loading...';
                 function fireRequest(vm) {
                     axios.get(url).then(response => {
@@ -218,7 +218,7 @@ if($('#service_index').length > 0) {
                     });
                 }
 
-                let debounceFunction = _.debounce(fireRequest, 1000);
+                var debounceFunction = _.debounce(fireRequest, 1000);
                 debounceFunction(vm);
             }
         }
@@ -301,8 +301,8 @@ if($('#service_index').length > 0) {
     }
 
     $('#select_tags').on('change', function () {
-        let tagIds = $(this).val();
-        let tenantId = $('#tenantId').val();
+        var tagIds = $(this).val();
+        var tenantId = $('#tenantId').val();
         if(tagIds.length > 0) {
             const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/filter-service-list/' + tagIds;
             serviceIndex.searchStatus = 'Searching...';
@@ -327,7 +327,7 @@ if($('#service_index').length > 0) {
                 });
             }
             //debounce buat trigger function setelah 1 detik
-            let debounceFunction = _.debounce(filterServices, 1000);
+            var debounceFunction = _.debounce(filterServices, 1000);
             debounceFunction();
         } else {
             const url = window.location.protocol + "//" + window.location.host + "/" + 'api/service/' + tenantId + '/get-service-list';
@@ -349,7 +349,7 @@ if($('#service_index').length > 0) {
                 });
             }
             //debounce buat trigger function setelah 1 detik
-            let debounceFunction = _.debounce(getServices, 1000);
+            var debounceFunction = _.debounce(getServices, 1000);
             debounceFunction();
         }
     });
