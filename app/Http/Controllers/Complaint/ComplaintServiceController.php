@@ -87,7 +87,7 @@ class ComplaintServiceController extends Controller
     }
 
     public function getAllComplaintService(Request $request, $tenantId) {
-        $complaintServices = ComplaintService::where('tenantId', $tenantId)->where('created_at', date('Y-m-d'))->orderBy('created_at', 'desc')->paginate(10);
+        $complaintServices = ComplaintService::where('tenantId', $tenantId)->whereDate('created_at', '=', date('Y-m-d'))->orderBy('created_at', 'desc')->paginate(10);
         return new ComplaintServiceCollection($complaintServices);
     }
 
