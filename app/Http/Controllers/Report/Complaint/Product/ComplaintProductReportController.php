@@ -64,7 +64,7 @@ class ComplaintProductReportController extends Controller
         }
     }
 
-    public function showDataComplaintProductMonthly(Request $request, $tenantId, $year, $month) {
+    public function showDataComplaintProductMonthly(Request $request, $tenantId, $year, $month, $count) {
         $complaintProducts = ComplaintProduct::where('tenantId', $tenantId)->whereYear('created_at', $year)->whereMonth('created_at', $month)->orderBy('created_at', 'asc')->get();
         $tempLabels = [];
         $tempDatas = array();
@@ -97,7 +97,7 @@ class ComplaintProductReportController extends Controller
                 }
             }
 
-            return ['labels' => array_slice($tempLabels, 0, 10), 'data' => array_slice($tempDatas, 0, 10)];
+            return ['labels' => array_slice($tempLabels, 0, $count), 'data' => array_slice($tempDatas, 0, $count)];
         } else {
             return ['error' => 'not found'];
         }
