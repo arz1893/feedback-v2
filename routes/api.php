@@ -77,5 +77,5 @@ Route::get('complaint_product_report/show-all-report/{tenantId}/yearly/{year}/sh
 Route::get('complaint_product_report/show-all-report/{tenantId}/monthly/{year}/{month}/show/{count}', 'Report\Complaint\Product\ComplaintProductReportController@showDataComplaintProductMonthly');
 
 /* Complaint Service API */
-Route::get('complaint_service_report/show-all-report/{tenantId}/yearly/{year}', 'Report\Complaint\Service\ComplaintServiceReportController@showDataComplaintServiceYearly');
-Route::get('complaint_service_report/show-all-report/{tenantId}/monthly/{year}/{month}', 'Report\Complaint\Service\ComplaintServiceReportController@showDataComplaintServiceMonthly');
+Route::get('complaint_service_report/show-all-report/{tenantId}/yearly/{year}/show/{count}', 'Report\Complaint\Service\ComplaintServiceReportController@showDataComplaintServiceYearly');
+Route::get('complaint_service_report/show-all-report/{tenantId}/monthly/{year}/{month}/show/{count}', 'Report\Complaint\Service\ComplaintServiceReportController@showDataComplaintServiceMonthly');

@@ -24,7 +24,7 @@ class ComplaintServiceReportController extends Controller
         return view('report.complaint.service.complaint_service_report_all_monthly');
     }
 
-    public function showDataComplaintServiceYearly(Request $request, $tenantId, $year) {
+    public function showDataComplaintServiceYearly(Request $request, $tenantId, $year, $count) {
         $complaintServices = ComplaintService::where('tenantId', $tenantId)->whereYear('created_at', $year)->orderBy('created_at', 'asc')->get();
         $tempLabels = [];
         $tempDatas = array();
@@ -57,13 +57,13 @@ class ComplaintServiceReportController extends Controller
                 }
             }
 
-            return ['labels' => $tempLabels, 'data' => $tempDatas];
+            return ['labels' => array_slice($tempLabels, 0, $count), 'data' => array_slice($tempDatas, 0, $count)];
         } else {
             return ['error' => 'not found'];
         }
     }
 
-    public function showDataComplaintServiceMonthly(Request $request, $tenantId, $year, $month) {
+    public function showDataComplaintServiceMonthly(Request $request, $tenantId, $year, $month, $count) {
         $complaintServices = ComplaintService::where('tenantId', $tenantId)->whereYear('created_at', $year)->whereMonth('created_at', $month)->orderBy('created_at', 'asc')->get();
         $tempLabels = [];
         $tempDatas = array();
@@ -96,7 +96,7 @@ class ComplaintServiceReportController extends Controller
                 }
             }
 
-            return ['labels' => array_slice($tempLabels, 0, 10), 'data' => array_slice($tempDatas, 0, 10)];
+            return ['labels' => array_slice($tempLabels, 0, $count), 'data' => array_slice($tempDatas, 0, $count)];
         } else {
             return ['error' => 'not found'];
         }

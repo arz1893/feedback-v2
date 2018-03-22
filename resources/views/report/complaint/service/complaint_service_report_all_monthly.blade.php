@@ -17,18 +17,32 @@
 @section('main-content')
     <h3 class="text-center text-info">All Complaint in <span id="current_month"></span> <span id="current_year"></span></h3>
 
-    <div class="col-lg-4 pull-right">
-        <form class="form-inline">
-            <div class="form-group">
-                {{ Form::label('select_year', 'Select Year') }}
-                {{ Form::selectYear('select_year', 1990, intval(date('Y')), intval(date('Y')), ['class' => 'form-control']) }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="form-inline">
+                    <div class="form-group">
+                        {{ Form::label('show_data', 'Show') }}
+                        {{ Form::select('show_data', ['10' => '10', '50' => '50', '100' => '100'], 10, ['class' => 'form-control']) }}
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                {{ Form::label('select_month', 'Select Month') }}
-                {{ Form::selectMonth('select_month', date('m'), ['class' => 'form-control']) }}
+
+
+            <div class="col-lg-4 pull-right">
+                <form class="form-inline pull-right">
+                    <div class="form-group">
+                        {{ Form::label('select_year', 'Select Year') }}
+                        {{ Form::selectYear('select_year', 1990, intval(date('Y')), intval(date('Y')), ['class' => 'form-control']) }}
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('select_month', 'Select Month') }}
+                        {{ Form::selectMonth('select_month', date('m'), ['class' => 'form-control']) }}
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
+    </div> <br> <br>
 
     {{ Form::hidden('tenantId', Auth::user()->tenantId, ['id' => 'tenantId']) }}
 

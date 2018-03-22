@@ -45,15 +45,15 @@ if($('#complaint_product_chart_all_yearly').length > 0) {
 
     $('#select_year').change(function () {
         myChart.destroy();
-        onChangeShowData();
+        onChangeParameter();
     });
 
     $('#show_data').change(function () {
         myChart.destroy();
-        onChangeShowData();
+        onChangeParameter();
     });
 
-    function onChangeShowData() {
+    function onChangeParameter() {
         var ctx = document.getElementById("complaint_product_chart_all_yearly");
         var tenantId = $('#tenantId').val();
         var year = $('#select_year').val();
@@ -64,7 +64,7 @@ if($('#complaint_product_chart_all_yearly').length > 0) {
         axios.get(url).then(response => {
             if(response.data.error === undefined) {
                 $('#not_found').css('display', 'none');
-                $('#complaint_product_chart_all_yearly').css('display', '');
+                $('#complaint_product_chart_all_yearly').css({'display': '', 'height': '55vh', 'width': '80vw'});
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -154,24 +154,24 @@ if($('#complaint_product_chart_all_yearly').length > 0) {
         myChart.destroy();
         $('#current_year').text($('#select_year').val());
         $('#current_month').text($('#select_month option:selected').text());
-        onChangeData();
+        onChangeParameter();
     });
 
     $('#select_month').change(function () {
         myChart.destroy();
         $('#current_year').text($('#select_year').val());
         $('#current_month').text($('#select_month option:selected').text());
-        onChangeData();
+        onChangeParameter();
     });
 
     $('#show_data').change(function () {
         myChart.destroy();
         $('#current_year').text($('#select_year').val());
         $('#current_month').text($('#select_month option:selected').text());
-        onChangeData();
+        onChangeParameter();
     });
 
-    function onChangeData() {
+    function onChangeParameter() {
         var ctx = document.getElementById("complaint_product_chart_all_monthly");
         var tenantId = $('#tenantId').val();
         var year = $('#select_year').val();
